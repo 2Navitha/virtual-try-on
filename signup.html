@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up - Virtual Try-On</title>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+
     <style>
 
         /* General Styles */
@@ -145,10 +147,15 @@ input {
             <h2>Create an Account</h2>
             <p>Sign up to get started</p>
 
-            <!-- Google Sign Up Button -->
-            <button class="google-btn">
-                <img src="images/google.png" alt="Google Logo"> Sign Up with Google
-            </button>
+        <!-- Google Sign-In Button -->
+        <div id="g_id_onload"
+            data-client_id="1043781877337-dud8r8vup168a23cobfun80qovghoha2.apps.googleusercontent.com"
+            data-context="signin"
+            data-ux_mode="popup"
+            data-callback="handleGoogleLogin"
+            data-auto_prompt="false">
+        </div>
+        <div class="g_id_signin" data-type="standard"></div>
 
             <div class="divider">
                 <span>Or sign up with Email</span>
