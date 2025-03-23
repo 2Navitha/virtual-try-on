@@ -1,0 +1,230 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Virtual Try-On</title>
+    <style>
+
+        /* General Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Layout */
+.container {
+    display: flex;
+    background: white;
+    width: 800px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Left Section */
+.login-box {
+    width: 50%;
+    padding: 30px;
+    text-align: center;
+}
+
+h2 {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+p {
+    color: #666;
+    font-size: 14px;
+}
+
+/* Google Button */
+.google-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    border: 1px solid #ccc;
+    padding: 12px;
+    width: 100%;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.google-btn img {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+.google-btn:hover {
+    background: #f1f1f1;
+}
+
+/* Divider */
+.divider {
+    margin: 15px 0;
+    color: #666;
+}
+
+/* Input Fields */
+.input-group {
+    text-align: left;
+    margin: 10px 0;
+}
+
+.input-group label {
+    font-size: 14px;
+    color: #333;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+.forgot-password {
+    display: block;
+    margin-bottom: 15px;
+    color: #6e8efb;
+    text-decoration: none;
+}
+
+.login-btn {
+    background: #6e8efb;
+    color: white;
+    font-size: 16px;
+    border: none;
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.signup-text a {
+    color: #6e8efb;
+}
+
+/* Right Section */
+.illustration {
+    width: 50%;
+    background: #ece8ff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 30px;
+}
+
+.illustration img {
+    width: 100%;
+    height: 100%;
+    
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Left Section: Signup Form -->
+        <div class="login-box">
+            <h2>Create an Account</h2>
+            <p>Sign up to get started</p>
+
+            <!-- Google Sign Up Button -->
+            <button class="google-btn">
+                <img src="images/google.png" alt="Google Logo"> Sign Up with Google
+            </button>
+
+            <div class="divider">
+                <span>Or sign up with Email</span>
+            </div>
+
+            <!-- Signup Form -->
+            <form id="signupForm">
+                <div class="input-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" placeholder="Enter your name" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" placeholder="Enter your email" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Create a password" required>
+                </div>
+
+                <button type="submit" class="login-btn">Sign Up</button>
+            </form>
+
+            <p class="signup-text">Already have an account? <a href="login.html">Login</a></p>
+        </div>
+
+        <!-- Right Section: Illustration -->
+        <div class="illustration">
+            <img src="images/side-image.jpg" alt="Task Management Illustration">
+            <p>Join Tasky and manage your tasks more efficiently!</p>
+        </div>
+    </div>
+<script>
+    document.getElementById("signupForm").addEventListener("submit", async function(event) {
+        event.preventDefault();
+    
+        const fullName = document.getElementById("name").value;  // Fixed ID
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+    
+        try {
+            const response = await fetch("http://localhost:8080/api/auth/signup", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ fullName, email, password })
+            });
+    
+            if (!response.ok) {
+                throw new Error("Signup failed. Email may already be in use.");
+            }
+    
+            alert("Signup successful! Please log in.");
+            window.location.href = "login.html";
+    
+        } catch (error) {
+            alert(error.message);
+        }
+    });
+
+    function handleGoogleLogin(response) {
+        fetch("http://localhost:8080/api/auth/google", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ token: response.credential })
+        })
+        .then(res => res.json())
+        .then(data => {
+            localStorage.setItem("token", data.token);
+            alert("Google Login Successful!");
+            window.location.href = "dashboard.html";
+        })
+        .catch(error => console.error("Google Login Error:", error));
+    }
+</script>
+    
+</body>
+</html>

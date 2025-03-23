@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Virtual Try-On</title>
+   <style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #f4f4f4;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    
+    .container {
+        width: 350px;
+        padding: 20px;
+        background: white;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        text-align: center;
+    }
+    
+    h2 {
+        color: #333;
+        margin-bottom: 10px;
+    }
+    
+    p {
+        color: #666;
+    }
+    
+    input {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    
+    button {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    
+    /* Google Signup Button */
+    .google-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: white;
+        border: 1px solid #ccc;
+        color: #333;
+        padding: 10px;
+        margin-bottom: 10px;
+        font-weight: bold;
+    }
+    
+    .google-btn img {
+        width: 20px;
+        height: 20px;
+        margin-right: 10px;
+    }
+    
+    /* Sign in Button */
+    .login-btn {
+        background: #5a67d8;
+        color: white;
+        border: none;
+    }
+    
+    .login-btn:hover {
+        background: #434190;
+    }
+    
+    .forgot-password {
+        display: block;
+        margin-bottom: 10px;
+        color: #5a67d8;
+        text-decoration: none;
+    }
+    
+    .forgot-password:hover {
+        text-decoration: underline;
+    }
+    
+   </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Welcome Back!</h2>
+        <p>Please enter login details below</p>
+
+        <!-- Google Signup Button -->
+        <button class="google-btn">
+            <img src="/images/google.png" alt="Google Logo"> Sign Up with Google
+        </button>
+
+        <p>Or continue with your email</p>
+
+        <!-- Login Form -->
+        <form id="loginForm">
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="Enter your email" required>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Enter your password" required>
+
+            <a href="#" class="forgot-password">Forgot password?</a>
+
+            <button type="submit" class="login-btn">Sign in</button>
+        </form>
+
+        <p>Don't have an account? <a href="seller-signup.html">Sign Up</a></p>
+    </div>
+
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            alert("Login successful! Redirecting...");
+            window.location.href = "home.html"; // Redirect to home page
+        });
+        
+    </script>
+</body>
+</html>
