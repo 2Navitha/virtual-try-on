@@ -250,7 +250,10 @@
 
 .product img {
     width: 100%;
+    height: 250px; /* Set a fixed height */
+    object-fit: cover; /* Ensures images maintain aspect ratio while filling the area */
     border-radius: 10px;
+   
 }
 
 .offer {
