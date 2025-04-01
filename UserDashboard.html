@@ -3,82 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Virtual Try-On</title>
-    <!-- Swiper CSS CDN -->
+    <title>User Dashboard</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
-    <link rel="stylesheet" href="styles.css">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="UserDashboard.css">
+    <script src="UserDashboard.js" defer></script>
 </head>
 <body>
-
-    <!-- Navigation Bar -->
-    <nav class="navbar">
-        <div class="logo">
-            <img src="/images/logo.webp" alt="ShopZone Logo" width="40" height="40">
-            <span>ShopZone</span>
-        </div>
-    
-
-        <!-- Search Bar -->
-        <div class="search-box">
-            <input type="text" placeholder="Search for products, brands and more">
-            <i class='bx bx-search' ></i>
-        </div>
-
-        <ul class="nav-links">
-            <!-- Login Dropdown -->
-            <li class="dropdown">
-                <button class="login-btn" onclick="toggleLoginDropdown()"><i class='bx bxs-user' ></i>Profile</button>
-                <div class="dropdown-content" id="loginDropdown">
-                    <a href="login.html">Login</a>
-                    <a href="signup.html">Sign Up</a>
-                </div>
-            </li>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="/images/logo.webp" alt="ShopZone Logo" width="40" height="40">
+                <span>ShopZone</span>
+            </div>
             
-            <li><button class="seller-btn"><a href="seller.html">Become a Seller</a></li></button>
-            <li><button class="cart-btn"></button><a href="#" class="cart-icon" onclick="handleCart()"><i class='bx bx-cart' ></i>  Cart</a></li></button>
+            <div class="search-box">
+                <input type="text" placeholder="Search for products, brands and more">
+                <i class='bx bx-search'></i>
+            </div>
+            
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Electronics</a></li>
+                <li><a href="#">Fashion</a></li>
+                <li><a href="#">Home & Furniture</a></li>
+            </ul>
+            
+            <ul class="user-menu">
+                <button id="profileButton">Profile</button>
+                <div id="userDropdown" class="dropdown-content">
+                    <a href="#">My Profile</a>
+                    <a href="#">Orders</a>
+                    <a href="#">Wishlist</a>
+                    <a href="#">Logout</a>
+                </div>
+            </ul>
+            
+            <button id="cartButton">Cart (<span id="cartCount">0</span>)</button>
+        </nav>
+    </header>
 
-        </ul>
-    </nav>
-
-    <!-- Image Slider (Swiper) -->
     <div class="swiper-container">
         <div class="swiper-wrapper">
-            <!-- Slide 1 -->
-            <div class="swiper-slide">
-                <img src="/images/banner1.png" alt="Banner 1">
-            </div>
-            <!-- Slide 2 -->
-            <div class="swiper-slide">
-                <img src="/images/banner2.jpg" alt="Banner 2">
-            </div>
-            <!-- Slide 3 -->
-            <div class="swiper-slide">
-                <img src="/images/banner3.jpg" alt="Banner 3">
-            </div>
-            <div class="swiper-slide">
-                <img src="/images/banner4.jpg" alt="Banner 4">
-            </div>
+            <div class="swiper-slide"><img src="/images/userdash.webp" alt="Banner 1"></div>
+            <div class="swiper-slide"><img src="/images/userdash1.webp" alt="Banner 2"></div>
+            <div class="swiper-slide"><img src="/images/userdash2.webp" alt="Banner 3"></div>
+            <div class="swiper-slide"><img src="/images/userdash3.webp" alt="Banner 4"></div>
         </div>
-        
-        <!-- Pagination & Navigation Buttons -->
         <div class="swiper-pagination"></div>
         <div class="swiper-button-next"></div>
         <div class="swiper-button-prev"></div>
     </div>
 
-    <!-- Swiper JS CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
-
-    <!-- Hero Section -->
-    <header class="hero">
-        <h1>Try Before You Buy with AR Technology!</h1>
-        <p>Experience a new way of shopping with our AI-powered virtual try-on feature.</p>
-        <button class="start-btn" onclick="viewProduct()">Start Now</button>
-    </header>
-
-    <!-- Product Section -->
-    <section class="products">
+     <!-- Product Section -->
+     <section class="products">
         <h2>Explore Our Latest Products</h2>
         <div class="product-container">
 
@@ -205,7 +182,7 @@
         </div>
     </section>
 
-    <script src="script.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
 </body>
 </html>

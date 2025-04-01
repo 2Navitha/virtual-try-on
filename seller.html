@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sell Online with Flipkart</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
     
     <style>
         body {
@@ -42,6 +43,14 @@
             padding: 15px 30px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
+        .login {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 8px 12px;
+            transition: 0.3s;
+        }
         .navbar ul {
             list-style: none;
             display: flex;
@@ -63,12 +72,23 @@
             font-weight: bold;
             border-radius: 5px;
             transition: background 0.3s ease;
+            margin-left: 10px;
+           
+        }
+
+        .buttons button a {
+            text-decoration: none;
+            color: black;
         }
         .login {
             background-color: #ddd;
+           
+        }
+        .login:hover {
+            background-color: #e0a800;
         }
         .start-selling {
-            background-color: #ffc107;
+            background-color: #ddd;
             color: black;
         }
         .start-selling:hover {
@@ -78,6 +98,10 @@
             text-align: center;
             padding: 60px;
             background-color: white;
+        }
+        .features img {
+            width: 100px;
+            height: 100px;
         }
         .features {
             display: flex;
@@ -102,8 +126,36 @@
         .seller-success {
             text-align: center;
             padding: 40px;
-            background-color: #f1f1f1;
+            background-color: white;
+            font-weight: bold;
+            font-size: larger;
+            color: #0073e6;
         }
+        /* Swiper Slider */
+.swiper-container {
+    width: 100%;
+    height: 420px; /* Adjust as needed */
+    margin-top: 40px;
+    z-index: 1;
+    
+}
+
+.swiper-slide img {
+    
+    align-items: center;
+    /* object-fit: cover; */
+}
+
+/* Swiper Navigation & Pagination */
+.swiper-button-next,
+.swiper-button-prev {
+    color: white;
+}
+
+.swiper-pagination {
+    position: absolute;
+    bottom: 10px;
+}
     </style>
 </head>
 <body>
@@ -119,7 +171,6 @@
                     <li><a href="#">Fees and Commission</a></li>
                     <li><a href="#">Grow</a></li>
                     <li><a href="#">Learn</a></li>
-                    <li><a href="#">Shopsy</a></li>
                 </ul>
             </nav>
             <div class="buttons">
@@ -133,23 +184,23 @@
             <h1>Sell Online with ShopZone</h1>
             <div class="features">
                 <div class="feature">
-                    <img src="customers-icon.png" alt="Customers">
+                    <img src="/images/customer.png" alt="Customers">
                     <p> 45 crore+ ShopZone customers</p>
                 </div>
                 <div class="feature">
-                    <img src="secure-payments.png" alt="Payments">
+                    <img src="/images/payment.png" alt="Payments">
                     <p>7* days secure & regular payments</p>
                 </div>
                 <div class="feature">
-                    <img src="low-cost.png" alt="Low Cost">
+                    <img src="/images/low-price.png" alt="Low Cost">
                     <p>Low cost of doing business</p>
                 </div>
                 <div class="feature">
-                    <img src="support.png" alt="Seller Support">
+                    <img src="/images/support.png" alt="Seller Support">
                     <p>One click Seller Support</p>
                 </div>
                 <div class="feature">
-                    <img src="big-billion-days.png" alt="Big Billion Days">
+                    <img src="/images/big.png" alt="Big Billion Days">
                     <p>Access to The Big Billion Days & more</p>
                 </div>
             </div>
@@ -157,10 +208,77 @@
         <section class="seller-success">
             <h2>Seller Success Stories</h2>
         </section>
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <!-- Slide 1 -->
+                <div class="swiper-slide">
+                    <img src="/images/seller_banner1.png" alt="Banner 1">
+                </div>
+                <!-- Slide 2 -->
+                <div class="swiper-slide">
+                    <img src="/images/seller_banner2.png" alt="Banner 2">
+                </div>
+                <!-- Slide 3 -->
+                <div class="swiper-slide">
+                    <img src="/images/seller_banner3.png" alt="Banner 3">
+                </div>
+                
+            </div>
+            
+            <!-- Pagination & Navigation Buttons -->
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+    
+        <!-- Swiper JS CDN -->
+        <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
     </main>
     <script>
         document.querySelector(".start-selling").addEventListener("click", function() {
             alert("Redirecting to Seller Registration Page");
+        });
+
+        var swiper = new Swiper(".swiper-container", {
+            loop: true,
+            autoplay: {
+                delay: 3000,
+                disableOnInteraction: false
+            },
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+        });
+
+        document.getElementById("signupForm").addEventListener("submit", async function(event) {
+            event.preventDefault();
+        
+            const fullName = document.getElementById("name").value;  // Fixed ID
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+        
+            try {
+                const response = await fetch("http://localhost:8081/api/auth/signup", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ fullName, email, password })
+                });
+        
+                if (!response.ok) {
+                    throw new Error("Signup failed. Email may already be in use.");
+                }
+        
+                alert("Signup successful! Please log in.");
+                window.location.href = "login.html";
+        
+            } catch (error) {
+                alert(error.message);
+            }
         });
     </script>
 </body>
