@@ -88,7 +88,7 @@
     border-radius: 5px;
 }
 
-.cart-icon {
+.cart-btn {
     font-size: 18px;
     display: flex;
     align-items: center;
@@ -123,15 +123,19 @@
     transition: 0.3s;
 }
 
+
 .login-btn:hover {
     background: #ff9f00;
     color: white;
 }
-.seller-btn a:hover {
-    background: #ff9f00;
-   color: white;
+
+.cart-btn:hover {
+   color: #ff9f00;
 }
 
+.seller-btn:hover{
+    color: #ff9f00;
+}
 .dropdown-content {
     display: none;
     position: absolute;

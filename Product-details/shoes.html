@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Men's Sports Shoes</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      background-color: #f5f5f5;
+    }
+    .header {
+      background-color: #fff;
+      padding: 15px 30px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      font-size: 20px;
+      font-weight: bold;
+    }
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 30px;
+    }
+    .product-card {
+      background-color: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+    .product-card:hover {
+      transform: scale(1.02);
+    }
+    .product-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+    }
+    .product-info {
+      padding: 15px;
+    }
+    .brand {
+      font-weight: bold;
+      font-size: 16px;
+    }
+    .description {
+      color: #555;
+      font-size: 14px;
+      margin: 5px 0;
+    }
+    .price {
+      font-weight: bold;
+      margin: 10px 0 5px;
+    }
+    .discount {
+      color: #ff3e6c;
+      font-size: 14px;
+    }
+    .rating {
+      font-size: 14px;
+      background: #f7f7f7;
+      padding: 4px 8px;
+      border-radius: 12px;
+      display: inline-block;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+
+    <div class="header">Men's Sports Shoes</div>
+
+    <div class="products-grid">
+      <div class="product-card">
+        <img src="/images/shoes/shoe1.jpg" alt="shoes">
+        <div class="product-info">
+          <div class="brand">Nike</div>
+          <div class="description">Air Zoom Pegasus 39</div>
+          <div class="price">Rs. 3,499 <span class="discount">(30% OFF)</span></div>
+          <div class="rating">⭐ 4.5 | 12k ratings</div>
+        </div>
+      </div>
+    
+      <div class="product-card">
+        <img src="/images/shoes/shoe2.jpg" alt="shoes">
+        <div class="product-info">
+          <div class="brand">Adidas</div>
+          <div class="description">Ultraboost Light Running Shoes</div>
+          <div class="price">Rs. 7,999 <span class="discount">(20% OFF)</span></div>
+          <div class="rating">⭐ 4.7 | 9.8k ratings</div>
+        </div>
+      </div>
+    
+      <div class="product-card">
+        <img src="/images/shoes/shoe3.jpg" alt="shoes">
+        <div class="product-info">
+          <div class="brand">Puma</div>
+          <div class="description">Velocity Nitro 2</div>
+          <div class="price">Rs. 4,199 <span class="discount">(45% OFF)</span></div>
+          <div class="rating">⭐ 4.3 | 4.6k ratings</div>
+        </div>
+      </div>
+    
+      <div class="product-card">
+        <img src="/images/shoes/shoe4.jpg" alt="shoes">
+        <div class="product-info">
+          <div class="brand">Reebok</div>
+          <div class="description">Zig Kinetica II Edge</div>
+          <div class="price">Rs. 3,999 <span class="discount">(50% OFF)</span></div>
+          <div class="rating">⭐ 4.0 | 2.2k ratings</div>
+        </div>
+      </div>
+    
+      <div class="product-card">
+        <img src="/images/shoes/shoe5.jpg" alt="shoes">
+        <div class="product-info">
+          <div class="brand">New Balance</div>
+          <div class="description">Fresh Foam 880v12</div>
+          <div class="price">Rs. 5,299 <span class="discount">(35% OFF)</span></div>
+          <div class="rating">⭐ 4.6 | 1.1k ratings</div>
+        </div>
+      </div>
+    
+      <div class="product-card">
+        <img src="/images/shoes/shoe6.jpg" alt="shoes">
+        <div class="product-info">
+          <div class="brand">ASICS</div>
+          <div class="description">Gel-Nimbus 25</div>
+          <div class="price">Rs. 6,599 <span class="discount">(28% OFF)</span></div>
+          <div class="rating">⭐ 4.8 | 7.3k ratings</div>
+        </div>
+      </div>
+    
+      <div class="product-card">
+        <img src="/images/shoes/shoe7.jpg" alt="shoes">
+        <div class="product-info">
+          <div class="brand">Skechers</div>
+          <div class="description">GoRun Consistent</div>
+          <div class="price">Rs. 3,199 <span class="discount">(60% OFF)</span></div>
+          <div class="rating">⭐ 4.4 | 5.1k ratings</div>
+        </div>
+      </div>
+    
+      <div class="product-card">
+        <img src="/images/shoes/shoe8.jpg" alt="shoes">
+        <div class="product-info">
+          <div class="brand">Campus</div>
+          <div class="description">Maxico Running Shoes</div>
+          <div class="price">Rs. 1,199 <span class="discount">(40% OFF)</span></div>
+          <div class="rating">⭐ 3.9 | 3.4k ratings</div>
+        </div>
+      </div>
+    
+      <div class="product-card">
+        <img src="/images/shoes/shoe9.jpg" alt="shoes">
+        <div class="product-info">
+          <div class="brand">HRX by Hrithik Roshan</div>
+          <div class="description">Ultraflex Running Shoes</div>
+          <div class="price">Rs. 1,499 <span class="discount">(50% OFF)</span></div>
+          <div class="rating">⭐ 4.1 | 6.2k ratings</div>
+        </div>
+      </div>
+    
+      <div class="product-card">
+        <img src="/images/shoes/shoe10.jpg" alt="shoes">
+        <div class="product-info">
+          <div class="brand">Red Tape</div>
+          <div class="description">Sports Walking Shoes</div>
+          <div class="price">Rs. 1,799 <span class="discount">(52% OFF)</span></div>
+          <div class="rating">⭐ 4.0 | 2.8k ratings</div>
+        </div>
+      </div>
+    
+      <div class="product-card">
+        <img src="/images/shoes/shoe11.jpg" alt="shoes">
+        <div class="product-info">
+          <div class="brand">Power</div>
+          <div class="description">Powerwalk Trek Shoes</div>
+          <div class="price">Rs. 1,299 <span class="discount">(45% OFF)</span></div>
+          <div class="rating">⭐ 3.8 | 950 ratings</div>
+        </div>
+      </div>
+    
+      <div class="product-card">
+        <img src="/images/shoes/shoe12.jpg" alt="shoes">
+        <div class="product-info">
+          <div class="brand">Woodland</div>
+          <div class="description">Trail Sneakers</div>
+          <div class="price">Rs. 3,899 <span class="discount">(33% OFF)</span></div>
+          <div class="rating">⭐ 4.2 | 2.3k ratings</div>
+        </div>
+      </div>
+    
+      <div class="product-card">
+        <img src="/images/shoes/shoe13.jpg" alt="shoes">
+        <div class="product-info">
+          <div class="brand">Fila</div>
+          <div class="description">Retro Court Sneakers</div>
+          <div class="price">Rs. 2,599 <span class="discount">(38% OFF)</span></div>
+          <div class="rating">⭐ 4.0 | 1.1k ratings</div>
+        </div>
+      </div>
+    
+      <div class="product-card">
+        <img src="/images/shoes/shoe14.jpg" alt="shoes">
+        <div class="product-info">
+          <div class="brand">Sparx</div>
+          <div class="description">Sporty Slip-On Shoes</div>
+          <div class="price">Rs. 999 <span class="discount">(60% OFF)</span></div>
+          <div class="rating">⭐ 3.9 | 4.9k ratings</div>
+        </div>
+      </div>
+    
+      <div class="product-card">
+        <img src="/images/shoes/shoe15.jpg" alt="shoes">
+        <div class="product-info">
+          <div class="brand">Bata</div>
+          <div class="description">Power Running Trainers</div>
+          <div class="price">Rs. 1,499 <span class="discount">(55% OFF)</span></div>
+          <div class="rating">⭐ 4.1 | 1.7k ratings</div>
+        </div>
+      </div>
+    
+      <div class="product-card">
+        <img src="/images/shoes/shoe16.jpg" alt="shoes">
+        <div class="product-info">
+          <div class="brand">Liberty</div>
+          <div class="description">Sports Flexi-Sole</div>
+          <div class="price">Rs. 1,099 <span class="discount">(50% OFF)</span></div>
+          <div class="rating">⭐ 4.0 | 1.3k ratings</div>
+        </div>
+      </div>
+    
+      <div class="product-card">
+        <img src="/images/shoes/shoe17.jpg" alt="shoes">
+        <div class="product-info">
+          <div class="brand">Action</div>
+          <div class="description">Bullet Slip-On Sneakers</div>
+          <div class="price">Rs. 899 <span class="discount">(65% OFF)</span></div>
+          <div class="rating">⭐ 3.7 | 2.1k ratings</div>
+        </div>
+      </div>
+    
+      <div class="product-card">
+        <img src="/images/shoes/shoe18.jpg" alt="shoes">
+        <div class="product-info">
+          <div class="brand">Wildcraft</div>
+          <div class="description">All Terrain Shoes</div>
+          <div class="price">Rs. 2,299 <span class="discount">(42% OFF)</span></div>
+          <div class="rating">⭐ 4.2 | 980 ratings</div>
+        </div>
+      </div>
+    
+      <div class="product-card">
+        <img src="/images/shoes/shoe19.jpg" alt="shoes">
+        <div class="product-info">
+          <div class="brand">Decathlon</div>
+          <div class="description">Kiprun KD500</div>
+          <div class="price">Rs. 3,299 <span class="discount">(30% OFF)</span></div>
+          <div class="rating">⭐ 4.5 | 3.3k ratings</div>
+        </div>
+      </div>
+    
+      <div class="product-card">
+        <img src="/images/shoes/shoe1.jpg" alt="shoes">
+        <div class="product-info">
+          <div class="brand">ASIAN</div>
+          <div class="description">Wonder-13 Sports Shoes</div>
+          <div class="price">Rs. 1,099 <span class="discount">(70% OFF)</span></div>
+          <div class="rating">⭐ 4.0 | 6.1k ratings</div>
+        </div>
+      </div>
+    </div>
+    

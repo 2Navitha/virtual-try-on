@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Laptop Collection</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      background-color: #f5f5f5;
+    }
+    .header {
+      background-color: #fff;
+      padding: 15px 30px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      font-size: 20px;
+      font-weight: bold;
+    }
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 30px;
+    }
+    .product-card {
+      background-color: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+    .product-card:hover {
+      transform: scale(1.02);
+    }
+    .product-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+    }
+    .product-info {
+      padding: 15px;
+    }
+    .brand {
+      font-weight: bold;
+      font-size: 16px;
+    }
+    .description {
+      color: #555;
+      font-size: 14px;
+      margin: 5px 0;
+    }
+    .price {
+      font-weight: bold;
+      margin: 10px 0 5px;
+    }
+    .discount {
+      color: #ff3e6c;
+      font-size: 14px;
+    }
+    .rating {
+      font-size: 14px;
+      background: #f7f7f7;
+      padding: 4px 8px;
+      border-radius: 12px;
+      display: inline-block;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">Laptop Collection</div>
+
+  <div class="products-grid">
+    <!-- 20 Laptop Products -->
+    <div class="product-card">
+      <img src="/images/laptops/acer1.jpg" alt="laptop">
+      <div class="product-info">
+        <div class="brand">Dell</div>
+        <div class="description">Inspiron 15 11th Gen i5</div>
+        <div class="price">Rs. 54,999 <span class="discount">(15% OFF)</span></div>
+        <div class="rating">⭐ 4.4 | 8.2k ratings</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="/images/laptops/hp2.jpg" alt="laptop">
+      <div class="product-info">
+        <div class="brand">HP</div>
+        <div class="description">Pavilion Ryzen 5</div>
+        <div class="price">Rs. 48,999 <span class="discount">(20% OFF)</span></div>
+        <div class="rating">⭐ 4.3 | 7.1k ratings</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="/images/laptops/asus1.jpg" alt="laptop">
+      <div class="product-info">
+        <div class="brand">Lenovo</div>
+        <div class="description">IdeaPad Slim 3</div>
+        <div class="price">Rs. 42,499 <span class="discount">(25% OFF)</span></div>
+        <div class="rating">⭐ 4.2 | 6.5k ratings</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="/images/laptops/acer2.jpg" alt="laptop">
+      <div class="product-info">
+        <div class="brand">ASUS</div>
+        <div class="description">VivoBook 14</div>
+        <div class="price">Rs. 39,999 <span class="discount">(18% OFF)</span></div>
+        <div class="rating">⭐ 4.1 | 5.3k ratings</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="/images/laptops/hp1.jpg" alt="laptop">
+      <div class="product-info">
+        <div class="brand">Acer</div>
+        <div class="description">Aspire 7 Gaming</div>
+        <div class="price">Rs. 56,499 <span class="discount">(22% OFF)</span></div>
+        <div class="rating">⭐ 4.5 | 4.7k ratings</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="/images/laptops/asus2.jpg" alt="laptop">
+      <div class="product-info">
+        <div class="brand">Apple</div>
+        <div class="description">MacBook Air M1</div>
+        <div class="price">Rs. 84,999 <span class="discount">(10% OFF)</span></div>
+        <div class="rating">⭐ 4.8 | 12.1k ratings</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="/images/laptops/acer3.jpg" alt="laptop">
+      <div class="product-info">
+        <div class="brand">MSI</div>
+        <div class="description">Modern 15 Core i7</div>
+        <div class="price">Rs. 65,999 <span class="discount">(19% OFF)</span></div>
+        <div class="rating">⭐ 4.6 | 3.8k ratings</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="/images/laptops/acer7.jpg" alt="laptop">
+      <div class="product-info">
+        <div class="brand">Samsung</div>
+        <div class="description">Galaxy Book2</div>
+        <div class="price">Rs. 58,999 <span class="discount">(16% OFF)</span></div>
+        <div class="rating">⭐ 4.3 | 2.9k ratings</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="/images/laptops/asus3.jpg" alt="laptop">
+      <div class="product-info">
+        <div class="brand">LG</div>
+        <div class="description">Gram 16 UltraLight</div>
+        <div class="price">Rs. 92,999 <span class="discount">(12% OFF)</span></div>
+        <div class="rating">⭐ 4.7 | 1.2k ratings</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="/images/laptops/acer4.jpg" alt="laptop">
+      <div class="product-info">
+        <div class="brand">Microsoft</div>
+        <div class="description">Surface Laptop Go</div>
+        <div class="price">Rs. 74,999 <span class="discount">(14% OFF)</span></div>
+        <div class="rating">⭐ 4.4 | 1.9k ratings</div>
+      </div>
+    </div>
+
+    <!-- 10 more -->
+    <div class="product-card">
+      <img src="/images/laptops/hp2.jpg" alt="laptop">
+      <div class="product-info">
+        <div class="brand">Realme</div>
+        <div class="description">Book Slim i3</div>
+        <div class="price">Rs. 34,999 <span class="discount">(28% OFF)</span></div>
+        <div class="rating">⭐ 4.2 | 3.5k ratings</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="/images/laptops/asus4.jpg" alt="laptop">
+      <div class="product-info">
+        <div class="brand">Infinix</div>
+        <div class="description">INBook X2 Plus</div>
+        <div class="price">Rs. 29,999 <span class="discount">(30% OFF)</span></div>
+        <div class="rating">⭐ 4.1 | 1.8k ratings</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="/images/laptops/acer5.jpg" alt="laptop">
+      <div class="product-info">
+        <div class="brand">Avita</div>
+        <div class="description">Liber V14</div>
+        <div class="price">Rs. 26,499 <span class="discount">(35% OFF)</span></div>
+        <div class="rating">⭐ 3.9 | 2.1k ratings</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="/images/laptops/asus1.jpg" alt="laptop">
+      <div class="product-info">
+        <div class="brand">Honor</div>
+        <div class="description">MagicBook 14</div>
+        <div class="price">Rs. 46,999 <span class="discount">(18% OFF)</span></div>
+        <div class="rating">⭐ 4.3 | 2.5k ratings</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="/images/laptops/asus5.jpg" alt="laptop">
+      <div class="product-info">
+        <div class="brand">Chuwi</div>
+        <div class="description">HeroBook Pro</div>
+        <div class="price">Rs. 24,999 <span class="discount">(40% OFF)</span></div>
+        <div class="rating">⭐ 4.0 | 1.6k ratings</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="/images/laptops/acer6.jpg" alt="laptop">
+      <div class="product-info">
+        <div class="brand">Razer</div>
+        <div class="description">Blade 15 Gaming</div>
+        <div class="price">Rs. 1,59,999 <span class="discount">(12% OFF)</span></div>
+        <div class="rating">⭐ 4.7 | 900 ratings</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="/images/laptops/hp1.jpg" alt="laptop">
+      <div class="product-info">
+        <div class="brand">Alienware</div>
+        <div class="description">x14 R1 Gaming</div>
+        <div class="price">Rs. 2,10,000 <span class="discount">(10% OFF)</span></div>
+        <div class="rating">⭐ 4.8 | 670 ratings</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="/images/laptops/asus6.jpg" alt="laptop">
+      <div class="product-info">
+        <div class="brand">iBall</div>
+        <div class="description">CompBook Premio v3.0</div>
+        <div class="price">Rs. 17,499 <span class="discount">(35% OFF)</span></div>
+        <div class="rating">⭐ 3.7 | 1.2k ratings</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="/images/laptops/acer1.jpg" alt="laptop">
+      <div class="product-info">
+        <div class="brand">Vaio</div>
+        <div class="description">E15 Ryzen 7</div>
+        <div class="price">Rs. 59,999 <span class="discount">(23% OFF)</span></div>
+        <div class="rating">⭐ 4.4 | 1.5k ratings</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="/images/laptops/acer2.jpg" alt="laptop">
+      <div class="product-info">
+        <div class="brand">Fujitsu</div>
+        <div class="description">UH-X 11th Gen i7</div>
+        <div class="price">Rs. 72,999 <span class="discount">(14% OFF)</span></div>
+        <div class="rating">⭐ 4.5 | 1.1k ratings</div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

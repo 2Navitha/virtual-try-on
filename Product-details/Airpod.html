@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AirPods Collection</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      background-color: #f5f5f5;
+    }
+    .header {
+      background-color: #fff;
+      padding: 15px 30px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      font-size: 20px;
+      font-weight: bold;
+    }
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 30px;
+    }
+    .product-card {
+      background-color: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+    .product-card:hover {
+      transform: scale(1.02);
+    }
+    .product-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+    }
+    .product-info {
+      padding: 15px;
+    }
+    .brand {
+      font-weight: bold;
+      font-size: 16px;
+    }
+    .description {
+      color: #555;
+      font-size: 14px;
+      margin: 5px 0;
+    }
+    .price {
+      font-weight: bold;
+      margin: 10px 0 5px;
+    }
+    .discount {
+      color: #ff3e6c;
+      font-size: 14px;
+    }
+    .rating {
+      font-size: 14px;
+      background: #f7f7f7;
+      padding: 4px 8px;
+      border-radius: 12px;
+      display: inline-block;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">AirPods Collection</div>
+
+  <div class="products-grid">
+    <!-- Repeat the following block 20 times -->
+    <div class="product-card">
+      <img src="/images/airpods/airpod1.jpg" alt="airpod">
+      <div class="product-info">
+        <div class="brand">Apple</div>
+        <div class="description">AirPods Pro (2nd Gen)</div>
+        <div class="price">Rs. 26,900 <span class="discount">(10% OFF)</span></div>
+        <div class="rating">⭐ 4.8 | 15k ratings</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="/images/airpods/airpod2.jpg" alt="airpod">
+      <div class="product-info">
+        <div class="brand">Samsung</div>
+        <div class="description">Galaxy Buds2 Pro</div>
+        <div class="price">Rs. 17,999 <span class="discount">(20% OFF)</span></div>
+        <div class="rating">⭐ 4.6 | 9.3k ratings</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="/images/airpods/airpod3.jpg" alt="airpod">
+      <div class="product-info">
+        <div class="brand">boAt</div>
+        <div class="description">Airdopes 441</div>
+        <div class="price">Rs. 1,999 <span class="discount">(60% OFF)</span></div>
+        <div class="rating">⭐ 4.2 | 25k ratings</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="/images/airpods/airpod4.jpg" alt="airpod">
+      <div class="product-info">
+        <div class="brand">Noise</div>
+        <div class="description">Air Buds Mini</div>
+        <div class="price">Rs. 1,299 <span class="discount">(55% OFF)</span></div>
+        <div class="rating">⭐ 4.0 | 12k ratings</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="/images/airpods/airpod5.jpg" alt="airpod">
+      <div class="product-info">
+        <div class="brand">OnePlus</div>
+        <div class="description">Buds Z2</div>
+        <div class="price">Rs. 4,999 <span class="discount">(30% OFF)</span></div>
+        <div class="rating">⭐ 4.4 | 10k ratings</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="/images/airpods/airpod6.jpg" alt="airpod">
+      <div class="product-info">
+        <div class="brand">realme</div>
+        <div class="description">Buds Air 5</div>
+        <div class="price">Rs. 3,699 <span class="discount">(25% OFF)</span></div>
+        <div class="rating">⭐ 4.3 | 8.1k ratings</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="/images/airpods/airpod7.jpg" alt="airpod">
+      <div class="product-info">
+        <div class="brand">Noise</div>
+        <div class="description">Wave Beam TWS</div>
+        <div class="price">Rs. 5,499 <span class="discount">(35% OFF)</span></div>
+        <div class="rating">⭐ 4.1 | 7.6k ratings</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="/images/airpods/airpod8.jpg" alt="airpod">
+      <div class="product-info">
+        <div class="brand">Sony</div>
+        <div class="description">WF-1000XM4</div>
+        <div class="price">Rs. 19,999 <span class="discount">(15% OFF)</span></div>
+        <div class="rating">⭐ 4.7 | 6.5k ratings</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="/images/airpods/airpod9.jpg" alt="airpod">
+      <div class="product-info">
+        <div class="brand">Lectronic</div>
+        <div class="description">Ear (2) Transparent</div>
+        <div class="price">Rs. 8,999 <span class="discount">(10% OFF)</span></div>
+        <div class="rating">⭐ 4.5 | 4.2k ratings</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="/images/airpods/airpod10.jpg" alt="airpod">
+      <div class="product-info">
+        <div class="brand">Boult</div>
+        <div class="description">Omega TWS Earbuds</div>
+        <div class="price">Rs. 1,799 <span class="discount">(65% OFF)</span></div>
+        <div class="rating">⭐ 4.1 | 3.9k ratings</div>
+      </div>
+    </div>
+
+    <!-- 10 More Products -->
+    <div class="product-card">
+      <img src="/images/airpods/airpod11.jpg" alt="airpod">
+      <div class="product-info">
+        <div class="brand">MI</div>
+        <div class="description">Redmi Buds 4 Active</div>
+        <div class="price">Rs. 1,399 <span class="discount">(50% OFF)</span></div>
+        <div class="rating">⭐ 4.0 | 7.2k ratings</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="/images/airpods/airpod12.jpg" alt="airpod">
+      <div class="product-info">
+        <div class="brand">Marshall</div>
+        <div class="description">Motif ANC Earbuds</div>
+        <div class="price">Rs. 18,499 <span class="discount">(18% OFF)</span></div>
+        <div class="rating">⭐ 4.6 | 2.3k ratings</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="/images/airpods/airpod13.jpg" alt="airpod">
+      <div class="product-info">
+        <div class="brand">Bose</div>
+        <div class="description">Opera ANC TWS</div>
+        <div class="price">Rs. 3,299 <span class="discount">(40% OFF)</span></div>
+        <div class="rating">⭐ 4.2 | 3.6k ratings</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="/images/airpods/airpod14.jpg" alt="airpod">
+      <div class="product-info">
+        <div class="brand">Boat</div>
+        <div class="description">Bassbuds Ultima</div>
+        <div class="price">Rs. 1,099 <span class="discount">(70% OFF)</span></div>
+        <div class="rating">⭐ 3.9 | 5.1k ratings</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="/images/airpods/airpod15.jpg" alt="airpod">
+      <div class="product-info">
+        <div class="brand">Boat</div>
+        <div class="description">Soundcore Liberty Air 2</div>
+        <div class="price">Rs. 7,999 <span class="discount">(22% OFF)</span></div>
+        <div class="rating">⭐ 4.5 | 4.9k ratings</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="/images/airpods/airpod16.jpg" alt="airpod">
+      <div class="product-info">
+        <div class="brand">TWS Pro</div>
+        <div class="description">Gaming Earbuds</div>
+        <div class="price">Rs. 2,099 <span class="discount">(48% OFF)</span></div>
+        <div class="rating">⭐ 4.0 | 2.6k ratings</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="/images/airpods/airpod17.jpg" alt="airpod">
+      <div class="product-info">
+        <div class="brand">TAGG</div>
+        <div class="description">Liberty Buds Pro</div>
+        <div class="price">Rs. 2,499 <span class="discount">(42% OFF)</span></div>
+        <div class="rating">⭐ 4.2 | 3.3k ratings</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="/images/airpods/airpod18.jpg" alt="airpod">
+      <div class="product-info">
+        <div class="brand">OPPO</div>
+        <div class="description">Enco Buds2</div>
+        <div class="price">Rs. 1,699 <span class="discount">(55% OFF)</span></div>
+        <div class="rating">⭐ 4.1 | 6.1k ratings</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="/images/airpods/airpod19.jpg" alt="airpod">
+      <div class="product-info">
+        <div class="brand">Lava</div>
+        <div class="description">Probuds N2</div>
+        <div class="price">Rs. 999 <span class="discount">(60% OFF)</span></div>
+        <div class="rating">⭐ 4.0 | 2.0k ratings</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="/images/airpods/airpod20.jpg" alt="airpod">
+      <div class="product-info">
+        <div class="brand">Wings</div>
+        <div class="description">Phantom 205 ANC</div>
+        <div class="price">Rs. 1,899 <span class="discount">(57% OFF)</span></div>
+        <div class="rating">⭐ 4.3 | 1.8k ratings</div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

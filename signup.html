@@ -221,10 +221,10 @@
         .then(res => res.json())
         .then(data => {
             localStorage.setItem("token", data.token);
-            alert("Google Login Successful!");
-            window.location.href = "dashboard.html";
+            alert("Google Signup Successful!");
+            window.location.href = "UserDashboard.html";
         })
-        .catch(error => console.error("Google Login Error:", error));
+        .catch(error => console.error("Google Signup Error:", error));
     }
 </script>
 

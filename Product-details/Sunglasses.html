@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Men's Sunglasses</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      background-color: #f5f5f5;
+    }
+    .header {
+      background-color: #fff;
+      padding: 15px 30px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      font-size: 20px;
+      font-weight: bold;
+    }
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 30px;
+    }
+    .product-card {
+      background-color: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+    .product-card:hover {
+      transform: scale(1.02);
+    }
+    .product-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+    }
+    .product-info {
+      padding: 15px;
+    }
+    .brand {
+      font-weight: bold;
+      font-size: 16px;
+    }
+    .description {
+      color: #555;
+      font-size: 14px;
+      margin: 5px 0;
+    }
+    .price {
+      font-weight: bold;
+      margin: 10px 0 5px;
+    }
+    .discount {
+      color: #ff3e6c;
+      font-size: 14px;
+    }
+    .rating {
+      font-size: 14px;
+      background: #f7f7f7;
+      padding: 4px 8px;
+      border-radius: 12px;
+      display: inline-block;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">Men's Sunglasses</div>
+
+  <div class="products-grid">
+    <div class="product-card">
+      <img src="/images/sunglass/sunglass1.jpg" alt="sunglasses">
+      <div class="product-info">
+        <div class="brand">Ray-Ban</div>
+        <div class="description">Aviator Classic</div>
+        <div class="price">Rs. 5,999 <span class="discount">(20% OFF)</span></div>
+        <div class="rating">⭐ 4.6 | 11k ratings</div>
+      </div>
+    </div>
+    
+    <div class="product-card">
+      <img src="/images/sunglass/sunglass2.jpg" alt="sunglasses">
+      <div class="product-info">
+        <div class="brand">Fastrack</div>
+        <div class="description">UV Protection Square</div>
+        <div class="price">Rs. 1,499 <span class="discount">(30% OFF)</span></div>
+        <div class="rating">⭐ 4.3 | 6.2k ratings</div>
+      </div>
+    </div>
+    
+    <div class="product-card">
+      <img src="/images/sunglass/sunglass3.jpg" alt="sunglasses">
+      <div class="product-info">
+        <div class="brand">Oakley</div>
+        <div class="description">Holbrook XL</div>
+        <div class="price">Rs. 7,199 <span class="discount">(25% OFF)</span></div>
+        <div class="rating">⭐ 4.7 | 3.1k ratings</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="/images/sunglass/sunglass4.jpg" alt="sunglasses">
+      <div class="product-info">
+        <div class="brand">Polaroid</div>
+        <div class="description">Polarized Round</div>
+        <div class="price">Rs. 2,199 <span class="discount">(40% OFF)</span></div>
+        <div class="rating">⭐ 4.2 | 2.5k ratings</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="/images/sunglass/sunglass5.jpg" alt="sunglasses">
+      <div class="product-info">
+        <div class="brand">Tommy Hilfiger</div>
+        <div class="description">Wayfarer Sunglasses</div>
+        <div class="price">Rs. 3,499 <span class="discount">(35% OFF)</span></div>
+        <div class="rating">⭐ 4.5 | 4.2k ratings</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="/images/sunglass/sunglass6.jpg" alt="sunglasses">
+      <div class="product-info">
+        <div class="brand">Voyage</div>
+        <div class="description">Retro Oversized</div>
+        <div class="price">Rs. 999 <span class="discount">(50% OFF)</span></div>
+        <div class="rating">⭐ 3.9 | 1.7k ratings</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="/images/sunglass/sunglass7.jpg" alt="sunglasses">
+      <div class="product-info">
+        <div class="brand">IDEE</div>
+        <div class="description">Men's Rectangular</div>
+        <div class="price">Rs. 1,799 <span class="discount">(45% OFF)</span></div>
+        <div class="rating">⭐ 4.0 | 3.8k ratings</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="/images/sunglass/sunglass8.jpg" alt="sunglasses">
+      <div class="product-info">
+        <div class="brand">Titan</div>
+        <div class="description">Black Sports Sunglasses</div>
+        <div class="price">Rs. 1,999 <span class="discount">(33% OFF)</span></div>
+        <div class="rating">⭐ 4.1 | 2.1k ratings</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="/images/sunglass/sunglass9.jpg" alt="sunglasses">
+      <div class="product-info">
+        <div class="brand">Roadster</div>
+        <div class="description">Round Tinted Glasses</div>
+        <div class="price">Rs. 899 <span class="discount">(60% OFF)</span></div>
+        <div class="rating">⭐ 3.8 | 4.4k ratings</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="/images/sunglass/sunglass10.jpg" alt="sunglasses">
+      <div class="product-info">
+        <div class="brand">Vincent Chase</div>
+        <div class="description">Polarized Sunglasses</div>
+        <div class="price">Rs. 1,299 <span class="discount">(50% OFF)</span></div>
+        <div class="rating">⭐ 4.4 | 3.0k ratings</div>
+      </div>
+    </div>
+
+    <!-- 10 more products below -->
+
+    <div class="product-card">
+      <img src="/images/sunglass/sunglass11.jpg" alt="sunglasses">
+      <div class="product-info">
+        <div class="brand">Lenskart</div>
+        <div class="description">Blue Cut Round</div>
+        <div class="price">Rs. 999 <span class="discount">(45% OFF)</span></div>
+        <div class="rating">⭐ 4.0 | 1.6k ratings</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="/images/sunglass/sunglass12.jpg" alt="sunglasses">
+      <div class="product-info">
+        <div class="brand">Gucci</div>
+        <div class="description">Luxury Square Frame</div>
+        <div class="price">Rs. 12,499 <span class="discount">(10% OFF)</span></div>
+        <div class="rating">⭐ 4.8 | 890 ratings</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="/images/sunglass/sunglass13.jpg" alt="sunglasses">
+      <div class="product-info">
+        <div class="brand">Diesel</div>
+        <div class="description">Vintage Green Glass</div>
+        <div class="price">Rs. 3,699 <span class="discount">(38% OFF)</span></div>
+        <div class="rating">⭐ 4.2 | 1.3k ratings</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="/images/sunglass/sunglass14.jpg" alt="sunglasses">
+      <div class="product-info">
+        <div class="brand">Prada</div>
+        <div class="description">Designer Sport Frame</div>
+        <div class="price">Rs. 15,999 <span class="discount">(18% OFF)</span></div>
+        <div class="rating">⭐ 4.7 | 740 ratings</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="/images/sunglass/sunglass15.jpg" alt="sunglasses">
+      <div class="product-info">
+        <div class="brand">Police</div>
+        <div class="description">Bold Look Sunglasses</div>
+        <div class="price">Rs. 2,299 <span class="discount">(42% OFF)</span></div>
+        <div class="rating">⭐ 4.0 | 2.9k ratings</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="/images/sunglass/sunglass16.jpg" alt="sunglasses">
+      <div class="product-info">
+        <div class="brand">Calvin Klein</div>
+        <div class="description">Square UV Sunglasses</div>
+        <div class="price">Rs. 4,799 <span class="discount">(28% OFF)</span></div>
+        <div class="rating">⭐ 4.5 | 1.4k ratings</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="/images/sunglass/sunglass17.jpg" alt="sunglasses">
+      <div class="product-info">
+        <div class="brand">Diesel</div>
+        <div class="description">Textured Aviator</div>
+        <div class="price">Rs. 3,899 <span class="discount">(36% OFF)</span></div>
+        <div class="rating">⭐ 4.3 | 2.0k ratings</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="/images/sunglass/sunglass18.jpg" alt="sunglasses">
+      <div class="product-info">
+        <div class="brand">Police</div>
+        <div class="description">Modern Round Fit</div>
+        <div class="price">Rs. 2,799 <span class="discount">(34% OFF)</span></div>
+        <div class="rating">⭐ 4.1 | 1.2k ratings</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="/images/sunglass/sunglass19.jpg" alt="sunglasses">
+      <div class="product-info">
+        <div class="brand">Fastrack</div>
+        <div class="description">Bold Black Shades</div>
+        <div class="price">Rs. 1,199 <span class="discount">(50% OFF)</span></div>
+        <div class="rating">⭐ 4.0 | 5.4k ratings</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="/images/sunglass/sunglass20.jpg" alt="sunglasses">
+      <div class="product-info">
+        <div class="brand">Ray-Ban</div>
+        <div class="description">Blue Mirror Lens</div>
+        <div class="price">Rs. 6,499 <span class="discount">(22% OFF)</span></div>
+        <div class="rating">⭐ 4.6 | 4.8k ratings</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

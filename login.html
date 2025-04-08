@@ -128,47 +128,67 @@
         // Handle Form Login
         document.getElementById("loginForm").addEventListener("submit", async function(event) {
             event.preventDefault();
-
+    
             const email = document.getElementById("email").value;
             const password = document.getElementById("password").value;
-
+    
             try {
                 const response = await fetch("http://localhost:8081/api/auth/login", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ email, password })
                 });
-
-                if (!response.ok) {
-                    throw new Error("Invalid email or password.");
-                }
-
+    
                 const data = await response.json();
+                console.log("Login Response:", data);
+    
+                if (!response.ok || !data.token) {
+                    throw new Error(data.message || "Invalid email or password.");
+                }
+    
                 localStorage.setItem("token", data.token);
                 alert("Login successful!");
+                console.log("Redirecting to UserDashboard.html...");
                 window.location.href = "UserDashboard.html";
-
+    
             } catch (error) {
                 alert("Login Error: " + error.message);
                 console.error("Login Error:", error);
             }
         });
-
+    
         // Handle Google Login
         function handleGoogleLogin(response) {
-            fetch("http://localhost:8081/api/auth/google", {
+            console.log("Google Credential Response:", response);
+        
+            fetch("http://localhost:8081/api/auth/google-signup", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ token: response.credential })
             })
-            .then(res => res.json())
-            .then(data => {
+            .then(async (res) => {
+                const data = await res.json();
+                console.log("Google Login Response:", data);
+        
+                if (!res.ok) {
+                    throw new Error(data.message || "Server error during Google login.");
+                }
+        
+                if (!data.token) {
+                    throw new Error("Google login failed: No token received from backend.");
+                }
+        
                 localStorage.setItem("token", data.token);
                 alert("Google Login Successful!");
                 window.location.href = "UserDashboard.html";
             })
-            .catch(error => console.error("Google Login Error:", error));
+            .catch((error) => {
+                alert("Google Login Error: " + error.message);
+                console.error("Google Login Error:", error);
+            });
         }
+        
     </script>
+    
 </body>
 </html>
