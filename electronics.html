@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ShopZone | Electronics</title>
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background-color: #f9f9f9;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: #1a1a1a;
+      padding: 15px 30px;
+      color: #fff;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo img {
+      width: 40px;
+      height: 40px;
+      margin-right: 10px;
+    }
+
+    .logo h2 {
+      font-size: 24px;
+      font-weight: 600;
+    }
+
+    .search-box {
+      display: flex;
+      align-items: center;
+      background: #fff;
+      padding: 8px 12px;
+      border-radius: 6px;
+    }
+
+    .search-box i {
+      color: #999;
+      margin-right: 8px;
+    }
+
+    .search-box input {
+      border: none;
+      outline: none;
+      width: 250px;
+      font-size: 14px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      align-items: center;
+    }
+
+    nav ul li {
+      margin-left: 20px;
+    }
+
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 16px;
+    }
+
+    .page-container {
+      display: flex;
+      padding: 30px;
+      gap: 30px;
+    }
+
+    .filters {
+      width: 250px;
+      background: #fff;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    .filters h3 {
+      margin-bottom: 20px;
+      color: #333;
+      font-weight: 600;
+    }
+
+    .filters strong {
+      display: block;
+      margin-top: 15px;
+      color: #222;
+      font-size: 14px;
+    }
+
+    .filters label {
+      display: block;
+      margin: 5px 0;
+      font-size: 14px;
+      color: #555;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 25px;
+      flex: 1;
+    }
+
+    .product-card {
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      transition: transform 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 15px;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 170px;
+      object-fit: contain;
+      margin-bottom: 10px;
+    }
+
+    .product-card h4 {
+      font-size: 16px;
+      color: #333;
+      margin: 8px 0 4px;
+      text-align: center;
+    }
+
+    .product-card .desc {
+      font-size: 13px;
+      color: #777;
+      margin-bottom: 6px;
+      text-align: center;
+    }
+
+    .rating {
+      font-size: 13px;
+      color: #f39c12;
+      margin-bottom: 6px;
+    }
+
+    .product-card p {
+      font-weight: bold;
+      color: #2c3e50;
+      font-size: 15px;
+      margin-bottom: 10px;
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .actions button {
+      padding: 8px 10px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 13px;
+      transition: 0.2s;
+    }
+
+    .actions button i {
+      font-size: 16px;
+    }
+
+    .actions button:first-child {
+      background-color: #ff4757;
+      color: white;
+    }
+
+    .actions .try-on {
+      background-color: #0984e3;
+      color: #fff;
+    }
+
+    .actions button:hover {
+      opacity: 0.85;
+    }
+
+    @media (max-width: 768px) {
+      .page-container {
+        flex-direction: column;
+        padding: 20px;
+      }
+
+      .filters {
+        width: 100%;
+      }
+
+      .search-box input {
+        width: 150px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<header>
+  <div class="logo">
+    <img src="/images/logo.webp" alt="ShopZone Logo">
+    <h2>ShopZone</h2>
+  </div>
+  <div class="search-box">
+    <i class='bx bx-search'></i>
+    <input type="text" placeholder="Search for electronics...">
+  </div>
+  <nav>
+    <ul class="nav-links">
+      <li><a href="#">Mobiles</a></li>
+      <li><a href="#">Laptops</a></li>
+      <li><a href="#">Tablets</a></li>
+      <li><a href="#">Wearables</a></li>
+      <li><a href="#">Audio</a></li>
+      <li><a href="cart.html"><i class='bx bx-cart'></i></a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- Page Layout -->
+<div class="page-container">
+
+  <!-- Filters Sidebar -->
+  <div class="filters">
+    <h3>Filters</h3>
+
+    <strong>Category</strong>
+    <label><input type="checkbox"> Smartphones</label>
+    <label><input type="checkbox"> Laptops</label>
+    <label><input type="checkbox"> Tablets</label>
+    <label><input type="checkbox"> Smartwatches</label>
+    <label><input type="checkbox"> Headphones</label>
+    <label><input type="checkbox"> Bluetooth Speakers</label>
+    <label><input type="checkbox"> Accessories</label>
+
+    <strong>Brand</strong>
+    <label><input type="checkbox"> Apple</label>
+    <label><input type="checkbox"> Samsung</label>
+    <label><input type="checkbox"> HP</label>
+    <label><input type="checkbox"> Lenovo</label>
+    <label><input type="checkbox"> Noise</label>
+    <label><input type="checkbox"> Dell</label>
+    <label><input type="checkbox"> OnePlus</label>
+    <label><input type="checkbox"> boAt</label>
+
+    <strong>Color</strong>
+    <label><input type="checkbox"> Black</label>
+    <label><input type="checkbox"> White</label>
+    <label><input type="checkbox"> Blue</label>
+    <label><input type="checkbox"> Silver</label>
+    <label><input type="checkbox"> Grey</label>
+    <label><input type="checkbox"> Red</label>
+    <label><input type="checkbox"> Green</label>
+    <label><input type="checkbox"> Pink</label>
+
+    <strong>Price</strong>
+    <label><input type="radio" name="price"> Under ₹10,000</label>
+    <label><input type="radio" name="price"> ₹10,000 - ₹30,000</label>
+    <label><input type="radio" name="price"> ₹30,000 - ₹60,000</label>
+    <label><input type="radio" name="price"> ₹60,000+</label>
+  </div>
+
+ <!-- Products Grid -->
+<div class="product-grid">
+  <!-- Product 1 -->
+  <div class="product-card">
+    <img src="/images/mobile/Samsung Galaxy M14.jpeg" alt="Samsung Galaxy M14" />
+    <h4>Samsung Galaxy M14</h4>
+    <p class="desc">5G, Exynos 1330, 6000mAh Battery</p>
+    <div class="rating">★★★★☆ (4.2)</div>
+    <p>₹19,999</p>
+    <div class="actions">
+      <button onclick="location.href='cart.html'"><i class='bx bx-heart'></i></button>
+      <button class="try-on" onclick="tryOn('Samsung Galaxy M14')">Virtual Try-On</button>
+    </div>
+  </div>
+
+  <!-- Product 2 -->
+  <div class="product-card">
+    <img src="/images/mobile/redmi_note13pro.jpeg" alt="Redmi Note 13 Pro+" />
+    <h4>Redmi Note 13 Pro+</h4>
+    <p class="desc">AMOLED, 200MP Camera, Dimensity 7200</p>
+    <div class="rating">★★★★☆ (4.5)</div>
+    <p>₹22,499</p>
+    <div class="actions">
+      <button onclick="location.href='cart.html'"><i class='bx bx-heart'></i></button>
+      <button class="try-on" onclick="tryOn('Redmi Note 13 Pro+')">Virtual Try-On</button>
+    </div>
+  </div>
+
+  <!-- Product 3 -->
+  <div class="product-card">
+    <img src="/images/mobile/iqoo_z9.jpeg" alt="iQOO Z9 5G" />
+    <h4>iQOO Z9 5G</h4>
+    <p class="desc">MediaTek Dimensity 7200, 64MP OIS Camera</p>
+    <div class="rating">★★★★☆ (4.3)</div>
+    <p>₹25,499</p>
+    <div class="actions">
+      <button onclick="location.href='cart.html'"><i class='bx bx-heart'></i></button>
+      <button class="try-on" onclick="tryOn('iQOO Z9 5G')">Virtual Try-On</button>
+    </div>
+  </div>
+
+  <!-- Product 4 -->
+  <div class="product-card">
+    <img src="/images/mobile/realme_narzo70pro.jpeg" alt="Realme Narzo 70 Pro" />
+    <h4>Realme Narzo 70 Pro</h4>
+    <p class="desc">120Hz AMOLED, Sony IMX890 Camera</p>
+    <div class="rating">★★★★☆ (4.4)</div>
+    <p>₹18,999</p>
+    <div class="actions">
+      <button onclick="location.href='cart.html'"><i class='bx bx-heart'></i></button>
+      <button class="try-on" onclick="tryOn('Realme Narzo 70 Pro')">Virtual Try-On</button>
+    </div>
+  </div>
+
+  <!-- Product 5 -->
+  <div class="product-card">
+    <img src="/images/mobile/samsung_galaxy_tab_a9.jpeg" alt="Samsung Galaxy Tab A9+" />
+    <h4>Samsung Galaxy Tab A9+</h4>
+    <p class="desc">11" Display, Snapdragon 695, 7040mAh Battery</p>
+    <div class="rating">★★★★☆ (4.0)</div>
+    <p>₹27,999</p>
+    <div class="actions">
+      <button onclick="location.href='cart.html'"><i class='bx bx-heart'></i></button>
+      <button class="try-on" onclick="tryOn('Samsung Galaxy Tab A9+')">Virtual Try-On</button>
+    </div>
+  </div>
+
+  <!-- Product 6 -->
+  <div class="product-card">
+    <img src="/images/laptops/hp_pavilion15.jpeg" alt="HP Pavilion 15" />
+    <h4>HP Pavilion 15</h4>
+    <p class="desc">Intel i5 12th Gen, 16GB RAM, 1TB SSD</p>
+    <div class="rating">★★★★★ (4.7)</div>
+    <p>₹64,999</p>
+    <div class="actions">
+      <button onclick="location.href='cart.html'"><i class='bx bx-heart'></i></button>
+      <button class="try-on" onclick="tryOn('HP Pavilion 15')">Virtual Try-On</button>
+    </div>
+  </div>
+
+  <!-- Product 7 -->
+  <div class="product-card">
+    <img src="/images/laptops/lenovo_ideapad_slim3.jpeg" alt="Lenovo Ideapad Slim 3" />
+    <h4>Lenovo Ideapad Slim 3</h4>
+    <p class="desc">Ryzen 7, Full HD Display, Rapid Charge</p>
+    <div class="rating">★★★★☆ (4.3)</div>
+    <p>₹49,999</p>
+    <div class="actions">
+      <button onclick="location.href='cart.html'"><i class='bx bx-heart'></i></button>
+      <button class="try-on" onclick="tryOn('Lenovo Ideapad Slim 3')">Virtual Try-On</button>
+    </div>
+  </div>
+
+  <!-- Product 8 -->
+  <div class="product-card">
+    <img src="/images/laptops/acer_aspires.jpeg" alt="Acer Aspire Lite 14" />
+    <h4>Acer Aspire Lite 14</h4>
+    <p class="desc">Intel Core i3, 8GB RAM, 512GB SSD</p>
+    <div class="rating">★★★☆☆ (3.8)</div>
+    <p>₹39,999</p>
+    <div class="actions">
+      <button onclick="location.href='cart.html'"><i class='bx bx-heart'></i></button>
+      <button class="try-on" onclick="tryOn('Acer Aspire Lite 14')">Virtual Try-On</button>
+    </div>
+  </div>
+
+  <!-- Product 9 -->
+  <div class="product-card">
+    <img src="/images/audio/jbl_flip6.jpeg" alt="JBL Flip 6 Speaker" />
+    <h4>JBL Flip 6 Speaker</h4>
+    <p class="desc">Portable, IP67 Waterproof, 12 Hours Playback</p>
+    <div class="rating">★★★★☆ (4.5)</div>
+    <p>₹8,999</p>
+    <div class="actions">
+      <button onclick="location.href='cart.html'"><i class='bx bx-heart'></i></button>
+      <button class="try-on" onclick="tryOn('JBL Flip 6 Speaker')">Virtual Try-On</button>
+    </div>
+  </div>
+
+  <!-- Product 10 -->
+  <div class="product-card">
+    <img src="/images/audio/sony_whch520.jpeg" alt="Sony WH-CH520 Headphones" />
+    <h4>Sony WH-CH520 Headphones</h4>
+    <p class="desc">50H Battery, BT 5.2, On-Ear Lightweight</p>
+    <div class="rating">★★★★☆ (4.1)</div>
+    <p>₹3,499</p>
+    <div class="actions">
+      <button onclick="location.href='cart.html'"><i class='bx bx-heart'></i></button>
+      <button class="try-on" onclick="tryOn('Sony WH-CH520 Headphones')">Virtual Try-On</button>
+    </div>
+  </div>
+
+  <!-- Product 11 -->
+  <div class="product-card">
+    <img src="/images/audio/zebronics_zebjuke.jpeg" alt="Zebronics Zeb-Juke Bar" />
+    <h4>Zebronics Zeb-Juke Bar</h4>
+    <p class="desc">100W Soundbar, Bluetooth, HDMI ARC</p>
+    <div class="rating">★★★★☆ (4.3)</div>
+    <p>₹12,999</p>
+    <div class="actions">
+      <button onclick="location.href='cart.html'"><i class='bx bx-heart'></i></button>
+      <button class="try-on" onclick="tryOn('Zebronics Zeb-Juke Bar')">Virtual Try-On</button>
+    </div>
+  </div>
+
+  <!-- Product 12 -->
+  <div class="product-card">
+    <img src="/images/audio/realme_buds3.jpeg" alt="Realme Buds Wireless 3" />
+    <h4>Realme Buds Wireless 3</h4>
+    <p class="desc">ANC, Dual Device Pairing, 13.6mm Drivers</p>
+    <div class="rating">★★★★☆ (4.0)</div>
+    <p>₹1,999</p>
+    <div class="actions">
+      <button onclick="location.href='cart.html'"><i class='bx bx-heart'></i></button>
+      <button class="try-on" onclick="tryOn('Realme Buds Wireless 3')">Virtual Try-On</button>
+    </div>
+  </div>
+
+  <!-- Product 13 -->
+  <div class="product-card">
+    <img src="/images/electronics/Mi Beard Trimmer 2.jpeg" alt="Mi Beard Trimmer 2" />
+    <h4>Mi Beard Trimmer 2</h4>
+    <p class="desc">40 Length Settings, USB-C Charging</p>
+    <div class="rating">★★★★☆ (4.4)</div>
+    <p>₹1,299</p>
+    <div class="actions">
+      <button onclick="location.href='cart.html'"><i class='bx bx-heart'></i></button>
+      <button class="try-on" onclick="tryOn('Mi Beard Trimmer 2')">Virtual Try-On</button>
+    </div>
+  </div>
+
+  <!-- Product 14 -->
+  <div class="product-card">
+    <img src="/images/watch/Noise ColorFit Ultra 3.jpeg" alt="Noise ColorFit Ultra 3" />
+    <h4>Noise ColorFit Ultra 3</h4>
+    <p class="desc">AMOLED Display, Bluetooth Calling, 7-Day Battery</p>
+    <div class="rating">★★★★☆ (4.2)</div>
+    <p>₹3,499</p>
+    <div class="actions">
+      <button onclick="location.href='cart.html'"><i class='bx bx-heart'></i></button>
+      <button class="try-on" onclick="tryOn('Noise ColorFit Ultra 3')">Virtual Try-On</button>
+    </div>
+  </div>
+
+  <!-- Product 15 -->
+  <div class="product-card">
+    <img src="/images/watch/Fire-Boltt Ninja Call Pro Plus.jpeg" alt="Fire-Boltt Ninja Call Pro Plus" />
+    <h4>Fire-Boltt Ninja Call Pro Plus</h4>
+    <p class="desc">1.83" Display, BT Calling, Sports Modes</p>
+    <div class="rating">★★★☆☆ (3.9)</div>
+    <p>₹2,299</p>
+    <div class="actions">
+      <button onclick="location.href='cart.html'"><i class='bx bx-heart'></i></button>
+      <button class="try-on" onclick="tryOn('Fire-Boltt Ninja Call Pro Plus')">Virtual Try-On</button>
+    </div>
+  </div>
+
+  <!-- Product 16 -->
+  <div class="product-card">
+    <img src="/images/airpods/pTron Bassbuds Duo.jpeg" alt="pTron Bassbuds Duo" />
+    <h4>pTron Bassbuds Duo</h4>
+    <p class="desc">32H Playback, BT 5.1, Type-C Fast Charging</p>
+    <div class="rating">★★★★☆ (4.0)</div>
+    <p>₹899</p>
+    <div class="actions">
+      <button onclick="location.href='cart.html'"><i class='bx bx-heart'></i></button>
+      <button class="try-on" onclick="tryOn('pTron Bassbuds Duo')">Virtual Try-On</button>
+    </div>
+  </div>
+
+  <!-- Product 17 -->
+  <div class="product-card">
+    <img src="/images/watch/boAt Flash Smartwatch.jpeg" alt="boAt Flash Smartwatch" />
+    <h4>boAt Flash Smartwatch</h4>
+    <p class="desc">1.3" LCD, Health Monitoring, Cloud Faces</p>
+    <div class="rating">★★★★☆ (4.1)</div>
+    <p>₹1,499</p>
+    <div class="actions">
+      <button onclick="location.href='cart.html'"><i class='bx bx-heart'></i></button>
+      <button class="try-on" onclick="tryOn('boAt Flash Smartwatch')">Virtual Try-On</button>
+    </div>
+  </div>
+
+  <!-- Product 18 -->
+  <div class="product-card">
+    <img src="/images/electronics/Ambrane 20000mAh Powerbank.jpeg" alt="Ambrane 20000mAh Powerbank" />
+    <h4>Ambrane 20000mAh Powerbank</h4>
+    <p class="desc">Dual Output, Type-C Fast Charging</p>
+    <div class="rating">★★★★☆ (4.3)</div>
+    <p>₹1,699</p>
+    <div class="actions">
+      <button onclick="location.href='cart.html'"><i class='bx bx-heart'></i></button>
+      <button class="try-on" onclick="tryOn('Ambrane 20000mAh Powerbank')">Virtual Try-On</button>
+    </div>
+  </div>
+
+  <!-- Product 19 -->
+  <div class="product-card">
+    <img src="/images/electronics/Logitech MK235 Wireless Combo.jpeg" alt="Logitech MK235 Wireless Combo" />
+    <h4>Logitech MK235 Wireless Combo</h4>
+    <p class="desc">Full-Size Keyboard, Long Battery Life</p>
+    <div class="rating">★★★★☆ (4.2)</div>
+    <p>₹1,799</p>
+    <div class="actions">
+      <button onclick="location.href='cart.html'"><i class='bx bx-heart'></i></button>
+      <button class="try-on" onclick="tryOn('Logitech MK235 Wireless Combo')">Virtual Try-On</button>
+    </div>
+  </div>
+
+  <!-- Product 20 -->
+  <div class="product-card">
+    <img src="/images/electronics/Cosmic Byte GS410 Gaming Headset.jpeg" alt="Cosmic Byte GS410 Gaming Headset" />
+    <h4>Cosmic Byte GS410 Gaming Headset</h4>
+    <p class="desc">PS4/Xbox/PC Compatible, Noise Isolation</p>
+    <div class="rating">★★★★☆ (4.4)</div>
+    <p>₹2,299</p>
+    <div class="actions">
+      <button onclick="location.href='cart.html'"><i class='bx bx-heart'></i></button>
+      <button class="try-on" onclick="tryOn('Cosmic Byte GS410 Gaming Headset')">Virtual Try-On</button>
+    </div>
+  </div>
+  
+  <!-- Add more product-card blocks here if needed -->
+</div>
+
+
+<!-- JS Script -->
+<script>
+  function tryOn(productName) {
+    alert("Launching Virtual Try-On for: " + productName);
+  }
+</script>
+
+</body>
+</html>
