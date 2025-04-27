@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Wishlist | Virtual Try-On</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #6c5ce7;
+            --secondary-color: #a29bfe;
+            --accent-color: #fd79a8;
+            --dark-color: #2d3436;
+            --light-color: #f5f6fa;
+            --success-color: #00b894;
+            --warning-color: #fdcb6e;
+            --danger-color: #d63031;
+            --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 20px 0;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            font-size: 28px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+
+        .nav-links a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .wishlist-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .wishlist-title {
+            font-size: 28px;
+            color: var(--dark-color);
+            position: relative;
+            display: inline-block;
+        }
+
+        .wishlist-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--primary-color);
+            border-radius: 2px;
+        }
+
+        .wishlist-count {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-left: 10px;
+        }
+
+        .sort-options {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .sort-options select {
+            padding: 8px 15px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            background-color: white;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .sort-options select:hover {
+            border-color: var(--primary-color);
+        }
+
+        .wishlist-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .wishlist-item {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .wishlist-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .item-image {
+            position: relative;
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .wishlist-item:hover .item-image img {
+            transform: scale(1.05);
+        }
+
+        .try-on-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .try-on-badge i {
+            font-size: 14px;
+        }
+
+        .item-actions {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .action-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border: none;
+            color: var(--dark-color);
+        }
+
+        .action-btn:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .remove-btn:hover {
+            background-color: var(--danger-color);
+        }
+
+        .item-details {
+            padding: 20px;
+        }
+
+        .item-brand {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .item-name {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .item-price {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .current-price {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .original-price {
+            font-size: 14px;
+            color: #999;
+            text-decoration: line-through;
+        }
+
+        .discount-badge {
+            background-color: var(--success-color);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .item-cta {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 10px 15px;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            flex: 1;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #5649c9;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-outline:hover {
+            background-color: rgba(108, 92, 231, 0.1);
+        }
+
+        .empty-wishlist {
+            text-align: center;
+            padding: 50px 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .empty-icon {
+            font-size: 60px;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+        }
+
+        .empty-title {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: var(--dark-color);
+        }
+
+        .empty-text {
+            color: #666;
+            margin-bottom: 25px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn-lg {
+            padding: 12px 25px;
+            font-size: 16px;
+        }
+
+        .recommendations {
+            margin-top: 50px;
+        }
+
+        .section-title {
+            font-size: 22px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 30px 0;
+            margin-top: 50px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .footer-title {
+            font-size: 18px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 30px;
+            height: 2px;
+            background-color: var(--primary-color);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            color: white;
+            background-color: rgba(255, 255, 255, 0.1);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        @media (max-width: 768px) {
+            .wishlist-grid {
+                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+                gap: 15px;
+            }
+
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-links {
+                width: 100%;
+                justify-content: space-around;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .wishlist-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .wishlist-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .item-cta {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-glasses"></i>
+                <span>VirtualTry</span>
+            </div>
+            <nav class="nav-links">
+                <a href="index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="shop.html"><i class="fas fa-store"></i> Shop</a>
+                <a href="virtual-try-on.html"><i class="fas fa-camera"></i> Virtual Try-On</a>
+                <a href="wishlist.html" class="active"><i class="fas fa-heart"></i> Wishlist</a>
+                <a href="account.html"><i class="fas fa-user"></i> Account</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="wishlist-header">
+            <h1 class="wishlist-title">My Wishlist <span class="wishlist-count">5 items</span></h1>
+            <div class="sort-options">
+                <span>Sort by:</span>
+                <select>
+                    <option value="recent">Recently Added</option>
+                    <option value="price-low">Price: Low to High</option>
+                    <option value="price-high">Price: High to Low</option>
+                    <option value="popular">Most Popular</option>
+                    <option value="discount">Biggest Discount</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="wishlist-grid">
+            <!-- Wishlist Item 1 -->
+            <div class="wishlist-item">
+                <div class="item-image">
+                    <img src="https://images.unsplash.com/photo-1591073113125-e46713c829ed?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Designer Sunglasses">
+                    <span class="try-on-badge"><i class="fas fa-camera"></i> Try On</span>
+                    <div class="item-actions">
+                        <button class="action-btn remove-btn" title="Remove from wishlist"><i class="fas fa-trash"></i></button>
+                        <button class="action-btn" title="Add to cart"><i class="fas fa-shopping-cart"></i></button>
+                    </div>
+                </div>
+                <div class="item-details">
+                    <p class="item-brand">Ray-Ban</p>
+                    <h3 class="item-name">Aviator Classic Sunglasses with Green Lenses</h3>
+                    <div class="item-price">
+                        <span class="current-price">$149.99</span>
+                        <span class="original-price">$189.99</span>
+                        <span class="discount-badge">21% OFF</span>
+                    </div>
+                    <div class="item-cta">
+                        <button class="btn btn-primary"><i class="fas fa-camera"></i> Try On</button>
+                        <button class="btn btn-outline"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Wishlist Item 2 -->
+            <div class="wishlist-item">
+                <div class="item-image">
+                    <img src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Round Glasses">
+                    <span class="try-on-badge"><i class="fas fa-camera"></i> Try On</span>
+                    <div class="item-actions">
+                        <button class="action-btn remove-btn" title="Remove from wishlist"><i class="fas fa-trash"></i></button>
+                        <button class="action-btn" title="Add to cart"><i class="fas fa-shopping-cart"></i></button>
+                    </div>
+                </div>
+                <div class="item-details">
+                    <p class="item-brand">Warby Parker</p>
+                    <h3 class="item-name">Percey Round Acetate Glasses with Blue Light Filter</h3>
+                    <div class="item-price">
+                        <span class="current-price">$95.00</span>
+                    </div>
+                    <div class="item-cta">
+                        <button class="btn btn-primary"><i class="fas fa-camera"></i> Try On</button>
+                        <button class="btn btn-outline"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Wishlist Item 3 -->
+            <div class="wishlist-item">
+                <div class="item-image">
+                    <img src="https://images.unsplash.com/photo-1556306535-0f09a537f0a3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Cat Eye Glasses">
+                    <span class="try-on-badge"><i class="fas fa-camera"></i> Try On</span>
+                    <div class="item-actions">
+                        <button class="action-btn remove-btn" title="Remove from wishlist"><i class="fas fa-trash"></i></button>
+                        <button class="action-btn" title="Add to cart"><i class="fas fa-shopping-cart"></i></button>
+                    </div>
+                </div>
+                <div class="item-details">
+                    <p class="item-brand">Gucci</p>
+                    <h3 class="item-name">GG0397O Cat Eye Sunglasses with Gold Frame</h3>
+                    <div class="item-price">
+                        <span class="current-price">$399.00</span>
+                        <span class="original-price">$450.00</span>
+                        <span class="discount-badge">11% OFF</span>
+                    </div>
+                    <div class="item-cta">
+                        <button class="btn btn-primary"><i class="fas fa-camera"></i> Try On</button>
+                        <button class="btn btn-outline"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Wishlist Item 4 -->
+            <div class="wishlist-item">
+                <div class="item-image">
+                    <img src="https://images.unsplash.com/photo-1572635196237-14b3f281503f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Square Glasses">
+                    <span class="try-on-badge"><i class="fas fa-camera"></i> Try On</span>
+                    <div class="item-actions">
+                        <button class="action-btn remove-btn" title="Remove from wishlist"><i class="fas fa-trash"></i></button>
+                        <button class="action-btn" title="Add to cart"><i class="fas fa-shopping-cart"></i></button>
+                    </div>
+                </div>
+                <div class="item-details">
+                    <p class="item-brand">Oakley</p>
+                    <h3 class="item-name">Holbrook Square Sunglasses with Polarized Lenses</h3>
+                    <div class="item-price">
+                        <span class="current-price">$162.00</span>
+                    </div>
+                    <div class="item-cta">
+                        <button class="btn btn-primary"><i class="fas fa-camera"></i> Try On</button>
+                        <button class="btn btn-outline"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Wishlist Item 5 -->
+            <div class="wishlist-item">
+                <div class="item-image">
+                    <img src="https://images.unsplash.com/photo-1594549181132-9047fed134ce?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Oversized Glasses">
+                    <span class="try-on-badge"><i class="fas fa-camera"></i> Try On</span>
+                    <div class="item-actions">
+                        <button class="action-btn remove-btn" title="Remove from wishlist"><i class="fas fa-trash"></i></button>
+                        <button class="action-btn" title="Add to cart"><i class="fas fa-shopping-cart"></i></button>
+                    </div>
+                </div>
+                <div class="item-details">
+                    <p class="item-brand">Prada</p>
+                    <h3 class="item-name">PR 16YS Oversized Square Sunglasses</h3>
+                    <div class="item-price">
+                        <span class="current-price">$275.00</span>
+                        <span class="original-price">$325.00</span>
+                        <span class="discount-badge">15% OFF</span>
+                    </div>
+                    <div class="item-cta">
+                        <button class="btn btn-primary"><i class="fas fa-camera"></i> Try On</button>
+                        <button class="btn btn-outline"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Empty Wishlist State (commented out) -->
+        <!--
+        <div class="empty-wishlist">
+            <div class="empty-icon">
+                <i class="far fa-heart"></i>
+            </div>
+            <h2 class="empty-title">Your Wishlist is Empty</h2>
+            <p class="empty-text">Looks like you haven't added any items to your wishlist yet. Start browsing our collection and save your favorite items for later!</p>
+            <button class="btn btn-primary btn-lg"><i class="fas fa-glasses"></i> Start Virtual Try-On</button>
+        </div>
+        -->
+
+        <div class="recommendations">
+            <h2 class="section-title">You Might Also Like</h2>
+            <div class="wishlist-grid">
+                <!-- Recommendation Item 1 -->
+                <div class="wishlist-item">
+                    <div class="item-image">
+                        <img src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Round Glasses">
+                        <span class="try-on-badge"><i class="fas fa-camera"></i> Try On</span>
+                    </div>
+                    <div class="item-details">
+                        <p class="item-brand">Oliver Peoples</p>
+                        <h3 class="item-name">OP-505 Round Titanium Glasses</h3>
+                        <div class="item-price">
+                            <span class="current-price">$385.00</span>
+                        </div>
+                        <div class="item-cta">
+                            <button class="btn btn-primary"><i class="fas fa-heart"></i> Add to Wishlist</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recommendation Item 2 -->
+                <div class="wishlist-item">
+                    <div class="item-image">
+                        <img src="https://images.unsplash.com/photo-1556306535-0f09a537f0a3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Cat Eye Glasses">
+                        <span class="try-on-badge"><i class="fas fa-camera"></i> Try On</span>
+                    </div>
+                    <div class="item-details">
+                        <p class="item-brand">Tom Ford</p>
+                        <h3 class="item-name">FT 5216 Cat Eye Sunglasses</h3>
+                        <div class="item-price">
+                            <span class="current-price">$345.00</span>
+                        </div>
+                        <div class="item-cta">
+                            <button class="btn btn-primary"><i class="fas fa-heart"></i> Add to Wishlist</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-column">
+                <h3 class="footer-title">VirtualTry</h3>
+                <p>Experience the future of eyewear shopping with our virtual try-on technology. Find your perfect fit from the comfort of your home.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-pinterest"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3 class="footer-title">Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Shop</a></li>
+                    <li><a href="#">Virtual Try-On</a></li>
+                    <li><a href="#">My Account</a></li>
+                    <li><a href="#">Wishlist</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3 class="footer-title">Customer Service</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Shipping & Returns</a></li>
+                    <li><a href="#">Size Guide</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3 class="footer-title">Newsletter</h3>
+                <p>Subscribe to get updates on new arrivals, special offers and virtual try-on tips.</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Your email address" required>
+                    <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple JavaScript for demonstration
+        document.addEventListener('DOMContentLoaded', function() {
+            // Remove item from wishlist
+            const removeButtons = document.querySelectorAll('.remove-btn');
+            removeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const item = this.closest('.wishlist-item');
+                    item.style.transform = 'scale(0)';
+                    item.style.opacity = '0';
+                    setTimeout(() => {
+                        item.remove();
+                        updateWishlistCount();
+                    }, 300);
+                });
+            });
+
+            // Update wishlist count
+            function updateWishlistCount() {
+                const count = document.querySelectorAll('.wishlist-item').length;
+                document.querySelector('.wishlist-count').textContent = `${count} items`;
+                
+                // Show empty state if no items
+                if (count === 0) {
+                    // In a real app, you would show the empty state div
+                    console.log('Wishlist is empty');
+                }
+            }
+
+            // Try on button functionality
+            const tryOnButtons = document.querySelectorAll('.btn-primary');
+            tryOnButtons.forEach(button => {
+                if (button.textContent.includes('Try On')) {
+                    button.addEventListener('click', function() {
+                        // In a real app, this would launch the virtual try-on feature
+                        alert('Launching Virtual Try-On for this item!');
+                    });
+                }
+            });
+
+            // Add to wishlist button in recommendations
+            const addToWishlistButtons = document.querySelectorAll('.recommendations .btn-primary');
+            addToWishlistButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // In a real app, this would add the item to the wishlist
+                    alert('Item added to your wishlist!');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

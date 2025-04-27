@@ -3,282 +3,713 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sell Online with Flipkart</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
-    
+    <title>Become a Seller | StyleVision</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        :root {
+            --primary-color: #6c63ff;
+            --secondary-color: #ff6584;
+            --dark-color: #2d2d44;
+            --light-color: #f8f9fa;
+            --success-color: #4caf50;
+            --transition: all 0.3s ease;
+        }
+        
+        * {
             margin: 0;
             padding: 0;
-            background-color: #f8f9fa;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
-        /* Logo Styling */
-.logo {
-    display: flex;
-    align-items: center;
-    font-size: 24px;
-    font-weight: bold;
-}
-
-.logo img {
-    width: 40px; /* Adjust for desired size */
-    height: 40px;
-    margin-right: 10px; /* Creates spacing between the icon and text */
-    border-radius: 8px; /* Gives it a smooth, modern look */
-}
-
-.logo span {
-    font-size: 24px;
-    font-weight: bold;
-    color: black;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-}
+        
+        body {
+            background-color: #f5f5f7;
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
         .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background-color: white;
-            padding: 15px 30px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px 0;
         }
-        .login {
-            color: white;
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
             text-decoration: none;
-            font-size: 16px;
-            font-weight: bold;
-            padding: 8px 12px;
-            transition: 0.3s;
         }
-        .navbar ul {
+        
+        .logo i {
+            margin-right: 10px;
+            font-size: 28px;
+        }
+        
+        .nav-links {
+            display: flex;
             list-style: none;
-            display: flex;
-            gap: 25px;
         }
-        .navbar ul li a {
+        
+        .nav-links li {
+            margin-left: 30px;
+            position: relative;
+        }
+        
+        .nav-links a {
             text-decoration: none;
-            color: #333;
-            font-weight: bold;
-            transition: color 0.3s ease;
+            color: var(--dark-color);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+            display: flex;
+            align-items: center;
         }
-        .navbar ul li a:hover {
-            color: #0073e6;
+        
+        .nav-links a:hover {
+            color: var(--primary-color);
         }
-        .buttons button {
-            padding: 10px 20px;
-            border: none;
+        
+        .auth-buttons {
+            display: flex;
+            align-items: center;
+        }
+        
+        .auth-buttons .btn {
+            margin-left: 15px;
+        }
+        
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
             cursor: pointer;
-            font-weight: bold;
-            border-radius: 5px;
-            transition: background 0.3s ease;
-            margin-left: 10px;
-           
+            border: none;
+            font-size: 16px;
         }
-
-        .buttons button a {
-            text-decoration: none;
-            color: black;
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
         }
-        .login {
-            background-color: #ddd;
-           
+        
+        .btn-primary:hover {
+            background-color: #5a52e0;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(108, 99, 255, 0.2);
         }
-        .login:hover {
-            background-color: #e0a800;
+        
+        .btn-secondary {
+            background-color: white;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
         }
-        .start-selling {
-            background-color: #ddd;
-            color: black;
+        
+        .btn-secondary:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(108, 99, 255, 0.2);
         }
-        .start-selling:hover {
-            background-color: #e0a800;
-        }
-        .hero {
+        
+        /* Seller Hero Section */
+        .seller-hero {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
             text-align: center;
-            padding: 60px;
+        }
+        
+        .seller-hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--dark-color);
+        }
+        
+        .seller-hero h1 span {
+            color: var(--primary-color);
+        }
+        
+        .seller-hero p {
+            font-size: 20px;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+        
+        /* Benefits Section */
+        .benefits {
+            padding: 80px 0;
             background-color: white;
         }
-        .features img {
-            width: 100px;
-            height: 100px;
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
         }
-        .features {
-            display: flex;
-            justify-content: center;
+        
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--dark-color);
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
-            padding: 30px;
-            flex-wrap: wrap;
         }
-        .feature {
-            background: white;
-            padding: 20px;
+        
+        .benefit-card {
+            background-color: var(--light-color);
             border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 40px 30px;
             text-align: center;
-            width: 200px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
         }
-        .feature:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        
+        .benefit-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
         }
-        .seller-success {
-            text-align: center;
-            padding: 40px;
+        
+        .benefit-icon {
+            width: 80px;
+            height: 80px;
+            background-color: rgba(108, 99, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: var(--primary-color);
+            font-size: 32px;
+        }
+        
+        .benefit-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--dark-color);
+        }
+        
+        /* Pricing Section */
+        .pricing {
+            padding: 80px 0;
+            background-color: #f9f9fb;
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .pricing-card {
             background-color: white;
-            font-weight: bold;
-            font-size: larger;
-            color: #0073e6;
+            border-radius: 10px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
         }
-        /* Swiper Slider */
-.swiper-container {
-    width: 100%;
-    height: 420px; /* Adjust as needed */
-    margin-top: 40px;
-    z-index: 1;
-    
-}
-
-.swiper-slide img {
-    
-    align-items: center;
-    /* object-fit: cover; */
-}
-
-/* Swiper Navigation & Pagination */
-.swiper-button-next,
-.swiper-button-prev {
-    color: white;
-}
-
-.swiper-pagination {
-    position: absolute;
-    bottom: 10px;
-}
+        
+        .pricing-card.popular {
+            border: 2px solid var(--primary-color);
+        }
+        
+        .popular-badge {
+            position: absolute;
+            top: 0;
+            right: 20px;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 5px 15px;
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .pricing-card h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: var(--dark-color);
+        }
+        
+        .price {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .price span {
+            font-size: 16px;
+            font-weight: normal;
+            color: #666;
+        }
+        
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+        
+        .pricing-features li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        /* Seller Form Section */
+        .seller-form {
+            padding: 80px 0;
+            background-color: white;
+        }
+        
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: var(--light-color);
+            border-radius: 10px;
+            padding: 50px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: var(--transition);
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.2);
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .submit-btn:hover {
+            background-color: #5a52e0;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(108, 99, 255, 0.3);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 60px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--primary-color);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #bbb;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #bbb;
+            font-size: 14px;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+            }
+            
+            .nav-links {
+                margin: 20px 0;
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .nav-links li {
+                margin: 10px 0;
+            }
+            
+            .auth-buttons {
+                margin-top: 20px;
+            }
+            
+            .seller-hero h1 {
+                font-size: 36px;
+            }
+            
+            .section-title h2 {
+                font-size: 30px;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            .form-container {
+                padding: 30px;
+            }
+        }
     </style>
 </head>
 <body>
+    <!-- Header -->
     <header>
-        <div class="navbar">
-            <div class="logo">
-                <img src="/images/logo.webp" alt="ShopZone Logo" width="40" height="40">
-                <span>ShopZone</span>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="#">Sell Online</a></li>
-                    <li><a href="#">Fees and Commission</a></li>
-                    <li><a href="#">Grow</a></li>
-                    <li><a href="#">Learn</a></li>
+        <div class="container">
+            <nav class="navbar">
+                <a href="home.html" class="logo">
+                    <i class="fas fa-glasses"></i> StyleVision
+                </a>
+                <ul class="nav-links">
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="#">Virtual Try-On</a></li>
+                    <li><a href="#">Shop</a></li>
+                    <li><a href="#">Collections</a></li>
+                    <li><a href="#">About</a></li>
                 </ul>
+                <div class="auth-buttons">
+                    <a href="login.html" class="btn btn-secondary">Login</a>
+                    <a href="signup.html" class="btn btn-primary">Sign Up</a>
+                </div>
             </nav>
-            <div class="buttons">
-                <button class="login"><a href="login.html">Login</a></button>
-                <button class="start-selling"><a href="login.html">Start Selling</a></button>
-            </div>
         </div>
     </header>
-    <main>
-        <section class="hero">
-            <h1>Sell Online with ShopZone</h1>
-            <div class="features">
-                <div class="feature">
-                    <img src="/images/customer.png" alt="Customers">
-                    <p> 45 crore+ ShopZone customers</p>
-                </div>
-                <div class="feature">
-                    <img src="/images/payment.png" alt="Payments">
-                    <p>7* days secure & regular payments</p>
-                </div>
-                <div class="feature">
-                    <img src="/images/low-price.png" alt="Low Cost">
-                    <p>Low cost of doing business</p>
-                </div>
-                <div class="feature">
-                    <img src="/images/support.png" alt="Seller Support">
-                    <p>One click Seller Support</p>
-                </div>
-                <div class="feature">
-                    <img src="/images/big.png" alt="Big Billion Days">
-                    <p>Access to The Big Billion Days & more</p>
-                </div>
-            </div>
-        </section>
-        <section class="seller-success">
-            <h2>Seller Success Stories</h2>
-        </section>
-        <div class="swiper-container">
-            <div class="swiper-wrapper">
-                <!-- Slide 1 -->
-                <div class="swiper-slide">
-                    <img src="/images/seller_banner1.png" alt="Banner 1">
-                </div>
-                <!-- Slide 2 -->
-                <div class="swiper-slide">
-                    <img src="/images/seller_banner2.png" alt="Banner 2">
-                </div>
-                <!-- Slide 3 -->
-                <div class="swiper-slide">
-                    <img src="/images/seller_banner3.png" alt="Banner 3">
-                </div>
-                
-            </div>
-            
-            <!-- Pagination & Navigation Buttons -->
-            <div class="swiper-pagination"></div>
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
+
+    <!-- Seller Hero Section -->
+    <section class="seller-hero">
+        <div class="container">
+            <h1>Join Our <span>Seller Community</span></h1>
+            <p>Expand your reach and grow your business by joining StyleVision's marketplace of premium fashion and accessories.</p>
+            <a href="#seller-form" class="btn btn-primary btn-lg">Get Started Now</a>
         </div>
-    
-        <!-- Swiper JS CDN -->
-        <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
-    </main>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits">
+        <div class="container">
+            <div class="section-title">
+                <h2>Why Sell With Us</h2>
+                <p>Discover the benefits of joining our growing marketplace</p>
+            </div>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Large Customer Base</h3>
+                    <p>Access thousands of fashion-conscious customers actively using our virtual try-on technology.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Increased Sales</h3>
+                    <p>Our virtual try-on technology leads to higher conversion rates and fewer returns.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3>Easy Setup</h3>
+                    <p>Simple onboarding process with tools to help you showcase your products effectively.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing">
+        <div class="container">
+            <div class="section-title">
+                <h2>Simple, Transparent Pricing</h2>
+                <p>Choose the plan that works best for your business</p>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Starter</h3>
+                    <div class="price">$29<span>/month</span></div>
+                    <ul class="pricing-features">
+                        <li>Up to 50 products</li>
+                        <li>Basic analytics</li>
+                        <li>Email support</li>
+                        <li>Standard listing</li>
+                    </ul>
+                    <a href="#seller-form" class="btn btn-secondary">Choose Plan</a>
+                </div>
+                <div class="pricing-card popular">
+                    <div class="popular-badge">Most Popular</div>
+                    <h3>Professional</h3>
+                    <div class="price">$79<span>/month</span></div>
+                    <ul class="pricing-features">
+                        <li>Up to 200 products</li>
+                        <li>Advanced analytics</li>
+                        <li>Priority support</li>
+                        <li>Featured listings</li>
+                        <li>Virtual try-on integration</li>
+                    </ul>
+                    <a href="#seller-form" class="btn btn-primary">Choose Plan</a>
+                </div>
+                <div class="pricing-card">
+                    <h3>Enterprise</h3>
+                    <div class="price">$199<span>/month</span></div>
+                    <ul class="pricing-features">
+                        <li>Unlimited products</li>
+                        <li>Premium analytics</li>
+                        <li>24/7 dedicated support</li>
+                        <li>Premium placement</li>
+                        <li>Custom integrations</li>
+                    </ul>
+                    <a href="#seller-form" class="btn btn-secondary">Choose Plan</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seller Form Section -->
+    <section class="seller-form" id="seller-form">
+        <div class="container">
+            <div class="section-title">
+                <h2>Become a Seller</h2>
+                <p>Fill out the form below to get started</p>
+            </div>
+            <div class="form-container">
+                <form action="#" method="POST">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="first-name">First Name</label>
+                            <input type="text" id="first-name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="last-name">Last Name</label>
+                            <input type="text" id="last-name" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="business-name">Business Name</label>
+                        <input type="text" id="business-name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="business-type">Business Type</label>
+                        <select id="business-type" class="form-control" required>
+                            <option value="">Select business type</option>
+                            <option value="individual">Individual/Sole Proprietor</option>
+                            <option value="llc">LLC</option>
+                            <option value="corporation">Corporation</option>
+                            <option value="partnership">Partnership</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="products">What products will you sell?</label>
+                        <textarea id="products" class="form-control" rows="3" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="plan">Select Plan</label>
+                        <select id="plan" class="form-control" required>
+                            <option value="">Select a plan</option>
+                            <option value="starter">Starter ($29/month)</option>
+                            <option value="professional">Professional ($79/month)</option>
+                            <option value="enterprise">Enterprise ($199/month)</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="submit-btn">Submit Application</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>StyleVision</h3>
+                    <p>Revolutionizing online shopping with augmented reality technology to help you make confident purchasing decisions.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="home.html">Home</a></li>
+                        <li><a href="#">Virtual Try-On</a></li>
+                        <li><a href="#">Shop</a></li>
+                        <li><a href="#">Collections</a></li>
+                        <li><a href="#">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Categories</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Eyeglasses</a></li>
+                        <li><a href="#">Sunglasses</a></li>
+                        <li><a href="#">Makeup</a></li>
+                        <li><a href="#">Jewelry</a></li>
+                        <li><a href="#">Accessories</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">FAQs</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Returns & Exchanges</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 StyleVision. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
     <script>
-        document.querySelector(".start-selling").addEventListener("click", function() {
-            alert("Redirecting to Seller Registration Page");
-        });
-
-        var swiper = new Swiper(".swiper-container", {
-            loop: true,
-            autoplay: {
-                delay: 3000,
-                disableOnInteraction: false
-            },
-            pagination: {
-                el: ".swiper-pagination",
-                clickable: true,
-            },
-            navigation: {
-                nextEl: ".swiper-button-next",
-                prevEl: ".swiper-button-prev",
-            },
-        });
-
-        document.getElementById("signupForm").addEventListener("submit", async function(event) {
-            event.preventDefault();
-        
-            const fullName = document.getElementById("name").value;  // Fixed ID
-            const email = document.getElementById("email").value;
-            const password = document.getElementById("password").value;
-        
-            try {
-                const response = await fetch("http://localhost:8081/api/auth/signup", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ fullName, email, password })
-                });
-        
-                if (!response.ok) {
-                    throw new Error("Signup failed. Email may already be in use.");
-                }
-        
-                alert("Signup successful! Please log in.");
-                window.location.href = "login.html";
-        
-            } catch (error) {
-                alert(error.message);
-            }
+        // Simple form validation could be added here
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Form validation would go here
+            alert('Thank you for your application! We will review your information and contact you shortly.');
+            // In a real implementation, this would submit the form data to a server
         });
     </script>
 </body>
