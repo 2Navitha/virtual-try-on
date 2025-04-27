@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ShopZone | Electronics</title>
+  <title>ShopZone | Furniture</title>
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
   <style>
@@ -96,6 +96,7 @@
       gap: 25px;
     }
 
+
     .product-card:hover {
       transform: scale(1.03);
     }
@@ -111,9 +112,9 @@
         padding: 5px;
         border-radius: 50%;
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
+      }
       
-    .product-card {
+      .product-card {
         background: white;
         padding: 15px;
         border-radius: 10px;
@@ -122,15 +123,16 @@
         transition: transform 0.3s ease;
         position: relative;
         padding: 15px 15px 20px;
-    }
+       
+      }
       
-    .product-card img {
+      .product-card img {
         width: 100%;
         height: 200px;
-        object-fit: contain;
+        object-fit: cover;
         margin-bottom: 15px;
         border-radius: 6px;
-    }
+      }
 
     .product-card h4 {
       margin: 10px 0 5px;
@@ -158,7 +160,6 @@
       padding: 8px 12px;
       border-radius: 6px;
       cursor: pointer;
-      font-size: 13px;
     }
 
     .actions .try-on {
@@ -195,15 +196,15 @@
   </div>
   <div class="search-box">
     <i class='bx bx-search'></i>
-    <input type="text" id="searchInput" placeholder="Search electronics...">
+    <input type="text" id="searchInput" placeholder="Search furniture...">
   </div>
   <nav>
     <ul>
-      <li><a href="#">Mobiles</a></li>
-      <li><a href="#">Laptops</a></li>
-      <li><a href="#">Tablets</a></li>
-      <li><a href="#">Wearables</a></li>
-      <li><a href="#">Audio</a></li>
+      <li><a href="#">Living Room</a></li>
+      <li><a href="#">Bedroom</a></li>
+      <li><a href="#">Dining</a></li>
+      <li><a href="#">Study</a></li>
+      <li><a href="#">Storage</a></li>
       <li><a href="cart.html"><i class='bx bx-cart'></i></a></li>
     </ul>
   </nav>
@@ -214,231 +215,105 @@
   <div class="filters">
     <h3>Filters</h3>
     <strong>Category</strong>
-    <label><input type="checkbox"> Smartphones</label>
-    <label><input type="checkbox"> Laptops</label>
-    <label><input type="checkbox"> Tablets</label>
-    <label><input type="checkbox"> Smartwatches</label>
-    <label><input type="checkbox"> Headphones</label>
-    <label><input type="checkbox"> Bluetooth Speakers</label>
-    <label><input type="checkbox"> Accessories</label>
+    <label><input type="checkbox"> Sofas</label>
+    <label><input type="checkbox"> Beds</label>
+    <label><input type="checkbox"> Tables</label>
+    <label><input type="checkbox"> Chairs</label>
+    <label><input type="checkbox"> Wardrobes</label>
+
+    <strong>Material</strong>
+    <label><input type="checkbox"> Wood</label>
+    <label><input type="checkbox"> Metal</label>
+    <label><input type="checkbox"> Plastic</label>
 
     <strong>Brand</strong>
-    <label><input type="checkbox"> Apple</label>
-    <label><input type="checkbox"> Samsung</label>
-    <label><input type="checkbox"> HP</label>
-    <label><input type="checkbox"> Lenovo</label>
-    <label><input type="checkbox"> Noise</label>
-    <label><input type="checkbox"> Dell</label>
-    <label><input type="checkbox"> OnePlus</label>
-    <label><input type="checkbox"> boAt</label>
+    <label><input type="checkbox"> IKEA</label>
+    <label><input type="checkbox"> Urban Ladder</label>
+    <label><input type="checkbox"> Pepperfry</label>
 
     <strong>Price</strong>
-    <label><input type="checkbox"> Under ₹10,000</label>
-    <label><input type="checkbox"> ₹10,000 - ₹30,000</label>
-    <label><input type="checkbox"> ₹30,000 - ₹60,000</label>
-    <label><input type="checkbox"> Above ₹60,000</label>
+    <label><input type="checkbox"> Under ₹5,000</label>
+    <label><input type="checkbox"> ₹5,000 - ₹10,000</label>
+    <label><input type="checkbox"> ₹10,000 - ₹20,000</label>
+    <label><input type="checkbox"> Above ₹20,000</label>
   </div>
 
   <div class="product-grid">
-    <!-- Product 1 -->
+    <!-- 15 product cards with wishlist icons -->
     <div class="product-card">
       <i class='bx bx-heart wishlist'></i>
-      <img src="/images/mobile/Samsung Galaxy M14.jpeg" alt="Samsung Galaxy M14">
-      <h4>Samsung Galaxy M14</h4>
-      <p class="desc">5G, Exynos 1330, 6000mAh Battery</p>
-      <p class="rating">★★★★☆ (4.2)</p>
+      <img src="images/furniture/Modern Sofa.jpg" alt="Sofa">
+      <h4>Modern Sofa</h4>
+      <p class="desc">Elegant 3-seater</p>
+      <p class="rating">★★★★☆</p>
       <div class="actions">
         <button class="add-cart">Add to Cart</button>
         <button class="try-on">Try On</button>
       </div>
     </div>
 
-    <!-- Product 2 -->
     <div class="product-card">
       <i class='bx bx-heart wishlist'></i>
-      <img src="/images/mobile/redmi_note13pro.jpeg" alt="Redmi Note 13 Pro+">
-      <h4>Redmi Note 13 Pro+</h4>
-      <p class="desc">AMOLED, 200MP Camera, Dimensity 7200</p>
-      <p class="rating">★★★★☆ (4.5)</p>
+      <img src="/images/furniture/Comfy Chair.jpg" alt="Chair">
+      <h4>Comfy Chair</h4>
+      <p class="desc">For living room</p>
+      <p class="rating">★★★☆☆</p>
       <div class="actions">
         <button class="add-cart">Add to Cart</button>
         <button class="try-on">Try On</button>
       </div>
     </div>
 
-    <!-- Product 3 -->
+    <!-- Add 13 more cards below -->
     <div class="product-card">
       <i class='bx bx-heart wishlist'></i>
-      <img src="/images/mobile/iqoo_z9.jpeg" alt="iQOO Z9 5G">
-      <h4>iQOO Z9 5G</h4>
-      <p class="desc">MediaTek Dimensity 7200, 64MP OIS Camera</p>
-      <p class="rating">★★★★☆ (4.3)</p>
+      <img src="/images/furniture/King Size Bed.jpg" alt="Bed">
+      <h4>King Size Bed</h4>
+      <p class="desc">With storage</p>
+      <p class="rating">★★★★★</p>
       <div class="actions">
         <button class="add-cart">Add to Cart</button>
         <button class="try-on">Try On</button>
       </div>
     </div>
 
-    <!-- Product 4 -->
     <div class="product-card">
       <i class='bx bx-heart wishlist'></i>
-      <img src="/images/mobile/realme_narzo70pro.jpeg" alt="Realme Narzo 70 Pro">
-      <h4>Realme Narzo 70 Pro</h4>
-      <p class="desc">120Hz AMOLED, Sony IMX890 Camera</p>
-      <p class="rating">★★★★☆ (4.4)</p>
+      <img src="/images/furniture/Dining Set.jpg" alt="Dining Set">
+      <h4>Dining Set</h4>
+      <p class="desc">4-seater wooden</p>
+      <p class="rating">★★★★☆</p>
       <div class="actions">
         <button class="add-cart">Add to Cart</button>
         <button class="try-on">Try On</button>
       </div>
     </div>
 
-    <!-- Product 5 -->
-    <div class="product-card">
-      <i class='bx bx-heart wishlist'></i>
-      <img src="/images/mobile/samsung_galaxy_tab_a9.jpeg" alt="Samsung Galaxy Tab A9+">
-      <h4>Samsung Galaxy Tab A9+</h4>
-      <p class="desc">11" Display, Snapdragon 695, 7040mAh Battery</p>
-      <p class="rating">★★★★☆ (4.0)</p>
-      <div class="actions">
-        <button class="add-cart">Add to Cart</button>
-        <button class="try-on">Try On</button>
-      </div>
-    </div>
+    <!-- Repeat similar structure for 11 more product cards -->
+    <div class="product-card"><i class='bx bx-heart wishlist'></i>
+        <img src="/images/furniture/Study Table.jpg" alt="Table">
+        <h4>Study Table</h4><p class="desc">Wood finish</p>
+        <p class="rating">★★★★☆</p>
+        <div class="actions"><button class="add-cart">Add to Cart</button>
+            <button class="try-on">Try On</button></div>
+        </div>
+    <div class="product-card"><i class='bx bx-heart wishlist'></i><img src="/images/furniture/Bookshelf.jpg" alt="Bookshelf"><h4>Bookshelf</h4><p class="desc">5-tier wooden</p><p class="rating">★★★☆☆</p><div class="actions"><button class="add-cart">Add to Cart</button><button class="try-on">Try On</button></div></div>
+    <div class="product-card"><i class='bx bx-heart wishlist'></i><img src="/images/furniture/TV Unit.jpg" alt="TV Unit"><h4>TV Unit</h4><p class="desc">With drawers</p><p class="rating">★★★★☆</p><div class="actions"><button class="add-cart">Add to Cart</button><button class="try-on">Try On</button></div></div>
+    <div class="product-card"><i class='bx bx-heart wishlist'></i><img src="/images/furniture/Double Wardrobe.jpg" alt="Wardrobe"><h4>Double Wardrobe</h4><p class="desc">2-door</p><p class="rating">★★★☆☆</p><div class="actions"><button class="add-cart">Add to Cart</button><button class="try-on">Try On</button></div></div>
+    <div class="product-card"><i class='bx bx-heart wishlist'></i><img src="/images/furniture/Bar Stool.jpg" alt="Stool"><h4>Bar Stool</h4><p class="desc">Modern design</p><p class="rating">★★★☆☆</p><div class="actions"><button class="add-cart">Add to Cart</button><button class="try-on">Try On</button></div></div>
+    <div class="product-card"><i class='bx bx-heart wishlist'></i><img src="/images/furniture/Storage Cabinet.jpg" alt="Cabinet"><h4>Storage Cabinet</h4><p class="desc">Multipurpose</p><p class="rating">★★★☆☆</p><div class="actions"><button class="add-cart">Add to Cart</button><button class="try-on">Try On</button></div></div>
+    <div class="product-card"><i class='bx bx-heart wishlist'></i><img src="/images/furniture/Recliner.jpg" alt="Recliner"><h4>Recliner</h4><p class="desc">Comfort lounge</p><p class="rating">★★★★☆</p><div class="actions"><button class="add-cart">Add to Cart</button><button class="try-on">Try On</button></div></div>
+    <div class="product-card"><i class='bx bx-heart wishlist'></i><img src="/images/furniture/Nightstand.jpg" alt="Nightstand"><h4>Nightstand</h4><p class="desc">Wood finish</p><p class="rating">★★★☆☆</p><div class="actions"><button class="add-cart">Add to Cart</button><button class="try-on">Try On</button></div></div>
+    <div class="product-card"><i class='bx bx-heart wishlist'></i><img src="/images/furniture/Desk Chair.jpg" alt="Desk Chair"><h4>Desk Chair</h4><p class="desc">Ergonomic</p><p class="rating">★★★★★</p><div class="actions"><button class="add-cart">Add to Cart</button><button class="try-on">Try On</button></div></div>
+    <div class="product-card"><i class='bx bx-heart wishlist'></i><img src="/images/furniture/dressing table.jpg" alt="Dressing table"><h4>Dressing table</h4><p class="desc">Elegant wooden design </p><p class="rating">★★★★★</p><div class="actions"><button class="add-cart">Add to Cart</button><button class="try-on">Try On</button></div></div>
 
-    <!-- Product 6 -->
-    <div class="product-card">
-      <i class='bx bx-heart wishlist'></i>
-      <img src="/images/laptops/hp_pavilion15.jpeg" alt="HP Pavilion 15">
-      <h4>HP Pavilion 15</h4>
-      <p class="desc">Intel i5 12th Gen, 16GB RAM, 1TB SSD</p>
-      <p class="rating">★★★★★ (4.7)</p>
-      <div class="actions">
-        <button class="add-cart">Add to Cart</button>
-        <button class="try-on">Try On</button>
-      </div>
-    </div>
-
-    <!-- Product 7 -->
-    <div class="product-card">
-      <i class='bx bx-heart wishlist'></i>
-      <img src="/images/laptops/lenovo_ideapad_slim3.jpeg" alt="Lenovo Ideapad Slim 3">
-      <h4>Lenovo Ideapad Slim 3</h4>
-      <p class="desc">Ryzen 7, Full HD Display, Rapid Charge</p>
-      <p class="rating">★★★★☆ (4.3)</p>
-      <div class="actions">
-        <button class="add-cart">Add to Cart</button>
-        <button class="try-on">Try On</button>
-      </div>
-    </div>
-
-    <!-- Product 8 -->
-    <div class="product-card">
-      <i class='bx bx-heart wishlist'></i>
-      <img src="/images/laptops/acer_aspires.jpeg" alt="Acer Aspire Lite 14">
-      <h4>Acer Aspire Lite 14</h4>
-      <p class="desc">Intel Core i3, 8GB RAM, 512GB SSD</p>
-      <p class="rating">★★★☆☆ (3.8)</p>
-      <div class="actions">
-        <button class="add-cart">Add to Cart</button>
-        <button class="try-on">Try On</button>
-      </div>
-    </div>
-
-    <!-- Product 9 -->
-    <div class="product-card">
-      <i class='bx bx-heart wishlist'></i>
-      <img src="/images/audio/jbl_flip6.jpeg" alt="JBL Flip 6 Speaker">
-      <h4>JBL Flip 6 Speaker</h4>
-      <p class="desc">Portable, IP67 Waterproof, 12 Hours Playback</p>
-      <p class="rating">★★★★☆ (4.5)</p>
-      <div class="actions">
-        <button class="add-cart">Add to Cart</button>
-        <button class="try-on">Try On</button>
-      </div>
-    </div>
-
-    <!-- Product 10 -->
-    <div class="product-card">
-      <i class='bx bx-heart wishlist'></i>
-      <img src="/images/audio/sony_whch520.jpeg" alt="Sony WH-CH520 Headphones">
-      <h4>Sony WH-CH520 Headphones</h4>
-      <p class="desc">50H Battery, BT 5.2, On-Ear Lightweight</p>
-      <p class="rating">★★★★☆ (4.1)</p>
-      <div class="actions">
-        <button class="add-cart">Add to Cart</button>
-        <button class="try-on">Try On</button>
-      </div>
-    </div>
-
-    <!-- Product 11 -->
-    <div class="product-card">
-      <i class='bx bx-heart wishlist'></i>
-      <img src="/images/audio/zebronics_zebjuke.jpeg" alt="Zebronics Zeb-Juke Bar">
-      <h4>Zebronics Zeb-Juke Bar</h4>
-      <p class="desc">100W Soundbar, Bluetooth, HDMI ARC</p>
-      <p class="rating">★★★★☆ (4.3)</p>
-      <div class="actions">
-        <button class="add-cart">Add to Cart</button>
-        <button class="try-on">Try On</button>
-      </div>
-    </div>
-
-    <!-- Product 12 -->
-    <div class="product-card">
-      <i class='bx bx-heart wishlist'></i>
-      <img src="/images/audio/realme_buds3.jpeg" alt="Realme Buds Wireless 3">
-      <h4>Realme Buds Wireless 3</h4>
-      <p class="desc">ANC, Dual Device Pairing, 13.6mm Drivers</p>
-      <p class="rating">★★★★☆ (4.0)</p>
-      <div class="actions">
-        <button class="add-cart">Add to Cart</button>
-        <button class="try-on">Try On</button>
-      </div>
-    </div>
-
-    <!-- Product 13 -->
-    <div class="product-card">
-      <i class='bx bx-heart wishlist'></i>
-      <img src="/images/electronics/Mi Beard Trimmer 2.jpeg" alt="Mi Beard Trimmer 2">
-      <h4>Mi Beard Trimmer 2</h4>
-      <p class="desc">40 Length Settings, USB-C Charging</p>
-      <p class="rating">★★★★☆ (4.4)</p>
-      <div class="actions">
-        <button class="add-cart">Add to Cart</button>
-        <button class="try-on">Try On</button>
-      </div>
-    </div>
-
-    <!-- Product 14 -->
-    <div class="product-card">
-      <i class='bx bx-heart wishlist'></i>
-      <img src="/images/watch/Noise ColorFit Ultra 3.jpeg" alt="Noise ColorFit Ultra 3">
-      <h4>Noise ColorFit Ultra 3</h4>
-      <p class="desc">AMOLED Display, Bluetooth Calling, 7-Day Battery</p>
-      <p class="rating">★★★★☆ (4.2)</p>
-      <div class="actions">
-        <button class="add-cart">Add to Cart</button>
-        <button class="try-on">Try On</button>
-      </div>
-    </div>
-
-    <!-- Product 15 -->
-    <div class="product-card">
-      <i class='bx bx-heart wishlist'></i>
-      <img src="/images/watch/Fire-Boltt Ninja Call Pro Plus.jpeg" alt="Fire-Boltt Ninja Call Pro Plus">
-      <h4>Fire-Boltt Ninja Call Pro Plus</h4>
-      <p class="desc">1.83" Display, BT Calling, Sports Modes</p>
-      <p class="rating">★★★☆☆ (3.9)</p>
-      <div class="actions">
-        <button class="add-cart">Add to Cart</button>
-        <button class="try-on">Try On</button>
-      </div>
-    </div>
   </div>
 </div>
 
+
 <script>
-   // Initialize when DOM is loaded
+    
+  // Initialize when DOM is loaded
   document.addEventListener('DOMContentLoaded', function() {
     // Get the search input element
     const searchInput = document.getElementById('searchInput');

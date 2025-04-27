@@ -3,278 +3,1082 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Men's Sunglasses</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <title>ShopZone | Sunglasses</title>
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: 'Roboto', sans-serif;
-      margin: 0;
-      background-color: #f5f5f5;
+      background-color: #fdfdfd;
+      font-family: 'Poppins', sans-serif;
     }
-    .header {
-      background-color: #fff;
+
+    header {
+      background-color: #222;
+      color: #fff;
       padding: 15px 30px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      font-size: 20px;
-      font-weight: bold;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 20px;
+
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo img {
+      width: 40px;
+      margin-right: 10px;
+    }
+
+    .search-box {
+      display: flex;
+      background: white;
+      padding: 8px 12px;
+      border-radius: 6px;
+    }
+
+    .search-box input {
+      border: none;
+      outline: none;
+      width: 600px;
+      font-size: 14px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav ul li {
+      margin-left: 20px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #fff;
+      font-size: 15px;
+      transition: color 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: #ddd;
+    }
+
+    .page-container {
+      display: flex;
       padding: 30px;
+      gap: 30px;
+      max-width: 1400px;
+      margin: 0 auto;
     }
-    .product-card {
-      background-color: #fff;
+
+    .filters {
+      width: 250px;
+      background: #fff;
+      padding: 20px;
       border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      height: fit-content;
+      position: sticky;
+      top: 20px;
+    }
+
+    .filters h3 {
+      margin-bottom: 20px;
+      font-size: 18px;
+      color: #333;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .filters strong {
+      display: block;
+      margin-top: 15px;
+      font-size: 14px;
+      color: #444;
+    }
+
+    .filters label {
+      display: block;
+      margin: 8px 0;
+      font-size: 13px;
+      color: #555;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .filters label:hover {
+      color: #222;
+    }
+
+    .filters input[type="checkbox"],
+    .filters input[type="radio"] {
+      margin-right: 8px;
+      accent-color: #ff4757;
+    }
+
+    .product-grid {
+      flex: 1;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 25px;
+    }
+
+    .product-card {
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
       overflow: hidden;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      transition: transform 0.3s ease;
     }
+
     .product-card:hover {
-      transform: scale(1.02);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
     }
+
+    .wishlist {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      font-size: 22px;
+      color: #ff4757;
+      cursor: pointer;
+      background: rgba(255,255,255,0.8);
+      padding: 5px;
+      border-radius: 50%;
+      transition: all 0.3s;
+      z-index: 2;
+    }
+
+    .wishlist:hover {
+      color: #ff0000;
+      transform: scale(1.1);
+    }
+
+    .wishlist.active {
+      color: #ff0000;
+    }
+
     .product-card img {
       width: 100%;
-      height: 220px;
-      object-fit: cover;
+      height: 200px;
+      object-fit: contain;
+      border-radius: 6px;
+      margin-bottom: 15px;
+      transition: transform 0.3s;
+      background-color: #f7f7f7;
     }
-    .product-info {
-      padding: 15px;
+
+    .product-card:hover img {
+      transform: scale(1.03);
     }
-    .brand {
-      font-weight: bold;
-      font-size: 16px;
-    }
-    .description {
-      color: #555;
-      font-size: 14px;
-      margin: 5px 0;
-    }
-    .price {
-      font-weight: bold;
+
+    .product-card h4 {
       margin: 10px 0 5px;
+      font-size: 16px;
+      color: #333;
+      font-weight: 600;
     }
-    .discount {
-      color: #ff3e6c;
-      font-size: 14px;
+
+    .product-card .desc {
+      font-size: 13px;
+      color: #666;
+      margin-bottom: 8px;
+      line-height: 1.4;
     }
+
     .rating {
+      color: #f39c12;
+      margin: 5px 0;
       font-size: 14px;
-      background: #f7f7f7;
-      padding: 4px 8px;
-      border-radius: 12px;
-      display: inline-block;
-      margin-top: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+    }
+
+    .rating-count {
+      color: #777;
+      font-size: 12px;
+      margin-left: 5px;
+    }
+
+    .product-card p:last-of-type {
+      font-weight: 600;
+      color: #222;
+      margin: 10px 0;
+      font-size: 15px;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .actions button {
+      border: none;
+      padding: 8px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 13px;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 500;
+    }
+
+    .actions button i {
+      margin-right: 5px;
+    }
+
+    .actions .try-on {
+      background-color: #0984e3;
+      color: white;
+      flex: 1;
+    }
+
+    .actions .try-on:hover {
+      background-color: #0768b3;
+      transform: translateY(-2px);
+    }
+
+    .actions .add-cart {
+      background-color: #ff4757;
+      color: white;
+      flex: 1;
+    }
+
+    .actions .add-cart:hover {
+      background-color: #e84118;
+      transform: translateY(-2px);
+    }
+
+    .price-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .original-price {
+      text-decoration: line-through;
+      color: #999;
+      font-size: 13px;
+    }
+
+    .discount {
+      color: #2ecc71;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .frame-selector {
+      margin: 10px 0;
+      display: flex;
+      justify-content: center;
+      gap: 5px;
+      flex-wrap: wrap;
+    }
+
+    .frame-option {
+      padding: 5px 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .frame-option:hover {
+      border-color: #999;
+    }
+
+    .frame-option.selected {
+      background-color: #222;
+      color: white;
+      border-color: #222;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        padding: 15px;
+      }
+
+      .logo {
+        margin-bottom: 15px;
+      }
+
+      .search-box {
+        width: 100%;
+        margin-bottom: 15px;
+      }
+
+      .search-box input {
+        width: 100%;
+      }
+
+      nav ul {
+        width: 100%;
+        justify-content: space-between;
+      }
+
+      nav ul li {
+        margin-left: 0;
+      }
+
+      .page-container {
+        flex-direction: column;
+        padding: 15px;
+      }
+
+      .filters {
+        width: 100%;
+        position: static;
+        margin-bottom: 20px;
+      }
+
+      .product-card img {
+        height: 160px;
+      }
+
+      .product-card h4 {
+        font-size: 15px;
+      }
+
+      .actions button {
+        font-size: 12px;
+        padding: 8px 10px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .product-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+      }
+
+      .product-card {
+        padding: 10px;
+      }
+
+      .product-card img {
+        height: 140px;
+      }
+
+      .actions {
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .actions button {
+        width: 100%;
+      }
     }
   </style>
 </head>
 <body>
 
-  <div class="header">Men's Sunglasses</div>
+<header>
+  <div class="logo">
+    <img src="/images/logo.webp" alt="ShopZone Logo">
+    <h2>ShopZone</h2>
+  </div>
+  <div class="search-box">
+    <i class='bx bx-search'></i>
+    <input type="text" id="searchInput" placeholder="Search Sunglasses...">
+  </div>
+  <nav>
+    <ul>
+      <li><a href="#">Aviator</a></li>
+      <li><a href="#">Wayfarer</a></li>
+      <li><a href="#">Round</a></li>
+      <li><a href="#">Sports</a></li>
+      <li><a href="#">Polarized</a></li>
+      <li><a href="cart.html"><i class='bx bx-cart'></i></a></li>
+    </ul>
+  </nav>
+</header>
 
-  <div class="products-grid">
+<div class="page-container">
+
+  <div class="filters">
+    <h3>Filters</h3>
+    <strong>Category</strong>
+    <label><input type="checkbox" checked> Aviator</label>
+    <label><input type="checkbox"> Wayfarer</label>
+    <label><input type="checkbox"> Round</label>
+    <label><input type="checkbox"> Sports</label>
+    <label><input type="checkbox"> Cat Eye</label>
+    <label><input type="checkbox"> Square</label>
+
+    <strong>Brand</strong>
+    <label><input type="checkbox" checked> Ray-Ban</label>
+    <label><input type="checkbox"> Oakley</label>
+    <label><input type="checkbox"> Gucci</label>
+    <label><input type="checkbox"> Prada</label>
+    <label><input type="checkbox"> Versace</label>
+    <label><input type="checkbox"> Polaroid</label>
+    <label><input type="checkbox"> Fastrack</label>
+    <label><input type="checkbox"> Vincent Chase</label>
+
+    <strong>Frame Type</strong>
+    <label><input type="checkbox"> Full Rim</label>
+    <label><input type="checkbox"> Half Rim</label>
+    <label><input type="checkbox"> Rimless</label>
+
+    <strong>Color</strong>
+    <label><input type="checkbox"> Black</label>
+    <label><input type="checkbox"> Brown</label>
+    <label><input type="checkbox"> Gold</label>
+    <label><input type="checkbox"> Silver</label>
+    <label><input type="checkbox"> Blue</label>
+    <label><input type="checkbox"> Red</label>
+    <label><input type="checkbox"> Green</label>
+
+    <strong>Lens Type</strong>
+    <label><input type="checkbox"> Polarized</label>
+    <label><input type="checkbox"> Mirrored</label>
+    <label><input type="checkbox"> Gradient</label>
+    <label><input type="checkbox"> Photochromic</label>
+
+    <strong>Discount</strong>
+    <label><input type="checkbox"> 10% and above</label>
+    <label><input type="checkbox"> 20% and above</label>
+    <label><input type="checkbox"> 30% and above</label>
+    <label><input type="checkbox"> 40% and above</label>
+    <label><input type="checkbox"> 50% and above</label>
+
+    <strong>Price</strong>
+    <label><input type="radio" name="price"> Under ₹1,000</label>
+    <label><input type="radio" name="price"> ₹1,000 - ₹2,000</label>
+    <label><input type="radio" name="price"> ₹2,000 - ₹5,000</label>
+    <label><input type="radio" name="price"> ₹5,000 - ₹10,000</label>
+    <label><input type="radio" name="price"> ₹10,000+</label>
+  </div>
+
+  <div class="product-grid">
+    <!-- Product 1 -->
     <div class="product-card">
-      <img src="/images/sunglass/sunglass1.jpg" alt="sunglasses">
-      <div class="product-info">
-        <div class="brand">Ray-Ban</div>
-        <div class="description">Aviator Classic</div>
-        <div class="price">Rs. 5,999 <span class="discount">(20% OFF)</span></div>
-        <div class="rating">⭐ 4.6 | 11k ratings</div>
+      <i class='bx bx-heart wishlist'></i>
+      <img src="/images/sunglasses/sunglass1.jpg" alt="Ray-Ban Aviator">
+      <h4>Ray-Ban Aviator</h4>
+      <p class="desc">Classic Aviator Sunglasses with G-15 Lens</p>
+      <div class="rating">★★★★★ <span class="rating-count">(4.9)</span></div>
+      <div class="frame-selector">
+        <div class="frame-option selected">Gold</div>
+        <div class="frame-option">Black</div>
+      </div>
+      <div class="price-container">
+        <p>₹12,999</p>
+        <span class="original-price">₹15,999</span>
+        <span class="discount">19% OFF</span>
+      </div>
+      <div class="actions">
+        <button class="add-cart">Add to Cart</button>
+        <button class="try-on">Virtual Try-On</button>
       </div>
     </div>
-    
+  
+    <!-- Product 2 -->
     <div class="product-card">
-      <img src="/images/sunglass/sunglass2.jpg" alt="sunglasses">
-      <div class="product-info">
-        <div class="brand">Fastrack</div>
-        <div class="description">UV Protection Square</div>
-        <div class="price">Rs. 1,499 <span class="discount">(30% OFF)</span></div>
-        <div class="rating">⭐ 4.3 | 6.2k ratings</div>
+      <i class='bx bx-heart wishlist'></i>
+      <img src="/images/sunglasses/sunglass2.jpg" alt="Oakley Holbrook">
+      <h4>Oakley Holbrook</h4>
+      <p class="desc">Square Sunglasses with Prizm Lens Technology</p>
+      <div class="rating">★★★★☆ <span class="rating-count">(4.7)</span></div>
+      <div class="frame-selector">
+        <div class="frame-option selected">Matte Black</div>
+        <div class="frame-option">Polished White</div>
+      </div>
+      <div class="price-container">
+        <p>₹9,499</p>
+        <span class="original-price">₹11,999</span>
+        <span class="discount">21% OFF</span>
+      </div>
+      <div class="actions">
+        <button class="add-cart">Add to Cart</button>
+        <button class="try-on">Virtual Try-On</button>
       </div>
     </div>
-    
+  
+    <!-- Product 3 -->
     <div class="product-card">
-      <img src="/images/sunglass/sunglass3.jpg" alt="sunglasses">
-      <div class="product-info">
-        <div class="brand">Oakley</div>
-        <div class="description">Holbrook XL</div>
-        <div class="price">Rs. 7,199 <span class="discount">(25% OFF)</span></div>
-        <div class="rating">⭐ 4.7 | 3.1k ratings</div>
+      <i class='bx bx-heart wishlist'></i>
+      <img src="/images/sunglasses/sunglass7.jpg" alt="Gucci Round">
+      <h4>Gucci Round</h4>
+      <p class="desc">Retro Round Sunglasses with Gold Frame</p>
+      <div class="rating">★★★★☆ <span class="rating-count">(4.5)</span></div>
+      <div class="frame-selector">
+        <div class="frame-option selected">Gold</div>
+        <div class="frame-option">Tortoise</div>
+      </div>
+      <div class="price-container">
+        <p>₹15,999</p>
+        <span class="original-price">₹19,999</span>
+        <span class="discount">20% OFF</span>
+      </div>
+      <div class="actions">
+        <button class="add-cart">Add to Cart</button>
+        <button class="try-on">Virtual Try-On</button>
+      </div>
+    </div>
+  
+    <!-- Product 4 -->
+    <div class="product-card">
+      <i class='bx bx-heart wishlist'></i>
+      <img src="/images/sunglasses/sunglass14.jpg" alt="Prada Cat Eye">
+      <h4>Prada Cat Eye</h4>
+      <p class="desc">Women's Cat Eye Sunglasses with Logo Detail</p>
+      <div class="rating">★★★★★ <span class="rating-count">(4.8)</span></div>
+      <div class="frame-selector">
+        <div class="frame-option selected">Black</div>
+        <div class="frame-option">Rose Gold</div>
+      </div>
+      <div class="price-container">
+        <p>₹14,499</p>
+        <span class="original-price">₹17,999</span>
+        <span class="discount">19% OFF</span>
+      </div>
+      <div class="actions">
+        <button class="add-cart">Add to Cart</button>
+        <button class="try-on">Virtual Try-On</button>
+      </div>
+    </div>
+  
+    <!-- Product 5 -->
+    <div class="product-card">
+      <i class='bx bx-heart wishlist'></i>
+      <img src="/images/sunglasses/sunglass5.jpg" alt="Versace Medusa">
+      <h4>Versace Medusa</h4>
+      <p class="desc">Square Sunglasses with Medusa Logo</p>
+      <div class="rating">★★★★☆ <span class="rating-count">(4.6)</span></div>
+      <div class="frame-selector">
+        <div class="frame-option selected">Gold</div>
+        <div class="frame-option">Silver</div>
+      </div>
+      <div class="price-container">
+        <p>₹16,999</p>
+        <span class="original-price">₹21,999</span>
+        <span class="discount">23% OFF</span>
+      </div>
+      <div class="actions">
+        <button class="add-cart">Add to Cart</button>
+        <button class="try-on">Virtual Try-On</button>
+      </div>
+    </div>
+  
+    <!-- Product 6 -->
+    <div class="product-card">
+      <i class='bx bx-heart wishlist'></i>
+      <img src="/images/sunglasses/sunglass6.jpg" alt="Polaroid PLD">
+      <h4>Polaroid PLD</h4>
+      <p class="desc">Polarized Sunglasses with UV Protection</p>
+      <div class="rating">★★★★☆ <span class="rating-count">(4.4)</span></div>
+      <div class="frame-selector">
+        <div class="frame-option selected">Black</div>
+        <div class="frame-option">Brown</div>
+        <div class="frame-option">Blue</div>
+      </div>
+      <div class="price-container">
+        <p>₹2,799</p>
+        <span class="original-price">₹3,999</span>
+        <span class="discount">30% OFF</span>
+      </div>
+      <div class="actions">
+        <button class="add-cart">Add to Cart</button>
+        <button class="try-on">Virtual Try-On</button>
+      </div>
+    </div>
+  
+    <!-- Product 7 -->
+    <div class="product-card">
+      <i class='bx bx-heart wishlist'></i>
+      <img src="/images/sunglasses/sunglass3.jpg" alt="Fastrack Wayfarer">
+      <h4>Fastrack Wayfarer</h4>
+      <p class="desc">Classic Wayfarer Style Sunglasses</p>
+      <div class="rating">★★★★★ <span class="rating-count">(4.8)</span></div>
+      <div class="frame-selector">
+        <div class="frame-option selected">Black</div>
+        <div class="frame-option">Tortoise</div>
+        <div class="frame-option">Red</div>
+      </div>
+      <div class="price-container">
+        <p>₹1,499</p>
+        <span class="original-price">₹2,499</span>
+        <span class="discount">40% OFF</span>
+      </div>
+      <div class="actions">
+        <button class="add-cart">Add to Cart</button>
+        <button class="try-on">Virtual Try-On</button>
+      </div>
+    </div>
+  
+    <!-- Product 8 -->
+    <div class="product-card">
+      <i class='bx bx-heart wishlist'></i>
+      <img src="/images/sunglasses/sunglass8.jpg" alt="Vincent Chase Aviator">
+      <h4>Vincent Chase Aviator</h4>
+      <p class="desc">Polarized Aviator Sunglasses with Metal Frame</p>
+      <div class="rating">★★★★☆ <span class="rating-count">(4.5)</span></div>
+      <div class="frame-selector">
+        <div class="frame-option selected">Gold</div>
+        <div class="frame-option">Silver</div>
+        <div class="frame-option">Gunmetal</div>
+      </div>
+      <div class="price-container">
+        <p>₹1,299</p>
+        <span class="original-price">₹1,999</span>
+        <span class="discount">35% OFF</span>
+      </div>
+      <div class="actions">
+        <button class="add-cart">Add to Cart</button>
+        <button class="try-on">Virtual Try-On</button>
+      </div>
+    </div>
+  
+    <!-- Product 9 -->
+    <div class="product-card">
+      <i class='bx bx-heart wishlist'></i>
+      <img src="/images/sunglasses/sunglass9.jpg" alt="Ray-Ban Clubmaster">
+      <h4>Ray-Ban Clubmaster</h4>
+      <p class="desc">Browline Sunglasses with Classic Design</p>
+      <div class="rating">★★★★★ <span class="rating-count">(4.9)</span></div>
+      <div class="frame-selector">
+        <div class="frame-option selected">Tortoise</div>
+        <div class="frame-option">Black</div>
+        <div class="frame-option">Havana</div>
+      </div>
+      <div class="price-container">
+        <p>₹10,999</p>
+        <span class="original-price">₹13,999</span>
+        <span class="discount">21% OFF</span>
+      </div>
+      <div class="actions">
+        <button class="add-cart">Add to Cart</button>
+        <button class="try-on">Virtual Try-On</button>
+      </div>
+    </div>
+  
+    <!-- Product 10 -->
+    <div class="product-card">
+      <i class='bx bx-heart wishlist'></i>
+      <img src="/images/sunglasses/sunglass10.jpg" alt="Oakley Flak 2.0">
+      <h4>Oakley Flak 2.0</h4>
+      <p class="desc">Sports Sunglasses with Prizm Lens</p>
+      <div class="rating">★★★★★ <span class="rating-count">(4.8)</span></div>
+      <div class="frame-selector">
+        <div class="frame-option selected">Matte Black</div>
+        <div class="frame-option">Ocean Blue</div>
+        <div class="frame-option">Red</div>
+      </div>
+      <div class="price-container">
+        <p>₹8,999</p>
+        <span class="original-price">₹11,999</span>
+        <span class="discount">25% OFF</span>
+      </div>
+      <div class="actions">
+        <button class="add-cart">Add to Cart</button>
+        <button class="try-on">Virtual Try-On</button>
+      </div>
+    </div>
+  
+    <!-- Product 11 -->
+    <div class="product-card">
+      <i class='bx bx-heart wishlist'></i>
+      <img src="/images/sunglasses/sunglass11.jpg" alt="Prada Linea Rossa">
+      <h4>Prada Linea Rossa</h4>
+      <p class="desc">Sporty Sunglasses with Red Accents</p>
+      <div class="rating">★★★★☆ <span class="rating-count">(4.6)</span></div>
+      <div class="frame-selector">
+        <div class="frame-option selected">Black</div>
+        <div class="frame-option">Blue</div>
+      </div>
+      <div class="price-container">
+        <p>₹15,999</p>
+        <span class="original-price">₹19,999</span>
+        <span class="discount">20% OFF</span>
+      </div>
+      <div class="actions">
+        <button class="add-cart">Add to Cart</button>
+        <button class="try-on">Virtual Try-On</button>
+      </div>
+    </div>
+  
+    <!-- Product 12 -->
+    <div class="product-card">
+      <i class='bx bx-heart wishlist'></i>
+      <img src="/images/sunglasses/sunglass12.jpg" alt="Ray-Ban Round">
+      <h4>Ray-Ban Round</h4>
+      <p class="desc">Metal Round Sunglasses with Green Lens</p>
+      <div class="rating">★★★★☆ <span class="rating-count">(4.7)</span></div>
+      <div class="frame-selector">
+        <div class="frame-option selected">Gold</div>
+        <div class="frame-option">Silver</div>
+      </div>
+      <div class="price-container">
+        <p>₹11,499</p>
+        <span class="original-price">₹14,999</span>
+        <span class="discount">23% OFF</span>
+      </div>
+      <div class="actions">
+        <button class="add-cart">Add to Cart</button>
+        <button class="try-on">Virtual Try-On</button>
       </div>
     </div>
 
+    <!-- Product 13 -->
     <div class="product-card">
-      <img src="/images/sunglass/sunglass4.jpg" alt="sunglasses">
-      <div class="product-info">
-        <div class="brand">Polaroid</div>
-        <div class="description">Polarized Round</div>
-        <div class="price">Rs. 2,199 <span class="discount">(40% OFF)</span></div>
-        <div class="rating">⭐ 4.2 | 2.5k ratings</div>
+      <i class='bx bx-heart wishlist'></i>
+      <img src="/images/sunglasses/sunglass13.jpg" alt="Gucci Oversized">
+      <h4>Gucci Oversized</h4>
+      <p class="desc">Oversized Square Sunglasses with Logo</p>
+      <div class="rating">★★★★☆ <span class="rating-count">(4.5)</span></div>
+      <div class="frame-selector">
+        <div class="frame-option selected">Black</div>
+        <div class="frame-option">Brown</div>
+      </div>
+      <div class="price-container">
+        <p>₹17,999</p>
+        <span class="original-price">₹22,999</span>
+        <span class="discount">22% OFF</span>
+      </div>
+      <div class="actions">
+        <button class="add-cart">Add to Cart</button>
+        <button class="try-on">Virtual Try-On</button>
       </div>
     </div>
 
+    <!-- Product 14 -->
     <div class="product-card">
-      <img src="/images/sunglass/sunglass5.jpg" alt="sunglasses">
-      <div class="product-info">
-        <div class="brand">Tommy Hilfiger</div>
-        <div class="description">Wayfarer Sunglasses</div>
-        <div class="price">Rs. 3,499 <span class="discount">(35% OFF)</span></div>
-        <div class="rating">⭐ 4.5 | 4.2k ratings</div>
+      <i class='bx bx-heart wishlist'></i>
+      <img src="/images/sunglasses/sunglass4.jpg" alt="Polaroid PLD 2">
+      <h4>Polaroid PLD 2</h4>
+      <p class="desc">Polarized Sunglasses with Mirrored Lens</p>
+      <div class="rating">★★★★☆ <span class="rating-count">(4.4)</span></div>
+      <div class="frame-selector">
+        <div class="frame-option selected">Blue</div>
+        <div class="frame-option">Silver</div>
+        <div class="frame-option">Gold</div>
+      </div>
+      <div class="price-container">
+        <p>₹2,799</p>
+        <span class="original-price">₹3,999</span>
+        <span class="discount">30% OFF</span>
+      </div>
+      <div class="actions">
+        <button class="add-cart">Add to Cart</button>
+        <button class="try-on">Virtual Try-On</button>
       </div>
     </div>
 
+    <!-- Product 15 -->
     <div class="product-card">
-      <img src="/images/sunglass/sunglass6.jpg" alt="sunglasses">
-      <div class="product-info">
-        <div class="brand">Voyage</div>
-        <div class="description">Retro Oversized</div>
-        <div class="price">Rs. 999 <span class="discount">(50% OFF)</span></div>
-        <div class="rating">⭐ 3.9 | 1.7k ratings</div>
+      <i class='bx bx-heart wishlist'></i>
+      <img src="/images/sunglasses/sunglass15.jpg" alt="Fastrack Decker">
+      <h4>Fastrack Decker</h4>
+      <p class="desc">Square Sunglasses with UV Protection</p>
+      <div class="rating">★★★★★ <span class="rating-count">(4.8)</span></div>
+      <div class="frame-selector">
+        <div class="frame-option selected">Black</div>
+        <div class="frame-option">Blue</div>
+        <div class="frame-option">Red</div>
+      </div>
+      <div class="price-container">
+        <p>₹1,499</p>
+        <span class="original-price">₹1,999</span>
+        <span class="discount">25% OFF</span>
+      </div>
+      <div class="actions">
+        <button class="add-cart">Add to Cart</button>
+        <button class="try-on">Virtual Try-On</button>
       </div>
     </div>
 
+    <!-- Product 16 -->
     <div class="product-card">
-      <img src="/images/sunglass/sunglass7.jpg" alt="sunglasses">
-      <div class="product-info">
-        <div class="brand">IDEE</div>
-        <div class="description">Men's Rectangular</div>
-        <div class="price">Rs. 1,799 <span class="discount">(45% OFF)</span></div>
-        <div class="rating">⭐ 4.0 | 3.8k ratings</div>
+      <i class='bx bx-heart wishlist'></i>
+      <img src="/images/sunglasses/sunglass16.jpg" alt="Vincent Chase Wayfarer">
+      <h4>Vincent Chase Wayfarer</h4>
+      <p class="desc">Classic Wayfarer with Polarized Lenses</p>
+      <div class="rating">★★★★☆ <span class="rating-count">(4.6)</span></div>
+      <div class="frame-selector">
+        <div class="frame-option selected">Black</div>
+        <div class="frame-option">Tortoise</div>
+        <div class="frame-option">Red</div>
+      </div>
+      <div class="price-container">
+        <p>₹1,999</p>
+        <span class="original-price">₹2,999</span>
+        <span class="discount">33% OFF</span>
+      </div>
+      <div class="actions">
+        <button class="add-cart">Add to Cart</button>
+        <button class="try-on">Virtual Try-On</button>
       </div>
     </div>
 
+    <!-- Product 17 -->
     <div class="product-card">
-      <img src="/images/sunglass/sunglass8.jpg" alt="sunglasses">
-      <div class="product-info">
-        <div class="brand">Titan</div>
-        <div class="description">Black Sports Sunglasses</div>
-        <div class="price">Rs. 1,999 <span class="discount">(33% OFF)</span></div>
-        <div class="rating">⭐ 4.1 | 2.1k ratings</div>
+      <i class='bx bx-heart wishlist'></i>
+      <img src="/images/sunglasses/sunglass17.jpg" alt="Ray-Ban Hexagonal">
+      <h4>Ray-Ban Hexagonal</h4>
+      <p class="desc">Hexagonal Sunglasses with Gradient Lens</p>
+      <div class="rating">★★★★☆ <span class="rating-count">(4.3)</span></div>
+      <div class="frame-selector">
+        <div class="frame-option selected">Gold</div>
+        <div class="frame-option">Silver</div>
+      </div>
+      <div class="price-container">
+        <p>₹10,499</p>
+        <span class="original-price">₹12,999</span>
+        <span class="discount">19% OFF</span>
+      </div>
+      <div class="actions">
+        <button class="add-cart">Add to Cart</button>
+        <button class="try-on">Virtual Try-On</button>
       </div>
     </div>
 
+    <!-- Product 18 -->
     <div class="product-card">
-      <img src="/images/sunglass/sunglass9.jpg" alt="sunglasses">
-      <div class="product-info">
-        <div class="brand">Roadster</div>
-        <div class="description">Round Tinted Glasses</div>
-        <div class="price">Rs. 899 <span class="discount">(60% OFF)</span></div>
-        <div class="rating">⭐ 3.8 | 4.4k ratings</div>
+      <i class='bx bx-heart wishlist'></i>
+      <img src="/images/sunglasses/sunglass18.jpg" alt="Oakley Frogskins">
+      <h4>Oakley Frogskins</h4>
+      <p class="desc">Retro Square Sunglasses with Prizm Lens</p>
+      <div class="rating">★★★★★ <span class="rating-count">(4.9)</span></div>
+      <div class="frame-selector">
+        <div class="frame-option selected">Matte Black</div>
+        <div class="frame-option">Sky Blue</div>
+        <div class="frame-option">Red</div>
+      </div>
+      <div class="price-container">
+        <p>₹8,999</p>
+        <span class="original-price">₹11,999</span>
+        <span class="discount">25% OFF</span>
+      </div>
+      <div class="actions">
+        <button class="add-cart">Add to Cart</button>
+        <button class="try-on">Virtual Try-On</button>
       </div>
     </div>
 
+    <!-- Product 19 -->
     <div class="product-card">
-      <img src="/images/sunglass/sunglass10.jpg" alt="sunglasses">
-      <div class="product-info">
-        <div class="brand">Vincent Chase</div>
-        <div class="description">Polarized Sunglasses</div>
-        <div class="price">Rs. 1,299 <span class="discount">(50% OFF)</span></div>
-        <div class="rating">⭐ 4.4 | 3.0k ratings</div>
+      <i class='bx bx-heart wishlist'></i>
+      <img src="/images/sunglasses/sunglass19.jpg" alt="Prada Baroque">
+      <h4>Prada Baroque</h4>
+      <p class="desc">Oversized Sunglasses with Baroque Design</p>
+      <div class="rating">★★★★☆ <span class="rating-count">(4.7)</span></div>
+      <div class="frame-selector">
+        <div class="frame-option selected">Black</div>
+        <div class="frame-option">Gold</div>
+      </div>
+      <div class="price-container">
+        <p>₹16,499</p>
+        <span class="original-price">₹19,999</span>
+        <span class="discount">18% OFF</span>
+      </div>
+      <div class="actions">
+        <button class="add-cart">Add to Cart</button>
+        <button class="try-on">Virtual Try-On</button>
       </div>
     </div>
-
-    <!-- 10 more products below -->
-
+  
+    <!-- Product 20 -->
     <div class="product-card">
-      <img src="/images/sunglass/sunglass11.jpg" alt="sunglasses">
-      <div class="product-info">
-        <div class="brand">Lenskart</div>
-        <div class="description">Blue Cut Round</div>
-        <div class="price">Rs. 999 <span class="discount">(45% OFF)</span></div>
-        <div class="rating">⭐ 4.0 | 1.6k ratings</div>
+      <i class='bx bx-heart wishlist'></i>
+      <img src="/images/sunglasses/sunglass20.jpg" alt="Versace Greca">
+      <h4>Versace Greca</h4>
+      <p class="desc">Square Sunglasses with Greca Motif</p>
+      <div class="rating">★★★★★ <span class="rating-count">(4.8)</span></div>
+      <div class="frame-selector">
+        <div class="frame-option selected">Gold</div>
+        <div class="frame-option">Black</div>
       </div>
-    </div>
-
-    <div class="product-card">
-      <img src="/images/sunglass/sunglass12.jpg" alt="sunglasses">
-      <div class="product-info">
-        <div class="brand">Gucci</div>
-        <div class="description">Luxury Square Frame</div>
-        <div class="price">Rs. 12,499 <span class="discount">(10% OFF)</span></div>
-        <div class="rating">⭐ 4.8 | 890 ratings</div>
+      <div class="price-container">
+        <p>₹15,999</p>
+        <span class="original-price">₹19,999</span>
+        <span class="discount">20% OFF</span>
       </div>
-    </div>
-
-    <div class="product-card">
-      <img src="/images/sunglass/sunglass13.jpg" alt="sunglasses">
-      <div class="product-info">
-        <div class="brand">Diesel</div>
-        <div class="description">Vintage Green Glass</div>
-        <div class="price">Rs. 3,699 <span class="discount">(38% OFF)</span></div>
-        <div class="rating">⭐ 4.2 | 1.3k ratings</div>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <img src="/images/sunglass/sunglass14.jpg" alt="sunglasses">
-      <div class="product-info">
-        <div class="brand">Prada</div>
-        <div class="description">Designer Sport Frame</div>
-        <div class="price">Rs. 15,999 <span class="discount">(18% OFF)</span></div>
-        <div class="rating">⭐ 4.7 | 740 ratings</div>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <img src="/images/sunglass/sunglass15.jpg" alt="sunglasses">
-      <div class="product-info">
-        <div class="brand">Police</div>
-        <div class="description">Bold Look Sunglasses</div>
-        <div class="price">Rs. 2,299 <span class="discount">(42% OFF)</span></div>
-        <div class="rating">⭐ 4.0 | 2.9k ratings</div>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <img src="/images/sunglass/sunglass16.jpg" alt="sunglasses">
-      <div class="product-info">
-        <div class="brand">Calvin Klein</div>
-        <div class="description">Square UV Sunglasses</div>
-        <div class="price">Rs. 4,799 <span class="discount">(28% OFF)</span></div>
-        <div class="rating">⭐ 4.5 | 1.4k ratings</div>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <img src="/images/sunglass/sunglass17.jpg" alt="sunglasses">
-      <div class="product-info">
-        <div class="brand">Diesel</div>
-        <div class="description">Textured Aviator</div>
-        <div class="price">Rs. 3,899 <span class="discount">(36% OFF)</span></div>
-        <div class="rating">⭐ 4.3 | 2.0k ratings</div>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <img src="/images/sunglass/sunglass18.jpg" alt="sunglasses">
-      <div class="product-info">
-        <div class="brand">Police</div>
-        <div class="description">Modern Round Fit</div>
-        <div class="price">Rs. 2,799 <span class="discount">(34% OFF)</span></div>
-        <div class="rating">⭐ 4.1 | 1.2k ratings</div>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <img src="/images/sunglass/sunglass19.jpg" alt="sunglasses">
-      <div class="product-info">
-        <div class="brand">Fastrack</div>
-        <div class="description">Bold Black Shades</div>
-        <div class="price">Rs. 1,199 <span class="discount">(50% OFF)</span></div>
-        <div class="rating">⭐ 4.0 | 5.4k ratings</div>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <img src="/images/sunglass/sunglass20.jpg" alt="sunglasses">
-      <div class="product-info">
-        <div class="brand">Ray-Ban</div>
-        <div class="description">Blue Mirror Lens</div>
-        <div class="price">Rs. 6,499 <span class="discount">(22% OFF)</span></div>
-        <div class="rating">⭐ 4.6 | 4.8k ratings</div>
+      <div class="actions">
+        <button class="add-cart">Add to Cart</button>
+        <button class="try-on">Virtual Try-On</button>
       </div>
     </div>
   </div>
+</div>
+
+
+<script>
+  // Initialize when DOM is loaded
+  document.addEventListener('DOMContentLoaded', function() {
+    // Get the search input element
+    const searchInput = document.getElementById('searchInput');
+    
+    if (!searchInput) {
+      console.error("Search input element not found!");
+      return;
+    }
+
+    // Wishlist functionality
+    document.querySelectorAll('.wishlist').forEach(heart => {
+      heart.addEventListener('click', function(e) {
+        e.stopPropagation();
+        this.classList.toggle('bxs-heart');
+        this.classList.toggle('bx-heart');
+        this.classList.toggle('active');
+        
+        if (this.classList.contains('bxs-heart')) {
+          this.style.color = '#ff0000';
+          alert('Added to wishlist!');
+        } else {
+          this.style.color = '#ff4757';
+        }
+      });
+    });
+
+    // Try-on functionality
+    document.querySelectorAll('.try-on').forEach(button => {
+      button.addEventListener('click', function() {
+        const productName = this.closest('.product-card').querySelector('h4').textContent;
+        alert("Launching try-on for: " + productName);
+      });
+    });
+
+    // Add to cart functionality
+    document.querySelectorAll('.add-cart').forEach(button => {
+      button.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const productName = this.closest('.product-card').querySelector('h4').textContent;
+        alert(productName + " added to cart!");
+      });
+    });
+
+    // Setup search functionality
+    setupSearch(searchInput);
+  });
+
+  // Search Functionality
+  function searchProducts(searchInput) {
+    const query = searchInput.value.trim().toLowerCase();
+    
+    if (!query) {
+      return; // Do nothing if search is empty
+    }
+
+    // Category mapping - search terms to page URLs
+    const categoryMap = {
+      // Bags
+      'bag': '/Product-details/bags.html',
+      'bags': '/Product-details/bags.html',
+      'backpack': '/Product-details/bags.html',
+      'handbag': '/Product-details/bags.html',
+      'luggage': '/Product-details/bags.html',
+      
+      // Shoes
+      'shoe': '/Product-details/shoes.html',
+      'shoes': '/Product-details/shoes.html',
+      'sneaker': '/Product-details/shoes.html',
+      'sneakers': '/Product-details/shoes.html',
+      'footwear': '/Product-details/shoes.html',
+      'boot': '/Product-details/shoes.html',
+      'boots': '/Product-details/shoes.html',
+      'sandals': '/Product-details/shoes.html',
+      
+      // Watches
+      'watch': '/Product-details/smartwatches.html',
+      'watches': '/Product-details/smartwatches.html',
+      'smartwatch': '/Product-details/smartwatches.html',
+      'smartwatches': '/Product-details/smartwatches.html',
+      
+      // Sunglasses
+      'sunglass': '/Product-details/sunglasses.html',
+      'sunglasses': '/Product-details/sunglasses.html',
+      'eyewear': '/Product-details/sunglasses.html',
+      
+      // T-Shirts
+      't-shirt': '/Product-details/t-shirts.html',
+      't-shirts': '/Product-details/t-shirts.html',
+      'tshirt': '/Product-details/t-shirts.html',
+      'tshirts': '/Product-details/t-shirts.html',
+      
+      // Headphones
+      'headphone': '/Product-details/headphones.html',
+      'headphones': '/Product-details/headphones.html',
+      'earphone': '/Product-details/headphones.html',
+      'earphones': '/Product-details/headphones.html',
+      'earbuds': '/Product-details/headphones.html',
+      
+      // Shirts
+      'shirt': '/Product-details/shirts.html',
+      'shirts': '/Product-details/shirts.html',
+      'formal shirt': '/Product-details/shirts.html',
+      
+      // Other categories
+      'jeans': '/Product-details/jeans.html',
+      'dress': '/Product-details/dresses.html',
+      'dresses': '/Product-details/dresses.html',
+      'jacket': '/Product-details/jackets.html',
+      'jackets': '/Product-details/jackets.html',
+      'sweater': '/Product-details/sweaters.html',
+      'sweaters': '/Product-details/sweaters.html'
+    };
+
+    // Check for direct category match first
+    if (categoryMap[query]) {
+      window.location.href = categoryMap[query];
+      return;
+    }
+
+    // Check for partial matches in the query
+    for (const [keyword, page] of Object.entries(categoryMap)) {
+      if (query.includes(keyword)) {
+        window.location.href = page;
+        return;
+      }
+    }
+
+    // If no match found, show alert to user
+    alert(`No category found for "${query}". Try searching for bags, shoes, watches, etc.`);
+  }
+
+  // Setup search event listeners
+  function setupSearch(searchInput) {
+    // Search on Enter key
+    searchInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        searchProducts(searchInput);
+      }
+    });
+    
+    // Search with debounce on input
+    searchInput.addEventListener('input', debounce(() => {
+      searchProducts(searchInput);
+    }, 500));
+  }
+
+  // Utility function for debouncing
+  function debounce(func, wait) {
+    let timeout;
+    return function() {
+      const context = this, args = arguments;
+      clearTimeout(timeout);
+      timeout = setTimeout(() => func.apply(context, args), wait);
+    };
+  }
+</script>
+
 </body>
 </html>

@@ -3,275 +3,1153 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Men's Sports Shoes</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <title>ShopZone | Shoes</title>
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: 'Roboto', sans-serif;
-      margin: 0;
-      background-color: #f5f5f5;
+      background-color: #fdfdfd;
+      font-family: 'Poppins', sans-serif;
+     
     }
-    .header {
-      background-color: #fff;
+
+    header {
+      background-color: #222;
+      color: #fff;
       padding: 15px 30px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      font-size: 20px;
-      font-weight: bold;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 20px;
+
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo img {
+      width: 40px;
+      margin-right: 10px;
+    }
+
+    .search-box {
+      display: flex;
+      background: white;
+      padding: 8px 12px;
+      border-radius: 6px;
+    }
+
+    .search-box input {
+      border: none;
+      outline: none;
+      width: 600px;
+      font-size: 14px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav ul li {
+      margin-left: 20px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #fff;
+      font-size: 15px;
+      transition: color 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: #ddd;
+    }
+
+    .page-container {
+      display: flex;
       padding: 30px;
+      gap: 30px;
+      max-width: 1400px;
+      margin: 0 auto;
     }
-    .product-card {
-      background-color: #fff;
+
+    .filters {
+      width: 250px;
+      background: #fff;
+      padding: 20px;
       border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      height: fit-content;
+      position: sticky;
+      top: 20px;
+    }
+
+    .filters h3 {
+      margin-bottom: 20px;
+      font-size: 18px;
+      color: #333;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .filters strong {
+      display: block;
+      margin-top: 15px;
+      font-size: 14px;
+      color: #444;
+    }
+
+    .filters label {
+      display: block;
+      margin: 8px 0;
+      font-size: 13px;
+      color: #555;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .filters label:hover {
+      color: #222;
+    }
+
+    .filters input[type="checkbox"],
+    .filters input[type="radio"] {
+      margin-right: 8px;
+      accent-color: #ff4757;
+    }
+
+    .product-grid {
+      flex: 1;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 25px;
+    }
+
+    .product-card {
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
       overflow: hidden;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      transition: transform 0.3s ease;
     }
+
     .product-card:hover {
-      transform: scale(1.02);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
     }
+
+    .wishlist {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      font-size: 22px;
+      color: #ff4757;
+      cursor: pointer;
+      background: rgba(255,255,255,0.8);
+      padding: 5px;
+      border-radius: 50%;
+      transition: all 0.3s;
+      z-index: 2;
+    }
+
+    .wishlist:hover {
+      color: #ff0000;
+      transform: scale(1.1);
+    }
+
+    .wishlist.active {
+      color: #ff0000;
+    }
+
     .product-card img {
       width: 100%;
-      height: 220px;
+      height: 200px;
       object-fit: cover;
+      border-radius: 6px;
+      margin-bottom: 15px;
+      transition: transform 0.3s;
     }
-    .product-info {
-      padding: 15px;
+
+    .product-card:hover img {
+      transform: scale(1.03);
     }
-    .brand {
-      font-weight: bold;
-      font-size: 16px;
-    }
-    .description {
-      color: #555;
-      font-size: 14px;
-      margin: 5px 0;
-    }
-    .price {
-      font-weight: bold;
+
+    .product-card h4 {
       margin: 10px 0 5px;
+      font-size: 16px;
+      color: #333;
+      font-weight: 600;
     }
-    .discount {
-      color: #ff3e6c;
-      font-size: 14px;
+
+    .product-card .desc {
+      font-size: 13px;
+      color: #666;
+      margin-bottom: 8px;
+      line-height: 1.4;
     }
+
     .rating {
+      color: #f39c12;
+      margin: 5px 0;
       font-size: 14px;
-      background: #f7f7f7;
-      padding: 4px 8px;
-      border-radius: 12px;
-      display: inline-block;
-      margin-top: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+    }
+
+    .rating-count {
+      color: #777;
+      font-size: 12px;
+      margin-left: 5px;
+    }
+
+    .product-card p:last-of-type {
+      font-weight: 600;
+      color: #222;
+      margin: 10px 0;
+      font-size: 15px;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .actions button {
+      border: none;
+      padding: 8px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 13px;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 500;
+    }
+
+    .actions button i {
+      margin-right: 5px;
+    }
+
+    .actions .try-on {
+      background-color: #0984e3;
+      color: white;
+      flex: 1;
+    }
+
+    .actions .try-on:hover {
+      background-color: #0768b3;
+      transform: translateY(-2px);
+    }
+
+    .actions .add-cart {
+      background-color: #ff4757;
+      color: white;
+      flex: 1;
+    }
+
+    .actions .add-cart:hover {
+      background-color: #e84118;
+      transform: translateY(-2px);
+    }
+
+    .price-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .original-price {
+      text-decoration: line-through;
+      color: #999;
+      font-size: 13px;
+    }
+
+    .discount {
+      color: #2ecc71;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .size-selector {
+      margin: 10px 0;
+      display: flex;
+      justify-content: center;
+      gap: 5px;
+    }
+
+    .size-option {
+      width: 30px;
+      height: 30px;
+      border: 1px solid #ddd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .size-option:hover {
+      border-color: #999;
+    }
+
+    .size-option.selected {
+      background-color: #222;
+      color: white;
+      border-color: #222;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        padding: 15px;
+      }
+
+      .logo {
+        margin-bottom: 15px;
+      }
+
+      .search-box {
+        display: flex;
+        background: white;
+        padding: 8px 12px;
+        border-radius: 6px;
+      }
+  
+      .search-box input {
+        border: none;
+        outline: none;
+        width: 600px;
+        font-size: 14px;
+      }
+
+
+      nav ul {
+        list-style: none;
+        display: flex;
+        margin: 0;
+        padding: 0;
+      }
+  
+      nav ul li {
+        margin-left: 20px;
+      }
+  
+      nav ul li a {
+        text-decoration: none;
+        color: #fff;
+        font-size: 15px;
+        transition: color 0.3s;
+      }
+  
+      nav ul li a:hover {
+        color: #ddd;
+      }
+
+      .page-container {
+      display: flex;
+      padding: 30px;
+      gap: 30px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .filters {
+      width: 250px;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      height: fit-content;
+      position: sticky;
+      top: 20px;
+    }
+
+    .filters h3 {
+      margin-bottom: 20px;
+      font-size: 18px;
+      color: #333;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #eee;
+    }
+
+      .product-card img {
+        height: 160px;
+      }
+
+      .product-card h4 {
+        font-size: 15px;
+      }
+
+      .actions button {
+        font-size: 12px;
+        padding: 8px 10px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .product-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+      }
+
+      .product-card {
+        padding: 10px;
+      }
+
+      .product-card img {
+        height: 140px;
+      }
+
+      .actions {
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .actions button {
+        width: 100%;
+      }
     }
   </style>
 </head>
 <body>
 
-    <div class="header">Men's Sports Shoes</div>
+<header>
+  <div class="logo">
+    <img src="/images/logo.webp" alt="ShopZone Logo">
+    <h2>ShopZone</h2>
+  </div>
+  <div class="search-box">
+    <i class='bx bx-search'></i>
+    <input type="text" id="searchInput" id="searchInput" placeholder="Search Shoes...">
+  </div>
+  <nav>
+    <ul>
+      <li><a href="#">Sneakers</a></li>
+      <li><a href="#">Sports</a></li>
+      <li><a href="#">Casuals</a></li>
+      <li><a href="#">Formals</a></li>
+      <li><a href="#">Sandals</a></li>
+      <li><a href="cart.html"><i class='bx bx-cart'></i></a></li>
+    </ul>
+  </nav>
+</header>
 
-    <div class="products-grid">
-      <div class="product-card">
-        <img src="/images/shoes/shoe1.jpg" alt="shoes">
-        <div class="product-info">
-          <div class="brand">Nike</div>
-          <div class="description">Air Zoom Pegasus 39</div>
-          <div class="price">Rs. 3,499 <span class="discount">(30% OFF)</span></div>
-          <div class="rating">⭐ 4.5 | 12k ratings</div>
-        </div>
+<div class="page-container">
+
+  <div class="filters">
+    <h3>Filters</h3>
+    <strong>Category</strong>
+    <label><input type="checkbox" checked> Sneakers</label>
+    <label><input type="checkbox"> Sports Shoes</label>
+    <label><input type="checkbox"> Casual Shoes</label>
+    <label><input type="checkbox"> Formal Shoes</label>
+    <label><input type="checkbox"> Sandals & Floaters</label>
+    <label><input type="checkbox"> Loafers</label>
+
+    <strong>Brand</strong>
+    <label><input type="checkbox" checked> Nike</label>
+    <label><input type="checkbox"> Adidas</label>
+    <label><input type="checkbox"> Puma</label>
+    <label><input type="checkbox"> Reebok</label>
+    <label><input type="checkbox"> Skechers</label>
+    <label><input type="checkbox"> Woodland</label>
+    <label><input type="checkbox"> Bata</label>
+    <label><input type="checkbox"> Red Tape</label>
+
+    <strong>Size</strong>
+    <label><input type="checkbox"> 6</label>
+    <label><input type="checkbox"> 7</label>
+    <label><input type="checkbox"> 8</label>
+    <label><input type="checkbox"> 9</label>
+    <label><input type="checkbox"> 10</label>
+    <label><input type="checkbox"> 11</label>
+
+    <strong>Color</strong>
+    <label><input type="checkbox"> White</label>
+    <label><input type="checkbox"> Black</label>
+    <label><input type="checkbox"> Blue</label>
+    <label><input type="checkbox"> Red</label>
+    <label><input type="checkbox"> Green</label>
+    <label><input type="checkbox"> Grey</label>
+    <label><input type="checkbox"> Brown</label>
+
+    <strong>Material</strong>
+    <label><input type="checkbox"> Leather</label>
+    <label><input type="checkbox"> Synthetic</label>
+    <label><input type="checkbox"> Mesh</label>
+    <label><input type="checkbox"> Canvas</label>
+    <label><input type="checkbox"> Rubber</label>
+
+    <strong>Discount</strong>
+    <label><input type="checkbox"> 10% and above</label>
+    <label><input type="checkbox"> 20% and above</label>
+    <label><input type="checkbox"> 30% and above</label>
+    <label><input type="checkbox"> 40% and above</label>
+    <label><input type="checkbox"> 50% and above</label>
+
+    <strong>Price</strong>
+    <label><input type="radio" name="price"> Under ₹1,000</label>
+    <label><input type="radio" name="price"> ₹1,000 - ₹2,000</label>
+    <label><input type="radio" name="price"> ₹2,000 - ₹3,000</label>
+    <label><input type="radio" name="price"> ₹3,000 - ₹5,000</label>
+    <label><input type="radio" name="price"> ₹5,000+</label>
+  </div>
+
+  <div class="product-grid">
+    <!-- Product 1 -->
+    <div class="product-card">
+      <i class='bx bx-heart wishlist'></i>
+      <img src="/images/shoes/shoe1.jpg" alt="Nike Air Max">
+      <h4>Nike Air Max</h4>
+      <p class="desc">Men's Running Shoes, Cushioned, Breathable</p>
+      <div class="rating">★★★★★ <span class="rating-count">(4.9)</span></div>
+      <div class="size-selector">
+        <div class="size-option">6</div>
+        <div class="size-option selected">7</div>
+        <div class="size-option">8</div>
+        <div class="size-option selected ">9</div>
       </div>
-    
-      <div class="product-card">
-        <img src="/images/shoes/shoe2.jpg" alt="shoes">
-        <div class="product-info">
-          <div class="brand">Adidas</div>
-          <div class="description">Ultraboost Light Running Shoes</div>
-          <div class="price">Rs. 7,999 <span class="discount">(20% OFF)</span></div>
-          <div class="rating">⭐ 4.7 | 9.8k ratings</div>
-        </div>
+      <div class="price-container">
+        <p>₹4,999</p>
+        <span class="original-price">₹6,999</span>
+        <span class="discount">29% OFF</span>
       </div>
-    
-      <div class="product-card">
-        <img src="/images/shoes/shoe3.jpg" alt="shoes">
-        <div class="product-info">
-          <div class="brand">Puma</div>
-          <div class="description">Velocity Nitro 2</div>
-          <div class="price">Rs. 4,199 <span class="discount">(45% OFF)</span></div>
-          <div class="rating">⭐ 4.3 | 4.6k ratings</div>
-        </div>
-      </div>
-    
-      <div class="product-card">
-        <img src="/images/shoes/shoe4.jpg" alt="shoes">
-        <div class="product-info">
-          <div class="brand">Reebok</div>
-          <div class="description">Zig Kinetica II Edge</div>
-          <div class="price">Rs. 3,999 <span class="discount">(50% OFF)</span></div>
-          <div class="rating">⭐ 4.0 | 2.2k ratings</div>
-        </div>
-      </div>
-    
-      <div class="product-card">
-        <img src="/images/shoes/shoe5.jpg" alt="shoes">
-        <div class="product-info">
-          <div class="brand">New Balance</div>
-          <div class="description">Fresh Foam 880v12</div>
-          <div class="price">Rs. 5,299 <span class="discount">(35% OFF)</span></div>
-          <div class="rating">⭐ 4.6 | 1.1k ratings</div>
-        </div>
-      </div>
-    
-      <div class="product-card">
-        <img src="/images/shoes/shoe6.jpg" alt="shoes">
-        <div class="product-info">
-          <div class="brand">ASICS</div>
-          <div class="description">Gel-Nimbus 25</div>
-          <div class="price">Rs. 6,599 <span class="discount">(28% OFF)</span></div>
-          <div class="rating">⭐ 4.8 | 7.3k ratings</div>
-        </div>
-      </div>
-    
-      <div class="product-card">
-        <img src="/images/shoes/shoe7.jpg" alt="shoes">
-        <div class="product-info">
-          <div class="brand">Skechers</div>
-          <div class="description">GoRun Consistent</div>
-          <div class="price">Rs. 3,199 <span class="discount">(60% OFF)</span></div>
-          <div class="rating">⭐ 4.4 | 5.1k ratings</div>
-        </div>
-      </div>
-    
-      <div class="product-card">
-        <img src="/images/shoes/shoe8.jpg" alt="shoes">
-        <div class="product-info">
-          <div class="brand">Campus</div>
-          <div class="description">Maxico Running Shoes</div>
-          <div class="price">Rs. 1,199 <span class="discount">(40% OFF)</span></div>
-          <div class="rating">⭐ 3.9 | 3.4k ratings</div>
-        </div>
-      </div>
-    
-      <div class="product-card">
-        <img src="/images/shoes/shoe9.jpg" alt="shoes">
-        <div class="product-info">
-          <div class="brand">HRX by Hrithik Roshan</div>
-          <div class="description">Ultraflex Running Shoes</div>
-          <div class="price">Rs. 1,499 <span class="discount">(50% OFF)</span></div>
-          <div class="rating">⭐ 4.1 | 6.2k ratings</div>
-        </div>
-      </div>
-    
-      <div class="product-card">
-        <img src="/images/shoes/shoe10.jpg" alt="shoes">
-        <div class="product-info">
-          <div class="brand">Red Tape</div>
-          <div class="description">Sports Walking Shoes</div>
-          <div class="price">Rs. 1,799 <span class="discount">(52% OFF)</span></div>
-          <div class="rating">⭐ 4.0 | 2.8k ratings</div>
-        </div>
-      </div>
-    
-      <div class="product-card">
-        <img src="/images/shoes/shoe11.jpg" alt="shoes">
-        <div class="product-info">
-          <div class="brand">Power</div>
-          <div class="description">Powerwalk Trek Shoes</div>
-          <div class="price">Rs. 1,299 <span class="discount">(45% OFF)</span></div>
-          <div class="rating">⭐ 3.8 | 950 ratings</div>
-        </div>
-      </div>
-    
-      <div class="product-card">
-        <img src="/images/shoes/shoe12.jpg" alt="shoes">
-        <div class="product-info">
-          <div class="brand">Woodland</div>
-          <div class="description">Trail Sneakers</div>
-          <div class="price">Rs. 3,899 <span class="discount">(33% OFF)</span></div>
-          <div class="rating">⭐ 4.2 | 2.3k ratings</div>
-        </div>
-      </div>
-    
-      <div class="product-card">
-        <img src="/images/shoes/shoe13.jpg" alt="shoes">
-        <div class="product-info">
-          <div class="brand">Fila</div>
-          <div class="description">Retro Court Sneakers</div>
-          <div class="price">Rs. 2,599 <span class="discount">(38% OFF)</span></div>
-          <div class="rating">⭐ 4.0 | 1.1k ratings</div>
-        </div>
-      </div>
-    
-      <div class="product-card">
-        <img src="/images/shoes/shoe14.jpg" alt="shoes">
-        <div class="product-info">
-          <div class="brand">Sparx</div>
-          <div class="description">Sporty Slip-On Shoes</div>
-          <div class="price">Rs. 999 <span class="discount">(60% OFF)</span></div>
-          <div class="rating">⭐ 3.9 | 4.9k ratings</div>
-        </div>
-      </div>
-    
-      <div class="product-card">
-        <img src="/images/shoes/shoe15.jpg" alt="shoes">
-        <div class="product-info">
-          <div class="brand">Bata</div>
-          <div class="description">Power Running Trainers</div>
-          <div class="price">Rs. 1,499 <span class="discount">(55% OFF)</span></div>
-          <div class="rating">⭐ 4.1 | 1.7k ratings</div>
-        </div>
-      </div>
-    
-      <div class="product-card">
-        <img src="/images/shoes/shoe16.jpg" alt="shoes">
-        <div class="product-info">
-          <div class="brand">Liberty</div>
-          <div class="description">Sports Flexi-Sole</div>
-          <div class="price">Rs. 1,099 <span class="discount">(50% OFF)</span></div>
-          <div class="rating">⭐ 4.0 | 1.3k ratings</div>
-        </div>
-      </div>
-    
-      <div class="product-card">
-        <img src="/images/shoes/shoe17.jpg" alt="shoes">
-        <div class="product-info">
-          <div class="brand">Action</div>
-          <div class="description">Bullet Slip-On Sneakers</div>
-          <div class="price">Rs. 899 <span class="discount">(65% OFF)</span></div>
-          <div class="rating">⭐ 3.7 | 2.1k ratings</div>
-        </div>
-      </div>
-    
-      <div class="product-card">
-        <img src="/images/shoes/shoe18.jpg" alt="shoes">
-        <div class="product-info">
-          <div class="brand">Wildcraft</div>
-          <div class="description">All Terrain Shoes</div>
-          <div class="price">Rs. 2,299 <span class="discount">(42% OFF)</span></div>
-          <div class="rating">⭐ 4.2 | 980 ratings</div>
-        </div>
-      </div>
-    
-      <div class="product-card">
-        <img src="/images/shoes/shoe19.jpg" alt="shoes">
-        <div class="product-info">
-          <div class="brand">Decathlon</div>
-          <div class="description">Kiprun KD500</div>
-          <div class="price">Rs. 3,299 <span class="discount">(30% OFF)</span></div>
-          <div class="rating">⭐ 4.5 | 3.3k ratings</div>
-        </div>
-      </div>
-    
-      <div class="product-card">
-        <img src="/images/shoes/shoe1.jpg" alt="shoes">
-        <div class="product-info">
-          <div class="brand">ASIAN</div>
-          <div class="description">Wonder-13 Sports Shoes</div>
-          <div class="price">Rs. 1,099 <span class="discount">(70% OFF)</span></div>
-          <div class="rating">⭐ 4.0 | 6.1k ratings</div>
-        </div>
+      <div class="actions">
+        <button class="add-cart">Add to Cart</button>
+        <button class="try-on">View Details</button>
       </div>
     </div>
+  
+    <!-- Product 2 -->
+    <div class="product-card">
+      <i class='bx bx-heart wishlist'></i>
+      <img src="/images/shoes/shoe2.jpg" alt="Adidas Ultraboost">
+      <h4>Adidas Ultraboost</h4>
+      <p class="desc">Men's Running Shoes, Responsive Cushioning</p>
+      <div class="rating">★★★★☆ <span class="rating-count">(4.7)</span></div>
+      <div class="size-selector">
+        <div class="size-option selected">7</div>
+        <div class="size-option ">8</div>
+        <div class="size-option">9</div>
+        <div class="size-option selected">10</div>
+      </div>
+      <div class="price-container">
+        <p>₹5,499</p>
+        <span class="original-price">₹7,999</span>
+        <span class="discount">31% OFF</span>
+      </div>
+      <div class="actions">
+        <button class="add-cart">Add to Cart</button>
+        <button class="try-on">View Details</button>
+      </div>
+    </div>
+  
+    <!-- Product 3 -->
+    <div class="product-card">
+      <i class='bx bx-heart wishlist'></i>
+      <img src="/images/shoes/shoe3.jpg" alt="Puma RS-X">
+      <h4>Puma RS-X</h4>
+      <p class="desc">Men's Sneakers, Retro Running Style</p>
+      <div class="rating">★★★★☆ <span class="rating-count">(4.5)</span></div>
+      <div class="size-selector">
+        <div class="size-option">7</div>
+        <div class="size-option selected">8</div>
+        <div class="size-option">9</div>
+        <div class="size-option">10</div>
+      </div>
+      <div class="price-container">
+        <p>₹3,299</p>
+        <span class="original-price">₹4,999</span>
+        <span class="discount">34% OFF</span>
+      </div>
+      <div class="actions">
+        <button class="add-cart">Add to Cart</button>
+        <button class="try-on">View Details</button>
+      </div>
+    </div>
+  
+    <!-- Product 4 -->
+    <div class="product-card">
+      <i class='bx bx-heart wishlist'></i>
+      <img src="/images/shoes/shoe4.jpg" alt="Reebok Classic">
+      <h4>Reebok Classic</h4>
+      <p class="desc">Leather Sneakers, Retro Style, Comfortable</p>
+      <div class="rating">★★★★★ <span class="rating-count">(4.8)</span></div>
+      <div class="size-selector">
+        <div class="size-option">7</div>
+        <div class="size-option ">8</div>
+        <div class="size-option">9</div>
+        <div class="size-option selected">10</div>
+      </div>
+      <div class="price-container">
+        <p>₹2,999</p>
+        <span class="original-price">₹4,499</span>
+        <span class="discount">33% OFF</span>
+      </div>
+      <div class="actions">
+        <button class="add-cart">Add to Cart</button>
+        <button class="try-on">View Details</button>
+      </div>
+    </div>
+  
+    <!-- Product 5 -->
+    <div class="product-card">
+      <i class='bx bx-heart wishlist'></i>
+      <img src="/images/shoes/shoe5.jpg" alt="Skechers Go Walk">
+      <h4>Skechers Go Walk</h4>
+      <p class="desc">Men's Walking Shoes, Lightweight, Slip-on</p>
+      <div class="rating">★★★★☆ <span class="rating-count">(4.6)</span></div>
+      <div class="size-selector">
+        <div class="size-option">7</div>
+        <div class="size-option ">8</div>
+        <div class="size-option selected">9</div>
+        <div class="size-option">10</div>
+      </div>
+      <div class="price-container">
+        <p>₹3,499</p>
+        <span class="original-price">₹4,999</span>
+        <span class="discount">30% OFF</span>
+      </div>
+      <div class="actions">
+        <button class="add-cart">Add to Cart</button>
+        <button class="try-on">View Details</button>
+      </div>
+    </div>
+  
+    <!-- Product 6 -->
+    <div class="product-card">
+      <i class='bx bx-heart wishlist'></i>
+      <img src="/images/shoes/shoe6.jpg" alt="Woodland Brown">
+      <h4>Woodland Brown</h4>
+      <p class="desc">Men's Leather Shoes, Outdoor, Durable</p>
+      <div class="rating">★★★★☆ <span class="rating-count">(4.4)</span></div>
+      <div class="size-selector">
+        <div class="size-option selected">7</div>
+        <div class="size-option ">8</div>
+        <div class="size-option">9</div>
+        <div class="size-option">10</div>
+      </div>
+      <div class="price-container">
+        <p>₹2,799</p>
+        <span class="original-price">₹3,999</span>
+        <span class="discount">30% OFF</span>
+      </div>
+      <div class="actions">
+        <button class="add-cart">Add to Cart</button>
+        <button class="try-on">View Details</button>
+      </div>
+    </div>
+  
+    <!-- Product 7 -->
+    <div class="product-card">
+      <i class='bx bx-heart wishlist'></i>
+      <img src="/images/shoes/shoe7.jpg" alt="Bata Formal">
+      <h4>Bata Formal</h4>
+      <p class="desc">Men's Leather Formal Shoes, Office Wear</p>
+      <div class="rating">★★★★★ <span class="rating-count">(4.8)</span></div>
+      <div class="size-selector">
+        <div class="size-option">7</div>
+        <div class="size-option ">8</div>
+        <div class="size-option selected">9</div>
+        <div class="size-option">10</div>
+      </div>
+      <div class="price-container">
+        <p>₹1,499</p>
+        <span class="original-price">₹2,499</span>
+        <span class="discount">40% OFF</span>
+      </div>
+      <div class="actions">
+        <button class="add-cart">Add to Cart</button>
+        <button class="try-on">View Details</button>
+      </div>
+    </div>
+  
+    <!-- Product 8 -->
+    <div class="product-card">
+      <i class='bx bx-heart wishlist'></i>
+      <img src="/images/shoes/shoe8.jpg" alt="Red Tape Loafers">
+      <h4>Red Tape Loafers</h4>
+      <p class="desc">Men's Casual Loafers, Slip-on, Comfortable</p>
+      <div class="rating">★★★★☆ <span class="rating-count">(4.5)</span></div>
+      <div class="size-selector">
+        <div class="size-option">7</div>
+        <div class="size-option selected">8</div>
+        <div class="size-option">9</div>
+        <div class="size-option">10</div>
+      </div>
+      <div class="price-container">
+        <p>₹1,299</p>
+        <span class="original-price">₹1,999</span>
+        <span class="discount">35% OFF</span>
+      </div>
+      <div class="actions">
+        <button class="add-cart">Add to Cart</button>
+        <button class="try-on">View Details</button>
+      </div>
+    </div>
+  
+    <!-- Product 9 -->
+    <div class="product-card">
+      <i class='bx bx-heart wishlist'></i>
+      <img src="/images/shoes/shoe9.jpg" alt="Nike Jordan">
+      <h4>Nike Jordan</h4>
+      <p class="desc">Men's Basketball Shoes, High-Top, Stylish</p>
+      <div class="rating">★★★★★ <span class="rating-count">(4.9)</span></div>
+      <div class="size-selector">
+        <div class="size-option">7</div>
+        <div class="size-option ">8</div>
+        <div class="size-option">9</div>
+        <div class="size-option selected">10</div>
+      </div>
+      <div class="price-container">
+        <p>₹6,999</p>
+        <span class="original-price">₹9,999</span>
+        <span class="discount">30% OFF</span>
+      </div>
+      <div class="actions">
+        <button class="add-cart">Add to Cart</button>
+        <button class="try-on">View Details</button>
+      </div>
+    </div>
+  
+    <!-- Product 10 -->
+    <div class="product-card">
+      <i class='bx bx-heart wishlist'></i>
+      <img src="/images/shoes/shoe10.jpg" alt="Adidas Stan Smith">
+      <h4>Adidas Stan Smith</h4>
+      <p class="desc">Men's Classic Sneakers, Leather, Green</p>
+      <div class="rating">★★★★★ <span class="rating-count">(4.8)</span></div>
+      <div class="size-selector">
+        <div class="size-option">7</div>
+        <div class="size-option selected">8</div>
+        <div class="size-option selected">9</div>
+        <div class="size-option">10</div>
+      </div>
+      <div class="price-container">
+        <p>₹3,999</p>
+        <span class="original-price">₹5,999</span>
+        <span class="discount">33% OFF</span>
+      </div>
+      <div class="actions">
+        <button class="add-cart">Add to Cart</button>
+        <button class="try-on">View Details</button>
+      </div>
+    </div>
+  
+    <!-- Product 11 -->
+    <div class="product-card">
+      <i class='bx bx-heart wishlist'></i>
+      <img src="/images/shoes/shoe11.jpg" alt="Puma Future Rider">
+      <h4>Puma Future Rider</h4>
+      <p class="desc">Men's Retro Running Shoes, Comfortable</p>
+      <div class="rating">★★★★☆ <span class="rating-count">(4.6)</span></div>
+      <div class="size-selector">
+        <div class="size-option selected">7</div>
+        <div class="size-option ">8</div>
+        <div class="size-option">9</div>
+        <div class="size-option">10</div>
+      </div>
+      <div class="price-container">
+        <p>₹2,999</p>
+        <span class="original-price">₹4,499</span>
+        <span class="discount">33% OFF</span>
+      </div>
+      <div class="actions">
+        <button class="add-cart">Add to Cart</button>
+        <button class="try-on">View Details</button>
+      </div>
+    </div>
+  
+    <!-- Product 12 -->
+    <div class="product-card">
+      <i class='bx bx-heart wishlist'></i>
+      <img src="/images/shoes/shoe12.jpg" alt="Reebok Nano">
+      <h4>Reebok Nano</h4>
+      <p class="desc">Men's Training Shoes, CrossFit, Durable</p>
+      <div class="rating">★★★★☆ <span class="rating-count">(4.7)</span></div>
+      <div class="size-selector">
+        <div class="size-option">7</div>
+        <div class="size-option selected">8</div>
+        <div class="size-option">9</div>
+        <div class="size-option">10</div>
+      </div>
+      <div class="price-container">
+        <p>₹4,499</p>
+        <span class="original-price">₹6,999</span>
+        <span class="discount">36% OFF</span>
+      </div>
+      <div class="actions">
+        <button class="add-cart">Add to Cart</button>
+        <button class="try-on">View Details</button>
+      </div>
+    </div>
+
+    <!-- Product 13 -->
+    <div class="product-card">
+      <i class='bx bx-heart wishlist'></i>
+      <img src="/images/shoes/shoe13.jpg" alt="Skechers Arch Fit">
+      <h4>Skechers Arch Fit</h4>
+      <p class="desc">Men's Walking Shoes, Arch Support, Comfort</p>
+      <div class="rating">★★★★☆ <span class="rating-count">(4.5)</span></div>
+      <div class="size-selector">
+        <div class="size-option">7</div>
+        <div class="size-option selected">8</div>
+        <div class="size-option">9</div>
+        <div class="size-option">10</div>
+      </div>
+      <div class="price-container">
+        <p>₹3,999</p>
+        <span class="original-price">₹5,999</span>
+        <span class="discount">33% OFF</span>
+      </div>
+      <div class="actions">
+        <button class="add-cart">Add to Cart</button>
+        <button class="try-on">View Details</button>
+      </div>
+    </div>
+
+    <!-- Product 14 -->
+    <div class="product-card">
+      <i class='bx bx-heart wishlist'></i>
+      <img src="/images/shoes/shoe14.jpg" alt="Woodland Sandals">
+      <h4>Woodland Sandals</h4>
+      <p class="desc">Men's Outdoor Sandals, Durable, Comfortable</p>
+      <div class="rating">★★★★☆ <span class="rating-count">(4.4)</span></div>
+      <div class="size-selector">
+        <div class="size-option">7</div>
+        <div class="size-option ">8</div>
+        <div class="size-option">9</div>
+        <div class="size-option selected">10</div>
+      </div>
+      <div class="price-container">
+        <p>₹1,799</p>
+        <span class="original-price">₹2,499</span>
+        <span class="discount">28% OFF</span>
+      </div>
+      <div class="actions">
+        <button class="add-cart">Add to Cart</button>
+        <button class="try-on">View Details</button>
+      </div>
+    </div>
+
+    <!-- Product 15 -->
+    <div class="product-card">
+      <i class='bx bx-heart wishlist'></i>
+      <img src="/images/shoes/shoe15.jpg" alt="Bata Comfit">
+      <h4>Bata Comfit</h4>
+      <p class="desc">Men's Casual Shoes, Lightweight, Comfortable</p>
+      <div class="rating">★★★★★ <span class="rating-count">(4.8)</span></div>
+      <div class="size-selector">
+        <div class="size-option">7</div>
+        <div class="size-option selected">8</div>
+        <div class="size-option">9</div>
+        <div class="size-option">10</div>
+      </div>
+      <div class="price-container">
+        <p>₹1,299</p>
+        <span class="original-price">₹1,999</span>
+        <span class="discount">35% OFF</span>
+      </div>
+      <div class="actions">
+        <button class="add-cart">Add to Cart</button>
+        <button class="try-on">View Details</button>
+      </div>
+    </div>
+
+    <!-- Product 16 -->
+    <div class="product-card">
+      <i class='bx bx-heart wishlist'></i>
+      <img src="/images/shoes/shoe16.jpg" alt="Red Tape Sports">
+      <h4>Red Tape Sports</h4>
+      <p class="desc">Men's Running Shoes, Breathable, Lightweight</p>
+      <div class="rating">★★★★☆ <span class="rating-count">(4.6)</span></div>
+      <div class="size-selector">
+        <div class="size-option selected">7</div>
+        <div class="size-option ">8</div>
+        <div class="size-option">9</div>
+        <div class="size-option">10</div>
+      </div>
+      <div class="price-container">
+        <p>₹1,999</p>
+        <span class="original-price">₹2,999</span>
+        <span class="discount">33% OFF</span>
+      </div>
+      <div class="actions">
+        <button class="add-cart">Add to Cart</button>
+        <button class="try-on">View Details</button>
+      </div>
+    </div>
+
+    <!-- Product 17 -->
+    <div class="product-card">
+      <i class='bx bx-heart wishlist'></i>
+      <img src="/images/shoes/shoe17.jpg" alt="Nike Revolution">
+      <h4>Nike Revolution</h4>
+      <p class="desc">Men's Running Shoes, Cushioned, Breathable</p>
+      <div class="rating">★★★★☆ <span class="rating-count">(4.3)</span></div>
+      <div class="size-selector">
+        <div class="size-option">7</div>
+        <div class="size-option selected">8</div>
+        <div class="size-option">9</div>
+        <div class="size-option">10</div>
+      </div>
+      <div class="price-container">
+        <p>₹2,499</p>
+        <span class="original-price">₹3,999</span>
+        <span class="discount">38% OFF</span>
+      </div>
+      <div class="actions">
+        <button class="add-cart">Add to Cart</button>
+        <button class="try-on">View Details</button>
+      </div>
+    </div>
+
+    <!-- Product 18 -->
+    <div class="product-card">
+      <i class='bx bx-heart wishlist'></i>
+      <img src="/images/shoes/shoe18.jpg" alt="Adidas Superstar">
+      <h4>Adidas Superstar</h4>
+      <p class="desc">Men's Classic Sneakers, Leather, White</p>
+      <div class="rating">★★★★★ <span class="rating-count">(4.9)</span></div>
+      <div class="size-selector">
+        <div class="size-option">7</div>
+        <div class="size-option ">8</div>
+        <div class="size-option">9</div>
+        <div class="size-option selected">10</div>
+      </div>
+      <div class="price-container">
+        <p>₹4,999</p>
+        <span class="original-price">₹7,999</span>
+        <span class="discount">38% OFF</span>
+      </div>
+      <div class="actions">
+        <button class="add-cart">Add to Cart</button>
+        <button class="try-on">View Details</button>
+      </div>
+    </div>
+
+    <!-- Product 19 -->
+    <div class="product-card">
+      <i class='bx bx-heart wishlist'></i>
+      <img src="/images/shoes/shoe19.jpg" alt="Adidas Ultraboost">
+      <h4>Adidas Ultraboost</h4>
+      <p class="desc">Men's Running Shoes, Responsive Cushioning</p>
+      <div class="rating">★★★★☆ <span class="rating-count">(4.7)</span></div>
+      <div class="size-selector">
+        <div class="size-option">7</div>
+        <div class="size-option ">8</div>
+        <div class="size-option selected">9</div>
+        <div class="size-option">10</div>
+      </div>
+      <div class="price-container">
+        <p>₹5,499</p>
+        <span class="original-price">₹7,999</span>
+        <span class="discount">31% OFF</span>
+      </div>
+      <div class="actions">
+        <button class="add-cart">Add to Cart</button>
+        <button class="try-on">View Details</button>
+      </div>
+    </div>
+  
+    <!-- Product 20 -->
+
+    <div class="product-card">
+      <i class='bx bx-heart wishlist'></i>
+      <img src="/images/shoes/shoe2.jpg" alt="Bata Formal">
+      <h4>Bata Formal</h4>
+      <p class="desc">Men's Leather Formal Shoes, Office Wear</p>
+      <div class="rating">★★★★★ <span class="rating-count">(4.8)</span></div>
+      <div class="size-selector">
+        <div class="size-option selected">7</div>
+        <div class="size-option">8</div>
+        <div class="size-option">9</div>
+        <div class="size-option">10</div>
+      </div>
+      <div class="price-container">
+        <p>₹1,499</p>
+        <span class="original-price">₹2,499</span>
+        <span class="discount">40% OFF</span>
+      </div>
+      <div class="actions">
+        <button class="add-cart">Add to Cart</button>
+        <button class="try-on">View Details</button>
+      </div>
+    </div>
+
+
+    <script>
+      // Initialize when DOM is loaded
+      document.addEventListener('DOMContentLoaded', function() {
+        // Get the search input element
+        const searchInput = document.getElementById('searchInput');
+        
+        if (!searchInput) {
+          console.error("Search input element not found!");
+          return;
+        }
     
+        // Wishlist functionality
+        document.querySelectorAll('.wishlist').forEach(heart => {
+          heart.addEventListener('click', function(e) {
+            e.stopPropagation();
+            this.classList.toggle('bxs-heart');
+            this.classList.toggle('bx-heart');
+            this.classList.toggle('active');
+            
+            if (this.classList.contains('bxs-heart')) {
+              this.style.color = '#ff0000';
+              alert('Added to wishlist!');
+            } else {
+              this.style.color = '#ff4757';
+            }
+          });
+        });
+    
+        // Try-on functionality
+        document.querySelectorAll('.try-on').forEach(button => {
+          button.addEventListener('click', function() {
+            const productName = this.closest('.product-card').querySelector('h4').textContent;
+            alert("Launching try-on for: " + productName);
+          });
+        });
+    
+        // Add to cart functionality
+        document.querySelectorAll('.add-cart').forEach(button => {
+          button.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const productName = this.closest('.product-card').querySelector('h4').textContent;
+            alert(productName + " added to cart!");
+          });
+        });
+    
+        // Setup search functionality
+        setupSearch(searchInput);
+      });
+    
+      // Search Functionality
+      function searchProducts(searchInput) {
+        const query = searchInput.value.trim().toLowerCase();
+        
+        if (!query) {
+          return; // Do nothing if search is empty
+        }
+    
+        // Category mapping - search terms to page URLs
+        const categoryMap = {
+          // Bags
+          'bag': '/Product-details/bags.html',
+          'bags': '/Product-details/bags.html',
+          'backpack': '/Product-details/bags.html',
+          'handbag': '/Product-details/bags.html',
+          'luggage': '/Product-details/bags.html',
+          
+          // Shoes
+          'shoe': '/Product-details/shoes.html',
+          'shoes': '/Product-details/shoes.html',
+          'sneaker': '/Product-details/shoes.html',
+          'sneakers': '/Product-details/shoes.html',
+          'footwear': '/Product-details/shoes.html',
+          'boot': '/Product-details/shoes.html',
+          'boots': '/Product-details/shoes.html',
+          'sandals': '/Product-details/shoes.html',
+          
+          // Watches
+          'watch': '/Product-details/smartwatches.html',
+          'watches': '/Product-details/smartwatches.html',
+          'smartwatch': '/Product-details/smartwatches.html',
+          'smartwatches': '/Product-details/smartwatches.html',
+          
+          // Sunglasses
+          'sunglass': '/Product-details/sunglasses.html',
+          'sunglasses': '/Product-details/sunglasses.html',
+          'eyewear': '/Product-details/sunglasses.html',
+          
+          // T-Shirts
+          't-shirt': '/Product-details/t-shirts.html',
+          't-shirts': '/Product-details/t-shirts.html',
+          'tshirt': '/Product-details/t-shirts.html',
+          'tshirts': '/Product-details/t-shirts.html',
+          
+          // Headphones
+          'headphone': '/Product-details/headphones.html',
+          'headphones': '/Product-details/headphones.html',
+          'earphone': '/Product-details/headphones.html',
+          'earphones': '/Product-details/headphones.html',
+          'earbuds': '/Product-details/headphones.html',
+          
+          // Shirts
+          'shirt': '/Product-details/shirts.html',
+          'shirts': '/Product-details/shirts.html',
+          'formal shirt': '/Product-details/shirts.html',
+          
+          // Other categories
+          'jeans': '/Product-details/jeans.html',
+          'dress': '/Product-details/dresses.html',
+          'dresses': '/Product-details/dresses.html',
+          'jacket': '/Product-details/jackets.html',
+          'jackets': '/Product-details/jackets.html',
+          'sweater': '/Product-details/sweaters.html',
+          'sweaters': '/Product-details/sweaters.html'
+        };
+    
+        // Check for direct category match first
+        if (categoryMap[query]) {
+          window.location.href = categoryMap[query];
+          return;
+        }
+    
+        // Check for partial matches in the query
+        for (const [keyword, page] of Object.entries(categoryMap)) {
+          if (query.includes(keyword)) {
+            window.location.href = page;
+            return;
+          }
+        }
+    
+        // If no match found, show alert to user
+        alert(`No category found for "${query}". Try searching for bags, shoes, watches, etc.`);
+      }
+    
+      // Setup search event listeners
+      function setupSearch(searchInput) {
+        // Search on Enter key
+        searchInput.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter') {
+            searchProducts(searchInput);
+          }
+        });
+        
+        // Search with debounce on input
+        searchInput.addEventListener('input', debounce(() => {
+          searchProducts(searchInput);
+        }, 500));
+      }
+    
+      // Utility function for debouncing
+      function debounce(func, wait) {
+        let timeout;
+        return function() {
+          const context = this, args = arguments;
+          clearTimeout(timeout);
+          timeout = setTimeout(() => func.apply(context, args), wait);
+        };
+      }
+    </script>
+    
+    </body>
+    </html>

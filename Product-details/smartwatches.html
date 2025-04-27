@@ -3,279 +3,981 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Men's Smartwatches</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <title>ShopZone | Smartwatches</title>
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: 'Roboto', sans-serif;
-      margin: 0;
-      background-color: #f5f5f5;
+      background-color: #fdfdfd;
+      font-family: 'Poppins', sans-serif;
+     
     }
-    .header {
-      background-color: #fff;
+
+    header {
+      background-color: #222;
+      color: #fff;
       padding: 15px 30px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      font-size: 20px;
-      font-weight: bold;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 20px;
+
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo img {
+      width: 40px;
+      margin-right: 10px;
+    }
+
+    .search-box {
+      display: flex;
+      background: white;
+      padding: 8px 12px;
+      border-radius: 6px;
+    }
+
+    .search-box input {
+      border: none;
+      outline: none;
+      width: 600px;
+      font-size: 14px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav ul li {
+      margin-left: 20px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #fff;
+      font-size: 15px;
+      transition: color 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: #ddd;
+    }
+
+    .page-container {
+      display: flex;
       padding: 30px;
+      gap: 30px;
+      max-width: 1400px;
+      margin: 0 auto;
     }
-    .product-card {
-      background-color: #fff;
+
+    .filters {
+      width: 250px;
+      background: #fff;
+      padding: 20px;
       border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      height: fit-content;
+      position: sticky;
+      top: 20px;
+    }
+
+    .filters h3 {
+      margin-bottom: 20px;
+      font-size: 18px;
+      color: #333;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .filters strong {
+      display: block;
+      margin-top: 15px;
+      font-size: 14px;
+      color: #444;
+    }
+
+    .filters label {
+      display: block;
+      margin: 8px 0;
+      font-size: 13px;
+      color: #555;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .filters label:hover {
+      color: #222;
+    }
+
+    .filters input[type="checkbox"],
+    .filters input[type="radio"] {
+      margin-right: 8px;
+      accent-color: #ff4757;
+    }
+
+    .product-grid {
+      flex: 1;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 25px;
+    }
+
+    .product-card {
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
       overflow: hidden;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      transition: transform 0.3s ease;
     }
+
     .product-card:hover {
-      transform: scale(1.02);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
     }
+
+    .wishlist {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      font-size: 22px;
+      color: #ff4757;
+      cursor: pointer;
+      background: rgba(255,255,255,0.8);
+      padding: 5px;
+      border-radius: 50%;
+      transition: all 0.3s;
+      z-index: 2;
+    }
+
+    .wishlist:hover {
+      color: #ff0000;
+      transform: scale(1.1);
+    }
+
+    .wishlist.active {
+      color: #ff0000;
+    }
+
     .product-card img {
       width: 100%;
-      height: 220px;
+      height: 200px;
       object-fit: cover;
+      border-radius: 6px;
+      margin-bottom: 15px;
+      transition: transform 0.3s;
     }
-    .product-info {
-      padding: 15px;
+
+    .product-card:hover img {
+      transform: scale(1.03);
     }
-    .brand {
-      font-weight: bold;
-      font-size: 16px;
-    }
-    .description {
-      color: #555;
-      font-size: 14px;
-      margin: 5px 0;
-    }
-    .price {
-      font-weight: bold;
+
+    .product-card h4 {
       margin: 10px 0 5px;
+      font-size: 16px;
+      color: #333;
+      font-weight: 600;
     }
-    .discount {
-      color: #ff3e6c;
-      font-size: 14px;
+
+    .product-card .desc {
+      font-size: 13px;
+      color: #666;
+      margin-bottom: 8px;
+      line-height: 1.4;
     }
+
     .rating {
+      color: #f39c12;
+      margin: 5px 0;
       font-size: 14px;
-      background: #f7f7f7;
-      padding: 4px 8px;
-      border-radius: 12px;
-      display: inline-block;
-      margin-top: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+    }
+
+    .rating-count {
+      color: #777;
+      font-size: 12px;
+      margin-left: 5px;
+    }
+
+    .product-card p:last-of-type {
+      font-weight: 600;
+      color: #222;
+      margin: 10px 0;
+      font-size: 15px;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .actions button {
+      border: none;
+      padding: 8px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 13px;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 500;
+    }
+
+    .actions button i {
+      margin-right: 5px;
+    }
+
+    .actions .try-on {
+      background-color: #0984e3;
+      color: white;
+      flex: 1;
+    }
+
+    .actions .try-on:hover {
+      background-color: #0768b3;
+      transform: translateY(-2px);
+    }
+
+    .actions .add-cart {
+      background-color: #ff4757;
+      color: white;
+      flex: 1;
+    }
+
+    .actions .add-cart:hover {
+      background-color: #e84118;
+      transform: translateY(-2px);
+    }
+
+    .price-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .original-price {
+      text-decoration: line-through;
+      color: #999;
+      font-size: 13px;
+    }
+
+    .discount {
+      color: #2ecc71;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        padding: 15px;
+      }
+
+      .logo {
+        margin-bottom: 15px;
+      }
+
+      .search-box {
+        display: flex;
+        background: white;
+        padding: 8px 12px;
+        border-radius: 6px;
+      }
+  
+      .search-box input {
+        border: none;
+        outline: none;
+        width: 600px;
+        font-size: 14px;
+      }
+
+
+      nav ul {
+        list-style: none;
+        display: flex;
+        margin: 0;
+        padding: 0;
+      }
+  
+      nav ul li {
+        margin-left: 20px;
+      }
+  
+      nav ul li a {
+        text-decoration: none;
+        color: #fff;
+        font-size: 15px;
+        transition: color 0.3s;
+      }
+  
+      nav ul li a:hover {
+        color: #ddd;
+      }
+
+      .page-container {
+      display: flex;
+      padding: 30px;
+      gap: 30px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .filters {
+      width: 250px;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      height: fit-content;
+      position: sticky;
+      top: 20px;
+    }
+
+    .filters h3 {
+      margin-bottom: 20px;
+      font-size: 18px;
+      color: #333;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #eee;
+    }
+
+      .product-card img {
+        height: 160px;
+      }
+
+      .product-card h4 {
+        font-size: 15px;
+      }
+
+      .actions button {
+        font-size: 12px;
+        padding: 8px 10px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .product-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+      }
+
+      .product-card {
+        padding: 10px;
+      }
+
+      .product-card img {
+        height: 140px;
+      }
+
+      .actions {
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .actions button {
+        width: 100%;
+      }
     }
   </style>
 </head>
 <body>
 
-<div class="header">Men's Smartwatches</div>
+<header>
+  <div class="logo">
+    <img src="/images/logo.webp" alt="ShopZone Logo">
+    <h2>ShopZone</h2>
+  </div>
+  <div class="search-box">
+    <i class='bx bx-search'></i>
+    <input type="text" id="searchInput" placeholder="Search Smartwatches...">
+  </div>
+  <nav>
+    <ul>
+      <li><a href="#">Smartwatches</a></li>
+      <li><a href="#">Fitness Trackers</a></li>
+      <li><a href="#">Smart Bands</a></li>
+      <li><a href="#">Accessories</a></li>
+      <li><a href="#">Straps</a></li>
+      <li><a href="cart.html"><i class='bx bx-cart'></i></a></li>
+    </ul>
+  </nav>
+</header>
 
-<div class="products-grid">
-  <div class="product-card">
-    <img src="/images/watch/watch1.jpg" alt="smartwatch">
-    <div class="product-info">
-      <div class="brand">Apple</div>
-      <div class="description">Watch Series 9 GPS</div>
-      <div class="price">Rs. 32,999 <span class="discount">(10% OFF)</span></div>
-      <div class="rating">⭐ 4.8 | 5.5k ratings</div>
-    </div>
+<div class="page-container">
+
+  <div class="filters">
+    <h3>Filters</h3>
+    <strong>Category</strong>
+    <label><input type="checkbox" checked> Smartwatches</label>
+    <label><input type="checkbox"> Fitness Trackers</label>
+    <label><input type="checkbox"> Hybrid Watches</label>
+    <label><input type="checkbox"> Kids Watches</label>
+
+    <strong>Brand</strong>
+    <label><input type="checkbox" checked> Apple</label>
+    <label><input type="checkbox"> Samsung</label>
+    <label><input type="checkbox"> Fitbit</label>
+    <label><input type="checkbox"> Garmin</label>
+    <label><input type="checkbox"> Amazfit</label>
+
+    <strong>Features</strong>
+    <label><input type="checkbox"> Heart Rate Monitor</label>
+    <label><input type="checkbox"> GPS</label>
+    <label><input type="checkbox"> Water Resistant</label>
+    <label><input type="checkbox"> Sleep Tracking</label>
+    <label><input type="checkbox"> Blood Oxygen</label>
+
+    <strong>Color</strong>
+    <label><input type="checkbox"> Black</label>
+    <label><input type="checkbox"> Silver</label>
+    <label><input type="checkbox"> Gold</label>
+    <label><input type="checkbox"> Blue</label>
+    <label><input type="checkbox"> Pink</label>
+
+    <strong>Price</strong>
+    <label><input type="radio" name="price"> Under ₹5,000</label>
+    <label><input type="radio" name="price"> ₹5,000 - ₹10,000</label>
+    <label><input type="radio" name="price"> ₹10,000 - ₹20,000</label>
+    <label><input type="radio" name="price"> ₹20,000+</label>
   </div>
 
-  <div class="product-card">
-    <img src="/images/watch/watch2.jpg" alt="smartwatch">
-    <div class="product-info">
-      <div class="brand">Samsung</div>
-      <div class="description">Galaxy Watch 6</div>
-      <div class="price">Rs. 26,499 <span class="discount">(15% OFF)</span></div>
-      <div class="rating">⭐ 4.6 | 4.2k ratings</div>
+  <div class="product-grid">
+    <!-- Product 1 -->
+    <div class="product-card">
+      <i class='bx bx-heart wishlist'></i>
+      <img src="/images/smartwatches/watch1.jpg" alt="Apple Watch Series 9">
+      <h4>Apple Watch Series 9</h4>
+      <p class="desc">45mm GPS + Cellular, Aluminum Case</p>
+      <div class="rating">★★★★★ <span class="rating-count">(4.9)</span></div>
+      <div class="price-container">
+        <p>₹45,900</p>
+        <span class="original-price">₹49,900</span>
+        <span class="discount">8% OFF</span>
+      </div>
+      <div class="actions">
+        <button class="add-cart">Add to Cart</button>
+        <button class="try-on">View Details</button>
+      </div>
     </div>
-  </div>
-
-  <div class="product-card">
-    <img src="/images/watch/watch3.jpg" alt="smartwatch">
-    <div class="product-info">
-      <div class="brand">Noise</div>
-      <div class="description">ColorFit Ultra 3</div>
-      <div class="price">Rs. 2,499 <span class="discount">(60% OFF)</span></div>
-      <div class="rating">⭐ 4.3 | 3.8k ratings</div>
+  
+    <!-- Product 2 -->
+    <div class="product-card">
+      <i class='bx bx-heart wishlist'></i>
+      <img src="/images/smartwatches/watch2.jpg" alt="Samsung Galaxy Watch 6">
+      <h4>Samsung Galaxy Watch 6</h4>
+      <p class="desc">44mm Bluetooth, Stainless Steel</p>
+      <div class="rating">★★★★☆ <span class="rating-count">(4.7)</span></div>
+      <div class="price-container">
+        <p>₹29,999</p>
+        <span class="original-price">₹32,999</span>
+        <span class="discount">9% OFF</span>
+      </div>
+      <div class="actions">
+        <button class="add-cart">Add to Cart</button>
+        <button class="try-on">View Details</button>
+      </div>
     </div>
-  </div>
-
-  <div class="product-card">
-    <img src="/images/watch/watch4.jpg" alt="smartwatch">
-    <div class="product-info">
-      <div class="brand">boAt</div>
-      <div class="description">Wave Call 2</div>
-      <div class="price">Rs. 1,799 <span class="discount">(65% OFF)</span></div>
-      <div class="rating">⭐ 4.1 | 2.9k ratings</div>
+  
+    <!-- Product 3 -->
+    <div class="product-card">
+      <i class='bx bx-heart wishlist'></i>
+      <img src="/images/smartwatches/watch3.jpg" alt="Fitbit Versa 4">
+      <h4>Fitbit Versa 4</h4>
+      <p class="desc">Fitness Smartwatch with GPS</p>
+      <div class="rating">★★★★☆ <span class="rating-count">(4.5)</span></div>
+      <div class="price-container">
+        <p>₹22,999</p>
+        <span class="original-price">₹25,999</span>
+        <span class="discount">12% OFF</span>
+      </div>
+      <div class="actions">
+        <button class="add-cart">Add to Cart</button>
+        <button class="try-on">View Details</button>
+      </div>
     </div>
-  </div>
-
-  <div class="product-card">
-    <img src="/images/watch/watch5.jpg" alt="smartwatch">
-    <div class="product-info">
-      <div class="brand">Fire-Boltt</div>
-      <div class="description">Invincible Plus</div>
-      <div class="price">Rs. 3,199 <span class="discount">(50% OFF)</span></div>
-      <div class="rating">⭐ 4.2 | 3.1k ratings</div>
+  
+    <!-- Product 4 -->
+    <div class="product-card">
+      <i class='bx bx-heart wishlist'></i>
+      <img src="/images/smartwatches/watch4.jpg" alt="Garmin Venu 2">
+      <h4>Garmin Venu 2</h4>
+      <p class="desc">AMOLED Display, Health Monitoring</p>
+      <div class="rating">★★★★☆ <span class="rating-count">(4.6)</span></div>
+      <div class="price-container">
+        <p>₹34,990</p>
+        <span class="original-price">₹39,990</span>
+        <span class="discount">13% OFF</span>
+      </div>
+      <div class="actions">
+        <button class="add-cart">Add to Cart</button>
+        <button class="try-on">View Details</button>
+      </div>
     </div>
-  </div>
-
-  <div class="product-card">
-    <img src="/images/watch/watch6.jpg" alt="smartwatch">
-    <div class="product-info">
-      <div class="brand">Fossil</div>
-      <div class="description">Gen 6 Smartwatch</div>
-      <div class="price">Rs. 14,999 <span class="discount">(40% OFF)</span></div>
-      <div class="rating">⭐ 4.5 | 2.3k ratings</div>
+  
+    <!-- Product 5 -->
+    <div class="product-card">
+      <i class='bx bx-heart wishlist'></i>
+      <img src="/images/smartwatches/watch5.jpg" alt="Amazfit GTR 4">
+      <h4>Amazfit GTR 4</h4>
+      <p class="desc">1.43" AMOLED, 150+ Sports Modes</p>
+      <div class="rating">★★★★☆ <span class="rating-count">(4.4)</span></div>
+      <div class="price-container">
+        <p>₹15,999</p>
+        <span class="original-price">₹18,999</span>
+        <span class="discount">16% OFF</span>
+      </div>
+      <div class="actions">
+        <button class="add-cart">Add to Cart</button>
+        <button class="try-on">View Details</button>
+      </div>
     </div>
-  </div>
-
-  <div class="product-card">
-    <img src="/images/watch/watch7.jpg" alt="smartwatch">
-    <div class="product-info">
-      <div class="brand">Titan</div>
-      <div class="description">Smart Pro Touch</div>
-      <div class="price">Rs. 8,999 <span class="discount">(30% OFF)</span></div>
-      <div class="rating">⭐ 4.4 | 1.9k ratings</div>
+  
+    <!-- Product 6 -->
+    <div class="product-card">
+      <i class='bx bx-heart wishlist'></i>
+      <img src="/images/smartwatches/watch6.jpg" alt="Apple Watch SE (2023)">
+      <h4>Apple Watch SE (2023)</h4>
+      <p class="desc">40mm GPS, Retina Display</p>
+      <div class="rating">★★★★☆ <span class="rating-count">(4.6)</span></div>
+      <div class="price-container">
+        <p>₹29,900</p>
+        <span class="original-price">₹32,900</span>
+        <span class="discount">9% OFF</span>
+      </div>
+      <div class="actions">
+        <button class="add-cart">Add to Cart</button>
+        <button class="try-on">View Details</button>
+      </div>
     </div>
-  </div>
-
-  <div class="product-card">
-    <img src="/images/watch/watch8.jpg" alt="smartwatch">
-    <div class="product-info">
-      <div class="brand">OnePlus</div>
-      <div class="description">Nord Watch</div>
-      <div class="price">Rs. 2,899 <span class="discount">(50% OFF)</span></div>
-      <div class="rating">⭐ 4.2 | 3.5k ratings</div>
+  
+    <!-- Product 7 -->
+    <div class="product-card">
+      <i class='bx bx-heart wishlist'></i>
+      <img src="/images/smartwatches/watch7.jpg" alt="Noise ColorFit Pro 4">
+      <h4>Noise ColorFit Pro 4</h4>
+      <p class="desc">1.78" AMOLED, Bluetooth Calling</p>
+      <div class="rating">★★★★☆ <span class="rating-count">(4.3)</span></div>
+      <div class="price-container">
+        <p>₹4,999</p>
+        <span class="original-price">₹6,999</span>
+        <span class="discount">29% OFF</span>
+      </div>
+      <div class="actions">
+        <button class="add-cart">Add to Cart</button>
+        <button class="try-on">View Details</button>
+      </div>
     </div>
-  </div>
-
-  <div class="product-card">
-    <img src="/images/watch/watch9.jpg" alt="smartwatch">
-    <div class="product-info">
-      <div class="brand">Realme</div>
-      <div class="description">Watch 3 Pro</div>
-      <div class="price">Rs. 4,599 <span class="discount">(35% OFF)</span></div>
-      <div class="rating">⭐ 4.3 | 2.8k ratings</div>
+  
+    <!-- Product 8 -->
+    <div class="product-card">
+      <i class='bx bx-heart wishlist'></i>
+      <img src="/images/smartwatches/watch8.jpg" alt="Fire-Boltt Ninja Pro Max">
+      <h4>Fire-Boltt Ninja Pro Max</h4>
+      <p class="desc">2.01" Display, 100+ Sports Modes</p>
+      <div class="rating">★★★★☆ <span class="rating-count">(4.2)</span></div>
+      <div class="price-container">
+        <p>₹3,499</p>
+        <span class="original-price">₹4,999</span>
+        <span class="discount">30% OFF</span>
+      </div>
+      <div class="actions">
+        <button class="add-cart">Add to Cart</button>
+        <button class="try-on">View Details</button>
+      </div>
     </div>
-  </div>
-
-  <div class="product-card">
-    <img src="/images/watch/watch10.jpg" alt="smartwatch">
-    <div class="product-info">
-      <div class="brand">Garmin</div>
-      <div class="description">Venu SQ Music</div>
-      <div class="price">Rs. 15,499 <span class="discount">(20% OFF)</span></div>
-      <div class="rating">⭐ 4.7 | 1.6k ratings</div>
+  
+    <!-- Product 9 -->
+    <div class="product-card">
+      <i class='bx bx-heart wishlist'></i>
+      <img src="/images/smartwatches/watch9.jpg" alt="Fossil Gen 6">
+      <h4>Fossil Gen 6</h4>
+      <p class="desc">Smartwatch with Wear OS, Heart Rate</p>
+      <div class="rating">★★★★☆ <span class="rating-count">(4.1)</span></div>
+      <div class="price-container">
+        <p>₹19,995</p>
+        <span class="original-price">₹24,995</span>
+        <span class="discount">20% OFF</span>
+      </div>
+      <div class="actions">
+        <button class="add-cart">Add to Cart</button>
+        <button class="try-on">View Details</button>
+      </div>
     </div>
-  </div>
-
-  <!-- 10 more smartwatches -->
-
-  <div class="product-card">
-    <img src="/images/watch/watch11.jpg" alt="smartwatch">
-    <div class="product-info">
-      <div class="brand">Huawei</div>
-      <div class="description">Watch GT 3</div>
-      <div class="price">Rs. 12,999 <span class="discount">(25% OFF)</span></div>
-      <div class="rating">⭐ 4.6 | 1.2k ratings</div>
+  
+    <!-- Product 10 -->
+    <div class="product-card">
+      <i class='bx bx-heart wishlist'></i>
+      <img src="/images/smartwatches/watch10.jpg" alt="Huawei Watch GT 3">
+      <h4>Huawei Watch GT 3</h4>
+      <p class="desc">46mm, 2 Weeks Battery Life</p>
+      <div class="rating">★★★★☆ <span class="rating-count">(4.4)</span></div>
+      <div class="price-container">
+        <p>₹18,990</p>
+        <span class="original-price">₹22,990</span>
+        <span class="discount">17% OFF</span>
+      </div>
+      <div class="actions">
+        <button class="add-cart">Add to Cart</button>
+        <button class="try-on">View Details</button>
+      </div>
     </div>
-  </div>
-
-  <div class="product-card">
-    <img src="/images/watch/watch12.jpg" alt="smartwatch">
-    <div class="product-info">
-      <div class="brand">Pebble</div>
-      <div class="description">Cosmos Luxe</div>
-      <div class="price">Rs. 2,199 <span class="discount">(58% OFF)</span></div>
-      <div class="rating">⭐ 4.0 | 2.1k ratings</div>
+  
+    <!-- Product 11 -->
+    <div class="product-card">
+      <i class='bx bx-heart wishlist'></i>
+      <img src="/images/smartwatches/watch11.jpg" alt="Realme Watch 3 Pro">
+      <h4>Realme Watch 3 Pro</h4>
+      <p class="desc">1.78" AMOLED, SpO2 Monitor</p>
+      <div class="rating">★★★★☆ <span class="rating-count">(4.0)</span></div>
+      <div class="price-container">
+        <p>₹5,999</p>
+        <span class="original-price">₹7,999</span>
+        <span class="discount">25% OFF</span>
+      </div>
+      <div class="actions">
+        <button class="add-cart">Add to Cart</button>
+        <button class="try-on">View Details</button>
+      </div>
     </div>
-  </div>
-
-  <div class="product-card">
-    <img src="/images/watch/watch13.jpg" alt="smartwatch">
-    <div class="product-info">
-      <div class="brand">Crossbeats</div>
-      <div class="description">Orbit Infiniti</div>
-      <div class="price">Rs. 5,299 <span class="discount">(45% OFF)</span></div>
-      <div class="rating">⭐ 4.1 | 1.7k ratings</div>
+  
+    <!-- Product 12 -->
+    <div class="product-card">
+      <i class='bx bx-heart wishlist'></i>
+      <img src="/images/smartwatches/watch12.jpg" alt="OnePlus Watch 2">
+      <h4>OnePlus Watch 2</h4>
+      <p class="desc">1.39" AMOLED, 100+ Workout Modes</p>
+      <div class="rating">★★★★☆ <span class="rating-count">(4.3)</span></div>
+      <div class="price-container">
+        <p>₹16,999</p>
+        <span class="original-price">₹19,999</span>
+        <span class="discount">15% OFF</span>
+      </div>
+      <div class="actions">
+        <button class="add-cart">Add to Cart</button>
+        <button class="try-on">View Details</button>
+      </div>
     </div>
-  </div>
 
-  <div class="product-card">
-    <img src="/images/watch/watch14.jpg" alt="smartwatch">
-    <div class="product-info">
-      <div class="brand">Amazfit</div>
-      <div class="description">GTS 4 Mini</div>
-      <div class="price">Rs. 7,999 <span class="discount">(32% OFF)</span></div>
-      <div class="rating">⭐ 4.5 | 2.6k ratings</div>
+    <!-- Product 13 -->
+    <div class="product-card">
+      <i class='bx bx-heart wishlist'></i>
+      <img src="/images/smartwatches/watch13.jpg" alt="Apple Watch Ultra 2">
+      <h4>Apple Watch Ultra 2</h4>
+      <p class="desc">49mm Titanium Case, Dual Frequency GPS</p>
+      <div class="rating">★★★★★ <span class="rating-count">(4.9)</span></div>
+      <div class="price-container">
+        <p>₹89,900</p>
+        <span class="original-price">₹92,900</span>
+        <span class="discount">3% OFF</span>
+      </div>
+      <div class="actions">
+        <button class="add-cart">Add to Cart</button>
+        <button class="try-on">View Details</button>
+      </div>
     </div>
-  </div>
 
-  <div class="product-card">
-    <img src="/images/watch/watch15.jpg" alt="smartwatch">
-    <div class="product-info">
-      <div class="brand">Zebronics</div>
-      <div class="description">Zeb-Fit2220CH</div>
-      <div class="price">Rs. 1,599 <span class="discount">(62% OFF)</span></div>
-      <div class="rating">⭐ 3.9 | 1.9k ratings</div>
+    <!-- Product 14 -->
+    <div class="product-card">
+      <i class='bx bx-heart wishlist'></i>
+      <img src="/images/smartwatches/watch14.jpg" alt="Samsung Galaxy Watch 5 Pro">
+      <h4>Samsung Galaxy Watch 5 Pro</h4>
+      <p class="desc">45mm, Titanium Case, GPS + Bluetooth</p>
+      <div class="rating">★★★★☆ <span class="rating-count">(4.7)</span></div>
+      <div class="price-container">
+        <p>₹34,999</p>
+        <span class="original-price">₹39,999</span>
+        <span class="discount">13% OFF</span>
+      </div>
+      <div class="actions">
+        <button class="add-cart">Add to Cart</button>
+        <button class="try-on">View Details</button>
+      </div>
     </div>
-  </div>
 
-  <div class="product-card">
-    <img src="/images/watch/watch16.jpg" alt="smartwatch">
-    <div class="product-info">
-      <div class="brand">TAGG</div>
-      <div class="description">Verve Engage</div>
-      <div class="price">Rs. 1,699 <span class="discount">(66% OFF)</span></div>
-      <div class="rating">⭐ 4.0 | 1.5k ratings</div>
+    <!-- Product 15 -->
+    <div class="product-card">
+      <i class='bx bx-heart wishlist'></i>
+      <img src="/images/smartwatches/watch15.jpg" alt="Garmin Forerunner 255">
+      <h4>Garmin Forerunner 255</h4>
+      <p class="desc">Music, GPS Running Smartwatch</p>
+      <div class="rating">★★★★☆ <span class="rating-count">(4.6)</span></div>
+      <div class="price-container">
+        <p>₹32,990</p>
+        <span class="original-price">₹36,990</span>
+        <span class="discount">11% OFF</span>
+      </div>
+      <div class="actions">
+        <button class="add-cart">Add to Cart</button>
+        <button class="try-on">View Details</button>
+      </div>
     </div>
-  </div>
 
-  <div class="product-card">
-    <img src="/images/watch/watch17.jpg" alt="smartwatch">
-    <div class="product-info">
-      <div class="brand">Boult</div>
-      <div class="description">Drift Plus</div>
-      <div class="price">Rs. 2,099 <span class="discount">(60% OFF)</span></div>
-      <div class="rating">⭐ 4.1 | 1.1k ratings</div>
+    <!-- Product 16 -->
+    <div class="product-card">
+      <i class='bx bx-heart wishlist'></i>
+      <img src="/images/smartwatches/watch16.jpg" alt="Amazfit Bip U Pro">
+      <h4>Amazfit Bip U Pro</h4>
+      <p class="desc">1.43" Display, 60+ Sports Modes</p>
+      <div class="rating">★★★★☆ <span class="rating-count">(4.2)</span></div>
+      <div class="price-container">
+        <p>₹6,999</p>
+        <span class="original-price">₹8,999</span>
+        <span class="discount">22% OFF</span>
+      </div>
+      <div class="actions">
+        <button class="add-cart">Add to Cart</button>
+        <button class="try-on">View Details</button>
+      </div>
     </div>
-  </div>
 
-  <div class="product-card">
-    <img src="/images/watch/watch18.jpg" alt="smartwatch">
-    <div class="product-info">
-      <div class="brand">Fastrack</div>
-      <div class="description">Reflex Play</div>
-      <div class="price">Rs. 3,299 <span class="discount">(50% OFF)</span></div>
-      <div class="rating">⭐ 4.2 | 2.0k ratings</div>
+    <!-- Product 17 -->
+    <div class="product-card">
+      <i class='bx bx-heart wishlist'></i>
+      <img src="/images/smartwatches/watch17.jpg" alt="Boat Wave Call 2">
+      <h4>Boat Wave Call 2</h4>
+      <p class="desc">1.83" Display, Bluetooth Calling</p>
+      <div class="rating">★★★★☆ <span class="rating-count">(4.1)</span></div>
+      <div class="price-container">
+        <p>₹3,990</p>
+        <span class="original-price">₹5,990</span>
+        <span class="discount">33% OFF</span>
+      </div>
+      <div class="actions">
+        <button class="add-cart">Add to Cart</button>
+        <button class="try-on">View Details</button>
+      </div>
     </div>
-  </div>
 
-  <div class="product-card">
-    <img src="/images/watch/watch19.jpg" alt="smartwatch">
-    <div class="product-info">
-      <div class="brand">GOQii</div>
-      <div class="description">Smart Vital Max</div>
-      <div class="price">Rs. 2,799 <span class="discount">(55% OFF)</span></div>
-      <div class="rating">⭐ 4.0 | 1.3k ratings</div>
+    <!-- Product 18 -->
+    <div class="product-card">
+      <i class='bx bx-heart wishlist'></i>
+      <img src="/images/smartwatches/watch18.jpg" alt="Fitbit Charge 6">
+      <h4>Fitbit Charge 6</h4>
+      <p class="desc">Advanced Fitness Tracker with GPS</p>
+      <div class="rating">★★★★☆ <span class="rating-count">(4.3)</span></div>
+      <div class="price-container">
+        <p>₹15,999</p>
+        <span class="original-price">₹18,999</span>
+        <span class="discount">16% OFF</span>
+      </div>
+      <div class="actions">
+        <button class="add-cart">Add to Cart</button>
+        <button class="try-on">View Details</button>
+      </div>
     </div>
-  </div>
 
-  <div class="product-card">
-    <img src="/images/watch/watch20.jpg" alt="smartwatch">
-    <div class="product-info">
-      <div class="brand">Fire-Boltt</div>
-      <div class="description">Phoenix AMOLED</div>
-      <div class="price">Rs. 2,499 <span class="discount">(60% OFF)</span></div>
-      <div class="rating">⭐ 4.3 | 1.9k ratings</div>
+    <!-- Product 19 -->
+    <div class="product-card">
+      <i class='bx bx-heart wishlist'></i>
+      <img src="/images/smartwatches/watch19.jpg" alt="Garmin Vivoactive 5">
+      <h4>Garmin Vivoactive 5</h4>
+      <p class="desc">AMOLED Touchscreen, Health Monitoring</p>
+      <div class="rating">★★★★☆ <span class="rating-count">(4.5)</span></div>
+      <div class="price-container">
+        <p>₹28,990</p>
+        <span class="original-price">₹32,990</span>
+        <span class="discount">12% OFF</span>
+      </div>
+      <div class="actions">
+        <button class="add-cart">Add to Cart</button>
+        <button class="try-on">View Details</button>
+      </div>
+    </div>
+
+
+    <!-- Product 20 -->
+    <div class="product-card">
+      <i class='bx bx-heart wishlist'></i>
+      <img src="/images/smartwatches/watch20.jpg" alt="Huawei Watch Fit 2">
+      <h4>Huawei Watch Fit 2</h4>
+      <p class="desc">1.74" AMOLED, 97 Workout Modes</p>
+      <div class="rating">★★★★☆ <span class="rating-count">(4.4)</span></div>
+      <div class="price-container">
+        <p>₹10,999</p>
+        <span class="original-price">₹12,999</span>
+        <span class="discount">15% OFF</span>
+      </div>
+      <div class="actions">
+        <button class="add-cart">Add to Cart</button>
+        <button class="try-on">View Details</button>
+      </div>
     </div>
   </div>
 </div>
-
-</body>
-</html>
+        <script>
+          // Initialize when DOM is loaded
+          document.addEventListener('DOMContentLoaded', function() {
+            // Get the search input element
+            const searchInput = document.getElementById('searchInput');
+            
+            if (!searchInput) {
+              console.error("Search input element not found!");
+              return;
+            }
+        
+            // Wishlist functionality
+            document.querySelectorAll('.wishlist').forEach(heart => {
+              heart.addEventListener('click', function(e) {
+                e.stopPropagation();
+                this.classList.toggle('bxs-heart');
+                this.classList.toggle('bx-heart');
+                this.classList.toggle('active');
+                
+                if (this.classList.contains('bxs-heart')) {
+                  this.style.color = '#ff0000';
+                  alert('Added to wishlist!');
+                } else {
+                  this.style.color = '#ff4757';
+                }
+              });
+            });
+        
+            // Try-on functionality
+            document.querySelectorAll('.try-on').forEach(button => {
+              button.addEventListener('click', function() {
+                const productName = this.closest('.product-card').querySelector('h4').textContent;
+                alert("Launching try-on for: " + productName);
+              });
+            });
+        
+            // Add to cart functionality
+            document.querySelectorAll('.add-cart').forEach(button => {
+              button.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const productName = this.closest('.product-card').querySelector('h4').textContent;
+                alert(productName + " added to cart!");
+              });
+            });
+        
+            // Setup search functionality
+            setupSearch(searchInput);
+          });
+        
+          // Search Functionality
+          function searchProducts(searchInput) {
+            const query = searchInput.value.trim().toLowerCase();
+            
+            if (!query) {
+              return; // Do nothing if search is empty
+            }
+        
+            // Category mapping - search terms to page URLs
+            const categoryMap = {
+              // Bags
+              'bag': '/Product-details/bags.html',
+              'bags': '/Product-details/bags.html',
+              'backpack': '/Product-details/bags.html',
+              'handbag': '/Product-details/bags.html',
+              'luggage': '/Product-details/bags.html',
+              
+              // Shoes
+              'shoe': '/Product-details/shoes.html',
+              'shoes': '/Product-details/shoes.html',
+              'sneaker': '/Product-details/shoes.html',
+              'sneakers': '/Product-details/shoes.html',
+              'footwear': '/Product-details/shoes.html',
+              'boot': '/Product-details/shoes.html',
+              'boots': '/Product-details/shoes.html',
+              'sandals': '/Product-details/shoes.html',
+              
+              // Watches
+              'watch': '/Product-details/smartwatches.html',
+              'watches': '/Product-details/smartwatches.html',
+              'smartwatch': '/Product-details/smartwatches.html',
+              'smartwatches': '/Product-details/smartwatches.html',
+              
+              // Sunglasses
+              'sunglass': '/Product-details/sunglasses.html',
+              'sunglasses': '/Product-details/sunglasses.html',
+              'eyewear': '/Product-details/sunglasses.html',
+              
+              // T-Shirts
+              't-shirt': '/Product-details/t-shirts.html',
+              't-shirts': '/Product-details/t-shirts.html',
+              'tshirt': '/Product-details/t-shirts.html',
+              'tshirts': '/Product-details/t-shirts.html',
+              
+              // Headphones
+              'headphone': '/Product-details/headphones.html',
+              'headphones': '/Product-details/headphones.html',
+              'earphone': '/Product-details/headphones.html',
+              'earphones': '/Product-details/headphones.html',
+              'earbuds': '/Product-details/headphones.html',
+              
+              // Shirts
+              'shirt': '/Product-details/shirts.html',
+              'shirts': '/Product-details/shirts.html',
+              'formal shirt': '/Product-details/shirts.html',
+              
+              // Other categories
+              'jeans': '/Product-details/jeans.html',
+              'dress': '/Product-details/dresses.html',
+              'dresses': '/Product-details/dresses.html',
+              'jacket': '/Product-details/jackets.html',
+              'jackets': '/Product-details/jackets.html',
+              'sweater': '/Product-details/sweaters.html',
+              'sweaters': '/Product-details/sweaters.html'
+            };
+        
+            // Check for direct category match first
+            if (categoryMap[query]) {
+              window.location.href = categoryMap[query];
+              return;
+            }
+        
+            // Check for partial matches in the query
+            for (const [keyword, page] of Object.entries(categoryMap)) {
+              if (query.includes(keyword)) {
+                window.location.href = page;
+                return;
+              }
+            }
+        
+            // If no match found, show alert to user
+            alert(`No category found for "${query}". Try searching for bags, shoes, watches, etc.`);
+          }
+        
+          // Setup search event listeners
+          function setupSearch(searchInput) {
+            // Search on Enter key
+            searchInput.addEventListener('keypress', (e) => {
+              if (e.key === 'Enter') {
+                searchProducts(searchInput);
+              }
+            });
+            
+            // Search with debounce on input
+            searchInput.addEventListener('input', debounce(() => {
+              searchProducts(searchInput);
+            }, 500));
+          }
+        
+          // Utility function for debouncing
+          function debounce(func, wait) {
+            let timeout;
+            return function() {
+              const context = this, args = arguments;
+              clearTimeout(timeout);
+              timeout = setTimeout(() => func.apply(context, args), wait);
+            };
+          }
+        </script>
+        
+        </body>
+        </html>
