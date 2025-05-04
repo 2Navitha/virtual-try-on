@@ -19,77 +19,79 @@
       --danger-color: #d63031;
       --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
       --transition: all 0.3s ease;
-  }
+    }
 
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #f9f9f9;
+      color: var(--dark-color);
+      line-height: 1.6;
+    }
     
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
+    header {
+      background-color: white;
+      color: black;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
 
-body {
-    background-color: #f9f9f9;
-    color: var(--dark-color);
-    line-height: 1.6;
-}
-header {
-  background-color: white;
-  color: black;
-  padding: 15px 30px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
+    .logo {
+      font-size: 24px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: #6c5ce7;
+    }
 
-.logo {
-  font-size: 24px;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-}
+    .logo i {
+      margin-right: 10px;
+      font-size: 28px;
+    }
 
-.logo i {
-  margin-right: 10px;
-  font-size: 28px;
-}
+    .search-box {
+      display: flex;
+      align-items: center;
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 8px 12px;
+      width: 500px;
+    }
 
+    .search-box i {
+      font-size: 20px;
+      color: #333;
+      margin-right: 8px;
+    }
 
-.search-box {
-  display: flex;
-  align-items: center;
-  background: #fff;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 8px 12px;
-  width: 500px;
-}
-
-.search-box i {
-  font-size: 20px;
-  color: #333;
-  margin-right: 8px;
-}
-
-.search-box input {
-  border: none;
-  outline: none;
-  font-size: 16px;
-  flex: 1;
-}
+    .search-box input {
+      border: none;
+      outline: none;
+      font-size: 16px;
+      flex: 1;
+    }
 
     nav ul {
       list-style: none;
       display: flex;
       margin: 0;
       padding: 0;
+      align-items: center;
     }
 
     nav ul li {
       margin-left: 20px;
+      position: relative;
     }
 
     nav ul li a {
@@ -97,10 +99,27 @@ header {
       color: black;
       font-size: 15px;
       transition: color 0.3s;
+      display: flex;
+      align-items: center;
     }
 
     nav ul li a:hover {
-      color: blue;
+      color: var(--primary-color);
+    }
+
+    .wishlist-count {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background-color: var(--danger-color);
+      color: white;
+      border-radius: 50%;
+      width: 18px;
+      height: 18px;
+      font-size: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .page-container {
@@ -184,7 +203,7 @@ header {
       top: 15px;
       right: 15px;
       font-size: 22px;
-      color: #ff4757;
+      color: #ccc;
       cursor: pointer;
       background: rgba(255,255,255,0.8);
       padding: 5px;
@@ -194,11 +213,14 @@ header {
     }
 
     .wishlist:hover {
-      color: #ff0000;
       transform: scale(1.1);
     }
 
     .wishlist.active {
+      color: #ff0000;
+    }
+
+    .wishlist.bxs-heart {
       color: #ff0000;
     }
 
@@ -317,6 +339,31 @@ header {
       font-weight: 600;
     }
 
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: var(--success-color);
+      color: white;
+      padding: 12px 20px;
+      border-radius: 4px;
+      box-shadow: var(--shadow);
+      transform: translateY(100px);
+      opacity: 0;
+      transition: var(--transition);
+      z-index: 1000;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .toast.error {
+      background-color: var(--danger-color);
+    }
+
     @media (max-width: 768px) {
       header {
         flex-direction: column;
@@ -400,7 +447,7 @@ header {
 <header>
   <a href="#" class="logo">
     <i class="fas fa-glasses"></i> StyleVision
-</a>
+  </a>
   <div class="search-box">
     <i class='bx bx-search'></i>
     <input type="text" id="searchInput" placeholder="Search fashion...">
@@ -412,6 +459,12 @@ header {
       <li><a href="#">Kids</a></li>
       <li><a href="#">Footwear</a></li>
       <li><a href="#">Accessories</a></li>
+      <li>
+        <a href="wishlist.html">
+          <i class='bx bx-heart'></i>
+          <span class="wishlist-count" id="wishlistCounter">0</span>
+        </a>
+      </li>
       <li><a href="cart.html"><i class='bx bx-cart'></i></a></li>
     </ul>
   </nav>
@@ -456,250 +509,220 @@ header {
     <label><input type="radio" name="price"> ₹5,000+</label>
   </div>
 
-  <div class="product-grid">
-    <!-- Product 1 -->
-    <div class="product-card">
-      <i class='bx bx-heart wishlist'></i>
-      <img src="/images/tshirts/tshirt1.jpg" alt="Men's T-Shirt">
-      <h4>Men's T-Shirt</h4>
-      <p class="desc">Cotton, Slim Fit</p>
-      <div class="rating">★★★★☆ <span class="rating-count">(4.4)</span></div>
-      <div class="price-container">
-        <p>₹799</p>
-        <span class="original-price">₹1,299</span>
-        <span class="discount">38% OFF</span>
-      </div>
-      <div class="actions">
-        <button class="add-cart">Add to Cart</button>
-        <button class="try-on">Try On</button>
-      </div>
-    </div>
-  
-    <!-- Product 2 -->
-    <div class="product-card">
-      <i class='bx bx-heart wishlist'></i>
-      <img src="/images/fashion/Women's Floral Dress.jpg" alt="Women's Dress">
-      <h4>Women's Floral Dress</h4>
-      <p class="desc">Floral Print, Flare</p>
-      <div class="rating">★★★★★ <span class="rating-count">(4.7)</span></div>
-      <div class="price-container">
-        <p>₹1,299</p>
-        <span class="original-price">₹1,999</span>
-        <span class="discount">35% OFF</span>
-      </div>
-      <div class="actions">
-        <button class="add-cart"> Add to Cart</button>
-        <button class="try-on">Try On</button>
-      </div>
-    </div>
-  
-    <!-- Product 3 -->
-    <div class="product-card">
-      <i class='bx bx-heart wishlist'></i>
-      <img src="/images/fashion/Men's Blue Jeans.jpg" alt="Men's Jeans">
-      <h4>Men's Blue Jeans</h4>
-      <p class="desc">Denim, Skinny Fit</p>
-      <div class="rating">★★★★☆ <span class="rating-count">(4.3)</span></div>
-      <div class="price-container">
-        <p>₹1,199</p>
-        <span class="original-price">₹1,799</span>
-        <span class="discount">33% OFF</span>
-      </div>
-      <div class="actions">
-        <button class="add-cart">Add to Cart</button>
-        <button class="try-on">Try On</button>
-      </div>
-    </div>
-  
-    <!-- Product 4 -->
-    <div class="product-card">
-      <i class='bx bx-heart wishlist'></i>
-      <img src="/images/fashion/Women's Skirt.jpg" alt="Women's Skirt">
-      <h4>Women's A-Line Skirt</h4>
-      <p class="desc">Cotton, High-Waisted</p>
-      <div class="rating">★★★★☆ <span class="rating-count">(4.5)</span></div>
-      <div class="price-container">
-        <p>₹899</p>
-        <span class="original-price">₹1,499</span>
-        <span class="discount">40% OFF</span>
-      </div>
-      <div class="actions">
-        <button class="add-cart">Add to Cart</button>
-        <button class="try-on">Try On</button>
-      </div>
-    </div>
-  
-    <!-- Product 5 -->
-    <div class="product-card">
-      <i class='bx bx-heart wishlist'></i>
-      <img src="/images/fashion/Men's Shoes.jpg" alt="Men's Shoes">
-      <h4>Men's Running Shoes</h4>
-      <p class="desc">Mesh, Breathable</p>
-      <div class="rating">★★★★☆ <span class="rating-count">(4.2)</span></div>
-      <div class="price-container">
-        <p>₹2,499</p>
-        <span class="original-price">₹3,999</span>
-        <span class="discount">37% OFF</span>
-      </div>
-      <div class="actions">
-        <button class="add-cart"> Add to Cart</button>
-        <button class="try-on">Try On</button>
-      </div>
-    </div>
-  
-    <!-- Product 6 -->
-    <div class="product-card">
-      <i class='bx bx-heart wishlist'></i>
-      <img src="/images/fashion/Women's High Heels.png" alt="Women's Heels">
-      <h4>Women's High Heels</h4>
-      <p class="desc">Suede, Stiletto</p>
-      <div class="rating">★★★★★ <span class="rating-count">(4.8)</span></div>
-      <div class="price-container">
-        <p>₹2,999</p>
-        <span class="original-price">₹4,499</span>
-        <span class="discount">33% OFF</span>
-      </div>
-      <div class="actions">
-        <button class="add-cart">Add to Cart</button>
-        <button class="try-on">Try On</button>
-      </div>
-    </div>
-  
-    <!-- Product 7 -->
-    <div class="product-card">
-      <i class='bx bx-heart wishlist'></i>
-      <img src="/images/fashion/Men's Checkered Shirt.jpg" alt="Men's Shirt">
-      <h4>Men's Checkered Shirt</h4>
-      <p class="desc">Cotton, Casual</p>
-      <div class="rating">★★★★☆ <span class="rating-count">(4.6)</span></div>
-      <div class="price-container">
-        <p>₹1,499</p>
-        <span class="original-price">₹2,199</span>
-        <span class="discount">32% OFF</span>
-      </div>
-      <div class="actions">
-        <button class="add-cart">Add to Cart</button>
-        <button class="try-on">Try On</button>
-      </div>
-    </div>
-  
-    <!-- Product 8 -->
-    <div class="product-card">
-      <i class='bx bx-heart wishlist'></i>
-      <img src="/images/fashion/Women's Jumpsuit.jpg" alt="Women's Jumpsuit">
-      <h4>Women's Jumpsuit</h4>
-      <p class="desc">One-Piece, Sleeveless</p>
-      <div class="rating">★★★★☆ <span class="rating-count">(4.3)</span></div>
-      <div class="price-container">
-        <p>₹2,199</p>
-        <span class="original-price">₹3,299</span>
-        <span class="discount">33% OFF</span>
-      </div>
-      <div class="actions">
-        <button class="add-cart"> Add to Cart</button>
-        <button class="try-on">Try On</button>
-      </div>
-    </div>
-  
-    <!-- Product 9 -->
-    <div class="product-card">
-      <i class='bx bx-heart wishlist'></i>
-      <img src="/images/fashion/Men's Woolen Sweater.jpg" alt="Men's Sweater">
-      <h4>Men's Woolen Sweater</h4>
-      <p class="desc">Knitted, Winter Wear</p>
-      <div class="rating">★★★★☆ <span class="rating-count">(4.5)</span></div>
-      <div class="price-container">
-        <p>₹1,799</p>
-        <span class="original-price">₹2,499</span>
-        <span class="discount">28% OFF</span>
-      </div>
-      <div class="actions">
-        <button class="add-cart"> Add to Cart</button>
-        <button class="try-on">Try On</button>
-      </div>
-    </div>
-  
-    <!-- Product 10 -->
-    <div class="product-card">
-      <i class='bx bx-heart wishlist'></i>
-      <img src="/images/bags/bag15.jpg" alt="bag">
-      <h4>Skybags</h4>
-      <p class="desc">Stylish Small Crossbody Bag</p>
-      <div class="rating">★★★★☆ <span class="rating-count">(4.6)</span></div>
-      <div class="price-container">
-        <p>₹799</p>
-        <span class="original-price">₹1,199</span>
-        <span class="discount">33% OFF</span>
-      </div>
-      <div class="actions">
-        <button class="add-cart"> Add to Cart</button>
-        <button class="try-on">Try On</button>
-      </div>
-    </div>
-  
-    <!-- Product 11 -->
-    <div class="product-card">
-      <i class='bx bx-heart wishlist'></i>
-      <img src="/images/fashion/men's jacket.jpg" alt="Men's Jacket">
-      <h4>Men's Jacket</h4>
-      <p class="desc">Windproof, Winter Wear</p>
-      <div class="rating">★★★★☆ <span class="rating-count">(4.2)</span></div>
-      <div class="price-container">
-        <p>₹899</p>
-        <span class="original-price">₹1,499</span>
-        <span class="discount">40% OFF</span>
-      </div>
-      <div class="actions">
-        <button class="add-cart"> Add to Cart</button>
-        <button class="try-on">Try On</button>
-      </div>
-    </div>
-  
-    <!-- Product 15 -->
-    <div class="product-card">
-      <i class='bx bx-heart wishlist'></i>
-      <img src="/images/sunglasses/sunglass1.jpg" alt="Men's Sunglasses">
-      <h4>Men's Classic Sunglasses</h4>
-      <p class="desc">UV Protected, Black</p>
-      <div class="rating">★★★★☆ <span class="rating-count">(4.5)</span></div>
-      <div class="price-container">
-        <p>₹1,299</p>
-        <span class="original-price">₹1,999</span>
-        <span class="discount">35% OFF</span>
-      </div>
-      <div class="actions">
-        <button class="add-cart"> Add to Cart</button>
-        <button class="try-on">Try On</button>
-      </div>
-    </div>
+  <div class="product-grid" id="productGrid">
+    <!-- Product cards will be populated here -->
   </div>
 </div>
 
+<!-- Toast Notification -->
+<div class="toast" id="toast"></div>
+
 <script>
+  // Product data
+  const products = [
+    {
+      id: 1,
+      name: "Men's T-Shirt",
+      desc: "Cotton, Slim Fit",
+      rating: "★★★★☆ (4.4)",
+      price: "₹799",
+      originalPrice: "₹1,299",
+      discount: "38% OFF",
+      image: "/images/tshirts/tshirt1.jpg"
+    },
+    {
+      id: 2,
+      name: "Women's Floral Dress",
+      desc: "Floral Print, Flare",
+      rating: "★★★★★ (4.7)",
+      price: "₹1,299",
+      originalPrice: "₹1,999",
+      discount: "35% OFF",
+      image: "/images/fashion/Women's Floral Dress.jpg"
+    },
+    {
+      id: 3,
+      name: "Men's Blue Jeans",
+      desc: "Denim, Skinny Fit",
+      rating: "★★★★☆ (4.3)",
+      price: "₹1,199",
+      originalPrice: "₹1,799",
+      discount: "33% OFF",
+      image: "/images/fashion/Men's Blue Jeans.jpg"
+    },
+    {
+      id: 4,
+      name: "Women's A-Line Skirt",
+      desc: "Cotton, High-Waisted",
+      rating: "★★★★☆ (4.5)",
+      price: "₹899",
+      originalPrice: "₹1,499",
+      discount: "40% OFF",
+      image: "/images/fashion/Women's Skirt.jpg"
+    },
+    {
+      id: 5,
+      name: "Men's Running Shoes",
+      desc: "Mesh, Breathable",
+      rating: "★★★★☆ (4.2)",
+      price: "₹2,499",
+      originalPrice: "₹3,999",
+      discount: "37% OFF",
+      image: "/images/fashion/Men's Shoes.jpg"
+    },
+    {
+      id: 6,
+      name: "Women's High Heels",
+      desc: "Suede, Stiletto",
+      rating: "★★★★★ (4.8)",
+      price: "₹2,999",
+      originalPrice: "₹4,499",
+      discount: "33% OFF",
+      image: "/images/fashion/Women's High Heels.png"
+    },
+    {
+      id: 7,
+      name: "Men's Checkered Shirt",
+      desc: "Cotton, Casual",
+      rating: "★★★★☆ (4.6)",
+      price: "₹1,499",
+      originalPrice: "₹2,199",
+      discount: "32% OFF",
+      image: "/images/fashion/Men's Checkered Shirt.jpg"
+    },
+    {
+      id: 8,
+      name: "Women's Jumpsuit",
+      desc: "One-Piece, Sleeveless",
+      rating: "★★★★☆ (4.3)",
+      price: "₹2,199",
+      originalPrice: "₹3,299",
+      discount: "33% OFF",
+      image: "/images/fashion/Women's Jumpsuit.jpg"
+    },
+    {
+      id: 9,
+      name: "Men's Woolen Sweater",
+      desc: "Knitted, Winter Wear",
+      rating: "★★★★☆ (4.5)",
+      price: "₹1,799",
+      originalPrice: "₹2,499",
+      discount: "28% OFF",
+      image: "/images/fashion/Men's Woolen Sweater.jpg"
+    },
+    {
+      id: 10,
+      name: "Skybags",
+      desc: "Stylish Small Crossbody Bag",
+      rating: "★★★★☆ (4.6)",
+      price: "₹799",
+      originalPrice: "₹1,199",
+      discount: "33% OFF",
+      image: "/images/bags/bag15.jpg"
+    },
+    {
+      id: 11,
+      name: "Men's Jacket",
+      desc: "Windproof, Winter Wear",
+      rating: "★★★★☆ (4.2)",
+      price: "₹899",
+      originalPrice: "₹1,499",
+      discount: "40% OFF",
+      image: "/images/fashion/men's jacket.jpg"
+    },
+    {
+      id: 12,
+      name: "Men's Classic Sunglasses",
+      desc: "UV Protected, Black",
+      rating: "★★★★☆ (4.5)",
+      price: "₹1,299",
+      originalPrice: "₹1,999",
+      discount: "35% OFF",
+      image: "/images/sunglasses/sunglass1.jpg"
+    }
+  ];
+
   // Initialize when DOM is loaded
   document.addEventListener('DOMContentLoaded', function() {
-    // Get the search input element
-    const searchInput = document.getElementById('searchInput');
+    // Initialize wishlist from localStorage
+    let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+    updateWishlistCounter(wishlist.length);
     
-    if (!searchInput) {
-      console.error("Search input element not found!");
-      return;
+    // Render all products
+    renderProducts(products, wishlist);
+    
+    // Setup search functionality
+    const searchInput = document.getElementById('searchInput');
+    if (searchInput) {
+      setupSearch(searchInput);
     }
+  });
 
+  // Render products to the page
+  function renderProducts(products, wishlist) {
+    const productGrid = document.getElementById('productGrid');
+    if (!productGrid) return;
+    
+    productGrid.innerHTML = '';
+    
+    products.forEach(product => {
+      const isInWishlist = wishlist.some(item => item.id === product.id);
+      
+      const productCard = document.createElement('div');
+      productCard.className = 'product-card';
+      productCard.innerHTML = `
+        <i class='bx ${isInWishlist ? 'bxs-heart active' : 'bx-heart'} wishlist' data-product-id="${product.id}"></i>
+        <img src="${product.image}" alt="${product.name}" onerror="this.src='https://via.placeholder.com/220x200?text=Product+Image'">
+        <h4>${product.name}</h4>
+        <p class="desc">${product.desc}</p>
+        <div class="rating">${product.rating}</div>
+        <div class="price-container">
+          <p>${product.price}</p>
+          <span class="original-price">${product.originalPrice}</span>
+          <span class="discount">${product.discount}</span>
+        </div>
+        <div class="actions">
+          <button class="add-cart">Add to Cart</button>
+          <button class="try-on">Try On</button>
+        </div>
+      `;
+      
+      productGrid.appendChild(productCard);
+    });
+    
+    // Attach event listeners after rendering
+    attachEventListeners();
+  }
+
+  // Attach event listeners to product cards
+  function attachEventListeners() {
     // Wishlist functionality
     document.querySelectorAll('.wishlist').forEach(heart => {
       heart.addEventListener('click', function(e) {
         e.stopPropagation();
-        this.classList.toggle('bxs-heart');
-        this.classList.toggle('bx-heart');
-        this.classList.toggle('active');
+        const productId = parseInt(this.getAttribute('data-product-id'));
+        const product = products.find(p => p.id === productId);
         
-        if (this.classList.contains('bxs-heart')) {
-          this.style.color = '#ff0000';
-          alert('Added to wishlist!');
+        let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+        const productIndex = wishlist.findIndex(item => item.id === productId);
+        
+        if (productIndex >= 0) {
+          // Remove from wishlist
+          wishlist.splice(productIndex, 1);
+          this.classList.remove('bxs-heart', 'active');
+          this.classList.add('bx-heart');
+          showToast(`${product.name} removed from wishlist`, 'error');
         } else {
-          this.style.color = '#ff4757';
+          // Add to wishlist
+          wishlist.push(product);
+          this.classList.remove('bx-heart');
+          this.classList.add('bxs-heart', 'active');
+          showToast(`${product.name} added to wishlist`);
         }
+        
+        // Save to localStorage
+        localStorage.setItem('wishlist', JSON.stringify(wishlist));
+        updateWishlistCounter(wishlist.length);
       });
     });
 
@@ -707,7 +730,7 @@ header {
     document.querySelectorAll('.try-on').forEach(button => {
       button.addEventListener('click', function() {
         const productName = this.closest('.product-card').querySelector('h4').textContent;
-        alert("Launching try-on for: " + productName);
+        showToast(`Launching try-on for: ${productName}`);
       });
     });
 
@@ -716,96 +739,53 @@ header {
       button.addEventListener('click', function(e) {
         e.stopPropagation();
         const productName = this.closest('.product-card').querySelector('h4').textContent;
-        alert(productName + " added to cart!");
+        showToast(`${productName} added to cart!`);
       });
     });
+  }
 
-    // Setup search functionality
-    setupSearch(searchInput);
-  });
+  // Update wishlist counter
+  function updateWishlistCounter(count) {
+    const counter = document.getElementById('wishlistCounter');
+    if (counter) {
+      counter.textContent = count;
+      counter.style.display = count > 0 ? 'flex' : 'none';
+    }
+  }
+
+  // Show toast notification
+  function showToast(message, type = 'success') {
+    const toast = document.getElementById('toast');
+    if (!toast) return;
+    
+    toast.textContent = message;
+    toast.className = 'toast';
+    toast.classList.add('show', type);
+    
+    setTimeout(() => {
+      toast.classList.remove('show');
+    }, 3000);
+  }
 
   // Search Functionality
   function searchProducts(searchInput) {
     const query = searchInput.value.trim().toLowerCase();
     
     if (!query) {
-      return; // Do nothing if search is empty
-    }
-
-    // Category mapping - search terms to page URLs
-    const categoryMap = {
-      // Bags
-      'bag': '/Product-details/bags.html',
-      'bags': '/Product-details/bags.html',
-      'backpack': '/Product-details/bags.html',
-      'handbag': '/Product-details/bags.html',
-      'luggage': '/Product-details/bags.html',
-      
-      // Shoes
-      'shoe': '/Product-details/shoes.html',
-      'shoes': '/Product-details/shoes.html',
-      'sneaker': '/Product-details/shoes.html',
-      'sneakers': '/Product-details/shoes.html',
-      'footwear': '/Product-details/shoes.html',
-      'boot': '/Product-details/shoes.html',
-      'boots': '/Product-details/shoes.html',
-      'sandals': '/Product-details/shoes.html',
-      
-      // Watches
-      'watch': '/Product-details/smartwatches.html',
-      'watches': '/Product-details/smartwatches.html',
-      'smartwatch': '/Product-details/smartwatches.html',
-      'smartwatches': '/Product-details/smartwatches.html',
-      
-      // Sunglasses
-      'sunglass': '/Product-details/sunglasses.html',
-      'sunglasses': '/Product-details/sunglasses.html',
-      'eyewear': '/Product-details/sunglasses.html',
-      
-      // T-Shirts
-      't-shirt': '/Product-details/t-shirts.html',
-      't-shirts': '/Product-details/t-shirts.html',
-      'tshirt': '/Product-details/t-shirts.html',
-      'tshirts': '/Product-details/t-shirts.html',
-      
-      // Headphones
-      'headphone': '/Product-details/headphones.html',
-      'headphones': '/Product-details/headphones.html',
-      'earphone': '/Product-details/headphones.html',
-      'earphones': '/Product-details/headphones.html',
-      'earbuds': '/Product-details/headphones.html',
-      
-      // Shirts
-      'shirt': '/Product-details/shirts.html',
-      'shirts': '/Product-details/shirts.html',
-      'formal shirt': '/Product-details/shirts.html',
-      
-      // Other categories
-      'jeans': '/Product-details/jeans.html',
-      'dress': '/Product-details/dresses.html',
-      'dresses': '/Product-details/dresses.html',
-      'jacket': '/Product-details/jackets.html',
-      'jackets': '/Product-details/jackets.html',
-      'sweater': '/Product-details/sweaters.html',
-      'sweaters': '/Product-details/sweaters.html'
-    };
-
-    // Check for direct category match first
-    if (categoryMap[query]) {
-      window.location.href = categoryMap[query];
+      renderProducts(products, JSON.parse(localStorage.getItem('wishlist')) || []);
       return;
     }
 
-    // Check for partial matches in the query
-    for (const [keyword, page] of Object.entries(categoryMap)) {
-      if (query.includes(keyword)) {
-        window.location.href = page;
-        return;
-      }
+    const filteredProducts = products.filter(product => 
+      product.name.toLowerCase().includes(query) || 
+      product.desc.toLowerCase().includes(query)
+    );
+    
+    if (filteredProducts.length === 0) {
+      showToast(`No products found for "${query}"`, 'error');
     }
-
-    // If no match found, show alert to user
-    alert(`No category found for "${query}". Try searching for bags, shoes, watches, etc.`);
+    
+    renderProducts(filteredProducts, JSON.parse(localStorage.getItem('wishlist')) || []);
   }
 
   // Setup search event listeners

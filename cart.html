@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ShopZone | Cart</title>
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="../cart.css">
+</head>
+<body>
+  <header>
+    <a href="../index.html" class="logo">
+      <i class="fas fa-shopping-bag"></i> ShopZone
+    </a>
+    <div class="search-box">
+      <i class='bx bx-search'></i>
+      <input type="text" placeholder="Search products...">
+    </div>
+    <nav>
+      <ul>
+        <li><a href="../men.html">Men</a></li>
+        <li><a href="../women.html">Women</a></li>
+        <li><a href="../kids.html">Kids</a></li>
+        <li><a href="../products/bags.html">Bags</a></li>
+        <li>
+          <a href="../wishlist.html">
+            <i class='bx bx-heart'></i>
+            <span class="counter" id="wishlistCounter">0</span>
+          </a>
+        </li>
+        <li>
+          <a href="../cart.html" class="active">
+            <i class='bx bx-cart'></i>
+            <span class="counter" id="cartCounter">0</span>
+          </a>
+        </li>
+        <li><a href="../account.html"><i class='bx bx-user'></i></a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="cart-container">
+    <div class="cart-header">
+      <h1><i class='bx bx-cart'></i> Your Shopping Cart</h1>
+      <p id="itemCount">0 Items</p>
+    </div>
+    
+    <div class="cart-wrapper">
+      <div class="cart-items" id="cartContent">
+        <!-- Empty cart state -->
+        <div class="empty-cart" id="emptyCart">
+          <div class="empty-cart-icon">
+            <i class='bx bx-cart-download'></i>
+          </div>
+          <h3>Your cart feels lonely</h3>
+          <p>Your shopping cart is empty</p>
+          <a href="../products/bags.html" class="continue-btn">
+            <i class='bx bx-chevron-left'></i> Continue Shopping
+          </a>
+        </div>
+      </div>
+      
+      <div class="order-summary" id="cartSummary">
+        <h3><i class='bx bx-receipt'></i> Order Summary</h3>
+        <div class="summary-details">
+          <div class="summary-row">
+            <span>Subtotal</span>
+            <span id="subtotal">₹0</span>
+          </div>
+          <div class="summary-row">
+            <span>Shipping</span>
+            <span>FREE</span>
+          </div>
+          <div class="summary-row">
+            <span>Discount</span>
+            <span id="discount">-₹0</span>
+          </div>
+          <div class="summary-row total">
+            <span>Total</span>
+            <span id="total">₹0</span>
+          </div>
+        </div>
+        <button class="checkout-btn" id="checkoutBtn">
+          Proceed to Checkout <i class='bx bx-chevron-right'></i>
+        </button>
+        <div class="payment-methods">
+          <p>We accept:</p>
+          <div class="payment-icons">
+            <i class='bx bxl-visa'></i>
+            <i class='bx bxl-mastercard'></i>
+            <i class='bx bxl-paypal'></i>
+            <i class='bx bxl-google-pay'></i>
+            <i class='bx bxl-apple'></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../cart.js"></script>
+</body>
+</html>

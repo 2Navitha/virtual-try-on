@@ -7,439 +7,14 @@
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    :root {
-      --primary-color: #6c5ce7;
-      --secondary-color: #a29bfe;
-      --accent-color: #fd79a8;
-      --dark-color: #2d3436;
-      --light-color: #f5f6fa;
-      --success-color: #00b894;
-      --warning-color: #fdcb6e;
-      --danger-color: #d63031;
-      --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-      --transition: all 0.3s ease;
-  }
-
-    
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-body {
-    background-color: #f9f9f9;
-    color: var(--dark-color);
-    line-height: 1.6;
-}
-
-    header {
-      background-color: white;
-      color: black;
-      padding: 15px 30px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
-
-    .logo {
-      font-size: 24px;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      text-decoration: none;
-  }
-
-  .logo i {
-      margin-right: 10px;
-      font-size: 28px;
-  }
-
-
-  .search-box {
-    display: flex;
-    align-items: center;
-    background: #fff;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 8px 12px;
-    width: 500px;
-  }
-  
-  .search-box i {
-    font-size: 20px;
-    color: #333;
-    margin-right: 8px;
-  }
-  
-  .search-box input {
-    border: none;
-    outline: none;
-    font-size: 16px;
-    flex: 1;
-  }
-
-    nav ul {
-      list-style: none;
-      display: flex;
-      margin: 0;
-      padding: 0;
-    }
-
-    nav ul li {
-      margin-left: 20px;
-    }
-
-    nav ul li a {
-      text-decoration: none;
-      color: black;
-      font-size: 15px;
-      transition: color 0.3s;
-      font-weight: bold;
-      margin-left: 40px;
-    }
-
-    nav ul li a:hover {
-      color: blue;
-    }
-
-    .page-container {
-      display: flex;
-      padding: 30px;
-      gap: 30px;
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-
-    .filters {
-      width: 250px;
-      background: #fff;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-      height: fit-content;
-      position: sticky;
-      top: 20px;
-    }
-
-    .filters h3 {
-      margin-bottom: 20px;
-      font-size: 18px;
-      color: #333;
-      padding-bottom: 10px;
-      border-bottom: 1px solid #eee;
-    }
-
-    .filters strong {
-      display: block;
-      margin-top: 15px;
-      font-size: 14px;
-      color: #444;
-    }
-
-    .filters label {
-      display: block;
-      margin: 8px 0;
-      font-size: 13px;
-      color: #555;
-      cursor: pointer;
-      transition: color 0.2s;
-    }
-
-    .filters label:hover {
-      color: #222;
-    }
-
-    .filters input[type="checkbox"],
-    .filters input[type="radio"] {
-      margin-right: 8px;
-      accent-color: #ff4757;
-    }
-
-    .product-grid {
-      flex: 1;
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 25px;
-    }
-
-    .product-card {
-      background: white;
-      padding: 15px;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      text-align: center;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .product-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-    }
-
-    .wishlist {
-      position: absolute;
-      top: 15px;
-      right: 15px;
-      font-size: 22px;
-      color: #ff4757;
-      cursor: pointer;
-      background: rgba(255,255,255,0.8);
-      padding: 5px;
-      border-radius: 50%;
-      transition: all 0.3s;
-      z-index: 2;
-    }
-
-    .wishlist:hover {
-      color: #ff0000;
-      transform: scale(1.1);
-    }
-
-    .wishlist.active {
-      color: #ff0000;
-    }
-
-    .product-card img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      border-radius: 6px;
-      margin-bottom: 15px;
-      transition: transform 0.3s;
-    }
-
-    .product-card:hover img {
-      transform: scale(1.03);
-    }
-
-    .product-card h4 {
-      margin: 10px 0 5px;
-      font-size: 16px;
-      color: #333;
-      font-weight: 600;
-    }
-
-    .product-card .desc {
-      font-size: 13px;
-      color: #666;
-      margin-bottom: 8px;
-      line-height: 1.4;
-    }
-
-    .rating {
-      color: #f39c12;
-      margin: 5px 0;
-      font-size: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 3px;
-    }
-
-    .rating-count {
-      color: #777;
-      font-size: 12px;
-      margin-left: 5px;
-    }
-
-    .product-card p:last-of-type {
-      font-weight: 600;
-      color: #222;
-      margin: 10px 0;
-      font-size: 15px;
-    }
-
-    .actions {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin-top: 15px;
-    }
-
-    .actions button {
-      border: none;
-      padding: 8px 12px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 13px;
-      transition: all 0.3s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 500;
-    }
-
-    .actions button i {
-      margin-right: 5px;
-    }
-
-    .actions .try-on {
-      background-color: #0984e3;
-      color: white;
-      flex: 1;
-    }
-
-    .actions .try-on:hover {
-      background-color: #0768b3;
-      transform: translateY(-2px);
-    }
-
-    .actions .add-cart {
-      background-color: #ff4757;
-      color: white;
-      flex: 1;
-    }
-
-    .actions .add-cart:hover {
-      background-color: #e84118;
-      transform: translateY(-2px);
-    }
-
-    .price-container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
-
-    .original-price {
-      text-decoration: line-through;
-      color: #999;
-      font-size: 13px;
-    }
-
-    .discount {
-      color: #2ecc71;
-      font-size: 12px;
-      font-weight: 600;
-    }
-
-    @media (max-width: 768px) {
-      header {
-        flex-direction: column;
-        padding: 15px;
-      }
-
-      .logo {
-        margin-bottom: 15px;
-      }
-
-      .search-box {
-        display: flex;
-        background:white;
-        padding: 8px 12px;
-        border-radius: 6px;
-        
-      }
-  
-      .search-box input {
-        border: none;
-        outline: none;
-        width: 600px;
-        font-size: 14px;
-      }
-
-
-      nav ul {
-        list-style: none;
-        display: flex;
-        margin: 0;
-        padding: 0;
-      }
-  
-      nav ul li {
-        margin-left: 20px;
-      }
-  
-      nav ul li a {
-        text-decoration: none;
-        color: #fff;
-        font-size: 15px;
-        transition: color 0.3s;
-      }
-  
-      nav ul li a:hover {
-        color: #ddd;
-      }
-
-      .page-container {
-      display: flex;
-      padding: 30px;
-      gap: 30px;
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-
-    .filters {
-      width: 250px;
-      background: #fff;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-      height: fit-content;
-      position: sticky;
-      top: 20px;
-    }
-
-    .filters h3 {
-      margin-bottom: 20px;
-      font-size: 18px;
-      color: #333;
-      padding-bottom: 10px;
-      border-bottom: 1px solid #eee;
-    }
-
-      .product-card img {
-        height: 160px;
-      }
-
-      .product-card h4 {
-        font-size: 15px;
-      }
-
-      .actions button {
-        font-size: 12px;
-        padding: 8px 10px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .product-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 15px;
-      }
-
-      .product-card {
-        padding: 10px;
-      }
-
-      .product-card img {
-        height: 140px;
-      }
-
-      .actions {
-        flex-direction: column;
-        gap: 8px;
-      }
-
-      .actions button {
-        width: 100%;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="../product.css">
 </head>
 <body>
 
 <header>
   <a href="#" class="logo">
     <i class="fas fa-glasses"></i> StyleVision
-</a>
+  </a>
   <div class="search-box">
     <i class='bx bx-search'></i>
     <input type="text" id="searchInput" placeholder="Search AirPods...">
@@ -451,571 +26,358 @@ body {
       <li><a href="#">Headphones</a></li>
       <li><a href="#">Speakers</a></li>
       <li><a href="#">Accessories</a></li>
-      <li><a href="cart.html"><i class='bx bx-cart'></i></a></li>
+      <li>
+        <a href="../wishlist.html">
+          <i class='bx bx-heart'></i>
+          <span class="wishlist-count" id="wishlistCounter">0</span>
+        </a>
+      </li>
+      <li>
+        <a href="../cart.html">
+          <i class='bx bx-cart'></i>
+          <span class="cart-count" id="cartCounter">0</span>
+        </a>
+      </li>
     </ul>
   </nav>
 </header>
 
 <div class="page-container">
-
   <div class="filters">
     <h3>Filters</h3>
     <strong>Category</strong>
-    <label><input type="checkbox" checked> AirPods</label>
-    <label><input type="checkbox"> AirPods Pro</label>
-    <label><input type="checkbox"> AirPods Max</label>
-    <label><input type="checkbox"> AirPods Cases</label>
+    <label><input type="checkbox" name="category" value="AirPods" checked> AirPods</label>
+    <label><input type="checkbox" name="category" value="AirPods Pro"> AirPods Pro</label>
+    <label><input type="checkbox" name="category" value="AirPods Max"> AirPods Max</label>
+    <label><input type="checkbox" name="category" value="AirPods Cases"> AirPods Cases</label>
 
     <strong>Brand</strong>
-    <label><input type="checkbox" checked> Apple</label>
-    <label><input type="checkbox"> Beats</label>
-    <label><input type="checkbox"> Sony</label>
-    <label><input type="checkbox"> Bose</label>
-    <label><input type="checkbox"> Samsung</label>
+    <label><input type="checkbox" name="brand" value="Apple" checked> Apple</label>
+    <label><input type="checkbox" name="brand" value="Beats"> Beats</label>
+    <label><input type="checkbox" name="brand" value="Sony"> Sony</label>
+    <label><input type="checkbox" name="brand" value="Bose"> Bose</label>
+    <label><input type="checkbox" name="brand" value="Boat"> Samsung</label>
+    <label><input type="checkbox" name="brand" value="Boat"> Noise</label>
 
     <strong>Features</strong>
-    <label><input type="checkbox"> Noise Cancellation</label>
-    <label><input type="checkbox"> Wireless Charging</label>
-    <label><input type="checkbox"> Sweat Resistant</label>
-    <label><input type="checkbox"> Spatial Audio</label>
-    <label><input type="checkbox"> MagSafe Compatible</label>
+    <label><input type="checkbox" name="features" value="Noise Cancellation"> Noise Cancellation</label>
+    <label><input type="checkbox" name="features" value="Wireless Charging"> Wireless Charging</label>
+    <label><input type="checkbox" name="features" value="Sweat Resistant"> Sweat Resistant</label>
+    <label><input type="checkbox" name="features" value="Spatial Audio"> Spatial Audio</label>
+    <label><input type="checkbox" name="features" value="MagSafe Compatible"> MagSafe Compatible</label>
 
     <strong>Color</strong>
-    <label><input type="checkbox"> White</label>
-    <label><input type="checkbox"> Black</label>
-    <label><input type="checkbox"> Silver</label>
-    <label><input type="checkbox"> Blue</label>
-    <label><input type="checkbox"> Pink</label>
+    <label><input type="checkbox" name="color" value="White"> White</label>
+    <label><input type="checkbox" name="color" value="Black"> Black</label>
+    <label><input type="checkbox" name="color" value="Silver"> Silver</label>
+    <label><input type="checkbox" name="color" value="Blue"> Blue</label>
+    <label><input type="checkbox" name="color" value="Pink"> Pink</label>
 
     <strong>Price</strong>
-    <label><input type="radio" name="price"> Under ₹5,000</label>
-    <label><input type="radio" name="price"> ₹5,000 - ₹10,000</label>
-    <label><input type="radio" name="price"> ₹10,000 - ₹20,000</label>
-    <label><input type="radio" name="price"> ₹20,000+</label>
+    <label><input type="radio" name="price" value="0-5000"> Under ₹5,000</label>
+    <label><input type="radio" name="price" value="5000-10000"> ₹5,000 - ₹10,000</label>
+    <label><input type="radio" name="price" value="10000-20000"> ₹10,000 - ₹20,000</label>
+    <label><input type="radio" name="price" value="20000-999999"> ₹20,000+</label>
+    
+    <div class="filter-buttons">
+      <button class="apply-filters" id="applyFilters">Apply Filters</button>
+      <button class="reset-filters" id="resetFilters">Reset</button>
+    </div>
   </div>
 
-  <div class="product-grid">
-    <!-- Product 1 -->
-    <div class="product-card">
-      <i class='bx bx-heart wishlist'></i>
-      <img src="/images/airpods/airpod1.jpg" alt="AirPods (2nd Gen)">
-      <h4>AirPods (2nd Gen)</h4>
-      <p class="desc">Wireless Bluetooth Earbuds with Charging Case</p>
-      <div class="rating">★★★★☆ <span class="rating-count">(4.6)</span></div>
-      <div class="price-container">
-        <p>₹12,900</p>
-        <span class="original-price">₹14,900</span>
-        <span class="discount">13% OFF</span>
-      </div>
-      <div class="actions">
-        <button class="add-cart">Add to Cart</button>
-        <button class="try-on">View Details</button>
-      </div>
-    </div>
-  
-    <!-- Product 2 -->
-    <div class="product-card">
-      <i class='bx bx-heart wishlist'></i>
-      <img src="/images/airpods/airpod2.jpg" alt="AirPods Pro (2nd Gen)">
-      <h4>AirPods Pro (2nd Gen)</h4>
-      <p class="desc">Active Noise Cancellation, Adaptive Transparency</p>
-      <div class="rating">★★★★★ <span class="rating-count">(4.8)</span></div>
-      <div class="price-container">
-        <p>₹24,900</p>
-        <span class="original-price">₹26,900</span>
-        <span class="discount">7% OFF</span>
-      </div>
-      <div class="actions">
-        <button class="add-cart">Add to Cart</button>
-        <button class="try-on">View Details</button>
-      </div>
-    </div>
-  
-    <!-- Product 3 -->
-    <div class="product-card">
-      <i class='bx bx-heart wishlist'></i>
-      <img src="/images/airpods/airpod3.jpg" alt="AirPods Max">
-      <h4>AirPods Max</h4>
-      <p class="desc">Over-ear headphones with Active Noise Cancellation</p>
-      <div class="rating">★★★★☆ <span class="rating-count">(4.7)</span></div>
-      <div class="price-container">
-        <p>₹59,900</p>
-        <span class="original-price">₹64,900</span>
-        <span class="discount">8% OFF</span>
-      </div>
-      <div class="actions">
-        <button class="add-cart">Add to Cart</button>
-        <button class="try-on">View Details</button>
-      </div>
-    </div>
-  
-    <!-- Product 4 -->
-    <div class="product-card">
-      <i class='bx bx-heart wishlist'></i>
-      <img src="/images/airpods/airpod4.jpg" alt="AirPods (3rd Gen)">
-      <h4>AirPods (3rd Gen)</h4>
-      <p class="desc">Spatial audio with dynamic head tracking</p>
-      <div class="rating">★★★★☆ <span class="rating-count">(4.5)</span></div>
-      <div class="price-container">
-        <p>₹18,500</p>
-        <span class="original-price">₹20,900</span>
-        <span class="discount">11% OFF</span>
-      </div>
-      <div class="actions">
-        <button class="add-cart">Add to Cart</button>
-        <button class="try-on">View Details</button>
-      </div>
-    </div>
-  
-    <!-- Product 5 -->
-    <div class="product-card">
-      <i class='bx bx-heart wishlist'></i>
-      <img src="/images/airpods/airpod5.jpg" alt="AirPods Pro with MagSafe">
-      <h4>AirPods Pro with MagSafe</h4>
-      <p class="desc">Wireless Charging Case included</p>
-      <div class="rating">★★★★★ <span class="rating-count">(4.9)</span></div>
-      <div class="price-container">
-        <p>₹25,900</p>
-        <span class="original-price">₹27,900</span>
-        <span class="discount">7% OFF</span>
-      </div>
-      <div class="actions">
-        <button class="add-cart">Add to Cart</button>
-        <button class="try-on">View Details</button>
-      </div>
-    </div>
-  
-    <!-- Product 6 -->
-    <div class="product-card">
-      <i class='bx bx-heart wishlist'></i>
-      <img src="/images/airpods/airpod6.jpg" alt="Beats Fit Pro">
-      <h4>Beats Fit Pro</h4>
-      <p class="desc">Apple H1 chip, Active Noise Cancelling</p>
-      <div class="rating">★★★★☆ <span class="rating-count">(4.6)</span></div>
-      <div class="price-container">
-        <p>₹19,990</p>
-        <span class="original-price">₹22,990</span>
-        <span class="discount">13% OFF</span>
-      </div>
-      <div class="actions">
-        <button class="add-cart">Add to Cart</button>
-        <button class="try-on">View Details</button>
-      </div>
-    </div>
-  
-    <!-- Product 7 -->
-    <div class="product-card">
-      <i class='bx bx-heart wishlist'></i>
-      <img src="/images/airpods/airpod7.jpg" alt="AirPods Pro Silicone Case">
-      <h4>AirPods Pro Silicone Case</h4>
-      <p class="desc">Premium protection with MagSafe</p>
-      <div class="rating">★★★★☆ <span class="rating-count">(4.3)</span></div>
-      <div class="price-container">
-        <p>₹3,900</p>
-        <span class="original-price">₹4,500</span>
-        <span class="discount">13% OFF</span>
-      </div>
-      <div class="actions">
-        <button class="add-cart">Add to Cart</button>
-        <button class="try-on">View Details</button>
-      </div>
-    </div>
-  
-    <!-- Product 8 -->
-    <div class="product-card">
-      <i class='bx bx-heart wishlist'></i>
-      <img src="/images/airpods/airpod8.jpg" alt="AirPods Leather Case">
-      <h4>AirPods Leather Case</h4>
-      <p class="desc">Genuine leather, premium finish</p>
-      <div class="rating">★★★★☆ <span class="rating-count">(4.2)</span></div>
-      <div class="price-container">
-        <p>₹5,900</p>
-        <span class="original-price">₹6,900</span>
-        <span class="discount">14% OFF</span>
-      </div>
-      <div class="actions">
-        <button class="add-cart">Add to Cart</button>
-        <button class="try-on">View Details</button>
-      </div>
-    </div>
-  
-    <!-- Product 9 -->
-    <div class="product-card">
-      <i class='bx bx-heart wishlist'></i>
-      <img src="/images/airpods/airpod9.jpg" alt="AirPods Max Smart Case">
-      <h4>AirPods Max Smart Case</h4>
-      <p class="desc">Ultra-low power state to preserve battery</p>
-      <div class="rating">★★★★☆ <span class="rating-count">(4.0)</span></div>
-      <div class="price-container">
-        <p>₹4,900</p>
-        <span class="original-price">₹5,900</span>
-        <span class="discount">17% OFF</span>
-      </div>
-      <div class="actions">
-        <button class="add-cart">Add to Cart</button>
-        <button class="try-on">View Details</button>
-      </div>
-    </div>
-  
-    <!-- Product 10 -->
-    <div class="product-card">
-      <i class='bx bx-heart wishlist'></i>
-      <img src="/images/airpods/airpod10.jpg" alt="AirPods Wireless Charging Case">
-      <h4>AirPods Wireless Charging Case</h4>
-      <p class="desc">Compatible with Qi-certified chargers</p>
-      <div class="rating">★★★★☆ <span class="rating-count">(4.4)</span></div>
-      <div class="price-container">
-        <p>₹7,900</p>
-        <span class="original-price">₹8,900</span>
-        <span class="discount">11% OFF</span>
-      </div>
-      <div class="actions">
-        <button class="add-cart">Add to Cart</button>
-        <button class="try-on">View Details</button>
-      </div>
-    </div>
-  
-    <!-- Product 11 -->
-    <div class="product-card">
-      <i class='bx bx-heart wishlist'></i>
-      <img src="/images/airpods/airpod11.jpg" alt="AirPods Pro Replacement Tips">
-      <h4>AirPods Pro Replacement Tips</h4>
-      <p class="desc">Set of 4 (Small and Large sizes included)</p>
-      <div class="rating">★★★★☆ <span class="rating-count">(4.1)</span></div>
-      <div class="price-container">
-        <p>₹1,900</p>
-        <span class="original-price">₹2,400</span>
-        <span class="discount">21% OFF</span>
-      </div>
-      <div class="actions">
-        <button class="add-cart">Add to Cart</button>
-        <button class="try-on">View Details</button>
-      </div>
-    </div>
-  
-    <!-- Product 12 -->
-    <div class="product-card">
-      <i class='bx bx-heart wishlist'></i>
-      <img src="/images/airpods/airpod12.jpg" alt="AirPods Cleaning Kit">
-      <h4>AirPods Cleaning Kit</h4>
-      <p class="desc">Safe cleaning tools for all AirPods models</p>
-      <div class="rating">★★★★☆ <span class="rating-count">(4.3)</span></div>
-      <div class="price-container">
-        <p>₹1,200</p>
-        <span class="original-price">₹1,800</span>
-        <span class="discount">33% OFF</span>
-      </div>
-      <div class="actions">
-        <button class="add-cart">Add to Cart</button>
-        <button class="try-on">View Details</button>
-      </div>
-    </div>
-
-    <!-- Product 13 -->
-    <div class="product-card">
-      <i class='bx bx-heart wishlist'></i>
-      <img src="/images/airpods/airpod13.jpg" alt="AirPods Pro Limited Edition">
-      <h4>AirPods Pro Limited Edition</h4>
-      <p class="desc">Special edition with engraved case</p>
-      <div class="rating">★★★★★ <span class="rating-count">(4.9)</span></div>
-      <div class="price-container">
-        <p>₹27,900</p>
-        <span class="original-price">₹29,900</span>
-        <span class="discount">7% OFF</span>
-      </div>
-      <div class="actions">
-        <button class="add-cart">Add to Cart</button>
-        <button class="try-on">View Details</button>
-      </div>
-    </div>
-
-    <!-- Product 14 -->
-    <div class="product-card">
-      <i class='bx bx-heart wishlist'></i>
-      <img src="/images/airpods/airpod14.jpg" alt="AirPods (2nd Gen) Refurbished">
-      <h4>AirPods (2nd Gen) Refurbished</h4>
-      <p class="desc">Certified refurbished with warranty</p>
-      <div class="rating">★★★★☆ <span class="rating-count">(4.4)</span></div>
-      <div class="price-container">
-        <p>₹9,900</p>
-        <span class="original-price">₹14,900</span>
-        <span class="discount">34% OFF</span>
-      </div>
-      <div class="actions">
-        <button class="add-cart">Add to Cart</button>
-        <button class="try-on">View Details</button>
-      </div>
-    </div>
-
-    <!-- Product 15 -->
-    <div class="product-card">
-      <i class='bx bx-heart wishlist'></i>
-      <img src="/images/airpods/airpod15.jpg" alt="AirPods Pro Refurbished">
-      <h4>AirPods Pro Refurbished</h4>
-      <p class="desc">Certified refurbished with warranty</p>
-      <div class="rating">★★★★☆ <span class="rating-count">(4.5)</span></div>
-      <div class="price-container">
-        <p>₹18,900</p>
-        <span class="original-price">₹26,900</span>
-        <span class="discount">30% OFF</span>
-      </div>
-      <div class="actions">
-        <button class="add-cart">Add to Cart</button>
-        <button class="try-on">View Details</button>
-      </div>
-    </div>
-
-    <!-- Product 16 -->
-    <div class="product-card">
-      <i class='bx bx-heart wishlist'></i>
-      <img src="/images/airpods/airpod16.jpg" alt="AirPods Car Mount">
-      <h4>AirPods Car Mount</h4>
-      <p class="desc">Convenient car holder for AirPods case</p>
-      <div class="rating">★★★★☆ <span class="rating-count">(4.2)</span></div>
-      <div class="price-container">
-        <p>₹1,500</p>
-        <span class="original-price">₹2,200</span>
-        <span class="discount">32% OFF</span>
-      </div>
-      <div class="actions">
-        <button class="add-cart">Add to Cart</button>
-        <button class="try-on">View Details</button>
-      </div>
-    </div>
-
-    <!-- Product 17 -->
-    <div class="product-card">
-      <i class='bx bx-heart wishlist'></i>
-      <img src="/images/airpods/airpod17.jpg" alt="AirPods Keychain Case">
-      <h4>AirPods Keychain Case</h4>
-      <p class="desc">Attachable to keys for easy carrying</p>
-      <div class="rating">★★★★☆ <span class="rating-count">(4.3)</span></div>
-      <div class="price-container">
-        <p>₹2,200</p>
-        <span class="original-price">₹2,900</span>
-        <span class="discount">24% OFF</span>
-      </div>
-      <div class="actions">
-        <button class="add-cart">Add to Cart</button>
-        <button class="try-on">View Details</button>
-      </div>
-    </div>
-
-    <!-- Product 18 -->
-    <div class="product-card">
-      <i class='bx bx-heart wishlist'></i>
-      <img src="/images/airpods/airpod18.jpg" alt="AirPods Max Stand">
-      <h4>AirPods Max Stand</h4>
-      <p class="desc">Premium aluminum stand for display</p>
-      <div class="rating">★★★★☆ <span class="rating-count">(4.6)</span></div>
-      <div class="price-container">
-        <p>₹3,900</p>
-        <span class="original-price">₹5,500</span>
-        <span class="discount">29% OFF</span>
-      </div>
-      <div class="actions">
-        <button class="add-cart">Add to Cart</button>
-        <button class="try-on">View Details</button>
-      </div>
-    </div>
-
-    <!-- Product 19 -->
-    <div class="product-card">
-      <i class='bx bx-heart wishlist'></i>
-      <img src="/images/airpods/airpod19.jpg" alt="AirPods Pro Ear Hooks">
-      <h4>AirPods Pro Ear Hooks</h4>
-      <p class="desc">Secure fit for sports and workouts</p>
-      <div class="rating">★★★★☆ <span class="rating-count">(4.1)</span></div>
-      <div class="price-container">
-        <p>₹1,200</p>
-        <span class="original-price">₹1,800</span>
-        <span class="discount">33% OFF</span>
-      </div>
-      <div class="actions">
-        <button class="add-cart">Add to Cart</button>
-        <button class="try-on">View Details</button>
-      </div>
-    </div>
-
-    <!-- Product 20 -->
-    <div class="product-card">
-      <i class='bx bx-heart wishlist'></i>
-      <img src="/images/airpods/airpod20.jpg" alt="AirPods Pro Skin Stickers">
-      <h4>AirPods Pro Skin Stickers</h4>
-      <p class="desc">Customizable vinyl skins (Set of 6)</p>
-      <div class="rating">★★★★☆ <span class="rating-count">(4.0)</span></div>
-      <div class="price-container">
-        <p>₹900</p>
-        <span class="original-price">₹1,500</span>
-        <span class="discount">40% OFF</span>
-      </div>
-      <div class="actions">
-        <button class="add-cart">Add to Cart</button>
-        <button class="try-on">View Details</button>
-      </div>
-    </div>
+  <div class="product-grid" id="productGrid">
+    <!-- Product cards will be populated here -->
   </div>
 </div>
 
+<!-- Toast Notification -->
+<div class="toast" id="toast"></div>
 
 <script>
-  // Initialize when DOM is loaded
-  document.addEventListener('DOMContentLoaded', function() {
-    // Get the search input element
-    const searchInput = document.getElementById('searchInput');
-    
-    if (!searchInput) {
-      console.error("Search input element not found!");
-      return;
-    }
-
-    // Wishlist functionality
-    document.querySelectorAll('.wishlist').forEach(heart => {
-      heart.addEventListener('click', function(e) {
-        e.stopPropagation();
-        this.classList.toggle('bxs-heart');
-        this.classList.toggle('bx-heart');
-        this.classList.toggle('active');
-        
-        if (this.classList.contains('bxs-heart')) {
-          this.style.color = '#ff0000';
-          alert('Added to wishlist!');
-        } else {
-          this.style.color = '#ff4757';
-        }
-      });
-    });
-
-    // Try-on functionality
-    document.querySelectorAll('.try-on').forEach(button => {
-      button.addEventListener('click', function() {
-        const productName = this.closest('.product-card').querySelector('h4').textContent;
-        alert("Launching try-on for: " + productName);
-      });
-    });
-
-    // Add to cart functionality
-    document.querySelectorAll('.add-cart').forEach(button => {
-      button.addEventListener('click', function(e) {
-        e.stopPropagation();
-        const productName = this.closest('.product-card').querySelector('h4').textContent;
-        alert(productName + " added to cart!");
-      });
-    });
-
-    // Setup search functionality
-    setupSearch(searchInput);
-  });
-
-  // Search Functionality
-  function searchProducts(searchInput) {
-    const query = searchInput.value.trim().toLowerCase();
-    
-    if (!query) {
-      return; // Do nothing if search is empty
-    }
-
-    // Category mapping - search terms to page URLs
-    const categoryMap = {
-      // Bags
-      'bag': '/Product-details/bags.html',
-      'bags': '/Product-details/bags.html',
-      'backpack': '/Product-details/bags.html',
-      'handbag': '/Product-details/bags.html',
-      'luggage': '/Product-details/bags.html',
-      
-      // Shoes
-      'shoe': '/Product-details/shoes.html',
-      'shoes': '/Product-details/shoes.html',
-      'sneaker': '/Product-details/shoes.html',
-      'sneakers': '/Product-details/shoes.html',
-      'footwear': '/Product-details/shoes.html',
-      'boot': '/Product-details/shoes.html',
-      'boots': '/Product-details/shoes.html',
-      'sandals': '/Product-details/shoes.html',
-      
-      // Watches
-      'watch': '/Product-details/smartwatches.html',
-      'watches': '/Product-details/smartwatches.html',
-      'smartwatch': '/Product-details/smartwatches.html',
-      'smartwatches': '/Product-details/smartwatches.html',
-      
-      // Sunglasses
-      'sunglass': '/Product-details/sunglasses.html',
-      'sunglasses': '/Product-details/sunglasses.html',
-      'eyewear': '/Product-details/sunglasses.html',
-      
-      // T-Shirts
-      't-shirt': '/Product-details/t-shirts.html',
-      't-shirts': '/Product-details/t-shirts.html',
-      'tshirt': '/Product-details/t-shirts.html',
-      'tshirts': '/Product-details/t-shirts.html',
-      
-      // Headphones
-      'headphone': '/Product-details/headphones.html',
-      'headphones': '/Product-details/headphones.html',
-      'earphone': '/Product-details/headphones.html',
-      'earphones': '/Product-details/headphones.html',
-      'earbuds': '/Product-details/headphones.html',
-      
-      // Shirts
-      'shirt': '/Product-details/shirts.html',
-      'shirts': '/Product-details/shirts.html',
-      'formal shirt': '/Product-details/shirts.html',
-      
-      // Other categories
-      'jeans': '/Product-details/jeans.html',
-      'dress': '/Product-details/dresses.html',
-      'dresses': '/Product-details/dresses.html',
-      'jacket': '/Product-details/jackets.html',
-      'jackets': '/Product-details/jackets.html',
-      'sweater': '/Product-details/sweaters.html',
-      'sweaters': '/Product-details/sweaters.html'
-    };
-
-    // Check for direct category match first
-    if (categoryMap[query]) {
-      window.location.href = categoryMap[query];
-      return;
-    }
-
-    // Check for partial matches in the query
-    for (const [keyword, page] of Object.entries(categoryMap)) {
-      if (query.includes(keyword)) {
-        window.location.href = page;
-        return;
-      }
-    }
-
-    // If no match found, show alert to user
-    alert(`No category found for "${query}". Try searching for bags, shoes, watches, etc.`);
+  // Product data with additional filter properties
+  const products = [
+  {
+    id: 1,
+    name: "AirPods (2nd Gen)",
+    desc: "Wireless Bluetooth Earbuds with Charging Case",
+    rating: "★★★★☆ (4.6)",
+    price: 12900,
+    originalPrice: 14900,
+    discount: "13% OFF",
+    image: "/images/airpods/airpod1.jpg",
+    category: "AirPods",
+    brand: "Apple",
+    features: ["Wireless Charging"],
+    color: "White"
+  },
+  {
+    id: 2,
+    name: "AirPods Pro (2nd Gen)",
+    desc: "Active Noise Cancellation, Adaptive Transparency",
+    rating: "★★★★★ (4.8)",
+    price: 24900,
+    originalPrice: 26900,
+    discount: "7% OFF",
+    image: "/images/airpods/airpod2.jpg",
+    category: "AirPods Pro",
+    brand: "Apple",
+    features: ["Noise Cancellation", "Spatial Audio", "Wireless Charging", "MagSafe Compatible"],
+    color: "Silver"
+  },
+  {
+    id: 3,
+    name: "AirPods Max",
+    desc: "Over-ear headphones with Active Noise Cancellation",
+    rating: "★★★★☆ (4.7)",
+    price: 59900,
+    originalPrice: 64900,
+    discount: "8% OFF",
+    image: "/images/airpods/airpod3.jpg",
+    category: "AirPods Max",
+    brand: "Apple",
+    features: ["Noise Cancellation", "Spatial Audio"],
+    color: "Black"
+  },
+  {
+    id: 4,
+    name: "AirPods (3rd Gen)",
+    desc: "Spatial audio with dynamic head tracking",
+    rating: "★★★★☆ (4.5)",
+    price: 18500,
+    originalPrice: 20900,
+    discount: "11% OFF",
+    image: "/images/airpods/airpod4.jpg",
+    category: "AirPods",
+    brand: "Beats",
+    features: ["Spatial Audio", "Wireless Charging"],
+    color: "White"
+  },
+  {
+    id: 5,
+    name: "AirPods Pro with MagSafe",
+    desc: "Wireless Charging Case included",
+    rating: "★★★★★ (4.9)",
+    price: 25900,
+    originalPrice: 27900,
+    discount: "7% OFF",
+    image: "/images/airpods/airpod5.jpg",
+    category: "AirPods Pro",
+    brand: "Beats",
+    features: ["Noise Cancellation", "Spatial Audio", "Wireless Charging", "MagSafe Compatible"],
+    color: "Silver"
+  },
+  {
+    id: 6,
+    name: "Beats Fit Pro",
+    desc: "Apple H1 chip, Active Noise Cancelling",
+    rating: "★★★★☆ (4.6)",
+    price: 19990,
+    originalPrice: 22990,
+    discount: "13% OFF",
+    image: "/images/airpods/airpod6.jpg",
+    category: "AirPods Pro",
+    brand: "Noise",
+    features: ["Noise Cancellation", "Sweat Resistant"],
+    color: "Black"
+  },
+  {
+    id: 7,
+    name: "AirPods Pro Silicone Case",
+    desc: "Premium protection with MagSafe",
+    rating: "★★★★☆ (4.3)",
+    price: 3900,
+    originalPrice: 4500,
+    discount: "13% OFF",
+    image: "/images/airpods/airpod7.jpg",
+    category: "AirPods Cases",
+    brand: "Noise",
+    features: ["MagSafe Compatible"],
+    color: "White"
+  },
+  {
+    id: 8,
+    name: "AirPods Leather Case",
+    desc: "Genuine leather, premium finish",
+    rating: "★★★★☆ (4.2)",
+    price: 25900,
+    originalPrice: 26900,
+    discount: "14% OFF",
+    image: "/images/airpods/airpod8.jpg",
+    category: "AirPods Cases",
+    brand: "Bose",
+    features: [],
+    color: "Silver"
+  },
+  {
+    id: 9,
+    name: "AirPods Max Smart Case",
+    desc: "Ultra-low power state to preserve battery",
+    rating: "★★★★☆ (4.0)",
+    price: 4900,
+    originalPrice: 5900,
+    discount: "17% OFF",
+    image: "/images/airpods/airpod9.jpg",
+    category: "AirPods Cases",
+    brand: "Noise",
+    features: [],
+    color: "White"
+  },
+  {
+    id: 10,
+    name: "AirPods Wireless Charging Case",
+    desc: "Compatible with Qi-certified chargers",
+    rating: "★★★★☆ (4.4)",
+    price: 17900,
+    originalPrice: 18900,
+    discount: "11% OFF",
+    image: "/images/airpods/airpod10.jpg",
+    category: "AirPods Cases",
+    brand: "Samsung",
+    features: ["Wireless Charging"],
+    color: "White"
+  },
+  {
+    id: 11,
+    name: "AirPods Pro Replacement Tips",
+    desc: "Set of 4 (Small and Large sizes included)",
+    rating: "★★★★☆ (4.1)",
+    price: 1900,
+    originalPrice: 2400,
+    discount: "21% OFF",
+    image: "/images/airpods/airpod11.jpg",
+    category: "AirPods Cases",
+    brand: "Samsung",
+    features: [],
+    color: "White"
+  },
+  {
+    id: 12,
+    name: "AirPods Cleaning Kit",
+    desc: "Safe cleaning tools for all AirPods models",
+    rating: "★★★★☆ (4.3)",
+    price: 1200,
+    originalPrice: 1800,
+    discount: "33% OFF",
+    image: "/images/airpods/airpod12.jpg",
+    category: "Accessories",
+    brand: "Sony",
+    features: [],
+    color: "White"
+  },
+  {
+    id: 13,
+    name: "AirPods Pro Limited Edition",
+    desc: "Special edition with engraved case",
+    rating: "★★★★★ (4.9)",
+    price: 27900,
+    originalPrice: 29900,
+    discount: "7% OFF",
+    image: "/images/airpods/airpod13.jpg",
+    category: "AirPods Pro",
+    brand: "Bose",
+    features: ["Noise Cancellation", "Spatial Audio", "Wireless Charging", "MagSafe Compatible"],
+    color: "Silver"
+  },
+  {
+    id: 14,
+    name: "AirPods (2nd Gen) Refurbished",
+    desc: "Certified refurbished with warranty",
+    rating: "★★★★☆ (4.4)",
+    price: 9900,
+    originalPrice: 14900,
+    discount: "34% OFF",
+    image: "/images/airpods/airpod14.jpg",
+    category: "AirPods",
+    brand: "Boat",
+    features: ["Wireless Charging"],
+    color: "Silver"
+  },
+  {
+    id: 15,
+    name: "BOAT WF-1000XM4",
+    desc: "Industry-leading noise cancellation",
+    rating: "★★★★★ (4.8)",
+    price: 19990,
+    originalPrice: 24990,
+    discount: "20% OFF",
+    image: "/images/airpods/airpod15.jpg",
+    category: "AirPods Pro",
+    brand: "Boat",
+    features: ["Noise Cancellation", "Sweat Resistant"],
+    color: "Black"
+  },
+  {
+    id: 16,
+    name: "Bose QuietComfort Earbuds",
+    desc: "World-class noise cancellation",
+    rating: "★★★★☆ (4.7)",
+    price: 8500,
+    originalPrice: 12900,
+    discount: "34% OFF",
+    image: "/images/airpods/airpod16.jpg",
+    category: "AirPods Max",
+    brand: "Bose",
+    features: ["Noise Cancellation", "Sweat Resistant"],
+    color: "Yellow"
+  },
+  {
+    id: 17,
+    name: "Samsung Galaxy Buds2 Pro",
+    desc: "Intelligent ANC, Hi-Fi sound",
+    rating: "★★★★☆ (4.5)",
+    price: 17990,
+    originalPrice: 19990,
+    discount: "10% OFF",
+    image: "/images/airpods/airpod17.jpg",
+    category: "AirPods Max",
+    brand: "Samsung",
+    features: ["Noise Cancellation", "Sweat Resistant"],
+    color: "White"
+  },
+  {
+    id: 18,
+    name: "Beats Studio Buds",
+    desc: "Active Noise Cancelling, sweat resistant",
+    rating: "★★★★☆ (4.3)",
+    price: 14990,
+    originalPrice: 17990,
+    discount: "17% OFF",
+    image: "/images/airpods/airpod18.jpg",
+    category: "AirPods Max",
+    brand: "Beats",
+    features: ["Noise Cancellation", "Sweat Resistant"],
+    color: "White"
+  },
+  {
+    id: 19,
+    name: "AirPods Ear Hooks",
+    desc: "Secure fit for sports and workouts",
+    rating: "★★★★☆ (4.1)",
+    price: 1200,
+    originalPrice: 1800,
+    discount: "33% OFF",
+    image: "/images/airpods/airpod19.jpg",
+    category: "AirPods",
+    brand: "Apple",
+    features: ["Sweat Resistant"],
+    color: "White"
+  },
+  {
+    id: 20,
+    name: "AirPods Skin Stickers",
+    desc: "Customizable vinyl skins (Set of 6)",
+    rating: "★★★★☆ (4.0)",
+    price: 490,
+    originalPrice: 550,
+    discount: "11% OFF",
+    image: "/images/airpods/airpod20.jpg",
+    category: "AirPods",
+    brand: "Samsung",
+    features: [],
+    color: "White"
   }
-
-  // Setup search event listeners
-  function setupSearch(searchInput) {
-    // Search on Enter key
-    searchInput.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') {
-        searchProducts(searchInput);
-      }
-    });
-    
-    // Search with debounce on input
-    searchInput.addEventListener('input', debounce(() => {
-      searchProducts(searchInput);
-    }, 500));
-  }
-
-  // Utility function for debouncing
-  function debounce(func, wait) {
-    let timeout;
-    return function() {
-      const context = this, args = arguments;
-      clearTimeout(timeout);
-      timeout = setTimeout(() => func.apply(context, args), wait);
-    };
-  }
+];
 </script>
-
+<script src="../product.js"></script>
 </body>
 </html>
