@@ -7,450 +7,17 @@
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    :root {
-      --primary-color: #6c5ce7;
-      --secondary-color: #a29bfe;
-      --accent-color: #fd79a8;
-      --dark-color: #2d3436;
-      --light-color: #f5f6fa;
-      --success-color: #00b894;
-      --warning-color: #fdcb6e;
-      --danger-color: #d63031;
-      --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-      --transition: all 0.3s ease;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-
-    body {
-      background-color: #f9f9f9;
-      color: var(--dark-color);
-      line-height: 1.6;
-    }
-    
-    header {
-      background-color: white;
-      color: black;
-      padding: 15px 30px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
-
-    .logo {
-      font-size: 24px;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      text-decoration: none;
-      color: #6c5ce7;
-    }
-
-    .logo i {
-      margin-right: 10px;
-      font-size: 28px;
-    }
-
-    .search-box {
-      display: flex;
-      align-items: center;
-      background: #fff;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      padding: 8px 12px;
-      width: 500px;
-    }
-
-    .search-box i {
-      font-size: 20px;
-      color: #333;
-      margin-right: 8px;
-    }
-
-    .search-box input {
-      border: none;
-      outline: none;
-      font-size: 16px;
-      flex: 1;
-    }
-
-    nav ul {
-      list-style: none;
-      display: flex;
-      margin: 0;
-      padding: 0;
-      align-items: center;
-    }
-
-    nav ul li {
-      margin-left: 20px;
-      position: relative;
-    }
-
-    nav ul li a {
-      text-decoration: none;
-      color: black;
-      font-size: 15px;
-      transition: color 0.3s;
-      display: flex;
-      align-items: center;
-    }
-
-    nav ul li a:hover {
-      color: var(--primary-color);
-    }
-
-    .wishlist-count {
-      position: absolute;
-      top: -8px;
-      right: -8px;
-      background-color: var(--danger-color);
-      color: white;
-      border-radius: 50%;
-      width: 18px;
-      height: 18px;
-      font-size: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .page-container {
-      display: flex;
-      padding: 30px;
-      gap: 30px;
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-
-    .filters {
-      width: 250px;
-      background: #fff;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-      height: fit-content;
-      position: sticky;
-      top: 20px;
-    }
-
-    .filters h3 {
-      margin-bottom: 20px;
-      font-size: 18px;
-      color: #333;
-      padding-bottom: 10px;
-      border-bottom: 1px solid #eee;
-    }
-
-    .filters strong {
-      display: block;
-      margin-top: 15px;
-      font-size: 14px;
-      color: #444;
-    }
-
-    .filters label {
-      display: block;
-      margin: 8px 0;
-      font-size: 13px;
-      color: #555;
-      cursor: pointer;
-      transition: color 0.2s;
-    }
-
-    .filters label:hover {
-      color: #222;
-    }
-
-    .filters input[type="checkbox"],
-    .filters input[type="radio"] {
-      margin-right: 8px;
-      accent-color: #ff4757;
-    }
-
-    .product-grid {
-      flex: 1;
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 25px;
-    }
-
-    .product-card {
-      background: white;
-      padding: 15px;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      text-align: center;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .product-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-    }
-
-    .wishlist {
-      position: absolute;
-      top: 15px;
-      right: 15px;
-      font-size: 22px;
-      color: #ccc;
-      cursor: pointer;
-      background: rgba(255,255,255,0.8);
-      padding: 5px;
-      border-radius: 50%;
-      transition: all 0.3s;
-      z-index: 2;
-    }
-
-    .wishlist:hover {
-      transform: scale(1.1);
-    }
-
-    .wishlist.active {
-      color: #ff0000;
-    }
-
-    .wishlist.bxs-heart {
-      color: #ff0000;
-    }
-
-    .product-card img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      border-radius: 6px;
-      margin-bottom: 15px;
-      transition: transform 0.3s;
-    }
-
-    .product-card:hover img {
-      transform: scale(1.03);
-    }
-
-    .product-card h4 {
-      margin: 10px 0 5px;
-      font-size: 16px;
-      color: #333;
-      font-weight: 600;
-    }
-
-    .product-card .desc {
-      font-size: 13px;
-      color: #666;
-      margin-bottom: 8px;
-      line-height: 1.4;
-    }
-
-    .rating {
-      color: #f39c12;
-      margin: 5px 0;
-      font-size: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 3px;
-    }
-
-    .rating-count {
-      color: #777;
-      font-size: 12px;
-      margin-left: 5px;
-    }
-
-    .product-card p:last-of-type {
-      font-weight: 600;
-      color: #222;
-      margin: 10px 0;
-      font-size: 15px;
-    }
-
-    .actions {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin-top: 15px;
-    }
-
-    .actions button {
-      border: none;
-      padding: 8px 12px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 13px;
-      transition: all 0.3s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 500;
-    }
-
-    .actions button i {
-      margin-right: 5px;
-    }
-
-    .actions .try-on {
-      background-color: #0984e3;
-      color: white;
-      flex: 1;
-    }
-
-    .actions .try-on:hover {
-      background-color: #0768b3;
-      transform: translateY(-2px);
-    }
-
-    .actions .add-cart {
-      background-color: #ff4757;
-      color: white;
-      flex: 1;
-    }
-
-    .actions .add-cart:hover {
-      background-color: #e84118;
-      transform: translateY(-2px);
-    }
-
-    .price-container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
-
-    .original-price {
-      text-decoration: line-through;
-      color: #999;
-      font-size: 13px;
-    }
-
-    .discount {
-      color: #2ecc71;
-      font-size: 12px;
-      font-weight: 600;
-    }
-
-    /* Toast Notification */
-    .toast {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background-color: var(--success-color);
-      color: white;
-      padding: 12px 20px;
-      border-radius: 4px;
-      box-shadow: var(--shadow);
-      transform: translateY(100px);
-      opacity: 0;
-      transition: var(--transition);
-      z-index: 1000;
-    }
-
-    .toast.show {
-      transform: translateY(0);
-      opacity: 1;
-    }
-
-    .toast.error {
-      background-color: var(--danger-color);
-    }
-
-    @media (max-width: 768px) {
-      header {
-        flex-direction: column;
-        padding: 15px;
-      }
-
-      .logo {
-        margin-bottom: 15px;
-      }
-
-      .search-box {
-        width: 100%;
-        margin-bottom: 15px;
-      }
-  
-      .search-box input {
-        width: 100%;
-      }
-
-      nav ul {
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-  
-      nav ul li {
-        margin: 5px 10px;
-      }
-
-      .page-container {
-        flex-direction: column;
-        padding: 15px;
-        gap: 20px;
-      }
-
-      .filters {
-        width: 100%;
-        position: static;
-      }
-
-      .product-card img {
-        height: 160px;
-      }
-
-      .product-card h4 {
-        font-size: 15px;
-      }
-
-      .actions button {
-        font-size: 12px;
-        padding: 8px 10px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .product-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 15px;
-      }
-
-      .product-card {
-        padding: 10px;
-      }
-
-      .product-card img {
-        height: 140px;
-      }
-
-      .actions {
-        flex-direction: column;
-        gap: 8px;
-      }
-
-      .actions button {
-        width: 100%;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="../product.css">
 </head>
 <body>
 
 <header>
   <a href="#" class="logo">
-    <i class="fas fa-glasses"></i> StyleVision
+    <i class="fas fa-glasses"></i> ShopZone
   </a>
   <div class="search-box">
     <i class='bx bx-search'></i>
-    <input type="text" id="searchInput" placeholder="Search fashion...">
+    <input type="text" id="searchInput" placeholder="Search Fashion...">
   </div>
   <nav>
     <ul>
@@ -460,53 +27,78 @@
       <li><a href="#">Footwear</a></li>
       <li><a href="#">Accessories</a></li>
       <li>
-        <a href="wishlist.html">
+        <a href="../wishlist.html">
           <i class='bx bx-heart'></i>
           <span class="wishlist-count" id="wishlistCounter">0</span>
         </a>
       </li>
-      <li><a href="cart.html"><i class='bx bx-cart'></i></a></li>
+      <li>
+        <a href="../cart.html">
+          <i class='bx bx-cart'></i>
+          <span class="cart-count" id="cartCounter">0</span>
+        </a>
+      </li>
     </ul>
   </nav>
 </header>
 
 <div class="page-container">
-
   <div class="filters">
     <h3>Filters</h3>
     <strong>Category</strong>
-    <label><input type="checkbox"> Tops</label>
-    <label><input type="checkbox"> Jeans</label>
-    <label><input type="checkbox"> Dresses</label>
-    <label><input type="checkbox"> Shoes</label>
-    <label><input type="checkbox"> Jackets</label>
-    <label><input type="checkbox"> Bags</label>
+    <label><input type="checkbox" name="category" value="T-Shirts" checked> T-Shirts</label>
+    <label><input type="checkbox" name="category" value="Jeans"> Jeans</label>
+    <label><input type="checkbox" name="category" value="Dresses"> Dresses</label>
+    <label><input type="checkbox" name="category" value="Shirts"> Shirts</label>
+    <label><input type="checkbox" name="category" value="Jackets"> Jackets</label>
+    <label><input type="checkbox" name="category" value="Shoes"> Shoes</label>
+    <label><input type="checkbox" name="category" value="Accessories"> Accessories</label>
 
     <strong>Brand</strong>
-    <label><input type="checkbox"> H&M</label>
-    <label><input type="checkbox"> Nike</label>
-    <label><input type="checkbox"> Adidas</label>
-    <label><input type="checkbox"> Puma</label>
-    <label><input type="checkbox"> Levi's</label>
-    <label><input type="checkbox"> ZARA</label>
+    <label><input type="checkbox" name="brand" value="Nike" checked> Nike</label>
+    <label><input type="checkbox" name="brand" value="Adidas"> Adidas</label>
+    <label><input type="checkbox" name="brand" value="Puma"> Puma</label>
+    <label><input type="checkbox" name="brand" value="H&M"> H&M</label>
+    <label><input type="checkbox" name="brand" value="Zara"> Zara</label>
+    <label><input type="checkbox" name="brand" value="Levi's"> Levi's</label>
+    <label><input type="checkbox" name="brand" value="Roadster"> Roadster</label>
+    <label><input type="checkbox" name="brand" value="US Polo"> US Polo</label>
 
     <strong>Size</strong>
-    <label><input type="checkbox"> S</label>
-    <label><input type="checkbox"> M</label>
-    <label><input type="checkbox"> L</label>
-    <label><input type="checkbox"> XL</label>
+    <label><input type="checkbox" name="size" value="S"> S</label>
+    <label><input type="checkbox" name="size" value="M"> M</label>
+    <label><input type="checkbox" name="size" value="L"> L</label>
+    <label><input type="checkbox" name="size" value="XL"> XL</label>
+    <label><input type="checkbox" name="size" value="XXL"> XXL</label>
 
     <strong>Color</strong>
-    <label><input type="checkbox"> Black</label>
-    <label><input type="checkbox"> White</label>
-    <label><input type="checkbox"> Red</label>
-    <label><input type="checkbox"> Blue</label>
+    <label><input type="checkbox" name="color" value="White"> White</label>
+    <label><input type="checkbox" name="color" value="Black"> Black</label>
+    <label><input type="checkbox" name="color" value="Blue"> Blue</label>
+    <label><input type="checkbox" name="color" value="Red"> Red</label>
+    <label><input type="checkbox" name="color" value="Green"> Green</label>
+    <label><input type="checkbox" name="color" value="Gray"> Gray</label>
+    <label><input type="checkbox" name="color" value="Multicolor"> Multicolor</label>
+
+    <strong>Material</strong>
+    <label><input type="checkbox" name="material" value="Cotton"> Cotton</label>
+    <label><input type="checkbox" name="material" value="Denim"> Denim</label>
+    <label><input type="checkbox" name="material" value="Polyester"> Polyester</label>
+    <label><input type="checkbox" name="material" value="Leather"> Leather</label>
+    <label><input type="checkbox" name="material" value="Wool"> Wool</label>
+    <label><input type="checkbox" name="material" value="Silk"> Silk</label>
 
     <strong>Price</strong>
-    <label><input type="radio" name="price"> Under ₹1,000</label>
-    <label><input type="radio" name="price"> ₹1,000 - ₹2,500</label>
-    <label><input type="radio" name="price"> ₹2,500 - ₹5,000</label>
-    <label><input type="radio" name="price"> ₹5,000+</label>
+    <label><input type="radio" name="price" value="0-1000"> Under ₹1,000</label>
+    <label><input type="radio" name="price" value="1000-2500"> ₹1,000 - ₹2,500</label>
+    <label><input type="radio" name="price" value="2500-5000"> ₹2,500 - ₹5,000</label>
+    <label><input type="radio" name="price" value="5000-10000"> ₹5,000 - ₹10,000</label>
+    <label><input type="radio" name="price" value="10000+"> ₹10,000+</label>
+
+    <div class="filter-buttons">
+      <button class="apply-filters" id="applyFilters">Apply Filters</button>
+      <button class="reset-filters" id="resetFilters">Reset</button>
+    </div>
   </div>
 
   <div class="product-grid" id="productGrid">
@@ -517,302 +109,325 @@
 <!-- Toast Notification -->
 <div class="toast" id="toast"></div>
 
+<script src="../product.js"></script>
+
 <script>
-  // Product data
+  // Product data with additional filter properties
   const products = [
     {
       id: 1,
-      name: "Men's T-Shirt",
-      desc: "Cotton, Slim Fit",
-      rating: "★★★★☆ (4.4)",
-      price: "₹799",
-      originalPrice: "₹1,299",
-      discount: "38% OFF",
-      image: "/images/tshirts/tshirt1.jpg"
+      name: "Men's Cotton T-Shirt",
+      desc: "100% Cotton, Regular Fit, Half Sleeve, Black",
+      rating: "★★★★★ (4.8)",
+      price: 799,
+      originalPrice: 1299,
+      discount: 38,
+      image: "/images/tshirts/tshirt1.jpg",
+      category: "T-Shirts",
+      brand: "Nike",
+      features: ["Moisture Wicking", "Breathable"],
+      color: "Black",
+      size: ["S", "M", "L", "XL"],
+      material: "Cotton"
     },
     {
       id: 2,
       name: "Women's Floral Dress",
-      desc: "Floral Print, Flare",
-      rating: "★★★★★ (4.7)",
-      price: "₹1,299",
-      originalPrice: "₹1,999",
-      discount: "35% OFF",
-      image: "/images/fashion/Women's Floral Dress.jpg"
+      desc: "Poly-Cotton Blend, A-Line, Knee Length",
+      rating: "★★★★☆ (4.5)",
+      price: 1299,
+      originalPrice: 1999,
+      discount: 35,
+      image: "/images/fashion/Women's Floral Dress.jpg",
+      category: "Dresses",
+      brand: "H&M",
+      features: ["Floral Print", "Comfort Fit"],
+      color: "Multicolor",
+      size: ["S", "M", "L"],
+      material: "Polyester"
     },
     {
       id: 3,
-      name: "Men's Blue Jeans",
-      desc: "Denim, Skinny Fit",
+      name: "Men's Slim Fit Jeans",
+      desc: "Stretch Denim, Mid Rise, Blue",
       rating: "★★★★☆ (4.3)",
-      price: "₹1,199",
-      originalPrice: "₹1,799",
-      discount: "33% OFF",
-      image: "/images/fashion/Men's Blue Jeans.jpg"
+      price: 1599,
+      originalPrice: 2299,
+      discount: 30,
+      image: "/images/fashion/Men's Blue Jeans.jpg",
+      category: "Jeans",
+      brand: "Levi's",
+      features: ["Stretch Fabric", "Slim Fit"],
+      color: "Blue",
+      size: ["28", "30", "32", "34"],
+      material: "Denim"
     },
     {
       id: 4,
-      name: "Women's A-Line Skirt",
-      desc: "Cotton, High-Waisted",
-      rating: "★★★★☆ (4.5)",
-      price: "₹899",
-      originalPrice: "₹1,499",
-      discount: "40% OFF",
-      image: "/images/fashion/Women's Skirt.jpg"
+      name: "Women's High Heels",
+      desc: "Leather, Stiletto, 3 Inch Heel, Black",
+      rating: "★★★★★ (4.7)",
+      price: 2999,
+      originalPrice: 4499,
+      discount: 33,
+      image: "/images/fashion/heels.jpg",
+      category: "Shoes",
+      brand: "Zara",
+      features: ["Leather Upper", "Comfort Insole"],
+      color: "Black",
+      size: ["6", "7", "8", "9"],
+      material: "Leather"
     },
     {
       id: 5,
-      name: "Men's Running Shoes",
-      desc: "Mesh, Breathable",
-      rating: "★★★★☆ (4.2)",
-      price: "₹2,499",
-      originalPrice: "₹3,999",
-      discount: "37% OFF",
-      image: "/images/fashion/Men's Shoes.jpg"
+      name: "Men's Casual Shirt",
+      desc: "100% Cotton, Regular Fit, Checkered, Blue",
+      rating: "★★★★☆ (4.6)",
+      price: 999,
+      originalPrice: 1599,
+      discount: 38,
+      image: "/images/fashion/Men's Shoes.jpg",
+      category: "Shirts",
+      brand: "US Polo",
+      features: ["Classic Fit", "Button Down Collar"],
+      color: "Blue",
+      size: ["S", "M", "L", "XL"],
+      material: "Cotton"
     },
     {
       id: 6,
-      name: "Women's High Heels",
-      desc: "Suede, Stiletto",
-      rating: "★★★★★ (4.8)",
-      price: "₹2,999",
-      originalPrice: "₹4,499",
-      discount: "33% OFF",
-      image: "/images/fashion/Women's High Heels.png"
+      name: "Women's Denim Jacket",
+      desc: "Denim, Regular Fit, Light Blue",
+      rating: "★★★★☆ (4.4)",
+      price: 1999,
+      originalPrice: 2999,
+      discount: 33,
+      image: "/images/fashion/Jacket.jpg",
+      category: "Jackets",
+      brand: "Adidas",
+      features: ["Classic Denim", "Front Pockets"],
+      color: "Blue",
+      size: ["S", "M", "L"],
+      material: "Denim"
     },
     {
       id: 7,
-      name: "Men's Checkered Shirt",
-      desc: "Cotton, Casual",
-      rating: "★★★★☆ (4.6)",
-      price: "₹1,499",
-      originalPrice: "₹2,199",
-      discount: "32% OFF",
-      image: "/images/fashion/Men's Checkered Shirt.jpg"
+      name: "Men's Running Shoes",
+      desc: "Mesh Upper, Cushioned Sole, White/Black",
+      rating: "★★★★★ (4.8)",
+      price: 2499,
+      originalPrice: 3999,
+      discount: 38,
+      image:"/images/fashion/Running_Shoes.jpg",
+      category: "Shoes",
+      brand: "Puma",
+      features: ["Breathable", "Lightweight"],
+      color: "White",
+      size: ["8", "9", "10", "11"],
+      material: "Polyester"
     },
     {
       id: 8,
-      name: "Women's Jumpsuit",
-      desc: "One-Piece, Sleeveless",
-      rating: "★★★★☆ (4.3)",
-      price: "₹2,199",
-      originalPrice: "₹3,299",
-      discount: "33% OFF",
-      image: "/images/fashion/Women's Jumpsuit.jpg"
+      name: "Women's Handbag",
+      desc: "Genuine Leather, Crossbody, Brown",
+      rating: "★★★★☆ (4.5)",
+      price: 1799,
+      originalPrice: 2599,
+      discount: 31,
+      image:  "/images/fashion/Handbag.jpg",
+      category: "Accessories",
+      brand: "H&M",
+      features: ["Multiple Compartments", "Adjustable Strap"],
+      color: "Brown",
+      material: "Leather"
     },
     {
       id: 9,
       name: "Men's Woolen Sweater",
-      desc: "Knitted, Winter Wear",
-      rating: "★★★★☆ (4.5)",
-      price: "₹1,799",
-      originalPrice: "₹2,499",
-      discount: "28% OFF",
-      image: "/images/fashion/Men's Woolen Sweater.jpg"
+      desc: "100% Wool, Crew Neck, Gray",
+      rating: "★★★★☆ (4.6)",
+      price: 1799,
+      originalPrice: 2499,
+      discount: 28,
+      image:"/images/fashion/Men's Woolen Sweater.jpg",
+      category: "Jackets",
+      brand: "Roadster",
+      features: ["Winter Wear", "Warm"],
+      color: "Gray",
+      size: ["S", "M", "L", "XL"],
+      material: "Wool"
     },
     {
       id: 10,
-      name: "Skybags",
-      desc: "Stylish Small Crossbody Bag",
-      rating: "★★★★☆ (4.6)",
-      price: "₹799",
-      originalPrice: "₹1,199",
-      discount: "33% OFF",
-      image: "/images/bags/bag15.jpg"
+      name: "Women's Silk Scarf",
+      desc: "100% Silk, Floral Print, Multicolor",
+      rating: "★★★★★ (4.9)",
+      price: 899,
+      originalPrice: 1299,
+      discount: 31,
+      image: "/images/fashion/Scarf.jpg",
+      category: "Accessories",
+      brand: "Zara",
+      features: ["Luxury Silk", "Versatile"],
+      color: "Multicolor",
+      material: "Silk"
     },
     {
       id: 11,
-      name: "Men's Jacket",
-      desc: "Windproof, Winter Wear",
-      rating: "★★★★☆ (4.2)",
-      price: "₹899",
-      originalPrice: "₹1,499",
-      discount: "40% OFF",
-      image: "/images/fashion/men's jacket.jpg"
+      name: "Men's Track Pants",
+      desc: "Polyester, Elastic Waist, Black",
+      rating: "★★★★☆ (4.3)",
+      price: 1199,
+      originalPrice: 1799,
+      discount: 33,
+      image: "/images/fashion/Track Pants.jpg",
+      category: "T-Shirts",
+      brand: "Adidas",
+      features: ["Moisture Wicking", "Comfort Fit"],
+      color: "Black",
+      size: ["S", "M", "L", "XL"],
+      material: "Polyester"
     },
     {
       id: 12,
-      name: "Men's Classic Sunglasses",
-      desc: "UV Protected, Black",
+      name: "Women's Sunglasses",
+      desc: "UV Protection, Cat Eye Frame, Black",
       rating: "★★★★☆ (4.5)",
-      price: "₹1,299",
-      originalPrice: "₹1,999",
-      discount: "35% OFF",
-      image: "/images/sunglasses/sunglass1.jpg"
+      price: 1299,
+      originalPrice: 1999,
+      discount: 35,
+      image:  "/images/sunglasses/sunglass1.jpg",
+      category: "Accessories",
+      brand: "Puma",
+      features: ["UV400 Protection", "Lightweight"],
+      color: "Black"
+    },
+    {
+      id: 13,
+      name: "Men's Leather Belt",
+      desc: "Genuine Leather, Buckle Closure, Brown",
+      rating: "★★★★☆ (4.4)",
+      price: 999,
+      originalPrice: 1499,
+      discount: 33,
+      image: "/images/fashion/men_belt1.jpg",
+      category: "Accessories",
+      brand: "Levi's",
+      features: ["Durable", "Adjustable"],
+      color: "Brown",
+      material: "Leather"
+    },
+    {
+      id: 14,
+      name: "Women's Cotton Top",
+      desc: "100% Cotton, Round Neck, Half Sleeve, White",
+      rating: "★★★★☆ (4.6)",
+      price: 699,
+      originalPrice: 999,
+      discount: 30,
+      image: "/images/fashion/women_top1.jpg",
+      category: "T-Shirts",
+      brand: "H&M",
+      features: ["Breathable", "Casual Wear"],
+      color: "White",
+      size: ["S", "M", "L"],
+      material: "Cotton"
+    },
+    {
+      id: 15,
+      name: "Men's Formal Shoes",
+      desc: "Genuine Leather, Lace-Up, Black",
+      rating: "★★★★★ (4.8)",
+      price: 3499,
+      originalPrice: 4999,
+      discount: 30,
+      image: "/images/shoes/shoe2.jpg",
+      category: "Shoes",
+      brand: "Nike",
+      features: ["Premium Leather", "Cushioned Insole"],
+      color: "Black",
+      size: ["8", "9", "10", "11"],
+      material: "Leather"
+    },
+    {
+      id: 16,
+      name: "Women's Woolen Scarf",
+      desc: "100% Wool, Winter Wear, Gray",
+      rating: "★★★★☆ (4.5)",
+      price: 899,
+      originalPrice: 1299,
+      discount: 31,
+      image: "/images/fashion/women_scarf2.jpg",
+      category: "Accessories",
+      brand: "Zara",
+      features: ["Warm", "Soft"],
+      color: "Gray",
+      material: "Wool"
+    },
+    {
+      id: 17,
+      name: "Men's Sports Shorts",
+      desc: "Quick Dry Fabric, Elastic Waist, Blue",
+      rating: "★★★★☆ (4.3)",
+      price: 799,
+      originalPrice: 1199,
+      discount: 33,
+      image: "/images/shoes/shoe4.jpg",
+      category: "T-Shirts",
+      brand: "Puma",
+      features: ["Moisture Wicking", "Comfort Fit"],
+      color: "Blue",
+      size: ["S", "M", "L", "XL"],
+      material: "Polyester"
+    },
+    {
+      id: 18,
+      name: "Women's Leather Wallet",
+      desc: "Genuine Leather, Multiple Slots, Brown",
+      rating: "★★★★☆ (4.4)",
+      price: 599,
+      originalPrice: 899,
+      discount: 33,
+      image: "/images/fashion/women_wallet1.jpg",
+      category: "Accessories",
+      brand: "H&M",
+      features: ["Compact", "Durable"],
+      color: "Brown",
+      material: "Leather"
+    },
+    {
+      id: 19,
+      name: "Men's Cotton Polo",
+      desc: "100% Cotton, Regular Fit, Half Sleeve, Navy",
+      rating: "★★★★☆ (4.5)",
+      price: 999,
+      originalPrice: 1499,
+      discount: 33,
+      image: "/images/fashion/men_polo1.jpg",
+      category: "T-Shirts",
+      brand: "US Polo",
+      features: ["Classic Polo", "Comfort Fit"],
+      color: "Blue",
+      size: ["S", "M", "L", "XL"],
+      material: "Cotton"
+    },
+    {
+      id: 20,
+      name: "Women's Sneakers",
+      desc: "Breathable Mesh, Cushioned Sole, White/Pink",
+      rating: "★★★★★ (4.7)",
+      price: 2299,
+      originalPrice: 3499,
+      discount: 34,
+      image: "/images/fashion/women_sneakers.jpg",
+      category: "Shoes",
+      brand: "Adidas",
+      features: ["Lightweight", "Flexible"],
+      color: "White",
+      size: ["5", "6", "7", "8"],
+      material: "Polyester"
     }
   ];
-
-  // Initialize when DOM is loaded
-  document.addEventListener('DOMContentLoaded', function() {
-    // Initialize wishlist from localStorage
-    let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
-    updateWishlistCounter(wishlist.length);
-    
-    // Render all products
-    renderProducts(products, wishlist);
-    
-    // Setup search functionality
-    const searchInput = document.getElementById('searchInput');
-    if (searchInput) {
-      setupSearch(searchInput);
-    }
-  });
-
-  // Render products to the page
-  function renderProducts(products, wishlist) {
-    const productGrid = document.getElementById('productGrid');
-    if (!productGrid) return;
-    
-    productGrid.innerHTML = '';
-    
-    products.forEach(product => {
-      const isInWishlist = wishlist.some(item => item.id === product.id);
-      
-      const productCard = document.createElement('div');
-      productCard.className = 'product-card';
-      productCard.innerHTML = `
-        <i class='bx ${isInWishlist ? 'bxs-heart active' : 'bx-heart'} wishlist' data-product-id="${product.id}"></i>
-        <img src="${product.image}" alt="${product.name}" onerror="this.src='https://via.placeholder.com/220x200?text=Product+Image'">
-        <h4>${product.name}</h4>
-        <p class="desc">${product.desc}</p>
-        <div class="rating">${product.rating}</div>
-        <div class="price-container">
-          <p>${product.price}</p>
-          <span class="original-price">${product.originalPrice}</span>
-          <span class="discount">${product.discount}</span>
-        </div>
-        <div class="actions">
-          <button class="add-cart">Add to Cart</button>
-          <button class="try-on">Try On</button>
-        </div>
-      `;
-      
-      productGrid.appendChild(productCard);
-    });
-    
-    // Attach event listeners after rendering
-    attachEventListeners();
-  }
-
-  // Attach event listeners to product cards
-  function attachEventListeners() {
-    // Wishlist functionality
-    document.querySelectorAll('.wishlist').forEach(heart => {
-      heart.addEventListener('click', function(e) {
-        e.stopPropagation();
-        const productId = parseInt(this.getAttribute('data-product-id'));
-        const product = products.find(p => p.id === productId);
-        
-        let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
-        const productIndex = wishlist.findIndex(item => item.id === productId);
-        
-        if (productIndex >= 0) {
-          // Remove from wishlist
-          wishlist.splice(productIndex, 1);
-          this.classList.remove('bxs-heart', 'active');
-          this.classList.add('bx-heart');
-          showToast(`${product.name} removed from wishlist`, 'error');
-        } else {
-          // Add to wishlist
-          wishlist.push(product);
-          this.classList.remove('bx-heart');
-          this.classList.add('bxs-heart', 'active');
-          showToast(`${product.name} added to wishlist`);
-        }
-        
-        // Save to localStorage
-        localStorage.setItem('wishlist', JSON.stringify(wishlist));
-        updateWishlistCounter(wishlist.length);
-      });
-    });
-
-    // Try-on functionality
-    document.querySelectorAll('.try-on').forEach(button => {
-      button.addEventListener('click', function() {
-        const productName = this.closest('.product-card').querySelector('h4').textContent;
-        showToast(`Launching try-on for: ${productName}`);
-      });
-    });
-
-    // Add to cart functionality
-    document.querySelectorAll('.add-cart').forEach(button => {
-      button.addEventListener('click', function(e) {
-        e.stopPropagation();
-        const productName = this.closest('.product-card').querySelector('h4').textContent;
-        showToast(`${productName} added to cart!`);
-      });
-    });
-  }
-
-  // Update wishlist counter
-  function updateWishlistCounter(count) {
-    const counter = document.getElementById('wishlistCounter');
-    if (counter) {
-      counter.textContent = count;
-      counter.style.display = count > 0 ? 'flex' : 'none';
-    }
-  }
-
-  // Show toast notification
-  function showToast(message, type = 'success') {
-    const toast = document.getElementById('toast');
-    if (!toast) return;
-    
-    toast.textContent = message;
-    toast.className = 'toast';
-    toast.classList.add('show', type);
-    
-    setTimeout(() => {
-      toast.classList.remove('show');
-    }, 3000);
-  }
-
-  // Search Functionality
-  function searchProducts(searchInput) {
-    const query = searchInput.value.trim().toLowerCase();
-    
-    if (!query) {
-      renderProducts(products, JSON.parse(localStorage.getItem('wishlist')) || []);
-      return;
-    }
-
-    const filteredProducts = products.filter(product => 
-      product.name.toLowerCase().includes(query) || 
-      product.desc.toLowerCase().includes(query)
-    );
-    
-    if (filteredProducts.length === 0) {
-      showToast(`No products found for "${query}"`, 'error');
-    }
-    
-    renderProducts(filteredProducts, JSON.parse(localStorage.getItem('wishlist')) || []);
-  }
-
-  // Setup search event listeners
-  function setupSearch(searchInput) {
-    // Search on Enter key
-    searchInput.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') {
-        searchProducts(searchInput);
-      }
-    });
-    
-    // Search with debounce on input
-    searchInput.addEventListener('input', debounce(() => {
-      searchProducts(searchInput);
-    }, 500));
-  }
-
-  // Utility function for debouncing
-  function debounce(func, wait) {
-    let timeout;
-    return function() {
-      const context = this, args = arguments;
-      clearTimeout(timeout);
-      timeout = setTimeout(() => func.apply(context, args), wait);
-    };
-  }
 </script>
-
 </body>
 </html>

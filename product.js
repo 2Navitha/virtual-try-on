@@ -363,7 +363,7 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
         <div class="actions">
           <button class="add-cart" data-product-id="${product.id}">Add to Cart</button>
-          <button class="try-on">View Details</button>
+          <button class="try-on">try-on</button>
         </div>
       `;
       

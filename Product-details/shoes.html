@@ -7,476 +7,13 @@
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    :root {
-      --primary-color: #6c5ce7;
-      --secondary-color: #a29bfe;
-      --accent-color: #fd79a8;
-      --dark-color: #2d3436;
-      --light-color: #f5f6fa;
-      --success-color: #00b894;
-      --warning-color: #fdcb6e;
-      --danger-color: #d63031;
-      --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-      --transition: all 0.3s ease;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-
-    body {
-      background-color: #f9f9f9;
-      color: var(--dark-color);
-      line-height: 1.6;
-    }
-
-    header {
-      background-color: white;
-      color: black;
-      padding: 15px 30px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
-
-    .logo {
-      font-size: 24px;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      text-decoration: none;
-      color: #6c5ce7;
-    }
-
-    .logo i {
-      margin-right: 10px;
-      font-size: 28px;
-    }
-
-    .search-box {
-      display: flex;
-      align-items: center;
-      background: #fff;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      padding: 8px 12px;
-      width: 500px;
-    }
-
-    .search-box i {
-      font-size: 20px;
-      color: #333;
-      margin-right: 8px;
-    }
-
-    .search-box input {
-      border: none;
-      outline: none;
-      font-size: 16px;
-      flex: 1;
-    }
-
-    nav ul {
-      list-style: none;
-      display: flex;
-      margin: 0;
-      padding: 0;
-      align-items: center;
-    }
-
-    nav ul li {
-      margin-left: 20px;
-      position: relative;
-    }
-
-    nav ul li a {
-      text-decoration: none;
-      color: black;
-      font-size: 15px;
-      transition: color 0.3s;
-      font-weight: bold;
-      display: flex;
-      align-items: center;
-    }
-
-    nav ul li a:hover {
-      color: var(--primary-color);
-    }
-
-    .wishlist-count {
-      position: absolute;
-      top: -8px;
-      right: -8px;
-      background-color: var(--danger-color);
-      color: white;
-      border-radius: 50%;
-      width: 18px;
-      height: 18px;
-      font-size: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .page-container {
-      display: flex;
-      padding: 30px;
-      gap: 30px;
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-
-    .filters {
-      width: 250px;
-      background: #fff;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-      height: fit-content;
-      position: sticky;
-      top: 20px;
-    }
-
-    .filters h3 {
-      margin-bottom: 20px;
-      font-size: 18px;
-      color: #333;
-      padding-bottom: 10px;
-      border-bottom: 1px solid #eee;
-    }
-
-    .filters strong {
-      display: block;
-      margin-top: 15px;
-      font-size: 14px;
-      color: #444;
-    }
-
-    .filters label {
-      display: block;
-      margin: 8px 0;
-      font-size: 13px;
-      color: #555;
-      cursor: pointer;
-      transition: color 0.2s;
-    }
-
-    .filters label:hover {
-      color: #222;
-    }
-
-    .filters input[type="checkbox"],
-    .filters input[type="radio"] {
-      margin-right: 8px;
-      accent-color: #ff4757;
-    }
-
-    .product-grid {
-      flex: 1;
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 25px;
-    }
-
-    .product-card {
-      background: white;
-      padding: 15px;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      text-align: center;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .product-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-    }
-
-    .wishlist {
-      position: absolute;
-      top: 15px;
-      right: 15px;
-      font-size: 22px;
-      color: #ccc;
-      cursor: pointer;
-      background: rgba(255,255,255,0.8);
-      padding: 5px;
-      border-radius: 50%;
-      transition: all 0.3s;
-      z-index: 2;
-    }
-
-    .wishlist:hover {
-      transform: scale(1.1);
-    }
-
-    .wishlist.active {
-      color: #ff0000;
-    }
-
-    .wishlist.bxs-heart {
-      color: #ff0000;
-    }
-
-    .product-card img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      border-radius: 6px;
-      margin-bottom: 15px;
-      transition: transform 0.3s;
-    }
-
-    .product-card:hover img {
-      transform: scale(1.03);
-    }
-
-    .product-card h4 {
-      margin: 10px 0 5px;
-      font-size: 16px;
-      color: #333;
-      font-weight: 600;
-    }
-
-    .product-card .desc {
-      font-size: 13px;
-      color: #666;
-      margin-bottom: 8px;
-      line-height: 1.4;
-    }
-
-    .rating {
-      color: #f39c12;
-      margin: 5px 0;
-      font-size: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 3px;
-    }
-
-    .rating-count {
-      color: #777;
-      font-size: 12px;
-      margin-left: 5px;
-    }
-
-    .product-card p:last-of-type {
-      font-weight: 600;
-      color: #222;
-      margin: 10px 0;
-      font-size: 15px;
-    }
-
-    .actions {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin-top: 15px;
-    }
-
-    .actions button {
-      border: none;
-      padding: 8px 12px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 13px;
-      transition: all 0.3s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 500;
-    }
-
-    .actions button i {
-      margin-right: 5px;
-    }
-
-    .actions .try-on {
-      background-color: #0984e3;
-      color: white;
-      flex: 1;
-    }
-
-    .actions .try-on:hover {
-      background-color: #0768b3;
-      transform: translateY(-2px);
-    }
-
-    .actions .add-cart {
-      background-color: #ff4757;
-      color: white;
-      flex: 1;
-    }
-
-    .actions .add-cart:hover {
-      background-color: #e84118;
-      transform: translateY(-2px);
-    }
-
-    .price-container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
-
-    .original-price {
-      text-decoration: line-through;
-      color: #999;
-      font-size: 13px;
-    }
-
-    .discount {
-      color: #2ecc71;
-      font-size: 12px;
-      font-weight: 600;
-    }
-
-    .size-selector {
-      margin: 10px 0;
-      display: flex;
-      justify-content: center;
-      gap: 5px;
-    }
-
-    .size-option {
-      width: 30px;
-      height: 30px;
-      border: 1px solid #ddd;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .size-option:hover {
-      border-color: #999;
-    }
-
-    .size-option.selected {
-      background-color: #222;
-      color: white;
-      border-color: #222;
-    }
-
-    /* Toast Notification */
-    .toast {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background-color: var(--success-color);
-      color: white;
-      padding: 12px 20px;
-      border-radius: 4px;
-      box-shadow: var(--shadow);
-      transform: translateY(100px);
-      opacity: 0;
-      transition: var(--transition);
-      z-index: 1000;
-    }
-
-    .toast.show {
-      transform: translateY(0);
-      opacity: 1;
-    }
-
-    .toast.error {
-      background-color: var(--danger-color);
-    }
-
-    @media (max-width: 768px) {
-      header {
-        flex-direction: column;
-        padding: 15px;
-      }
-
-      .logo {
-        margin-bottom: 15px;
-      }
-
-      .search-box {
-        width: 100%;
-        margin-bottom: 15px;
-      }
-  
-      .search-box input {
-        width: 100%;
-      }
-
-      nav ul {
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-  
-      nav ul li {
-        margin: 5px 10px;
-      }
-
-      .page-container {
-        flex-direction: column;
-        padding: 15px;
-        gap: 20px;
-      }
-
-      .filters {
-        width: 100%;
-        position: static;
-      }
-
-      .product-card img {
-        height: 160px;
-      }
-
-      .product-card h4 {
-        font-size: 15px;
-      }
-
-      .actions button {
-        font-size: 12px;
-        padding: 8px 10px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .product-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 15px;
-      }
-
-      .product-card {
-        padding: 10px;
-      }
-
-      .product-card img {
-        height: 140px;
-      }
-
-      .actions {
-        flex-direction: column;
-        gap: 8px;
-      }
-
-      .actions button {
-        width: 100%;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="../product.css">
 </head>
 <body>
 
 <header>
   <a href="#" class="logo">
-    <i class="fas fa-glasses"></i> StyleVision
+    <i class="fas fa-shoe-prints"></i> ShopZone
   </a>
   <div class="search-box">
     <i class='bx bx-search'></i>
@@ -495,7 +32,12 @@
           <span class="wishlist-count" id="wishlistCounter">0</span>
         </a>
       </li>
-      <li><a href="cart.html"><i class='bx bx-cart'></i></a></li>
+      <li>
+        <a href="../cart.html">
+          <i class='bx bx-cart'></i>
+          <span class="cart-count" id="cartCounter">0</span>
+        </a>
+      </li>
     </ul>
   </nav>
 </header>
@@ -504,60 +46,65 @@
   <div class="filters">
     <h3>Filters</h3>
     <strong>Category</strong>
-    <label><input type="checkbox" checked> Sneakers</label>
-    <label><input type="checkbox"> Sports Shoes</label>
-    <label><input type="checkbox"> Casual Shoes</label>
-    <label><input type="checkbox"> Formal Shoes</label>
-    <label><input type="checkbox"> Sandals & Floaters</label>
-    <label><input type="checkbox"> Loafers</label>
+    <label><input type="checkbox" name="category" value="Sneakers" checked> Sneakers</label>
+    <label><input type="checkbox" name="category" value="Sports"> Sports Shoes</label>
+    <label><input type="checkbox" name="category" value="Casual"> Casual Shoes</label>
+    <label><input type="checkbox" name="category" value="Formal"> Formal Shoes</label>
+    <label><input type="checkbox" name="category" value="Sandals"> Sandals & Floaters</label>
+    <label><input type="checkbox" name="category" value="Loafers"> Loafers</label>
 
     <strong>Brand</strong>
-    <label><input type="checkbox" checked> Nike</label>
-    <label><input type="checkbox"> Adidas</label>
-    <label><input type="checkbox"> Puma</label>
-    <label><input type="checkbox"> Reebok</label>
-    <label><input type="checkbox"> Skechers</label>
-    <label><input type="checkbox"> Woodland</label>
-    <label><input type="checkbox"> Bata</label>
-    <label><input type="checkbox"> Red Tape</label>
+    <label><input type="checkbox" name="brand" value="Nike" checked> Nike</label>
+    <label><input type="checkbox" name="brand" value="Adidas"> Adidas</label>
+    <label><input type="checkbox" name="brand" value="Puma"> Puma</label>
+    <label><input type="checkbox" name="brand" value="Reebok"> Reebok</label>
+    <label><input type="checkbox" name="brand" value="Skechers"> Skechers</label>
+    <label><input type="checkbox" name="brand" value="Woodland"> Woodland</label>
+    <label><input type="checkbox" name="brand" value="Bata"> Bata</label>
+    <label><input type="checkbox" name="brand" value="Red Tape"> Red Tape</label>
 
     <strong>Size</strong>
-    <label><input type="checkbox"> 6</label>
-    <label><input type="checkbox"> 7</label>
-    <label><input type="checkbox"> 8</label>
-    <label><input type="checkbox"> 9</label>
-    <label><input type="checkbox"> 10</label>
-    <label><input type="checkbox"> 11</label>
+    <label><input type="checkbox" name="size" value="6"> 6</label>
+    <label><input type="checkbox" name="size" value="7"> 7</label>
+    <label><input type="checkbox" name="size" value="8"> 8</label>
+    <label><input type="checkbox" name="size" value="9"> 9</label>
+    <label><input type="checkbox" name="size" value="10"> 10</label>
+    <label><input type="checkbox" name="size" value="11"> 11</label>
 
     <strong>Color</strong>
-    <label><input type="checkbox"> White</label>
-    <label><input type="checkbox"> Black</label>
-    <label><input type="checkbox"> Blue</label>
-    <label><input type="checkbox"> Red</label>
-    <label><input type="checkbox"> Green</label>
-    <label><input type="checkbox"> Grey</label>
-    <label><input type="checkbox"> Brown</label>
+    <label><input type="checkbox" name="color" value="White"> White</label>
+    <label><input type="checkbox" name="color" value="Black"> Black</label>
+    <label><input type="checkbox" name="color" value="Blue"> Blue</label>
+    <label><input type="checkbox" name="color" value="Red"> Red</label>
+    <label><input type="checkbox" name="color" value="Green"> Green</label>
+    <label><input type="checkbox" name="color" value="Grey"> Grey</label>
+    <label><input type="checkbox" name="color" value="Brown"> Brown</label>
 
     <strong>Material</strong>
-    <label><input type="checkbox"> Leather</label>
-    <label><input type="checkbox"> Synthetic</label>
-    <label><input type="checkbox"> Mesh</label>
-    <label><input type="checkbox"> Canvas</label>
-    <label><input type="checkbox"> Rubber</label>
+    <label><input type="checkbox" name="material" value="Leather"> Leather</label>
+    <label><input type="checkbox" name="material" value="Synthetic"> Synthetic</label>
+    <label><input type="checkbox" name="material" value="Mesh"> Mesh</label>
+    <label><input type="checkbox" name="material" value="Canvas"> Canvas</label>
+    <label><input type="checkbox" name="material" value="Rubber"> Rubber</label>
 
     <strong>Discount</strong>
-    <label><input type="checkbox"> 10% and above</label>
-    <label><input type="checkbox"> 20% and above</label>
-    <label><input type="checkbox"> 30% and above</label>
-    <label><input type="checkbox"> 40% and above</label>
-    <label><input type="checkbox"> 50% and above</label>
+    <label><input type="checkbox" name="discount" value="10"> 10% and above</label>
+    <label><input type="checkbox" name="discount" value="20"> 20% and above</label>
+    <label><input type="checkbox" name="discount" value="30"> 30% and above</label>
+    <label><input type="checkbox" name="discount" value="40"> 40% and above</label>
+    <label><input type="checkbox" name="discount" value="50"> 50% and above</label>
 
     <strong>Price</strong>
-    <label><input type="radio" name="price"> Under ₹1,000</label>
-    <label><input type="radio" name="price"> ₹1,000 - ₹2,000</label>
-    <label><input type="radio" name="price"> ₹2,000 - ₹3,000</label>
-    <label><input type="radio" name="price"> ₹3,000 - ₹5,000</label>
-    <label><input type="radio" name="price"> ₹5,000+</label>
+    <label><input type="radio" name="price" value="0-1000"> Under ₹1,000</label>
+    <label><input type="radio" name="price" value="1000-2000"> ₹1,000 - ₹2,000</label>
+    <label><input type="radio" name="price" value="2000-3000"> ₹2,000 - ₹3,000</label>
+    <label><input type="radio" name="price" value="3000-5000"> ₹3,000 - ₹5,000</label>
+    <label><input type="radio" name="price" value="5000+"> ₹5,000+</label>
+
+    <div class="filter-buttons">
+      <button class="apply-filters" id="applyFilters">Apply Filters</button>
+      <button class="reset-filters" id="resetFilters">Reset</button>
+    </div>
   </div>
 
   <div class="product-grid" id="productGrid">
@@ -568,398 +115,312 @@
 <!-- Toast Notification -->
 <div class="toast" id="toast"></div>
 
+<script src="../product.js"></script>
+
 <script>
-  // Product data
+  // Product data with additional filter properties
   const products = [
     {
       id: 1,
       name: "Nike Air Max",
       desc: "Men's Running Shoes, Cushioned, Breathable",
       rating: "★★★★★ (4.9)",
-      price: "₹4,999",
-      originalPrice: "₹6,999",
-      discount: "29% OFF",
-      image: "/images/shoes/shoe1.jpg"
+      price: 4999,
+      originalPrice: 6999,
+      discount: 29,
+      image: "/images/shoes/shoe1.jpg",
+      category: "Sneakers",
+      brand: "Nike",
+      size: [7, 8, 9, 10],
+      color: "White",
+      material: "Mesh"
     },
     {
       id: 2,
       name: "Adidas Ultraboost",
       desc: "Men's Running Shoes, Responsive Cushioning",
       rating: "★★★★☆ (4.7)",
-      price: "₹5,499",
-      originalPrice: "₹7,999",
-      discount: "31% OFF",
-      image: "/images/shoes/shoe2.jpg"
+      price: 5499,
+      originalPrice: 7999,
+      discount: 31,
+      image: "/images/shoes/shoe2.jpg",
+      category: "Sports",
+      brand: "Adidas",
+      size: [8, 9, 10],
+      color: "Black",
+      material: "Mesh"
     },
     {
       id: 3,
       name: "Puma RS-X",
       desc: "Men's Sneakers, Retro Running Style",
       rating: "★★★★☆ (4.5)",
-      price: "₹3,299",
-      originalPrice: "₹4,999",
-      discount: "34% OFF",
-      image: "/images/shoes/shoe3.jpg"
+      price: 3299,
+      originalPrice: 4999,
+      discount: 34,
+      image: "/images/shoes/shoe3.jpg",
+      category: "Sneakers",
+      brand: "Puma",
+      size: [7, 8, 9],
+      color: "Red",
+      material: "Synthetic"
     },
     {
       id: 4,
       name: "Reebok Classic",
       desc: "Leather Sneakers, Retro Style, Comfortable",
       rating: "★★★★★ (4.8)",
-      price: "₹2,999",
-      originalPrice: "₹4,499",
-      discount: "33% OFF",
-      image: "/images/shoes/shoe4.jpg"
+      price: 2999,
+      originalPrice: 4499,
+      discount: 33,
+      image: "/images/shoes/shoe4.jpg",
+      category: "Casual",
+      brand: "Reebok",
+      size: [8, 9, 10],
+      color: "White",
+      material: "Leather"
     },
     {
       id: 5,
       name: "Skechers Go Walk",
       desc: "Men's Walking Shoes, Lightweight, Slip-on",
       rating: "★★★★☆ (4.6)",
-      price: "₹3,499",
-      originalPrice: "₹4,999",
-      discount: "30% OFF",
-      image: "/images/shoes/shoe5.jpg"
+      price: 3499,
+      originalPrice: 4999,
+      discount: 30,
+      image: "/images/shoes/shoe5.jpg",
+      category: "Casual",
+      brand: "Skechers",
+      size: [7, 8, 9, 10],
+      color: "Black",
+      material: "Mesh"
     },
     {
       id: 6,
       name: "Woodland Brown",
       desc: "Men's Leather Shoes, Outdoor, Durable",
       rating: "★★★★☆ (4.4)",
-      price: "₹2,799",
-      originalPrice: "₹3,999",
-      discount: "30% OFF",
-      image: "/images/shoes/shoe6.jpg"
+      price: 2799,
+      originalPrice: 3999,
+      discount: 30,
+      image: "/images/shoes/shoe6.jpg",
+      category: "Formal",
+      brand: "Woodland",
+      size: [8, 9, 10],
+      color: "Brown",
+      material: "Leather"
     },
     {
       id: 7,
       name: "Bata Formal",
       desc: "Men's Leather Formal Shoes, Office Wear",
       rating: "★★★★★ (4.8)",
-      price: "₹1,499",
-      originalPrice: "₹2,499",
-      discount: "40% OFF",
-      image: "/images/shoes/shoe7.jpg"
+      price: 1499,
+      originalPrice: 2499,
+      discount: 40,
+      image: "/images/shoes/shoe7.jpg",
+      category: "Formal",
+      brand: "Bata",
+      size: [7, 8, 9],
+      color: "Black",
+      material: "Leather"
     },
     {
       id: 8,
       name: "Red Tape Loafers",
       desc: "Men's Casual Loafers, Slip-on, Comfortable",
       rating: "★★★★☆ (4.5)",
-      price: "₹1,299",
-      originalPrice: "₹1,999",
-      discount: "35% OFF",
-      image: "/images/shoes/shoe8.jpg"
+      price: 1299,
+      originalPrice: 1999,
+      discount: 35,
+      image: "/images/shoes/shoe8.jpg",
+      category: "Loafers",
+      brand: "Red Tape",
+      size: [8, 9, 10],
+      color: "Brown",
+      material: "Leather"
     },
     {
       id: 9,
       name: "Nike Jordan",
       desc: "Men's Basketball Shoes, High-Top, Stylish",
       rating: "★★★★★ (4.9)",
-      price: "₹6,999",
-      originalPrice: "₹9,999",
-      discount: "30% OFF",
-      image: "/images/shoes/shoe9.jpg"
+      price: 6999,
+      originalPrice: 9999,
+      discount: 30,
+      image: "/images/shoes/shoe9.jpg",
+      category: "Sneakers",
+      brand: "Nike",
+      size: [8, 9, 10, 11],
+      color: "Black",
+      material: "Leather"
     },
     {
       id: 10,
       name: "Adidas Stan Smith",
       desc: "Men's Classic Sneakers, Leather, Green",
       rating: "★★★★★ (4.8)",
-      price: "₹3,999",
-      originalPrice: "₹5,999",
-      discount: "33% OFF",
-      image: "/images/shoes/shoe10.jpg"
+      price: 3999,
+      originalPrice: 5999,
+      discount: 33,
+      image: "/images/shoes/shoe10.jpg",
+      category: "Sneakers",
+      brand: "Adidas",
+      size: [7, 8, 9],
+      color: "Green",
+      material: "Leather"
     },
     {
       id: 11,
       name: "Puma Future Rider",
       desc: "Men's Retro Running Shoes, Comfortable",
       rating: "★★★★☆ (4.6)",
-      price: "₹2,999",
-      originalPrice: "₹4,499",
-      discount: "33% OFF",
-      image: "/images/shoes/shoe11.jpg"
+      price: 2999,
+      originalPrice: 4499,
+      discount: 33,
+      image: "/images/shoes/shoe11.jpg",
+      category: "Sneakers",
+      brand: "Puma",
+      size: [8, 9, 10],
+      color: "Blue",
+      material: "Synthetic"
     },
     {
       id: 12,
       name: "Reebok Nano",
       desc: "Men's Training Shoes, CrossFit, Durable",
       rating: "★★★★☆ (4.7)",
-      price: "₹4,499",
-      originalPrice: "₹6,999",
-      discount: "36% OFF",
-      image: "/images/shoes/shoe12.jpg"
+      price: 4499,
+      originalPrice: 6999,
+      discount: 36,
+      image: "/images/shoes/shoe12.jpg",
+      category: "Sports",
+      brand: "Reebok",
+      size: [9, 10, 11],
+      color: "Black",
+      material: "Synthetic"
     },
     {
       id: 13,
       name: "Skechers Arch Fit",
       desc: "Men's Walking Shoes, Arch Support, Comfort",
       rating: "★★★★☆ (4.5)",
-      price: "₹3,999",
-      originalPrice: "₹5,999",
-      discount: "33% OFF",
-      image: "/images/shoes/shoe13.jpg"
+      price: 3999,
+      originalPrice: 5999,
+      discount: 33,
+      image: "/images/shoes/shoe13.jpg",
+      category: "Casual",
+      brand: "Skechers",
+      size: [8, 9, 10],
+      color: "Grey",
+      material: "Mesh"
     },
     {
       id: 14,
       name: "Woodland Sandals",
       desc: "Men's Outdoor Sandals, Durable, Comfortable",
       rating: "★★★★☆ (4.4)",
-      price: "₹1,799",
-      originalPrice: "₹2,499",
-      discount: "28% OFF",
-      image: "/images/shoes/shoe14.jpg"
+      price: 1799,
+      originalPrice: 2499,
+      discount: 28,
+      image: "/images/shoes/shoe14.jpg",
+      category: "Sandals",
+      brand: "Woodland",
+      size: [8, 9, 10],
+      color: "Brown",
+      material: "Rubber"
     },
     {
       id: 15,
       name: "Bata Comfit",
       desc: "Men's Casual Shoes, Lightweight, Comfortable",
       rating: "★★★★★ (4.8)",
-      price: "₹1,299",
-      originalPrice: "₹1,999",
-      discount: "35% OFF",
-      image: "/images/shoes/shoe15.jpg"
+      price: 1299,
+      originalPrice: 1999,
+      discount: 35,
+      image: "/images/shoes/shoe15.jpg",
+      category: "Casual",
+      brand: "Bata",
+      size: [7, 8, 9],
+      color: "Black",
+      material: "Synthetic"
     },
     {
       id: 16,
       name: "Red Tape Sports",
       desc: "Men's Running Shoes, Breathable, Lightweight",
       rating: "★★★★☆ (4.6)",
-      price: "₹1,999",
-      originalPrice: "₹2,999",
-      discount: "33% OFF",
-      image: "/images/shoes/shoe16.jpg"
+      price: 1999,
+      originalPrice: 2999,
+      discount: 33,
+      image: "/images/shoes/shoe16.jpg",
+      category: "Sports",
+      brand: "Red Tape",
+      size: [8, 9, 10],
+      color: "Blue",
+      material: "Mesh"
     },
     {
       id: 17,
       name: "Nike Revolution",
       desc: "Men's Running Shoes, Cushioned, Breathable",
       rating: "★★★★☆ (4.3)",
-      price: "₹2,499",
-      originalPrice: "₹3,999",
-      discount: "38% OFF",
-      image: "/images/shoes/shoe17.jpg"
+      price: 2499,
+      originalPrice: 3999,
+      discount: 38,
+      image: "/images/shoes/shoe17.jpg",
+      category: "Sports",
+      brand: "Nike",
+      size: [7, 8, 9],
+      color: "White",
+      material: "Mesh"
     },
     {
       id: 18,
       name: "Adidas Superstar",
       desc: "Men's Classic Sneakers, Leather, White",
       rating: "★★★★★ (4.9)",
-      price: "₹4,999",
-      originalPrice: "₹7,999",
-      discount: "38% OFF",
-      image: "/images/shoes/shoe18.jpg"
+      price: 4999,
+      originalPrice: 7999,
+      discount: 38,
+      image: "/images/shoes/shoe18.jpg",
+      category: "Sneakers",
+      brand: "Adidas",
+      size: [8, 9, 10],
+      color: "White",
+      material: "Leather"
     },
     {
       id: 19,
       name: "Adidas Ultraboost",
       desc: "Men's Running Shoes, Responsive Cushioning",
       rating: "★★★★☆ (4.7)",
-      price: "₹5,499",
-      originalPrice: "₹7,999",
-      discount: "31% OFF",
-      image: "/images/shoes/shoe19.jpg"
+      price: 5499,
+      originalPrice: 7999,
+      discount: 31,
+      image: "/images/shoes/shoe19.jpg",
+      category: "Sports",
+      brand: "Adidas",
+      size: [9, 10, 11],
+      color: "Black",
+      material: "Mesh"
     },
     {
       id: 20,
       name: "Bata Formal",
       desc: "Men's Leather Formal Shoes, Office Wear",
       rating: "★★★★★ (4.8)",
-      price: "₹1,499",
-      originalPrice: "₹2,499",
-      discount: "40% OFF",
-      image: "/images/shoes/shoe2.jpg"
+      price: 1499,
+      originalPrice: 2499,
+      discount: 40,
+      image: "/images/shoes/shoe20.jpg",
+      category: "Formal",
+      brand: "Bata",
+      size: [7, 8, 9],
+      color: "Black",
+      material: "Leather"
     }
   ];
-
-  // Initialize when DOM is loaded
-  document.addEventListener('DOMContentLoaded', function() {
-    // Initialize wishlist from localStorage
-    let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
-    updateWishlistCounter(wishlist.length);
-    
-    // Render all products
-    renderProducts(products, wishlist);
-    
-    // Setup search functionality
-    const searchInput = document.getElementById('searchInput');
-    if (searchInput) {
-      setupSearch(searchInput);
-    }
-  });
-
-  // Render products to the page
-  function renderProducts(products, wishlist) {
-    const productGrid = document.getElementById('productGrid');
-    if (!productGrid) return;
-    
-    productGrid.innerHTML = '';
-    
-    products.forEach(product => {
-      const isInWishlist = wishlist.some(item => item.id === product.id);
-      
-      const productCard = document.createElement('div');
-      productCard.className = 'product-card';
-      productCard.innerHTML = `
-        <i class='bx ${isInWishlist ? 'bxs-heart active' : 'bx-heart'} wishlist' data-product-id="${product.id}"></i>
-        <img src="${product.image}" alt="${product.name}" onerror="this.src='https://via.placeholder.com/220x200?text=Product+Image'">
-        <h4>${product.name}</h4>
-        <p class="desc">${product.desc}</p>
-        <div class="rating">${product.rating}</div>
-        <div class="size-selector">
-          <div class="size-option">6</div>
-          <div class="size-option selected">7</div>
-          <div class="size-option">8</div>
-          <div class="size-option">9</div>
-        </div>
-        <div class="price-container">
-          <p>${product.price}</p>
-          <span class="original-price">${product.originalPrice}</span>
-          <span class="discount">${product.discount}</span>
-        </div>
-        <div class="actions">
-          <button class="add-cart">Add to Cart</button>
-          <button class="try-on">View Details</button>
-        </div>
-      `;
-      
-      productGrid.appendChild(productCard);
-    });
-    
-    // Attach event listeners after rendering
-    attachEventListeners();
-  }
-
-  // Attach event listeners to product cards
-  function attachEventListeners() {
-    // Wishlist functionality
-    document.querySelectorAll('.wishlist').forEach(heart => {
-      heart.addEventListener('click', function(e) {
-        e.stopPropagation();
-        const productId = parseInt(this.getAttribute('data-product-id'));
-        const product = products.find(p => p.id === productId);
-        
-        let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
-        const productIndex = wishlist.findIndex(item => item.id === productId);
-        
-        if (productIndex >= 0) {
-          // Remove from wishlist
-          wishlist.splice(productIndex, 1);
-          this.classList.remove('bxs-heart', 'active');
-          this.classList.add('bx-heart');
-          showToast(`${product.name} removed from wishlist`, 'error');
-        } else {
-          // Add to wishlist
-          wishlist.push(product);
-          this.classList.remove('bx-heart');
-          this.classList.add('bxs-heart', 'active');
-          showToast(`${product.name} added to wishlist`);
-        }
-        
-        // Save to localStorage
-        localStorage.setItem('wishlist', JSON.stringify(wishlist));
-        updateWishlistCounter(wishlist.length);
-      });
-    });
-
-    // Size selection functionality
-    document.querySelectorAll('.size-option').forEach(size => {
-      size.addEventListener('click', function() {
-        this.parentNode.querySelectorAll('.size-option').forEach(option => {
-          option.classList.remove('selected');
-        });
-        this.classList.add('selected');
-      });
-    });
-
-    // View Details functionality
-    document.querySelectorAll('.try-on').forEach(button => {
-      button.addEventListener('click', function() {
-        const productName = this.closest('.product-card').querySelector('h4').textContent;
-        showToast(`Showing details for: ${productName}`);
-      });
-    });
-
-    // Add to cart functionality
-    document.querySelectorAll('.add-cart').forEach(button => {
-      button.addEventListener('click', function(e) {
-        e.stopPropagation();
-        const productName = this.closest('.product-card').querySelector('h4').textContent;
-        showToast(`${productName} added to cart!`);
-      });
-    });
-  }
-
-  // Update wishlist counter
-  function updateWishlistCounter(count) {
-    const counter = document.getElementById('wishlistCounter');
-    if (counter) {
-      counter.textContent = count;
-      counter.style.display = count > 0 ? 'flex' : 'none';
-    }
-  }
-
-  // Show toast notification
-  function showToast(message, type = 'success') {
-    const toast = document.getElementById('toast');
-    if (!toast) return;
-    
-    toast.textContent = message;
-    toast.className = 'toast';
-    toast.classList.add('show', type);
-    
-    setTimeout(() => {
-      toast.classList.remove('show');
-    }, 3000);
-  }
-
-  // Search Functionality
-  function searchProducts(searchInput) {
-    const query = searchInput.value.trim().toLowerCase();
-    
-    if (!query) {
-      renderProducts(products, JSON.parse(localStorage.getItem('wishlist')) || []);
-      return;
-    }
-
-    const filteredProducts = products.filter(product => 
-      product.name.toLowerCase().includes(query) || 
-      product.desc.toLowerCase().includes(query)
-    );
-    
-    if (filteredProducts.length === 0) {
-      showToast(`No products found for "${query}"`, 'error');
-    }
-    
-    renderProducts(filteredProducts, JSON.parse(localStorage.getItem('wishlist')) || []);
-  }
-
-  // Setup search event listeners
-  function setupSearch(searchInput) {
-    // Search on Enter key
-    searchInput.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') {
-        searchProducts(searchInput);
-      }
-    });
-    
-    // Search with debounce on input
-    searchInput.addEventListener('input', debounce(() => {
-      searchProducts(searchInput);
-    }, 500));
-  }
-
-  // Utility function for debouncing
-  function debounce(func, wait) {
-    let timeout;
-    return function() {
-      const context = this, args = arguments;
-      clearTimeout(timeout);
-      timeout = setTimeout(() => func.apply(context, args), wait);
-    };
-  }
 </script>
-
 </body>
 </html>

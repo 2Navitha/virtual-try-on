@@ -7,1181 +7,456 @@
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    :root {
-      --primary-color: #6c5ce7;
-      --secondary-color: #a29bfe;
-      --accent-color: #fd79a8;
-      --dark-color: #2d3436;
-      --light-color: #f5f6fa;
-      --success-color: #00b894;
-      --warning-color: #fdcb6e;
-      --danger-color: #d63031;
-      --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-      --transition: all 0.3s ease;
-  }
-
-    
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-body {
-    background-color: #f9f9f9;
-    color: var(--dark-color);
-    line-height: 1.6;
-}
-header {
-  background-color: white;
-  color: black;
-  padding: 15px 30px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
-
-.logo {
-  font-size: 24px;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-}
-
-.logo i {
-  margin-right: 10px;
-  font-size: 28px;
-}
-
-
-.search-box {
-  display: flex;
-  align-items: center;
-  background: #fff;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 8px 12px;
-  width: 500px;
-}
-
-.search-box i {
-  font-size: 20px;
-  color: #333;
-  margin-right: 8px;
-}
-
-.search-box input {
-  border: none;
-  outline: none;
-  font-size: 16px;
-  flex: 1;
-}
-
-    nav ul {
-      list-style: none;
-      display: flex;
-      margin: 0;
-      padding: 0;
-    }
-
-    nav ul li {
-      margin-left: 20px;
-    }
-
-    nav ul li a {
-      text-decoration: none;
-      color: black;
-      font-size: 15px;
-      transition: color 0.3s;
-      font-weight: bold;
-      padding-left: 40px;
-    }
-
-    nav ul li a:hover {
-      color:blue;
-    }
-
-    .page-container {
-      display: flex;
-      padding: 30px;
-      gap: 30px;
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-
-    .filters {
-      width: 250px;
-      background: #fff;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-      height: fit-content;
-      position: sticky;
-      top: 20px;
-    }
-
-    .filters h3 {
-      margin-bottom: 20px;
-      font-size: 18px;
-      color: #333;
-      padding-bottom: 10px;
-      border-bottom: 1px solid #eee;
-    }
-
-    .filters strong {
-      display: block;
-      margin-top: 15px;
-      font-size: 14px;
-      color: #444;
-    }
-
-    .filters label {
-      display: block;
-      margin: 8px 0;
-      font-size: 13px;
-      color: #555;
-      cursor: pointer;
-      transition: color 0.2s;
-    }
-
-    .filters label:hover {
-      color: #222;
-    }
-
-    .filters input[type="checkbox"],
-    .filters input[type="radio"] {
-      margin-right: 8px;
-      accent-color: #ff4757;
-    }
-
-    .product-grid {
-      flex: 1;
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 25px;
-    }
-
-    .product-card {
-      background: white;
-      padding: 15px;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      text-align: center;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .product-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-    }
-
-    .wishlist {
-      position: absolute;
-      top: 15px;
-      right: 15px;
-      font-size: 22px;
-      color: #ff4757;
-      cursor: pointer;
-      background: rgba(255,255,255,0.8);
-      padding: 5px;
-      border-radius: 50%;
-      transition: all 0.3s;
-      z-index: 2;
-    }
-
-    .wishlist:hover {
-      color: #ff0000;
-      transform: scale(1.1);
-    }
-
-    .wishlist.active {
-      color: #ff0000;
-    }
-
-    .product-card img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      border-radius: 6px;
-      margin-bottom: 15px;
-      transition: transform 0.3s;
-    }
-
-    .product-card:hover img {
-      transform: scale(1.03);
-    }
-
-    .product-card h4 {
-      margin: 10px 0 5px;
-      font-size: 16px;
-      color: #333;
-      font-weight: 600;
-    }
-
-    .product-card .desc {
-      font-size: 13px;
-      color: #666;
-      margin-bottom: 8px;
-      line-height: 1.4;
-    }
-
-    .rating {
-      color: #f39c12;
-      margin: 5px 0;
-      font-size: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 3px;
-    }
-
-    .rating-count {
-      color: #777;
-      font-size: 12px;
-      margin-left: 5px;
-    }
-
-    .product-card p:last-of-type {
-      font-weight: 600;
-      color: #222;
-      margin: 10px 0;
-      font-size: 15px;
-    }
-
-    .actions {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin-top: 15px;
-    }
-
-    .actions button {
-      border: none;
-      padding: 8px 12px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 13px;
-      transition: all 0.3s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 500;
-    }
-
-    .actions button i {
-      margin-right: 5px;
-    }
-
-    .actions .try-on {
-      background-color: #0984e3;
-      color: white;
-      flex: 1;
-    }
-
-    .actions .try-on:hover {
-      background-color: #0768b3;
-      transform: translateY(-2px);
-    }
-
-    .actions .add-cart {
-      background-color: #ff4757;
-      color: white;
-      flex: 1;
-    }
-
-    .actions .add-cart:hover {
-      background-color: #e84118;
-      transform: translateY(-2px);
-    }
-
-    .price-container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
-
-    .original-price {
-      text-decoration: line-through;
-      color: #999;
-      font-size: 13px;
-    }
-
-    .discount {
-      color: #2ecc71;
-      font-size: 12px;
-      font-weight: 600;
-    }
-
-    .size-selector {
-      margin: 10px 0;
-      display: flex;
-      justify-content: center;
-      gap: 5px;
-    }
-
-    .size-option {
-      width: 30px;
-      height: 30px;
-      border: 1px solid #ddd;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .size-option:hover {
-      border-color: #999;
-    }
-
-    .size-option.selected {
-      background-color: #222;
-      color: white;
-      border-color: #222;
-    }
-
-    @media (max-width: 768px) {
-      header {
-        flex-direction: column;
-        padding: 15px;
-      }
-
-      .logo {
-        margin-bottom: 15px;
-      }
-
-      .search-box {
-        display: flex;
-        background: white;
-        padding: 8px 12px;
-        border-radius: 6px;
-      }
-  
-      .search-box input {
-        border: none;
-        outline: none;
-        width: 600px;
-        font-size: 14px;
-      }
-
-
-      nav ul {
-        list-style: none;
-        display: flex;
-        margin: 0;
-        padding: 0;
-      }
-  
-      nav ul li {
-        margin-left: 20px;
-      }
-  
-      nav ul li a {
-        text-decoration: none;
-        color: #fff;
-        font-size: 15px;
-        transition: color 0.3s;
-      }
-  
-      nav ul li a:hover {
-        color: #ddd;
-      }
-
-      .page-container {
-      display: flex;
-      padding: 30px;
-      gap: 30px;
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-
-    .filters {
-      width: 250px;
-      background: #fff;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-      height: fit-content;
-      position: sticky;
-      top: 20px;
-    }
-
-    .filters h3 {
-      margin-bottom: 20px;
-      font-size: 18px;
-      color: #333;
-      padding-bottom: 10px;
-      border-bottom: 1px solid #eee;
-    }
-
-      .product-card img {
-        height: 160px;
-      }
-
-      .product-card h4 {
-        font-size: 15px;
-      }
-
-      .actions button {
-        font-size: 12px;
-        padding: 8px 10px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .product-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 15px;
-      }
-
-      .product-card {
-        padding: 10px;
-      }
-
-      .product-card img {
-        height: 140px;
-      }
-
-      .actions {
-        flex-direction: column;
-        gap: 8px;
-      }
-
-      .actions button {
-        width: 100%;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="../product.css">
 </head>
 <body>
 
 <header>
   <a href="#" class="logo">
-    <i class="fas fa-glasses"></i> StyleVision
-</a>
+    <i class="fas fa-glasses"></i> ShopZone
+  </a>
   <div class="search-box">
     <i class='bx bx-search'></i>
     <input type="text" id="searchInput" placeholder="Search T-Shirts...">
   </div>
   <nav>
     <ul>
-      <li><a href="#">Shirts</a></li>
-      <li><a href="#">T-Shirts</a></li>
-      <li><a href="#">Jeans</a></li>
-      <li><a href="#">Jackets</a></li>
-      <li><a href="#">Accessories</a></li>
-      <li><a href="cart.html"><i class='bx bx-cart'></i></a></li>
+      <li><a href="#">Round Neck</a></li>
+      <li><a href="#">Polo</a></li>
+      <li><a href="#">V-Neck</a></li>
+      <li><a href="#">Graphic</a></li>
+      <li><a href="#">Sports</a></li>
+      <li>
+        <a href="../wishlist.html">
+          <i class='bx bx-heart'></i>
+          <span class="wishlist-count" id="wishlistCounter">0</span>
+        </a>
+      </li>
+      <li>
+        <a href="../cart.html">
+          <i class='bx bx-cart'></i>
+          <span class="cart-count" id="cartCounter">0</span>
+        </a>
+      </li>
     </ul>
   </nav>
 </header>
 
 <div class="page-container">
-
   <div class="filters">
     <h3>Filters</h3>
     <strong>Category</strong>
-    <label><input type="checkbox" checked> Round Neck</label>
-    <label><input type="checkbox"> Polo T-Shirts</label>
-    <label><input type="checkbox"> V-Neck</label>
-    <label><input type="checkbox"> Henley</label>
-    <label><input type="checkbox"> Graphic Tees</label>
+    <label><input type="checkbox" name="category" value="Round Neck" checked> Round Neck</label>
+    <label><input type="checkbox" name="category" value="Polo"> Polo</label>
+    <label><input type="checkbox" name="category" value="V-Neck"> V-Neck</label>
+    <label><input type="checkbox" name="category" value="Henley"> Henley</label>
+    <label><input type="checkbox" name="category" value="Graphic"> Graphic</label>
+    <label><input type="checkbox" name="category" value="Sports"> Sports</label>
 
     <strong>Brand</strong>
-    <label><input type="checkbox" checked> Nike</label>
-    <label><input type="checkbox"> Adidas</label>
-    <label><input type="checkbox"> Puma</label>
-    <label><input type="checkbox"> H&M</label>
-    <label><input type="checkbox"> Zara</label>
-    <label><input type="checkbox"> Levi's</label>
-    <label><input type="checkbox"> Roadster</label>
-    <label><input type="checkbox"> US Polo</label>
+    <label><input type="checkbox" name="brand" value="Nike" checked> Nike</label>
+    <label><input type="checkbox" name="brand" value="Adidas"> Adidas</label>
+    <label><input type="checkbox" name="brand" value="Puma"> Puma</label>
+    <label><input type="checkbox" name="brand" value="H&M"> H&M</label>
+    <label><input type="checkbox" name="brand" value="Zara"> Zara</label>
+    <label><input type="checkbox" name="brand" value="Levi's"> Levi's</label>
+    <label><input type="checkbox" name="brand" value="Roadster"> Roadster</label>
+    <label><input type="checkbox" name="brand" value="US Polo"> US Polo</label>
 
     <strong>Size</strong>
-    <label><input type="checkbox"> S</label>
-    <label><input type="checkbox"> M</label>
-    <label><input type="checkbox"> L</label>
-    <label><input type="checkbox"> XL</label>
-    <label><input type="checkbox"> XXL</label>
+    <label><input type="checkbox" name="size" value="S"> S</label>
+    <label><input type="checkbox" name="size" value="M"> M</label>
+    <label><input type="checkbox" name="size" value="L"> L</label>
+    <label><input type="checkbox" name="size" value="XL"> XL</label>
+    <label><input type="checkbox" name="size" value="XXL"> XXL</label>
 
     <strong>Color</strong>
-    <label><input type="checkbox"> White</label>
-    <label><input type="checkbox"> Black</label>
-    <label><input type="checkbox"> Blue</label>
-    <label><input type="checkbox"> Red</label>
-    <label><input type="checkbox"> Green</label>
-    <label><input type="checkbox"> Yellow</label>
-    <label><input type="checkbox"> Gray</label>
-    <label><input type="checkbox"> Multicolor</label>
+    <label><input type="checkbox" name="color" value="White"> White</label>
+    <label><input type="checkbox" name="color" value="Black"> Black</label>
+    <label><input type="checkbox" name="color" value="Blue"> Blue</label>
+    <label><input type="checkbox" name="color" value="Red"> Red</label>
+    <label><input type="checkbox" name="color" value="Green"> Green</label>
+    <label><input type="checkbox" name="color" value="Gray"> Gray</label>
+    <label><input type="checkbox" name="color" value="Multicolor"> Multicolor</label>
 
     <strong>Material</strong>
-    <label><input type="checkbox"> Cotton</label>
-    <label><input type="checkbox"> Polyester</label>
-    <label><input type="checkbox"> Linen</label>
-    <label><input type="checkbox"> Blended</label>
+    <label><input type="checkbox" name="material" value="Cotton"> Cotton</label>
+    <label><input type="checkbox" name="material" value="Polyester"> Polyester</label>
+    <label><input type="checkbox" name="material" value="Linen"> Linen</label>
+    <label><input type="checkbox" name="material" value="Blended"> Blended</label>
 
     <strong>Sleeve</strong>
-    <label><input type="checkbox"> Full Sleeve</label>
-    <label><input type="checkbox"> Half Sleeve</label>
-    <label><input type="checkbox"> Sleeveless</label>
-
-    <strong>Pattern</strong>
-    <label><input type="checkbox"> Solid</label>
-    <label><input type="checkbox"> Striped</label>
-    <label><input type="checkbox"> Printed</label>
-    <label><input type="checkbox"> Graphic</label>
+    <label><input type="checkbox" name="sleeve" value="Full Sleeve"> Full Sleeve</label>
+    <label><input type="checkbox" name="sleeve" value="Half Sleeve"> Half Sleeve</label>
+    <label><input type="checkbox" name="sleeve" value="Sleeveless"> Sleeveless</label>
 
     <strong>Price</strong>
-    <label><input type="radio" name="price"> Under ₹500</label>
-    <label><input type="radio" name="price"> ₹500 - ₹1,000</label>
-    <label><input type="radio" name="price"> ₹1,000 - ₹1,500</label>
-    <label><input type="radio" name="price"> ₹1,500+</label>
+    <label><input type="radio" name="price" value="0-500"> Under ₹500</label>
+    <label><input type="radio" name="price" value="500-1000"> ₹500 - ₹1,000</label>
+    <label><input type="radio" name="price" value="1000-1500"> ₹1,000 - ₹1,500</label>
+    <label><input type="radio" name="price" value="1500-3000"> ₹1,500 - ₹3,000</label>
+    <label><input type="radio" name="price" value="3000+"> ₹3,000+</label>
+
+    <div class="filter-buttons">
+      <button class="apply-filters" id="applyFilters">Apply Filters</button>
+      <button class="reset-filters" id="resetFilters">Reset</button>
+    </div>
   </div>
 
-  <div class="product-grid">
-    <!-- Product 1 -->
-    <div class="product-card">
-      <i class='bx bx-heart wishlist'></i>
-      <img src="/images/tshirts/tshirt1.jpg" alt="Nike Sport T-Shirt">
-      <h4>Nike Sport T-Shirt</h4>
-      <p class="desc">100% Cotton, Regular Fit, Half Sleeve, Black</p>
-      <div class="rating">★★★★★ <span class="rating-count">(4.8)</span></div>
-      <div class="size-selector">
-        <div class="size-option">S</div>
-        <div class="size-option selected">M</div>
-        <div class="size-option">L</div>
-        <div class="size-option">XL</div>
-      </div>
-      <div class="price-container">
-        <p>₹899</p>
-        <span class="original-price">₹1,299</span>
-        <span class="discount">31% OFF</span>
-      </div>
-      <div class="actions">
-        <button class="add-cart">Add to Cart</button>
-        <button class="try-on">View Details</button>
-      </div>
-    </div>
-  
-    <!-- Product 2 -->
-    <div class="product-card">
-      <i class='bx bx-heart wishlist'></i>
-      <img src="/images/tshirts/tshirt2.jpg" alt="Adidas Originals Tee">
-      <h4>Adidas Originals Tee</h4>
-      <p class="desc">Classic Fit, White, Cotton, Half Sleeve</p>
-      <div class="rating">★★★★☆ <span class="rating-count">(4.5)</span></div>
-      <div class="size-selector">
-        <div class="size-option">S</div>
-        <div class="size-option selected">M</div>
-        <div class="size-option">L</div>
-        <div class="size-option">XL</div>
-      </div>
-      <div class="price-container">
-        <p>₹1,199</p>
-        <span class="original-price">₹1,499</span>
-        <span class="discount">20% OFF</span>
-      </div>
-      <div class="actions">
-        <button class="add-cart">Add to Cart</button>
-        <button class="try-on">View Details</button>
-      </div>
-    </div>
-  
-    <!-- Product 3 -->
-    <div class="product-card">
-      <i class='bx bx-heart wishlist'></i>
-      <img src="/images/tshirts/tshirt3.jpg" alt="Puma Graphic Tee">
-      <h4>Puma Graphic Tee</h4>
-      <p class="desc">Printed Design, Relaxed Fit, Half Sleeve</p>
-      <div class="rating">★★★★☆ <span class="rating-count">(4.3)</span></div>
-      <div class="size-selector">
-        <div class="size-option">S</div>
-        <div class="size-option selected">M</div>
-        <div class="size-option">L</div>
-        <div class="size-option">XL</div>
-      </div>
-      <div class="price-container">
-        <p>₹1,290</p>
-        <span class="original-price">₹1,690</span>
-        <span class="discount">24% OFF</span>
-      </div>
-      <div class="actions">
-        <button class="add-cart">Add to Cart</button>
-        <button class="try-on">View Details</button>
-      </div>
-    </div>
-  
-    <!-- Product 4 -->
-    <div class="product-card">
-      <i class='bx bx-heart wishlist'></i>
-      <img src="/images/tshirts/tshirt4.jpg" alt="US Polo Assn Polo">
-      <h4>US Polo Assn Polo</h4>
-      <p class="desc">Classic Polo, Half Sleeve, Regular Fit, Navy</p>
-      <div class="rating">★★★★★ <span class="rating-count">(4.7)</span></div>
-      <div class="size-selector">
-        <div class="size-option">S</div>
-        <div class="size-option selected">M</div>
-        <div class="size-option">L</div>
-        <div class="size-option">XL</div>
-      </div>
-      <div class="price-container">
-        <p>₹1,299</p>
-        <span class="original-price">₹1,599</span>
-        <span class="discount">19% OFF</span>
-      </div>
-      <div class="actions">
-        <button class="add-cart">Add to Cart</button>
-        <button class="try-on">View Details</button>
-      </div>
-    </div>
-  
-    <!-- Product 5 -->
-    <div class="product-card">
-      <i class='bx bx-heart wishlist'></i>
-      <img src="/images/tshirts/tshirt5.jpg" alt="H&M Basic Tee">
-      <h4>H&M Basic Tee</h4>
-      <p class="desc">100% Cotton, Regular Fit, Round Neck, White</p>
-      <div class="rating">★★★★☆ <span class="rating-count">(4.6)</span></div>
-      <div class="size-selector">
-        <div class="size-option">S</div>
-        <div class="size-option selected">M</div>
-        <div class="size-option">L</div>
-        <div class="size-option">XL</div>
-      </div>
-      <div class="price-container">
-        <p>₹499</p>
-        <span class="original-price">₹799</span>
-        <span class="discount">38% OFF</span>
-      </div>
-      <div class="actions">
-        <button class="add-cart">Add to Cart</button>
-        <button class="try-on">View Details</button>
-      </div>
-    </div>
-  
-    <!-- Product 6 -->
-    <div class="product-card">
-      <i class='bx bx-heart wishlist'></i>
-      <img src="/images/tshirts/tshirt6.jpg" alt="Zara Striped Tee">
-      <h4>Zara Striped Tee</h4>
-      <p class="desc">Striped T-Shirt, Slim Fit, Half Sleeve</p>
-      <div class="rating">★★★★☆ <span class="rating-count">(4.4)</span></div>
-      <div class="size-selector">
-        <div class="size-option">S</div>
-        <div class="size-option selected">M</div>
-        <div class="size-option">L</div>
-        <div class="size-option">XL</div>
-      </div>
-      <div class="price-container">
-        <p>₹899</p>
-        <span class="original-price">₹1,199</span>
-        <span class="discount">25% OFF</span>
-      </div>
-      <div class="actions">
-        <button class="add-cart">Add to Cart</button>
-        <button class="try-on">View Details</button>
-      </div>
-    </div>
-  
-    <!-- Product 7 -->
-    <div class="product-card">
-      <i class='bx bx-heart wishlist'></i>
-      <img src="/images/tshirts/tshirt7.jpg" alt="Levi's Classic Tee">
-      <h4>Levi's Classic Tee</h4>
-      <p class="desc">Premium Cotton, Regular Fit, Round Neck</p>
-      <div class="rating">★★★★★ <span class="rating-count">(4.8)</span></div>
-      <div class="size-selector">
-        <div class="size-option">S</div>
-        <div class="size-option selected">M</div>
-        <div class="size-option">L</div>
-        <div class="size-option">XL</div>
-      </div>
-      <div class="price-container">
-        <p>₹1,099</p>
-        <span class="original-price">₹1,499</span>
-        <span class="discount">27% OFF</span>
-      </div>
-      <div class="actions">
-        <button class="add-cart">Add to Cart</button>
-        <button class="try-on">View Details</button>
-      </div>
-    </div>
-  
-    <!-- Product 8 -->
-    <div class="product-card">
-      <i class='bx bx-heart wishlist'></i>
-      <img src="/images/tshirts/tshirt8.jpg" alt="Roadster Full Sleeve">
-      <h4>Roadster Full Sleeve</h4>
-      <p class="desc">Full Sleeve T-Shirt, Regular Fit, Black</p>
-      <div class="rating">★★★★☆ <span class="rating-count">(4.5)</span></div>
-      <div class="size-selector">
-        <div class="size-option">S</div>
-        <div class="size-option selected">M</div>
-        <div class="size-option">L</div>
-        <div class="size-option">XL</div>
-      </div>
-      <div class="price-container">
-        <p>₹699</p>
-        <span class="original-price">₹999</span>
-        <span class="discount">30% OFF</span>
-      </div>
-      <div class="actions">
-        <button class="add-cart">Add to Cart</button>
-        <button class="try-on">View Details</button>
-      </div>
-    </div>
-  
-    <!-- Product 9 -->
-    <div class="product-card">
-      <i class='bx bx-heart wishlist'></i>
-      <img src="/images/tshirts/tshirt9.jpg" alt="Tommy Hilfiger Polo">
-      <h4>Tommy Hilfiger Polo</h4>
-      <p class="desc">Classic Polo, Half Sleeve, Regular Fit, Red</p>
-      <div class="rating">★★★★☆ <span class="rating-count">(4.6)</span></div>
-      <div class="size-selector">
-        <div class="size-option">S</div>
-        <div class="size-option selected">M</div>
-        <div class="size-option">L</div>
-        <div class="size-option">XL</div>
-      </div>
-      <div class="price-container">
-        <p>₹1,799</p>
-        <span class="original-price">₹2,299</span>
-        <span class="discount">22% OFF</span>
-      </div>
-      <div class="actions">
-        <button class="add-cart">Add to Cart</button>
-        <button class="try-on">View Details</button>
-      </div>
-    </div>
-  
-    <!-- Product 10 -->
-    <div class="product-card">
-      <i class='bx bx-heart wishlist'></i>
-      <img src="/images/tshirts/tshirt10.jpg" alt="Jack & Jones Graphic">
-      <h4>Jack & Jones Graphic</h4>
-      <p class="desc">Graphic Print, Slim Fit, Half Sleeve</p>
-      <div class="rating">★★★★★ <span class="rating-count">(4.9)</span></div>
-      <div class="size-selector">
-        <div class="size-option">S</div>
-        <div class="size-option selected">M</div>
-        <div class="size-option">L</div>
-        <div class="size-option">XL</div>
-      </div>
-      <div class="price-container">
-        <p>₹999</p>
-        <span class="original-price">₹1,299</span>
-        <span class="discount">23% OFF</span>
-      </div>
-      <div class="actions">
-        <button class="add-cart">Add to Cart</button>
-        <button class="try-on">View Details</button>
-      </div>
-    </div>
-  
-    <!-- Product 11 -->
-    <div class="product-card">
-      <i class='bx bx-heart wishlist'></i>
-      <img src="/images/tshirts/tshirt11.jpg" alt="Under Armour Sport">
-      <h4>Under Armour Sport</h4>
-      <p class="desc">Performance Tee, Moisture Wicking, Black</p>
-      <div class="rating">★★★★☆ <span class="rating-count">(4.7)</span></div>
-      <div class="size-selector">
-        <div class="size-option">S</div>
-        <div class="size-option selected">M</div>
-        <div class="size-option">L</div>
-        <div class="size-option">XL</div>
-      </div>
-      <div class="price-container">
-        <p>₹1,499</p>
-        <span class="original-price">₹1,999</span>
-        <span class="discount">25% OFF</span>
-      </div>
-      <div class="actions">
-        <button class="add-cart">Add to Cart</button>
-        <button class="try-on">View Details</button>
-      </div>
-    </div>
-  
-    <!-- Product 12 -->
-    <div class="product-card">
-      <i class='bx bx-heart wishlist'></i>
-      <img src="/images/tshirts/tshirt12.jpg" alt="Calvin Klein Basic">
-      <h4>Calvin Klein Basic</h4>
-      <p class="desc">Premium Cotton, Slim Fit, Round Neck, White</p>
-      <div class="rating">★★★★☆ <span class="rating-count">(4.6)</span></div>
-      <div class="size-selector">
-        <div class="size-option">S</div>
-        <div class="size-option selected">M</div>
-        <div class="size-option">L</div>
-        <div class="size-option">XL</div>
-      </div>
-      <div class="price-container">
-        <p>₹1,299</p>
-        <span class="original-price">₹1,699</span>
-        <span class="discount">24% OFF</span>
-      </div>
-      <div class="actions">
-        <button class="add-cart">Add to Cart</button>
-        <button class="try-on">View Details</button>
-      </div>
-    </div>
+  <div class="product-grid" id="productGrid">
+    <!-- Product cards will be populated here -->
+  </div>
+</div>
 
-    <!-- Product 13 -->
-    <div class="product-card">
-      <i class='bx bx-heart wishlist'></i>
-      <img src="/images/tshirts/tshirt13.jpg" alt="Puma Dry Cell">
-      <h4>Puma Dry Cell</h4>
-      <p class="desc">Activewear Tee, Quick Dry, Half Sleeve</p>
-      <div class="rating">★★★★☆ <span class="rating-count">(4.5)</span></div>
-      <div class="size-selector">
-        <div class="size-option">S</div>
-        <div class="size-option selected">M</div>
-        <div class="size-option">L</div>
-        <div class="size-option">XL</div>
-      </div>
-      <div class="price-container">
-        <p>₹1,099</p>
-        <span class="original-price">₹1,399</span>
-        <span class="discount">21% OFF</span>
-      </div>
-      <div class="actions">
-        <button class="add-cart">Add to Cart</button>
-        <button class="try-on">View Details</button>
-      </div>
-    </div>
+<!-- Toast Notification -->
+<div class="toast" id="toast"></div>
 
-    <!-- Product 14 -->
-    <div class="product-card">
-      <i class='bx bx-heart wishlist'></i>
-      <img src="/images/tshirts/tshirt14.jpg" alt="Adidas Essentials">
-      <h4>Adidas Essentials</h4>
-      <p class="desc">Classic 3-Stripes, Regular Fit, Half Sleeve</p>
-      <div class="rating">★★★★☆ <span class="rating-count">(4.4)</span></div>
-      <div class="size-selector">
-        <div class="size-option">S</div>
-        <div class="size-option selected">M</div>
-        <div class="size-option">L</div>
-        <div class="size-option">XL</div>
-      </div>
-      <div class="price-container">
-        <p>₹1,199</p>
-        <span class="original-price">₹1,499</span>
-        <span class="discount">20% OFF</span>
-      </div>
-      <div class="actions">
-        <button class="add-cart">Add to Cart</button>
-        <button class="try-on">View Details</button>
-      </div>
-    </div>
+<script src="../product.js"></script>
 
-    <!-- Product 15 -->
-    <div class="product-card">
-      <i class='bx bx-heart wishlist'></i>
-      <img src="/images/tshirts/tshirt15.jpg" alt="Nike Dri-FIT">
-      <h4>Nike Dri-FIT</h4>
-      <p class="desc">Performance Tee, Moisture Wicking, Navy</p>
-      <div class="rating">★★★★★ <span class="rating-count">(4.8)</span></div>
-      <div class="size-selector">
-        <div class="size-option">S</div>
-        <div class="size-option selected">M</div>
-        <div class="size-option">L</div>
-        <div class="size-option">XL</div>
-      </div>
-      <div class="price-container">
-        <p>₹1,499</p>
-        <span class="original-price">₹1,999</span>
-        <span class="discount">25% OFF</span>
-      </div>
-      <div class="actions">
-        <button class="add-cart">Add to Cart</button>
-        <button class="try-on">View Details</button>
-      </div>
-    </div>
-
-    <!-- Product 16 -->
-    <div class="product-card">
-      <i class='bx bx-heart wishlist'></i>
-      <img src="/images/tshirts/tshirt16.jpg" alt="H&M Linen Tee">
-      <h4>H&M Linen Tee</h4>
-      <p class="desc">Linen Blend, Relaxed Fit, Round Neck</p>
-      <div class="rating">★★★★☆ <span class="rating-count">(4.6)</span></div>
-      <div class="size-selector">
-        <div class="size-option">S</div>
-        <div class="size-option selected">M</div>
-        <div class="size-option">L</div>
-        <div class="size-option">XL</div>
-      </div>
-      <div class="price-container">
-        <p>₹799</p>
-        <span class="original-price">₹999</span>
-        <span class="discount">20% OFF</span>
-      </div>
-      <div class="actions">
-        <button class="add-cart">Add to Cart</button>
-        <button class="try-on">View Details</button>
-      </div>
-    </div>
-
-    <!-- Product 17 -->
-    <div class="product-card">
-      <i class='bx bx-heart wishlist'></i>
-      <img src="/images/tshirts/tshirt17.jpg" alt="Zara Oversized Tee">
-      <h4>Zara Oversized Tee</h4>
-      <p class="desc">Oversized Fit, Round Neck, Half Sleeve</p>
-      <div class="rating">★★★★☆ <span class="rating-count">(4.3)</span></div>
-      <div class="size-selector">
-        <div class="size-option">S</div>
-        <div class="size-option selected">M</div>
-        <div class="size-option">L</div>
-        <div class="size-option">XL</div>
-      </div>
-      <div class="price-container">
-        <p>₹899</p>
-        <span class="original-price">₹1,199</span>
-        <span class="discount">25% OFF</span>
-      </div>
-      <div class="actions">
-        <button class="add-cart">Add to Cart</button>
-        <button class="try-on">View Details</button>
-      </div>
-    </div>
-
-    <!-- Product 18 -->
-    <div class="product-card">
-      <i class='bx bx-heart wishlist'></i>
-      <img src="/images/tshirts/tshirt18.jpg" alt="Levi's Graphic Tee">
-      <h4>Levi's Graphic Tee</h4>
-      <p class="desc">Vintage Print, Regular Fit, Half Sleeve</p>
-      <div class="rating">★★★★☆ <span class="rating-count">(4.5)</span></div>
-      <div class="size-selector">
-        <div class="size-option">S</div>
-        <div class="size-option selected">M</div>
-        <div class="size-option">L</div>
-        <div class="size-option">XL</div>
-      </div>
-      <div class="price-container">
-        <p>₹1,099</p>
-        <span class="original-price">₹1,399</span>
-        <span class="discount">21% OFF</span>
-      </div>
-      <div class="actions">
-        <button class="add-cart">Add to Cart</button>
-        <button class="try-on">View Details</button>
-      </div>
-    </div>
-
-    <!-- Product 19 -->
-    <div class="product-card">
-      <i class='bx bx-heart wishlist'></i>
-      <img src="/images/tshirts/tshirt19.jpg" alt="Roadster Color Block">
-      <h4>Roadster Color Block</h4>
-      <p class="desc">Color Block Design, Regular Fit, Half Sleeve</p>
-      <div class="rating">★★★★☆ <span class="rating-count">(4.5)</span></div>
-      <div class="size-selector">
-        <div class="size-option">S</div>
-        <div class="size-option selected">M</div>
-        <div class="size-option selected">L</div>
-        <div class="size-option">XL</div>
-      </div>
-      <div class="price-container">
-        <p>₹699</p>
-        <span class="original-price">₹999</span>
-        <span class="discount">30% OFF</span>
-      </div>
-      <div class="actions">
-        <button class="add-cart">Add to Cart</button>
-        <button class="try-on">View Details</button>
-      </div>
-    </div>
-    <div class="product-card">
-      <i class='bx bx-heart wishlist'></i>
-      <img src="/images/tshirts/tshirt20.jpg" alt="US Polo Assn V-Neck">
-      <h4>US Polo Assn V-Neck</h4>
-      <p class="desc">Classic V-Neck, Slim Fit, Half Sleeve</p>
-      <div class="rating">★★★★★ <span class="rating-count">(4.7)</span></div>
-      <div class="size-selector">
-        <div class="size-option">S</div>
-        <div class="size-option">M</div>
-        <div class="size-option">L</div>
-        <div class="size-option selected">XL</div>
-      </div>
-      <div class="price-container">
-        <p>₹1,099</p>
-        <span class="original-price">₹1,399</span>
-        <span class="discount">21% OFF</span>
-      </div>
-      <div class="actions">
-        <button class="add-cart">Add to Cart</button>
-        <button class="try-on">View Details</button>
-      </div>
-    </div>
-    
 <script>
-  // Initialize when DOM is loaded
-  document.addEventListener('DOMContentLoaded', function() {
-    // Get the search input element
-    const searchInput = document.getElementById('searchInput');
-    
-    if (!searchInput) {
-      console.error("Search input element not found!");
-      return;
+  // Product data with additional filter properties
+  const products = [
+    {
+      id: 1,
+      name: "Nike Sport T-Shirt",
+      desc: "100% Cotton, Regular Fit, Half Sleeve, Black",
+      rating: "★★★★★ (4.8)",
+      price: 899,
+      originalPrice: 1299,
+      discount: 31,
+      image: "/images/tshirts/tshirt1.jpg",
+      category: "Sports",
+      brand: "Nike",
+      features: ["Moisture Wicking", "Breathable"],
+      color: "Black",
+      size: ["S", "M", "L", "XL"],
+      material: "Cotton",
+      sleeve: "Half Sleeve"
+    },
+    {
+      id: 2,
+      name: "Adidas Originals Tee",
+      desc: "Classic Fit, White, Cotton, Half Sleeve",
+      rating: "★★★★☆ (4.5)",
+      price: 1199,
+      originalPrice: 1499,
+      discount: 20,
+      image: "/images/tshirts/tshirt2.jpg",
+      category: "Round Neck",
+      brand: "Adidas",
+      features: ["Classic Fit", "Cotton"],
+      color: "White",
+      size: ["S", "M", "L"],
+      material: "Cotton",
+      sleeve: "Half Sleeve"
+    },
+    {
+      id: 3,
+      name: "Puma Graphic Tee",
+      desc: "Printed Design, Relaxed Fit, Half Sleeve",
+      rating: "★★★★☆ (4.3)",
+      price: 1290,
+      originalPrice: 1690,
+      discount: 24,
+      image: "/images/tshirts/tshirt3.jpg",
+      category: "Graphic",
+      brand: "Puma",
+      features: ["Printed Design", "Relaxed Fit"],
+      color: "Multicolor",
+      size: ["M", "L", "XL"],
+      material: "Cotton",
+      sleeve: "Half Sleeve"
+    },
+    {
+      id: 4,
+      name: "US Polo Assn Polo",
+      desc: "Classic Polo, Half Sleeve, Regular Fit, Navy",
+      rating: "★★★★★ (4.7)",
+      price: 1299,
+      originalPrice: 1599,
+      discount: 19,
+      image: "/images/tshirts/tshirt4.jpg",
+      category: "Polo",
+      brand: "US Polo",
+      features: ["Classic Polo", "Regular Fit"],
+      color: "Blue",
+      size: ["S", "M", "L", "XL"],
+      material: "Cotton",
+      sleeve: "Half Sleeve"
+    },
+    {
+      id: 5,
+      name: "H&M Basic Tee",
+      desc: "100% Cotton, Regular Fit, Round Neck, White",
+      rating: "★★★★☆ (4.6)",
+      price: 499,
+      originalPrice: 799,
+      discount: 38,
+      image: "/images/tshirts/tshirt5.jpg",
+      category: "Round Neck",
+      brand: "H&M",
+      features: ["Basic Tee", "Regular Fit"],
+      color: "White",
+      size: ["S", "M", "L"],
+      material: "Cotton",
+      sleeve: "Half Sleeve"
+    },
+    {
+      id: 6,
+      name: "Zara Striped Tee",
+      desc: "Striped T-Shirt, Slim Fit, Half Sleeve",
+      rating: "★★★★☆ (4.4)",
+      price: 899,
+      originalPrice: 1199,
+      discount: 25,
+      image: "/images/tshirts/tshirt6.jpg",
+      category: "Round Neck",
+      brand: "Zara",
+      features: ["Striped", "Slim Fit"],
+      color: "Multicolor",
+      size: ["S", "M", "L"],
+      material: "Cotton",
+      sleeve: "Half Sleeve"
+    },
+    {
+      id: 7,
+      name: "Levi's Classic Tee",
+      desc: "Premium Cotton, Regular Fit, Round Neck",
+      rating: "★★★★★ (4.8)",
+      price: 1099,
+      originalPrice: 1499,
+      discount: 27,
+      image: "/images/tshirts/tshirt7.jpg",
+      category: "Round Neck",
+      brand: "Levi's",
+      features: ["Premium Cotton", "Regular Fit"],
+      color: "Black",
+      size: ["S", "M", "L", "XL"],
+      material: "Cotton",
+      sleeve: "Half Sleeve"
+    },
+    {
+      id: 8,
+      name: "Roadster Full Sleeve",
+      desc: "Full Sleeve T-Shirt, Regular Fit, Black",
+      rating: "★★★★☆ (4.5)",
+      price: 699,
+      originalPrice: 999,
+      discount: 30,
+      image: "/images/tshirts/tshirt8.jpg",
+      category: "Round Neck",
+      brand: "Roadster",
+      features: ["Full Sleeve", "Regular Fit"],
+      color: "Black",
+      size: ["M", "L", "XL"],
+      material: "Cotton",
+      sleeve: "Full Sleeve"
+    },
+    {
+      id: 9,
+      name: "Tommy Hilfiger Polo",
+      desc: "Classic Polo, Half Sleeve, Regular Fit, Red",
+      rating: "★★★★☆ (4.6)",
+      price: 1799,
+      originalPrice: 2299,
+      discount: 22,
+      image: "/images/tshirts/tshirt9.jpg",
+      category: "Polo",
+      brand: "Tommy Hilfiger",
+      features: ["Classic Polo", "Regular Fit"],
+      color: "Red",
+      size: ["S", "M", "L"],
+      material: "Cotton",
+      sleeve: "Half Sleeve"
+    },
+    {
+      id: 10,
+      name: "Jack & Jones Graphic",
+      desc: "Graphic Print, Slim Fit, Half Sleeve",
+      rating: "★★★★★ (4.9)",
+      price: 999,
+      originalPrice: 1299,
+      discount: 23,
+      image: "/images/tshirts/tshirt10.jpg",
+      category: "Graphic",
+      brand: "Jack & Jones",
+      features: ["Graphic Print", "Slim Fit"],
+      color: "Black",
+      size: ["S", "M", "L"],
+      material: "Cotton",
+      sleeve: "Half Sleeve"
+    },
+    {
+      id: 11,
+      name: "Under Armour Sport",
+      desc: "Performance Tee, Moisture Wicking, Black",
+      rating: "★★★★☆ (4.7)",
+      price: 1499,
+      originalPrice: 1999,
+      discount: 25,
+      image: "/images/tshirts/tshirt11.jpg",
+      category: "Sports",
+      brand: "Under Armour",
+      features: ["Performance", "Moisture Wicking"],
+      color: "Black",
+      size: ["S", "M", "L", "XL"],
+      material: "Polyester",
+      sleeve: "Half Sleeve"
+    },
+    {
+      id: 12,
+      name: "Calvin Klein Basic",
+      desc: "Premium Cotton, Slim Fit, Round Neck, White",
+      rating: "★★★★☆ (4.6)",
+      price: 1299,
+      originalPrice: 1699,
+      discount: 24,
+      image: "/images/tshirts/tshirt12.jpg",
+      category: "Round Neck",
+      brand: "Calvin Klein",
+      features: ["Premium Cotton", "Slim Fit"],
+      color: "White",
+      size: ["S", "M", "L"],
+      material: "Cotton",
+      sleeve: "Half Sleeve"
+    },
+    {
+      id: 13,
+      name: "Puma Dry Cell",
+      desc: "Activewear Tee, Quick Dry, Half Sleeve",
+      rating: "★★★★☆ (4.5)",
+      price: 1099,
+      originalPrice: 1399,
+      discount: 21,
+      image: "/images/tshirts/tshirt13.jpg",
+      category: "Sports",
+      brand: "Puma",
+      features: ["Quick Dry", "Activewear"],
+      color: "Black",
+      size: ["S", "M", "L"],
+      material: "Polyester",
+      sleeve: "Half Sleeve"
+    },
+    {
+      id: 14,
+      name: "Adidas Essentials",
+      desc: "Classic 3-Stripes, Regular Fit, Half Sleeve",
+      rating: "★★★★☆ (4.4)",
+      price: 1199,
+      originalPrice: 1499,
+      discount: 20,
+      image: "/images/tshirts/tshirt14.jpg",
+      category: "Round Neck",
+      brand: "Adidas",
+      features: ["Classic 3-Stripes", "Regular Fit"],
+      color: "Black",
+      size: ["M", "L", "XL"],
+      material: "Cotton",
+      sleeve: "Half Sleeve"
+    },
+    {
+      id: 15,
+      name: "Nike Dri-FIT",
+      desc: "Performance Tee, Moisture Wicking, Navy",
+      rating: "★★★★★ (4.8)",
+      price: 1499,
+      originalPrice: 1999,
+      discount: 25,
+      image: "/images/tshirts/tshirt15.jpg",
+      category: "Sports",
+      brand: "Nike",
+      features: ["Dri-FIT", "Moisture Wicking"],
+      color: "Blue",
+      size: ["S", "M", "L", "XL"],
+      material: "Polyester",
+      sleeve: "Half Sleeve"
+    },
+    {
+      id: 16,
+      name: "H&M Linen Tee",
+      desc: "Linen Blend, Relaxed Fit, Round Neck",
+      rating: "★★★★☆ (4.6)",
+      price: 799,
+      originalPrice: 999,
+      discount: 20,
+      image: "/images/tshirts/tshirt16.jpg",
+      category: "Round Neck",
+      brand: "H&M",
+      features: ["Linen Blend", "Relaxed Fit"],
+      color: "Gray",
+      size: ["S", "M", "L"],
+      material: "Linen",
+      sleeve: "Half Sleeve"
+    },
+    {
+      id: 17,
+      name: "Zara Oversized Tee",
+      desc: "Oversized Fit, Round Neck, Half Sleeve",
+      rating: "★★★★☆ (4.3)",
+      price: 899,
+      originalPrice: 1199,
+      discount: 25,
+      image: "/images/tshirts/tshirt17.jpg",
+      category: "Round Neck",
+      brand: "Zara",
+      features: ["Oversized", "Relaxed Fit"],
+      color: "White",
+      size: ["S", "M", "L"],
+      material: "Cotton",
+      sleeve: "Half Sleeve"
+    },
+    {
+      id: 18,
+      name: "Levi's Graphic Tee",
+      desc: "Vintage Print, Regular Fit, Half Sleeve",
+      rating: "★★★★☆ (4.5)",
+      price: 1099,
+      originalPrice: 1399,
+      discount: 21,
+      image: "/images/tshirts/tshirt18.jpg",
+      category: "Graphic",
+      brand: "Levi's",
+      features: ["Vintage Print", "Regular Fit"],
+      color: "Multicolor",
+      size: ["S", "M", "L"],
+      material: "Cotton",
+      sleeve: "Half Sleeve"
+    },
+    {
+      id: 19,
+      name: "Roadster Color Block",
+      desc: "Color Block Design, Regular Fit, Half Sleeve",
+      rating: "★★★★☆ (4.5)",
+      price: 699,
+      originalPrice: 999,
+      discount: 30,
+      image: "/images/tshirts/tshirt19.jpg",
+      category: "Round Neck",
+      brand: "Roadster",
+      features: ["Color Block", "Regular Fit"],
+      color: "Multicolor",
+      size: ["S", "M", "L"],
+      material: "Cotton",
+      sleeve: "Half Sleeve"
+    },
+    {
+      id: 20,
+      name: "US Polo Assn V-Neck",
+      desc: "Classic V-Neck, Slim Fit, Half Sleeve",
+      rating: "★★★★★ (4.7)",
+      price: 1099,
+      originalPrice: 1399,
+      discount: 21,
+      image: "/images/tshirts/tshirt20.jpg",
+      category: "V-Neck",
+      brand: "US Polo",
+      features: ["V-Neck", "Slim Fit"],
+      color: "Black",
+      size: ["S", "M", "L", "XL"],
+      material: "Cotton",
+      sleeve: "Half Sleeve"
     }
-
-    // Wishlist functionality
-    document.querySelectorAll('.wishlist').forEach(heart => {
-      heart.addEventListener('click', function(e) {
-        e.stopPropagation();
-        this.classList.toggle('bxs-heart');
-        this.classList.toggle('bx-heart');
-        this.classList.toggle('active');
-        
-        if (this.classList.contains('bxs-heart')) {
-          this.style.color = '#ff0000';
-          alert('Added to wishlist!');
-        } else {
-          this.style.color = '#ff4757';
-        }
-      });
-    });
-
-    // Try-on functionality
-    document.querySelectorAll('.try-on').forEach(button => {
-      button.addEventListener('click', function() {
-        const productName = this.closest('.product-card').querySelector('h4').textContent;
-        alert("Launching try-on for: " + productName);
-      });
-    });
-
-    // Add to cart functionality
-    document.querySelectorAll('.add-cart').forEach(button => {
-      button.addEventListener('click', function(e) {
-        e.stopPropagation();
-        const productName = this.closest('.product-card').querySelector('h4').textContent;
-        alert(productName + " added to cart!");
-      });
-    });
-
-    // Setup search functionality
-    setupSearch(searchInput);
-  });
-
-  // Search Functionality
-  function searchProducts(searchInput) {
-    const query = searchInput.value.trim().toLowerCase();
-    
-    if (!query) {
-      return; // Do nothing if search is empty
-    }
-
-    // Category mapping - search terms to page URLs
-    const categoryMap = {
-      // Bags
-      'bag': '/Product-details/bags.html',
-      'bags': '/Product-details/bags.html',
-      'backpack': '/Product-details/bags.html',
-      'handbag': '/Product-details/bags.html',
-      'luggage': '/Product-details/bags.html',
-      
-      // Shoes
-      'shoe': '/Product-details/shoes.html',
-      'shoes': '/Product-details/shoes.html',
-      'sneaker': '/Product-details/shoes.html',
-      'sneakers': '/Product-details/shoes.html',
-      'footwear': '/Product-details/shoes.html',
-      'boot': '/Product-details/shoes.html',
-      'boots': '/Product-details/shoes.html',
-      'sandals': '/Product-details/shoes.html',
-      
-      // Watches
-      'watch': '/Product-details/smartwatches.html',
-      'watches': '/Product-details/smartwatches.html',
-      'smartwatch': '/Product-details/smartwatches.html',
-      'smartwatches': '/Product-details/smartwatches.html',
-      
-      // Sunglasses
-      'sunglass': '/Product-details/sunglasses.html',
-      'sunglasses': '/Product-details/sunglasses.html',
-      'eyewear': '/Product-details/sunglasses.html',
-      
-      // T-Shirts
-      't-shirt': '/Product-details/t-shirts.html',
-      't-shirts': '/Product-details/t-shirts.html',
-      'tshirt': '/Product-details/t-shirts.html',
-      'tshirts': '/Product-details/t-shirts.html',
-      
-      // Headphones
-      'headphone': '/Product-details/headphones.html',
-      'headphones': '/Product-details/headphones.html',
-      'earphone': '/Product-details/headphones.html',
-      'earphones': '/Product-details/headphones.html',
-      'earbuds': '/Product-details/headphones.html',
-      
-      // Shirts
-      'shirt': '/Product-details/shirts.html',
-      'shirts': '/Product-details/shirts.html',
-      'formal shirt': '/Product-details/shirts.html',
-      
-      // Other categories
-      'jeans': '/Product-details/jeans.html',
-      'dress': '/Product-details/dresses.html',
-      'dresses': '/Product-details/dresses.html',
-      'jacket': '/Product-details/jackets.html',
-      'jackets': '/Product-details/jackets.html',
-      'sweater': '/Product-details/sweaters.html',
-      'sweaters': '/Product-details/sweaters.html'
-    };
-
-    // Check for direct category match first
-    if (categoryMap[query]) {
-      window.location.href = categoryMap[query];
-      return;
-    }
-
-    // Check for partial matches in the query
-    for (const [keyword, page] of Object.entries(categoryMap)) {
-      if (query.includes(keyword)) {
-        window.location.href = page;
-        return;
-      }
-    }
-
-    // If no match found, show alert to user
-    alert(`No category found for "${query}". Try searching for bags, shoes, watches, etc.`);
-  }
-
-  // Setup search event listeners
-  function setupSearch(searchInput) {
-    // Search on Enter key
-    searchInput.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') {
-        searchProducts(searchInput);
-      }
-    });
-    
-    // Search with debounce on input
-    searchInput.addEventListener('input', debounce(() => {
-      searchProducts(searchInput);
-    }, 500));
-  }
-
-  // Utility function for debouncing
-  function debounce(func, wait) {
-    let timeout;
-    return function() {
-      const context = this, args = arguments;
-      clearTimeout(timeout);
-      timeout = setTimeout(() => func.apply(context, args), wait);
-    };
-  }
+  ];
 </script>
-
 </body>
 </html>
