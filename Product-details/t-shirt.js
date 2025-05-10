@@ -20,6 +20,9 @@ document.addEventListener('DOMContentLoaded', function() {
   // Setup filter buttons
   document.getElementById('applyFilters').addEventListener('click', applyFilters);
   document.getElementById('resetFilters').addEventListener('click', resetFilters);
+  
+  // Initialize try-on functionality
+  initVirtualTryOn();
 });
 
 // Render products to the page
@@ -59,7 +62,7 @@ function renderProducts(productsToRender, wishlist) {
       </div>
       <div class="actions">
         <button class="add-cart" data-product-id="${product.id}">Add to Cart</button>
-        <button class="try-on">Try-on</button>
+        <button class="try-on" data-product-id="${product.id}">Virtual Try-On</button>
       </div>
     `;
     
@@ -102,14 +105,6 @@ function attachEventListeners() {
     });
   });
 
-  // Try-on functionality
-  document.querySelectorAll('.try-on').forEach(button => {
-    button.addEventListener('click', function() {
-      const productName = this.closest('.product-card').querySelector('h4').textContent;
-      showToast(`Launching try-on for: ${productName}`);
-    });
-  });
-
   // Add to cart functionality
   document.querySelectorAll('.add-cart').forEach(button => {
     button.addEventListener('click', function(e) {
@@ -131,6 +126,16 @@ function attachEventListeners() {
       
       localStorage.setItem('cart', JSON.stringify(cart));
       updateCartCounter(cart.reduce((total, item) => total + item.quantity, 0));
+    });
+  });
+  
+  // Virtual try-on functionality
+  document.querySelectorAll('.try-on').forEach(button => {
+    button.addEventListener('click', function(e) {
+      e.stopPropagation();
+      const productId = parseInt(this.getAttribute('data-product-id'));
+      const product = products.find(p => p.id === productId);
+      openTryOnModal(product);
     });
   });
 }
@@ -248,7 +253,7 @@ function applyFilters() {
     // Price filter
     if (selectedPrice) {
       const [min, max] = selectedPrice.split('-').map(Number);
-      if (product.price < min || product.price > max) {
+      if (product.price < min || (max && product.price > max)) {
         return false;
       }
     }
@@ -302,69 +307,64 @@ function debounce(func, wait) {
   };
 }
 
-// Global variables
+// Virtual Try-On Implementation
 let currentStream = null;
 let currentProduct = null;
-let handposeModel = null;
+let poseDetectionModel = null;
 let isDragging = false;
 let offsetX, offsetY;
-let watchOverlay = null;
-let watchScale = 1;
-let watchRotation = 0;
-let wristPosition = { x: 0, y: 0 };
+let tshirtOverlay = null;
+let tshirtScale = 1;
+let tshirtRotation = 0;
+let bodyPosition = { x: 0, y: 0, width: 0, height: 0 };
+// Added zoom levels array
+const zoomLevels = [0.5, 0.8, 1, 1.2, 1.5, 1.8];
+let currentZoomIndex = 2; // Default to 1 (middle of the array)
 
-// Initialize when DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
-  // Initialize handpose model
-  loadHandposeModel();
-  
-  // Initialize try-on button event listeners
-  document.querySelectorAll('.try-on').forEach(button => {
-    button.addEventListener('click', function() {
-      const productCard = this.closest('.product-card');
-      const productId = parseInt(productCard.querySelector('.wishlist').getAttribute('data-product-id'));
-      const product = products.find(p => p.id === productId);
-      
-      openTryOnModal(product);
-    });
-  });
-});
-
-// Load TensorFlow.js handpose model
-async function loadHandposeModel() {
+async function initVirtualTryOn() {
   try {
-    await tf.ready();
-    handposeModel = await handpose.load();
-    console.log("Handpose model loaded successfully");
+    // Load TensorFlow.js and Pose Detection model if available
+    if (typeof tf !== 'undefined' && typeof poseDetection !== 'undefined') {
+      await tf.ready();
+      poseDetectionModel = await poseDetection.createDetector(
+        poseDetection.SupportedModels.MoveNet,
+        { modelType: poseDetection.movenet.modelType.SINGLEPOSE_THUNDER }
+      );
+      console.log("Pose detection model loaded successfully");
+    }
   } catch (error) {
-    console.error("Error loading handpose model:", error);
-    showToast("Advanced wrist detection not available", "warning");
+    console.error("Error loading pose detection model:", error);
+    showToast("Advanced body detection not available", "warning");
   }
 }
 
-// Open the try-on modal
 function openTryOnModal(product) {
   currentProduct = product;
   const modal = document.getElementById('tryOnModal');
-  const watchVariantsContainer = document.getElementById('watchVariants');
+  if (!modal) {
+    console.error("Try-on modal not found in DOM");
+    return;
+  }
+
+  const tshirtVariantsContainer = document.getElementById('tshirtVariants');
   
-  // Reset watch transformations
-  watchScale = 1;
-  watchRotation = 0;
+  // Reset t-shirt transformations
+  tshirtScale = zoomLevels[currentZoomIndex]; // Use the default zoom level
+  tshirtRotation = 0;
   
   // Clear previous variants
-  watchVariantsContainer.innerHTML = '';
+  tshirtVariantsContainer.innerHTML = '';
   
   // For demo, we'll just use the main product image
   const variantItem = document.createElement('div');
-  variantItem.className = 'watch-variant active';
+  variantItem.className = 'tshirt-variant active';
   variantItem.innerHTML = `<img src="${product.image}" alt="${product.name}">`;
   variantItem.addEventListener('click', () => {
-    document.querySelectorAll('.watch-variant').forEach(v => v.classList.remove('active'));
+    document.querySelectorAll('.tshirt-variant').forEach(v => v.classList.remove('active'));
     variantItem.classList.add('active');
-    updateWatchOverlay(product.image);
+    updateTshirtOverlay(product.image);
   });
-  watchVariantsContainer.appendChild(variantItem);
+  tshirtVariantsContainer.appendChild(variantItem);
   
   // Show modal
   modal.style.display = 'flex';
@@ -385,12 +385,16 @@ function setupTryOnModalEvents() {
   const captureBtn = document.getElementById('captureBtn');
   const cancelBtn = document.getElementById('cancelBtn');
   const previewContainer = document.getElementById('previewContainer');
-  const rotateLeftBtn = document.getElementById('rotateLeftBtn');
-  const rotateRightBtn = document.getElementById('rotateRightBtn');
-  const resizeBtn = document.getElementById('resizeBtn');
+  const zoomInBtn = document.getElementById('zoomInBtn');
+  const zoomOutBtn = document.getElementById('zoomOutBtn');
+  const zoomResetBtn = document.getElementById('zoomResetBtn');
   
-  watchOverlay = document.getElementById('watchOverlay');
-  
+  tshirtOverlay = document.getElementById('tshirtOverlay');
+  if (!tshirtOverlay) {
+    console.error("T-shirt overlay element not found");
+    return;
+  }
+
   // Close modal
   closeBtn.addEventListener('click', closeTryOnModal);
   
@@ -415,12 +419,18 @@ function setupTryOnModalEvents() {
       const reader = new FileReader();
       reader.onload = function(event) {
         const imagePreview = document.getElementById('imagePreview');
+        if (!imagePreview) return;
+        
         imagePreview.src = event.target.result;
         imagePreview.style.display = 'block';
-        document.getElementById('previewInstructions').style.display = 'none';
         
-        // Process the image for wrist detection
-        detectWristInImage(imagePreview);
+        const previewInstructions = document.getElementById('previewInstructions');
+        if (previewInstructions) {
+          previewInstructions.style.display = 'none';
+        }
+        
+        // Process the image for body detection
+        detectBodyInImage(imagePreview);
       };
       reader.readAsDataURL(e.target.files[0]);
     }
@@ -432,6 +442,8 @@ function setupTryOnModalEvents() {
     const video = document.getElementById('videoPreview');
     const image = document.getElementById('imagePreview');
     
+    if (!canvas || !video || !image) return;
+    
     if (video.style.display === 'block') {
       // Capture from webcam
       canvas.width = video.videoWidth;
@@ -439,29 +451,29 @@ function setupTryOnModalEvents() {
       const ctx = canvas.getContext('2d');
       ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
       
-      // Draw watch overlay on canvas with transparency
-      if (watchOverlay.style.display === 'block') {
+      // Draw t-shirt overlay on canvas with transparency
+      if (tshirtOverlay.style.display === 'block') {
         // Save the current context
         ctx.save();
         
-        // Move to the center of the watch
-        const watchX = parseInt(watchOverlay.style.left) + watchOverlay.width/2;
-        const watchY = parseInt(watchOverlay.style.top) + watchOverlay.height/2;
-        ctx.translate(watchX, watchY);
+        // Move to the center of the t-shirt
+        const tshirtX = parseInt(tshirtOverlay.style.left) + tshirtOverlay.width/2;
+        const tshirtY = parseInt(tshirtOverlay.style.top) + tshirtOverlay.height/2;
+        ctx.translate(tshirtX, tshirtY);
         
         // Apply rotation
-        ctx.rotate(watchRotation * Math.PI / 180);
+        ctx.rotate(tshirtRotation * Math.PI / 180);
         
         // Apply scale
-        ctx.scale(watchScale, watchScale);
+        ctx.scale(tshirtScale, tshirtScale);
         
-        // Draw the watch image (adjusted for center)
+        // Draw the t-shirt image (adjusted for center)
         ctx.drawImage(
-          watchOverlay, 
-          -watchOverlay.width/2, 
-          -watchOverlay.height/2, 
-          watchOverlay.width, 
-          watchOverlay.height
+          tshirtOverlay, 
+          -tshirtOverlay.width/2, 
+          -tshirtOverlay.height/2, 
+          tshirtOverlay.width, 
+          tshirtOverlay.height
         );
         
         // Restore the context
@@ -476,7 +488,7 @@ function setupTryOnModalEvents() {
       // Stop webcam
       stopWebcam();
     } else if (image.style.display === 'block') {
-      // For uploaded images, we'll create a new canvas with the watch
+      // For uploaded images, we'll create a new canvas with the t-shirt
       const tempCanvas = document.createElement('canvas');
       tempCanvas.width = image.naturalWidth || image.width;
       tempCanvas.height = image.naturalHeight || image.height;
@@ -485,22 +497,22 @@ function setupTryOnModalEvents() {
       // Draw the original image
       tempCtx.drawImage(image, 0, 0, tempCanvas.width, tempCanvas.height);
       
-      // Draw the watch overlay
-      if (watchOverlay.style.display === 'block') {
+      // Draw the t-shirt overlay
+      if (tshirtOverlay.style.display === 'block') {
         tempCtx.save();
         
-        const watchX = parseInt(watchOverlay.style.left) + watchOverlay.width/2;
-        const watchY = parseInt(watchOverlay.style.top) + watchOverlay.height/2;
-        tempCtx.translate(watchX, watchY);
-        tempCtx.rotate(watchRotation * Math.PI / 180);
-        tempCtx.scale(watchScale, watchScale);
+        const tshirtX = parseInt(tshirtOverlay.style.left) + tshirtOverlay.width/2;
+        const tshirtY = parseInt(tshirtOverlay.style.top) + tshirtOverlay.height/2;
+        tempCtx.translate(tshirtX, tshirtY);
+        tempCtx.rotate(tshirtRotation * Math.PI / 180);
+        tempCtx.scale(tshirtScale, tshirtScale);
         
         tempCtx.drawImage(
-          watchOverlay, 
-          -watchOverlay.width/2, 
-          -watchOverlay.height/2, 
-          watchOverlay.width, 
-          watchOverlay.height
+          tshirtOverlay, 
+          -tshirtOverlay.width/2, 
+          -tshirtOverlay.height/2, 
+          tshirtOverlay.width, 
+          tshirtOverlay.height
         );
         
         tempCtx.restore();
@@ -516,31 +528,49 @@ function setupTryOnModalEvents() {
   // Cancel button
   cancelBtn.addEventListener('click', closeTryOnModal);
   
-  // Watch controls
-  rotateLeftBtn.addEventListener('click', () => {
-    watchRotation -= 15;
-    updateWatchTransform();
+  // Zoom in button
+  zoomInBtn.addEventListener('click', () => {
+    if (currentZoomIndex < zoomLevels.length - 1) {
+      currentZoomIndex++;
+      tshirtScale = zoomLevels[currentZoomIndex];
+      updateTshirtTransform();
+      positionTshirtOverlay();
+      showToast(`Zoom: ${tshirtScale.toFixed(1)}x`);
+    } else {
+      showToast("Maximum zoom reached", "warning");
+    }
   });
   
-  rotateRightBtn.addEventListener('click', () => {
-    watchRotation += 15;
-    updateWatchTransform();
+  // Zoom out button
+  zoomOutBtn.addEventListener('click', () => {
+    if (currentZoomIndex > 0) {
+      currentZoomIndex--;
+      tshirtScale = zoomLevels[currentZoomIndex];
+      updateTshirtTransform();
+      positionTshirtOverlay();
+      showToast(`Zoom: ${tshirtScale.toFixed(1)}x`);
+    } else {
+      showToast("Minimum zoom reached", "warning");
+    }
   });
   
-  resizeBtn.addEventListener('click', () => {
-    // Toggle between two sizes
-    watchScale = watchScale === 1 ? 1.3 : 1;
-    updateWatchTransform();
+  // Reset zoom button
+  zoomResetBtn.addEventListener('click', () => {
+    currentZoomIndex = 2; // Reset to middle index (1.0)
+    tshirtScale = zoomLevels[currentZoomIndex];
+    updateTshirtTransform();
+    positionTshirtOverlay();
+    showToast(`Zoom reset to ${tshirtScale.toFixed(1)}x`);
   });
   
-  // Make watch overlay draggable
-  watchOverlay.addEventListener('mousedown', startDrag);
+  // Make t-shirt overlay draggable
+  tshirtOverlay.addEventListener('mousedown', startDrag);
   previewContainer.addEventListener('mousemove', drag);
   previewContainer.addEventListener('mouseup', endDrag);
   previewContainer.addEventListener('mouseleave', endDrag);
   
   // Touch events for mobile
-  watchOverlay.addEventListener('touchstart', startDrag);
+  tshirtOverlay.addEventListener('touchstart', startDrag);
   previewContainer.addEventListener('touchmove', drag);
   previewContainer.addEventListener('touchend', endDrag);
 }
@@ -548,7 +578,7 @@ function setupTryOnModalEvents() {
 function startDrag(e) {
   isDragging = true;
   
-  const rect = watchOverlay.getBoundingClientRect();
+  const rect = tshirtOverlay.getBoundingClientRect();
   
   if (e.type === 'mousedown') {
     offsetX = e.clientX - rect.left;
@@ -564,6 +594,8 @@ function drag(e) {
   if (!isDragging) return;
   
   const previewContainer = document.getElementById('previewContainer');
+  if (!previewContainer) return;
+  
   const containerRect = previewContainer.getBoundingClientRect();
   
   let clientX, clientY;
@@ -581,28 +613,33 @@ function drag(e) {
   let newTop = clientY - containerRect.top - offsetY;
   
   // Constrain to container
-  newLeft = Math.max(0, Math.min(newLeft, containerRect.width - watchOverlay.width * watchScale));
-  newTop = Math.max(0, Math.min(newTop, containerRect.height - watchOverlay.height * watchScale));
+  newLeft = Math.max(0, Math.min(newLeft, containerRect.width - tshirtOverlay.width * tshirtScale));
+  newTop = Math.max(0, Math.min(newTop, containerRect.height - tshirtOverlay.height * tshirtScale));
   
   // Apply new position
-  watchOverlay.style.left = newLeft + 'px';
-  watchOverlay.style.top = newTop + 'px';
+  tshirtOverlay.style.left = newLeft + 'px';
+  tshirtOverlay.style.top = newTop + 'px';
 }
 
 function endDrag() {
   isDragging = false;
 }
 
-function updateWatchTransform() {
-  watchOverlay.style.transform = `rotate(${watchRotation}deg) scale(${watchScale})`;
+function updateTshirtTransform() {
+  tshirtOverlay.style.transform = `rotate(${tshirtRotation}deg) scale(${tshirtScale})`;
 }
 
 function initWebcam() {
   const videoPreview = document.getElementById('videoPreview');
   const previewInstructions = document.getElementById('previewInstructions');
   
+  if (!videoPreview || !previewInstructions) return;
+  
   // Hide image preview if showing
-  document.getElementById('imagePreview').style.display = 'none';
+  const imagePreview = document.getElementById('imagePreview');
+  if (imagePreview) {
+    imagePreview.style.display = 'none';
+  }
   
   // Stop any existing stream
   if (currentStream) {
@@ -624,17 +661,17 @@ function initWebcam() {
     videoPreview.style.display = 'block';
     previewInstructions.style.display = 'none';
     
-    // When video starts playing, detect wrist
+    // When video starts playing, detect body
     videoPreview.addEventListener('play', function() {
-      // Position watch overlay initially
-      positionWatchOverlay();
+      // Position t-shirt overlay initially
+      positionTshirtOverlay();
       
-      // Start wrist detection
-      if (handposeModel) {
-        detectWristInVideo(videoPreview);
+      // Start body detection
+      if (poseDetectionModel) {
+        detectBodyInVideo(videoPreview);
       } else {
-        // Fallback if handpose model didn't load
-        positionWatchOverlay();
+        // Fallback if pose detection model didn't load
+        positionTshirtOverlay();
       }
     });
   })
@@ -645,81 +682,145 @@ function initWebcam() {
   });
 }
 
-async function detectWristInVideo(video) {
-  if (!handposeModel) return;
+async function detectBodyInVideo(video) {
+  if (!poseDetectionModel) return;
   
   try {
-    const predictions = await handposeModel.estimateHands(video);
+    const poses = await poseDetectionModel.estimatePoses(video);
     
-    if (predictions.length > 0) {
-      // Get wrist landmark (landmark 0 is the wrist)
-      const wrist = predictions[0].landmarks[0];
+    if (poses.length > 0 && poses[0].keypoints) {
+      // Get keypoints for shoulders and hips
+      const leftShoulder = poses[0].keypoints.find(k => k.name === 'left_shoulder');
+      const rightShoulder = poses[0].keypoints.find(k => k.name === 'right_shoulder');
+      const leftHip = poses[0].keypoints.find(k => k.name === 'left_hip');
+      const rightHip = poses[0].keypoints.find(k => k.name === 'right_hip');
       
-      // Convert coordinates to screen space
-      const videoRect = video.getBoundingClientRect();
-      const scaleX = videoRect.width / video.videoWidth;
-      const scaleY = videoRect.height / video.videoHeight;
-      
-      wristPosition.x = wrist[0] * scaleX;
-      wristPosition.y = wrist[1] * scaleY;
-      
-      // Position watch overlay
-      positionWatchAtWrist();
+      if (leftShoulder && rightShoulder && leftHip && rightHip) {
+        // Convert coordinates to screen space
+        const videoRect = video.getBoundingClientRect();
+        const scaleX = videoRect.width / video.videoWidth;
+        const scaleY = videoRect.height / video.videoHeight;
+        
+        // Calculate body position
+        const shoulderCenterX = (leftShoulder.x + rightShoulder.x) / 2 * scaleX;
+        const shoulderCenterY = (leftShoulder.y + rightShoulder.y) / 2 * scaleY;
+        const hipCenterX = (leftHip.x + rightHip.x) / 2 * scaleX;
+        const hipCenterY = (leftHip.y + rightHip.y) / 2 * scaleY;
+        
+        const bodyWidth = Math.abs(leftShoulder.x - rightShoulder.x) * scaleX * 1.5;
+        const bodyHeight = Math.abs(shoulderCenterY - hipCenterY) * 2;
+        
+        bodyPosition = {
+          x: shoulderCenterX - bodyWidth/2,
+          y: shoulderCenterY,
+          width: bodyWidth,
+          height: bodyHeight
+        };
+        
+        // Position t-shirt overlay
+        positionTshirtOnBody();
+      }
     }
   } catch (error) {
-    console.error("Error detecting wrist:", error);
+    console.error("Error detecting body:", error);
   }
   
   // Continue detection
   if (currentStream) {
-    requestAnimationFrame(() => detectWristInVideo(video));
+    requestAnimationFrame(() => detectBodyInVideo(video));
   }
 }
 
-function positionWatchAtWrist() {
-  if (!watchOverlay) return;
+function positionTshirtOnBody() {
+  if (!tshirtOverlay) return;
   
-  const watchWidth = 150 * watchScale;
-  const watchHeight = (150 * 1.5) * watchScale;
+  // Set t-shirt size based on detected body
+  const tshirtWidth = bodyPosition.width;
+  const tshirtHeight = bodyPosition.height;
   
-  watchOverlay.style.left = (wristPosition.x - watchWidth/2) + 'px';
-  watchOverlay.style.top = (wristPosition.y - watchHeight/2) + 'px';
-  watchOverlay.style.display = 'block';
-}
-
-function positionWatchOverlay() {
-  const previewContainer = document.getElementById('previewContainer');
-  const containerRect = previewContainer.getBoundingClientRect();
+  tshirtOverlay.style.width = tshirtWidth + 'px';
+  tshirtOverlay.style.height = 'auto';
   
-  // Set watch overlay size
-  const watchWidth = 150;
-  const watchHeight = watchWidth * 1.5;
-  
-  watchOverlay.style.width = watchWidth + 'px';
-  watchOverlay.style.height = 'auto';
-  
-  // Center the watch overlay
-  const left = (containerRect.width - watchWidth) / 2;
-  const top = (containerRect.height - watchHeight) / 2;
-  
-  watchOverlay.style.left = left + 'px';
-  watchOverlay.style.top = top + 'px';
-  watchOverlay.style.display = 'block';
+  // Position the t-shirt
+  tshirtOverlay.style.left = bodyPosition.x + 'px';
+  tshirtOverlay.style.top = bodyPosition.y + 'px';
+  tshirtOverlay.style.display = 'block';
   
   // Update with current product image
-  updateWatchOverlay(currentProduct.image);
+  updateTshirtOverlay(currentProduct.image);
 }
 
-function updateWatchOverlay(imageSrc) {
-  // Simply set the watch overlay image source without any background processing
-  watchOverlay.src = imageSrc;
+function positionTshirtOverlay() {
+  const previewContainer = document.getElementById('previewContainer');
+  if (!previewContainer || !tshirtOverlay) return;
+  
+  const containerRect = previewContainer.getBoundingClientRect();
+  
+  // Set t-shirt overlay size
+  const tshirtWidth = containerRect.width * 0.4;
+  const tshirtHeight = tshirtWidth * 1.5;
+  
+  tshirtOverlay.style.width = tshirtWidth + 'px';
+  tshirtOverlay.style.height = 'auto';
+  
+  // Center the t-shirt overlay
+  const left = (containerRect.width - tshirtWidth) / 2;
+  const top = (containerRect.height - tshirtHeight) / 2;
+  
+  tshirtOverlay.style.left = left + 'px';
+  tshirtOverlay.style.top = top + 'px';
+  tshirtOverlay.style.display = 'block';
+  
+  // Update with current product image
+  updateTshirtOverlay(currentProduct.image);
 }
 
-function detectWristInImage(img) {
-  // In a real app, you would analyze the image to find the wrist
-  // For demo, we'll just position the watch in the center
-  positionWatchOverlay();
-  updateWatchOverlay(currentProduct.image);
+function updateTshirtOverlay(imageSrc) {
+  if (!tshirtOverlay) return;
+  tshirtOverlay.src = imageSrc;
+}
+
+async function detectBodyInImage(img) {
+  if (poseDetectionModel) {
+    try {
+      const poses = await poseDetectionModel.estimatePoses(img);
+      
+      if (poses.length > 0 && poses[0].keypoints) {
+        // Get keypoints for shoulders and hips
+        const leftShoulder = poses[0].keypoints.find(k => k.name === 'left_shoulder');
+        const rightShoulder = poses[0].keypoints.find(k => k.name === 'right_shoulder');
+        const leftHip = poses[0].keypoints.find(k => k.name === 'left_hip');
+        const rightHip = poses[0].keypoints.find(k => k.name === 'right_hip');
+        
+        if (leftShoulder && rightShoulder && leftHip && rightHip) {
+          // Calculate body position
+          const shoulderCenterX = (leftShoulder.x + rightShoulder.x) / 2;
+          const shoulderCenterY = (leftShoulder.y + rightShoulder.y) / 2;
+          const hipCenterX = (leftHip.x + rightHip.x) / 2;
+          const hipCenterY = (leftHip.y + rightHip.y) / 2;
+          
+          const bodyWidth = Math.abs(leftShoulder.x - rightShoulder.x) * 1.5;
+          const bodyHeight = Math.abs(shoulderCenterY - hipCenterY) * 2;
+          
+          bodyPosition = {
+            x: shoulderCenterX - bodyWidth/2,
+            y: shoulderCenterY,
+            width: bodyWidth,
+            height: bodyHeight
+          };
+          
+          // Position t-shirt overlay
+          positionTshirtOnBody();
+          return;
+        }
+      }
+    } catch (error) {
+      console.error("Error detecting body in image:", error);
+    }
+  }
+  
+  // Fallback if pose detection fails or not available
+  positionTshirtOverlay();
 }
 
 function stopWebcam() {
@@ -727,16 +828,28 @@ function stopWebcam() {
     currentStream.getTracks().forEach(track => track.stop());
     currentStream = null;
   }
-  document.getElementById('videoPreview').style.display = 'none';
+  const videoPreview = document.getElementById('videoPreview');
+  if (videoPreview) {
+    videoPreview.style.display = 'none';
+  }
 }
 
 function stopImagePreview() {
-  document.getElementById('imagePreview').style.display = 'none';
-  document.getElementById('previewInstructions').style.display = 'flex';
+  const imagePreview = document.getElementById('imagePreview');
+  const previewInstructions = document.getElementById('previewInstructions');
+  
+  if (imagePreview) {
+    imagePreview.style.display = 'none';
+  }
+  if (previewInstructions) {
+    previewInstructions.style.display = 'flex';
+  }
 }
 
 function closeTryOnModal() {
   const modal = document.getElementById('tryOnModal');
+  if (!modal) return;
+  
   modal.style.display = 'none';
   
   // Stop webcam if active
@@ -747,8 +860,17 @@ function closeTryOnModal() {
   
   // Clear canvas
   const canvas = document.getElementById('canvasPreview');
-  canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
+  if (canvas) {
+    canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
+  }
   
-  // Hide watch overlay
-  document.getElementById('watchOverlay').style.display = 'none';
+  // Hide t-shirt overlay
+  const tshirtOverlay = document.getElementById('tshirtOverlay');
+  if (tshirtOverlay) {
+    tshirtOverlay.style.display = 'none';
+  }
+  
+  // Reset zoom to default
+  currentZoomIndex = 2;
+  tshirtScale = zoomLevels[currentZoomIndex];
 }

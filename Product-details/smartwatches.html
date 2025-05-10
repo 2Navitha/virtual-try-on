@@ -10,90 +10,152 @@
   <link rel="stylesheet" href="../product.css">
 </head>
 <body>
-
-<header>
-  <a href="#" class="logo">
-    <i class="fas fa-clock"></i> ShopZone
-  </a>
-  <div class="search-box">
-    <i class='bx bx-search'></i>
-    <input type="text" id="searchInput" placeholder="Search Smartwatches...">
-  </div>
-  <nav>
-    <ul>
-      <li><a href="#">Smartwatches</a></li>
-      <li><a href="#">Fitness Trackers</a></li>
-      <li><a href="#">Smart Bands</a></li>
-      <li><a href="#">Straps</a></li>
-      <li>
-        <a href="../wishlist.html">
-          <i class='bx bx-heart'></i>
-          <span class="wishlist-count" id="wishlistCounter">0</span>
-        </a>
-      </li>
-      <li>
-        <a href="../cart.html">
-          <i class='bx bx-cart'></i>
-          <span class="cart-count" id="cartCounter">0</span>
-        </a>
-      </li>
-    </ul>
-  </nav>
-</header>
-
-<div class="page-container">
-  <div class="filters">
-    <h3>Filters</h3>
-    <strong>Category</strong>
-    <label><input type="checkbox" name="category" value="Smartwatches" checked> Smartwatches</label>
-    <label><input type="checkbox" name="category" value="Fitness"> Fitness Trackers</label>
-    <label><input type="checkbox" name="category" value="Hybrid"> Hybrid Watches</label>
-    <label><input type="checkbox" name="category" value="Kids"> Kids Watches</label>
-
-    <strong>Brand</strong>
-    <label><input type="checkbox" name="brand" value="Apple" checked> Apple</label>
-    <label><input type="checkbox" name="brand" value="Samsung"> Samsung</label>
-    <label><input type="checkbox" name="brand" value="Fitbit"> Fitbit</label>
-    <label><input type="checkbox" name="brand" value="Garmin"> Garmin</label>
-    <label><input type="checkbox" name="brand" value="Amazfit"> Amazfit</label>
-    <label><input type="checkbox" name="brand" value="Noise"> Noise</label>
-    <label><input type="checkbox" name="brand" value="Fire-Boltt"> Fire-Boltt</label>
-    <label><input type="checkbox" name="brand" value="Boat"> Boat</label>
-
-    <strong>Features</strong>
-    <label><input type="checkbox" name="feature" value="Heart Rate"> Heart Rate Monitor</label>
-    <label><input type="checkbox" name="feature" value="GPS"> GPS</label>
-    <label><input type="checkbox" name="feature" value="Waterproof"> Water Resistant</label>
-    <label><input type="checkbox" name="feature" value="Sleep"> Sleep Tracking</label>
-    <label><input type="checkbox" name="feature" value="SpO2"> Blood Oxygen</label>
-    <label><input type="checkbox" name="feature" value="Calling"> Bluetooth Calling</label>
-
-    <strong>Color</strong>
-    <label><input type="checkbox" name="color" value="Black"> Black</label>
-    <label><input type="checkbox" name="color" value="Silver"> Silver</label>
-    <label><input type="checkbox" name="color" value="Gold"> Gold</label>
-    <label><input type="checkbox" name="color" value="Blue"> Blue</label>
-    <label><input type="checkbox" name="color" value="Pink"> Pink</label>
-
-    <strong>Price</strong>
-    <label><input type="radio" name="price" value="0-5000"> Under ₹5,000</label>
-    <label><input type="radio" name="price" value="5000-10000"> ₹5,000 - ₹10,000</label>
-    <label><input type="radio" name="price" value="10000-20000"> ₹10,000 - ₹20,000</label>
-    <label><input type="radio" name="price" value="20000+"> ₹20,000+</label>
-
-    <div class="filter-buttons">
-      <button class="apply-filters" id="applyFilters">Apply Filters</button>
-      <button class="reset-filters" id="resetFilters">Reset</button>
+  <header>
+    <a href="#" class="logo">
+      <i class="fas fa-clock"></i> ShopZone
+    </a>
+    <div class="search-box">
+      <i class='bx bx-search'></i>
+      <input type="text" id="searchInput" placeholder="Search Smartwatches...">
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#">Smartwatches</a></li>
+        <li><a href="#">Fitness Trackers</a></li>
+        <li><a href="#">Smart Bands</a></li>
+        <li><a href="#">Straps</a></li>
+        <li>
+          <a href="../wishlist.html">
+            <i class='bx bx-heart'></i>
+            <span class="wishlist-count" id="wishlistCounter">0</span>
+          </a>
+        </li>
+        <li>
+          <a href="../cart.html">
+            <i class='bx bx-cart'></i>
+            <span class="cart-count" id="cartCounter">0</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+  
+  <div class="page-container">
+    <div class="filters">
+      <h3>Filters</h3>
+      <strong>Category</strong>
+      <label><input type="checkbox" name="category" value="Smartwatches" checked> Smartwatches</label>
+      <label><input type="checkbox" name="category" value="Fitness"> Fitness Trackers</label>
+      <label><input type="checkbox" name="category" value="Hybrid"> Hybrid Watches</label>
+      <label><input type="checkbox" name="category" value="Kids"> Kids Watches</label>
+  
+      <strong>Brand</strong>
+      <label><input type="checkbox" name="brand" value="Apple" checked> Apple</label>
+      <label><input type="checkbox" name="brand" value="Samsung"> Samsung</label>
+      <label><input type="checkbox" name="brand" value="Fitbit"> Fitbit</label>
+      <label><input type="checkbox" name="brand" value="Garmin"> Garmin</label>
+      <label><input type="checkbox" name="brand" value="Amazfit"> Amazfit</label>
+      <label><input type="checkbox" name="brand" value="Noise"> Noise</label>
+      <label><input type="checkbox" name="brand" value="Fire-Boltt"> Fire-Boltt</label>
+      <label><input type="checkbox" name="brand" value="Boat"> Boat</label>
+  
+      <strong>Features</strong>
+      <label><input type="checkbox" name="feature" value="Heart Rate"> Heart Rate Monitor</label>
+      <label><input type="checkbox" name="feature" value="GPS"> GPS</label>
+      <label><input type="checkbox" name="feature" value="Waterproof"> Water Resistant</label>
+      <label><input type="checkbox" name="feature" value="Sleep"> Sleep Tracking</label>
+      <label><input type="checkbox" name="feature" value="SpO2"> Blood Oxygen</label>
+      <label><input type="checkbox" name="feature" value="Calling"> Bluetooth Calling</label>
+  
+      <strong>Color</strong>
+      <label><input type="checkbox" name="color" value="Black"> Black</label>
+      <label><input type="checkbox" name="color" value="Silver"> Silver</label>
+      <label><input type="checkbox" name="color" value="Gold"> Gold</label>
+      <label><input type="checkbox" name="color" value="Blue"> Blue</label>
+      <label><input type="checkbox" name="color" value="Pink"> Pink</label>
+  
+      <strong>Price</strong>
+      <label><input type="radio" name="price" value="0-5000"> Under ₹5,000</label>
+      <label><input type="radio" name="price" value="5000-10000"> ₹5,000 - ₹10,000</label>
+      <label><input type="radio" name="price" value="10000-20000"> ₹10,000 - ₹20,000</label>
+      <label><input type="radio" name="price" value="20000+"> ₹20,000+</label>
+  
+      <div class="filter-buttons">
+        <button class="apply-filters" id="applyFilters">Apply Filters</button>
+        <button class="reset-filters" id="resetFilters">Reset</button>
+      </div>
+    </div>
+  
+    <div class="product-grid" id="productGrid">
+      <!-- Product cards will be populated here -->
     </div>
   </div>
+  
+  <!-- Toast Notification -->
+  <div class="toast" id="toast"></div>
+  
+  <script src="../product.js"></script>
 
-  <div class="product-grid" id="productGrid">
-    <!-- Product cards will be populated here -->
+<!-- Your existing header and product grid code -->
+
+<!-- Virtual Try-On Modal -->
+<div class="try-on-modal" id="tryOnModal">
+  <div class="try-on-container">
+    <div class="try-on-header">
+      <h3>Virtual Try-On</h3>
+      <button class="close-try-on" id="closeTryOn">&times;</button>
+    </div>
+    
+    <div class="try-on-options">
+      <div class="try-on-option active" id="webcamOption">
+        <i class='bx bx-webcam'></i>
+        <p>Use Webcam</p>
+      </div>
+      <div class="try-on-option" id="uploadOption">
+        <i class='bx bx-upload'></i>
+        <p>Upload Photo</p>
+      </div>
+    </div>
+    
+    <div class="preview-container" id="previewContainer">
+      <video id="videoPreview" autoplay playsinline></video>
+      <canvas id="canvasPreview"></canvas>
+      <img id="imagePreview">
+      <img id="watchOverlay" src="" draggable="false">
+      <div class="preview-instructions" id="previewInstructions">
+        <i class='bx bx-camera' style="font-size: 3rem; color: #d2d2d7;"></i>
+        <p>Position your wrist in the frame</p>
+        <p>or upload a photo of your wrist</p>
+      </div>
+    </div>
+    
+    <input type="file" id="imageUpload" accept="image/*" class="upload-btn">
+    
+    <div class="try-on-controls">
+      <button class="capture-btn" id="captureBtn">Capture</button>
+      <button class="cancel-btn" id="cancelBtn">Cancel</button>
+    </div>
+    
+    <div class="watch-selector">
+      <h4>Select Watch Variant</h4>
+      <div class="watch-variants" id="watchVariants">
+        <!-- Will be populated by JavaScript -->
+      </div>
+    </div>
+    
+    <div class="watch-controls">
+      <button class="watch-btn" id="rotateLeftBtn"><i class='bx bx-rotate-left'></i></button>
+      <button class="watch-btn" id="resizeBtn"><i class='bx bx-resize'></i></button>
+      <button class="watch-btn" id="rotateRightBtn"><i class='bx bx-rotate-right'></i></button>
+    </div>
+    
+    <p class="drag-instruction">Drag the watch to adjust position on your wrist</p>
   </div>
 </div>
 
-<!-- Toast Notification -->
-<div class="toast" id="toast"></div>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/handpose"></script>
+
 
 <script src="../product.js"></script>
 
@@ -108,7 +170,7 @@
       price: 45900,
       originalPrice: 49900,
       discount: 8,
-      image: "/images/smartwatches/watch1.jpg",
+      image: "/images/smartwatches/watch8.png",
       category: "Smartwatches",
       brand: "Apple",
       features: ["Heart Rate", "GPS", "Waterproof", "Sleep", "SpO2"],
@@ -122,7 +184,7 @@
       price: 29999,
       originalPrice: 32999,
       discount: 9,
-      image: "/images/smartwatches/watch2.jpg",
+      image: "/images/smartwatches/watch2.png",
       category: "Smartwatches",
       brand: "Samsung",
       features: ["Heart Rate", "GPS", "Waterproof", "Sleep"],
@@ -136,7 +198,7 @@
       price: 22999,
       originalPrice: 25999,
       discount: 12,
-      image: "/images/smartwatches/watch3.jpg",
+      image: "/images/smartwatches/watch3.png",
       category: "Fitness",
       brand: "Fitbit",
       features: ["Heart Rate", "GPS", "Waterproof", "Sleep"],
@@ -150,7 +212,7 @@
       price: 34990,
       originalPrice: 39990,
       discount: 13,
-      image: "/images/smartwatches/watch4.jpg",
+      image: "/images/smartwatches/watch4.png",
       category: ["Smartwatches"],
       brand: "Garmin",
       features: ["Heart Rate", "GPS", "Waterproof", "Sleep", "SpO2"],
@@ -164,7 +226,7 @@
       price: 15999,
       originalPrice: 18999,
       discount: 16,
-      image: "/images/smartwatches/watch5.jpg",
+      image: "/images/smartwatches/watch5.png",
       category: ["Smartwatches"],
       brand: "Amazfit",
       features: ["Heart Rate", "GPS", "Waterproof", "Sleep"],
@@ -178,7 +240,7 @@
       price: 29900,
       originalPrice: 32900,
       discount: 9,
-      image: "/images/smartwatches/watch6.jpg",
+      image: "/images/smartwatches/watch6.png",
       category: "Smartwatches",
       brand: "Apple",
       features: ["Heart Rate", "Waterproof", "Sleep"],
@@ -192,7 +254,7 @@
       price: 4999,
       originalPrice: 6999,
       discount: 29,
-      image: "/images/smartwatches/watch7.jpg",
+      image: "/images/smartwatches/watch7.png",
       category: "Smart Bands",
       brand: "Noise",
       features: ["Heart Rate", "Calling"],
@@ -206,7 +268,7 @@
       price: 3499,
       originalPrice: 4999,
       discount: 30,
-      image: "/images/smartwatches/watch8.jpg",
+      image: "/images/smartwatches/watch1.png",
       category: "Smart Bands",
       brand: "Fire-Boltt",
       features: ["Heart Rate", "SpO2"],
@@ -220,7 +282,7 @@
       price: 19995,
       originalPrice: 24995,
       discount: 20,
-      image: "/images/smartwatches/watch9.jpg",
+      image: "/images/smartwatches/watch9.png",
       category: "Smartwatches",
       brand: "Fossil",
       features: ["Heart Rate", "GPS", "Waterproof"],
@@ -234,7 +296,7 @@
       price: 18990,
       originalPrice: 22990,
       discount: 17,
-      image: "/images/smartwatches/watch10.jpg",
+      image: "/images/smartwatches/watch4.png",
       category: "Smartwatches",
       brand: "Huawei",
       features: ["Heart Rate", "GPS", "Waterproof", "Sleep", "SpO2"],
@@ -248,7 +310,7 @@
       price: 5999,
       originalPrice: 7999,
       discount: 25,
-      image: "/images/smartwatches/watch11.jpg",
+      image: "/images/smartwatches/watch11.png",
       category: "Smart Bands",
       brand: "Realme",
       features: ["Heart Rate", "SpO2"],
@@ -262,7 +324,7 @@
       price: 16999,
       originalPrice: 19999,
       discount: 15,
-      image: "/images/smartwatches/watch12.jpg",
+      image: "/images/smartwatches/watch12.png",
       category: "Smartwatches",
       brand: "OnePlus",
       features: ["Heart Rate", "GPS", "Waterproof", "Sleep"],
@@ -276,7 +338,7 @@
       price: 89900,
       originalPrice: 92900,
       discount: 3,
-      image: "/images/smartwatches/watch13.jpg",
+      image: "/images/smartwatches/watch13.png",
       category: "Smartwatches",
       brand: "Apple",
       features: ["Heart Rate", "GPS", "Waterproof", "Sleep", "SpO2"],
@@ -290,7 +352,7 @@
       price: 34999,
       originalPrice: 39999,
       discount: 13,
-      image: "/images/smartwatches/watch14.jpg",
+      image: "/images/smartwatches/watch14.png",
       category: "Smartwatches",
       brand: "Samsung",
       features: ["Heart Rate", "GPS", "Waterproof", "Sleep", "SpO2"],
@@ -304,7 +366,7 @@
       price: 32990,
       originalPrice: 36990,
       discount: 11,
-      image: "/images/smartwatches/watch15.jpg",
+      image: "/images/smartwatches/watch15.png",
       category: "Fitness",
       brand: "Garmin",
       features: ["Heart Rate", "GPS", "Waterproof", "Sleep"],
@@ -318,7 +380,7 @@
       price: 6999,
       originalPrice: 8999,
       discount: 22,
-      image: "/images/smartwatches/watch16.jpg",
+      image: "/images/smartwatches/watch16.png",
       category: "Smart Bands",
       brand: "Amazfit",
       features: ["Heart Rate", "SpO2"],
@@ -332,7 +394,7 @@
       price: 3990,
       originalPrice: 5990,
       discount: 33,
-      image: "/images/smartwatches/watch17.jpg",
+      image: "/images/smartwatches/watch17.png",
       category: "Smart Bands",
       brand: "Boat",
       features: ["Heart Rate", "Calling"],
@@ -346,7 +408,7 @@
       price: 15999,
       originalPrice: 18999,
       discount: 16,
-      image: "/images/smartwatches/watch18.jpg",
+      image: "/images/smartwatches/watch18.png",
       category: "Fitness",
       brand: "Fitbit",
       features: ["Heart Rate", "GPS", "Waterproof", "Sleep"],
@@ -360,7 +422,7 @@
       price: 28990,
       originalPrice: 32990,
       discount: 12,
-      image: "/images/smartwatches/watch19.jpg",
+      image: "/images/smartwatches/watch19.png",
       category: "Smartwatches",
       brand: "Garmin",
       features: ["Heart Rate", "GPS", "Waterproof", "Sleep", "SpO2"],
@@ -374,7 +436,7 @@
       price: 10999,
       originalPrice: 12999,
       discount: 15,
-      image: "/images/smartwatches/watch20.jpg",
+      image: "/images/smartwatches/watch20.png",
       category: "Smartwatches",
       brand: "Huawei",
       features: ["Heart Rate", "GPS", "Waterproof", "Sleep"],
@@ -382,5 +444,52 @@
     }
   ];
 </script>
+<div class="try-on-modal" id="tryOnModal">
+  <div class="try-on-container">
+    <div class="try-on-header">
+      <h3>Virtual Try-On</h3>
+      <button class="close-try-on" id="closeTryOn">&times;</button>
+    </div>
+    
+    <div class="try-on-options">
+      <div class="try-on-option active" id="webcamOption">
+        <i class='bx bx-webcam'></i>
+        <p>Use Webcam</p>
+      </div>
+      <div class="try-on-option" id="uploadOption">
+        <i class='bx bx-upload'></i>
+        <p>Upload Photo</p>
+      </div>
+    </div>
+    
+    <div class="preview-container" id="previewContainer">
+      <video id="videoPreview" autoplay playsinline></video>
+      <canvas id="canvasPreview"></canvas>
+      <img id="imagePreview">
+      <img id="watchOverlay" src="">
+      <div class="preview-instructions" id="previewInstructions">
+        <i class='bx bx-camera' style="font-size: 3rem; color: #d2d2d7;"></i>
+        <p>Position your wrist in the frame</p>
+        <p>or upload a photo of your wrist</p>
+      </div>
+    </div>
+    
+    <input type="file" id="imageUpload" accept="image/*" class="upload-btn">
+    
+    <div class="try-on-controls">
+      <button class="capture-btn" id="captureBtn">Capture</button>
+      <button class="cancel-btn" id="cancelBtn">Cancel</button>
+    </div>
+    
+    <div class="watch-selector">
+      <h4>Select Watch Variant</h4>
+      <div class="watch-variants" id="watchVariants">
+        <!-- Will be populated by JavaScript -->
+      </div>
+    </div>
+    
+    <p class="drag-instruction">Drag the watch to adjust position on your wrist</p>
+  </div>
+</div>
 </body>
 </html>

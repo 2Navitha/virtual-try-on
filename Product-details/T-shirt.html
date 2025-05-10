@@ -7,7 +7,7 @@
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="../product.css">
+  <link rel="stylesheet" href="t-shirt.css">
 </head>
 <body>
 
@@ -111,8 +111,64 @@
 <!-- Toast Notification -->
 <div class="toast" id="toast"></div>
 
-<script src="../product.js"></script>
+<!-- Virtual Try-On Modal -->
+<div class="try-on-modal" id="tryOnModal">
+  <div class="try-on-container">
+    <div class="try-on-header">
+      <h3>Virtual Try-On</h3>
+      <button class="close-try-on" id="closeTryOn">&times;</button>
+    </div>
+    
+    <div class="try-on-options">
+      <div class="try-on-option active" id="webcamOption">
+        <i class='bx bx-webcam'></i>
+        <p>Use Webcam</p>
+      </div>
+      <div class="try-on-option" id="uploadOption">
+        <i class='bx bx-upload'></i>
+        <p>Upload Photo</p>
+      </div>
+    </div>
+    
+    <div class="preview-container" id="previewContainer">
+      <video id="videoPreview" autoplay playsinline></video>
+      <canvas id="canvasPreview"></canvas>
+      <img id="imagePreview">
+      <img id="tshirtOverlay" src="" draggable="false">
+      <div class="preview-instructions" id="previewInstructions">
+        <i class='bx bx-camera' style="font-size: 3rem; color: #d2d2d7;"></i>
+        <p>Stand facing the camera</p>
+        <p>or upload a full-body photo</p>
+      </div>
+    </div>
+    
+    <input type="file" id="imageUpload" accept="image/*" class="upload-btn">
+    
+    <div class="try-on-controls">
+      <button class="capture-btn" id="captureBtn">Capture</button>
+      <button class="cancel-btn" id="cancelBtn">Cancel</button>
+    </div>
+    
+    <div class="watch-selector">
+      <h4>Select T-Shirt Variant</h4>
+      <div class="tshirt-variants" id="tshirtVariants">
+        <!-- Will be populated by JavaScript -->
+      </div>
+    </div>
+    
+   <div class="zoom-controls">
+  <button id="zoomOutBtn" title="Zoom Out"><i class='bx bx-zoom-out'></i></button>
+  <button id="zoomResetBtn" title="Reset Zoom"><i class='bx bx-reset'></i></button>
+  <button id="zoomInBtn" title="Zoom In"><i class='bx bx-zoom-in'></i></button>
+</div>
+    
+    <p class="drag-instruction">Drag the t-shirt to adjust position</p>
+  </div>
+</div>
 
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/pose-detection"></script>
+<script src="t-shirt.js"></script>
 <script>
   // Product data with additional filter properties
   const products = [
@@ -124,7 +180,7 @@
       price: 899,
       originalPrice: 1299,
       discount: 31,
-      image: "/images/tshirts/tshirt1.jpg",
+      image: "/images/tshirts/tshirt1.png",
       category: "Sports",
       brand: "Nike",
       features: ["Moisture Wicking", "Breathable"],
@@ -141,7 +197,7 @@
       price: 1199,
       originalPrice: 1499,
       discount: 20,
-      image: "/images/tshirts/tshirt2.jpg",
+      image: "/images/tshirts/tshirt2.png",
       category: "Round Neck",
       brand: "Adidas",
       features: ["Classic Fit", "Cotton"],
@@ -158,7 +214,7 @@
       price: 1290,
       originalPrice: 1690,
       discount: 24,
-      image: "/images/tshirts/tshirt3.jpg",
+      image: "/images/tshirts/tshirt3.png",
       category: "Graphic",
       brand: "Puma",
       features: ["Printed Design", "Relaxed Fit"],
@@ -175,7 +231,7 @@
       price: 1299,
       originalPrice: 1599,
       discount: 19,
-      image: "/images/tshirts/tshirt4.jpg",
+      image: "/images/tshirts/tshirt4.png",
       category: "Polo",
       brand: "US Polo",
       features: ["Classic Polo", "Regular Fit"],
@@ -192,7 +248,7 @@
       price: 499,
       originalPrice: 799,
       discount: 38,
-      image: "/images/tshirts/tshirt5.jpg",
+      image: "/images/tshirts/tshirt5.png",
       category: "Round Neck",
       brand: "H&M",
       features: ["Basic Tee", "Regular Fit"],
@@ -209,7 +265,7 @@
       price: 899,
       originalPrice: 1199,
       discount: 25,
-      image: "/images/tshirts/tshirt6.jpg",
+      image: "/images/tshirts/tshirt6.png",
       category: "Round Neck",
       brand: "Zara",
       features: ["Striped", "Slim Fit"],
@@ -226,7 +282,7 @@
       price: 1099,
       originalPrice: 1499,
       discount: 27,
-      image: "/images/tshirts/tshirt7.jpg",
+      image: "/images/tshirts/tshirt7.png",
       category: "Round Neck",
       brand: "Levi's",
       features: ["Premium Cotton", "Regular Fit"],
@@ -243,7 +299,7 @@
       price: 699,
       originalPrice: 999,
       discount: 30,
-      image: "/images/tshirts/tshirt8.jpg",
+      image: "/images/tshirts/tshirt8.png",
       category: "Round Neck",
       brand: "Roadster",
       features: ["Full Sleeve", "Regular Fit"],
@@ -260,7 +316,7 @@
       price: 1799,
       originalPrice: 2299,
       discount: 22,
-      image: "/images/tshirts/tshirt9.jpg",
+      image: "/images/tshirts/tshirt9.png",
       category: "Polo",
       brand: "Tommy Hilfiger",
       features: ["Classic Polo", "Regular Fit"],
@@ -277,7 +333,7 @@
       price: 999,
       originalPrice: 1299,
       discount: 23,
-      image: "/images/tshirts/tshirt10.jpg",
+      image: "/images/tshirts/tshirt10.png",
       category: "Graphic",
       brand: "Jack & Jones",
       features: ["Graphic Print", "Slim Fit"],
@@ -294,7 +350,7 @@
       price: 1499,
       originalPrice: 1999,
       discount: 25,
-      image: "/images/tshirts/tshirt11.jpg",
+      image: "/images/tshirts/tshirt11.png",
       category: "Sports",
       brand: "Under Armour",
       features: ["Performance", "Moisture Wicking"],
@@ -311,7 +367,7 @@
       price: 1299,
       originalPrice: 1699,
       discount: 24,
-      image: "/images/tshirts/tshirt12.jpg",
+      image: "/images/tshirts/tshirt12.png",
       category: "Round Neck",
       brand: "Calvin Klein",
       features: ["Premium Cotton", "Slim Fit"],
@@ -328,7 +384,7 @@
       price: 1099,
       originalPrice: 1399,
       discount: 21,
-      image: "/images/tshirts/tshirt13.jpg",
+      image: "/images/tshirts/tshirt13.png",
       category: "Sports",
       brand: "Puma",
       features: ["Quick Dry", "Activewear"],
@@ -345,7 +401,7 @@
       price: 1199,
       originalPrice: 1499,
       discount: 20,
-      image: "/images/tshirts/tshirt14.jpg",
+      image: "/images/tshirts/tshirt14.png",
       category: "Round Neck",
       brand: "Adidas",
       features: ["Classic 3-Stripes", "Regular Fit"],
@@ -362,7 +418,7 @@
       price: 1499,
       originalPrice: 1999,
       discount: 25,
-      image: "/images/tshirts/tshirt15.jpg",
+      image: "/images/tshirts/tshirt15.png",
       category: "Sports",
       brand: "Nike",
       features: ["Dri-FIT", "Moisture Wicking"],
@@ -379,7 +435,7 @@
       price: 799,
       originalPrice: 999,
       discount: 20,
-      image: "/images/tshirts/tshirt16.jpg",
+      image: "/images/tshirts/tshirt16.png",
       category: "Round Neck",
       brand: "H&M",
       features: ["Linen Blend", "Relaxed Fit"],
@@ -396,7 +452,7 @@
       price: 899,
       originalPrice: 1199,
       discount: 25,
-      image: "/images/tshirts/tshirt17.jpg",
+      image: "/images/tshirts/tshirt17.png",
       category: "Round Neck",
       brand: "Zara",
       features: ["Oversized", "Relaxed Fit"],
@@ -413,7 +469,7 @@
       price: 1099,
       originalPrice: 1399,
       discount: 21,
-      image: "/images/tshirts/tshirt18.jpg",
+      image: "/images/tshirts/tshirt18.png",
       category: "Graphic",
       brand: "Levi's",
       features: ["Vintage Print", "Regular Fit"],
@@ -430,7 +486,7 @@
       price: 699,
       originalPrice: 999,
       discount: 30,
-      image: "/images/tshirts/tshirt19.jpg",
+      image: "/images/tshirts/tshirt19.png",
       category: "Round Neck",
       brand: "Roadster",
       features: ["Color Block", "Regular Fit"],
@@ -447,7 +503,7 @@
       price: 1099,
       originalPrice: 1399,
       discount: 21,
-      image: "/images/tshirts/tshirt20.jpg",
+      image: "/images/tshirts/tshirt20.png",
       category: "V-Neck",
       brand: "US Polo",
       features: ["V-Neck", "Slim Fit"],
