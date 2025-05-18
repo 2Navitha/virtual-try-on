@@ -3,28 +3,30 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ShopZone | Shirts</title>
+  <title>ShopZone | Shoes</title>
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="product.css">
+ 
 </head>
 <body>
 
 <header>
   <a href="#" class="logo">
-    <i class="fas fa-tshirt"></i> ShopZone
+    <i class="fas fa-shoe-prints"></i> ShopZone
   </a>
   <div class="search-box">
     <i class='bx bx-search'></i>
-    <input type="text" id="searchInput" placeholder="Search Shirts...">
+    <input type="text" id="searchInput" placeholder="Search Shoes...">
   </div>
   <nav>
     <ul>
-      <li><a href="#">Shirts</a></li>
-      <li><a href="#">T-Shirts</a></li>
-      <li><a href="#">Jeans</a></li>
-      <li><a href="#">Jackets</a></li>
+      <li><a href="#">Sneakers</a></li>
+      <li><a href="#">Sports</a></li>
+      <li><a href="#">Casuals</a></li>
+      <li><a href="#">Formals</a></li>
+      <li><a href="#">Sandals</a></li>
       <li>
         <a href="../wishlist.html">
           <i class='bx bx-heart'></i>
@@ -45,26 +47,30 @@
   <div class="filters">
     <h3>Filters</h3>
     <strong>Category</strong>
-    <label><input type="checkbox" name="category" value="Casual" checked> Casual Shirts</label>
-    <label><input type="checkbox" name="category" value="Formal"> Formal Shirts</label>
-    <label><input type="checkbox" name="category" value="Polo"> Polo Shirts</label>
-    <label><input type="checkbox" name="category" value="Linen"> Linen Shirts</label>
+    <label><input type="checkbox" name="category" value="Sneakers" checked> Sneakers</label>
+    <label><input type="checkbox" name="category" value="Sports"> Sports Shoes</label>
+    <label><input type="checkbox" name="category" value="Casual"> Casual Shoes</label>
+    <label><input type="checkbox" name="category" value="Formal"> Formal Shoes</label>
+    <label><input type="checkbox" name="category" value="Sandals"> Sandals & Floaters</label>
+    <label><input type="checkbox" name="category" value="Loafers"> Loafers</label>
 
     <strong>Brand</strong>
-    <label><input type="checkbox" name="brand" value="Levi's" checked> Levi's</label>
-    <label><input type="checkbox" name="brand" value="H&M"> H&M</label>
-    <label><input type="checkbox" name="brand" value="Zara"> Zara</label>
-    <label><input type="checkbox" name="brand" value="Allen Solly"> Allen Solly</label>
-    <label><input type="checkbox" name="brand" value="Van Heusen"> Van Heusen</label>
-    <label><input type="checkbox" name="brand" value="Peter England"> Peter England</label>
-    <label><input type="checkbox" name="brand" value="Arrow"> Arrow</label>
+    <label><input type="checkbox" name="brand" value="Nike" checked> Nike</label>
+    <label><input type="checkbox" name="brand" value="Adidas"> Adidas</label>
+    <label><input type="checkbox" name="brand" value="Puma"> Puma</label>
+    <label><input type="checkbox" name="brand" value="Reebok"> Reebok</label>
+    <label><input type="checkbox" name="brand" value="Skechers"> Skechers</label>
+    <label><input type="checkbox" name="brand" value="Woodland"> Woodland</label>
+    <label><input type="checkbox" name="brand" value="Bata"> Bata</label>
+    <label><input type="checkbox" name="brand" value="Red Tape"> Red Tape</label>
 
     <strong>Size</strong>
-    <label><input type="checkbox" name="size" value="S"> S</label>
-    <label><input type="checkbox" name="size" value="M"> M</label>
-    <label><input type="checkbox" name="size" value="L"> L</label>
-    <label><input type="checkbox" name="size" value="XL"> XL</label>
-    <label><input type="checkbox" name="size" value="XXL"> XXL</label>
+    <label><input type="checkbox" name="size" value="6"> 6</label>
+    <label><input type="checkbox" name="size" value="7"> 7</label>
+    <label><input type="checkbox" name="size" value="8"> 8</label>
+    <label><input type="checkbox" name="size" value="9"> 9</label>
+    <label><input type="checkbox" name="size" value="10"> 10</label>
+    <label><input type="checkbox" name="size" value="11"> 11</label>
 
     <strong>Color</strong>
     <label><input type="checkbox" name="color" value="White"> White</label>
@@ -72,33 +78,29 @@
     <label><input type="checkbox" name="color" value="Blue"> Blue</label>
     <label><input type="checkbox" name="color" value="Red"> Red</label>
     <label><input type="checkbox" name="color" value="Green"> Green</label>
-    <label><input type="checkbox" name="color" value="Yellow"> Yellow</label>
-    <label><input type="checkbox" name="color" value="Pink"> Pink</label>
+    <label><input type="checkbox" name="color" value="Grey"> Grey</label>
     <label><input type="checkbox" name="color" value="Brown"> Brown</label>
 
     <strong>Material</strong>
-    <label><input type="checkbox" name="material" value="Cotton"> Cotton</label>
-    <label><input type="checkbox" name="material" value="Linen"> Linen</label>
-    <label><input type="checkbox" name="material" value="Polyester"> Polyester</label>
-    <label><input type="checkbox" name="material" value="Silk"> Silk</label>
-    <label><input type="checkbox" name="material" value="Denim"> Denim</label>
+    <label><input type="checkbox" name="material" value="Leather"> Leather</label>
+    <label><input type="checkbox" name="material" value="Synthetic"> Synthetic</label>
+    <label><input type="checkbox" name="material" value="Mesh"> Mesh</label>
+    <label><input type="checkbox" name="material" value="Canvas"> Canvas</label>
+    <label><input type="checkbox" name="material" value="Rubber"> Rubber</label>
 
-    <strong>Sleeve</strong>
-    <label><input type="checkbox" name="sleeve" value="Full"> Full Sleeve</label>
-    <label><input type="checkbox" name="sleeve" value="Half"> Half Sleeve</label>
-    <label><input type="checkbox" name="sleeve" value="Sleeveless"> Sleeveless</label>
-
-    <strong>Pattern</strong>
-    <label><input type="checkbox" name="pattern" value="Solid"> Solid</label>
-    <label><input type="checkbox" name="pattern" value="Striped"> Striped</label>
-    <label><input type="checkbox" name="pattern" value="Checked"> Checked</label>
-    <label><input type="checkbox" name="pattern" value="Printed"> Printed</label>
+    <strong>Discount</strong>
+    <label><input type="checkbox" name="discount" value="10"> 10% and above</label>
+    <label><input type="checkbox" name="discount" value="20"> 20% and above</label>
+    <label><input type="checkbox" name="discount" value="30"> 30% and above</label>
+    <label><input type="checkbox" name="discount" value="40"> 40% and above</label>
+    <label><input type="checkbox" name="discount" value="50"> 50% and above</label>
 
     <strong>Price</strong>
-    <label><input type="radio" name="price" value="0-500"> Under ₹500</label>
-    <label><input type="radio" name="price" value="500-1000"> ₹500 - ₹1,000</label>
+    <label><input type="radio" name="price" value="0-1000"> Under ₹1,000</label>
     <label><input type="radio" name="price" value="1000-2000"> ₹1,000 - ₹2,000</label>
-    <label><input type="radio" name="price" value="2000+"> ₹2,000+</label>
+    <label><input type="radio" name="price" value="2000-3000"> ₹2,000 - ₹3,000</label>
+    <label><input type="radio" name="price" value="3000-5000"> ₹3,000 - ₹5,000</label>
+    <label><input type="radio" name="price" value="5000+"> ₹5,000+</label>
 
     <div class="filter-buttons">
       <button class="apply-filters" id="applyFilters">Apply Filters</button>
@@ -113,6 +115,7 @@
 
 <!-- Toast Notification -->
 <div class="toast" id="toast"></div>
+
 <!-- Virtual Try-On Modal -->
 <div class="try-on-modal" id="tryOnModal">
   <div class="try-on-container">
@@ -123,7 +126,7 @@
     
     <div class="try-on-options">
       <div class="try-on-option active" id="webcamOption">
-        <i class='bx bx-webcam'></i>
+          <i class='bx bx-webcam'></i>
         <p>Use Webcam</p>
       </div>
       <div class="try-on-option" id="uploadOption">
@@ -136,11 +139,11 @@
       <video id="videoPreview" autoplay playsinline></video>
       <canvas id="canvasPreview"></canvas>
       <img id="imagePreview">
-      <img id="tshirtOverlay" src="" draggable="false">
+      <img id="shoeOverlay" src="" draggable="false">
       <div class="preview-instructions" id="previewInstructions">
         <i class='bx bx-camera' style="font-size: 3rem; color: #d2d2d7;"></i>
-        <p>Stand facing the camera</p>
-        <p>or upload a full-body photo</p>
+        <p>Position your feet in the frame</p>
+        <p>or upload a photo of your feet</p>
       </div>
     </div>
     
@@ -149,373 +152,344 @@
     <div class="try-on-controls">
       <button class="capture-btn" id="captureBtn">Capture</button>
       <button class="cancel-btn" id="cancelBtn">Cancel</button>
+
+      
     </div>
     
-    <div class="watch-selector">
-      <h4>Select T-Shirt Variant</h4>
-      <div class="tshirt-variants" id="tshirtVariants">
+    <div class="shoe-selector">
+      <h4>Select Shoe Variant</h4>
+      <div class="shoe-variants" id="shoeVariants">
         <!-- Will be populated by JavaScript -->
       </div>
     </div>
     
-   <div class="zoom-controls">
-  <button id="zoomOutBtn" title="Zoom Out"><i class='bx bx-zoom-out'></i></button>
-  <button id="zoomResetBtn" title="Reset Zoom"><i class='bx bx-reset'></i></button>
-  <button id="zoomInBtn" title="Zoom In"><i class='bx bx-zoom-in'></i></button>
+     
+
+      <!-- Inside the shoe-controls div, add these buttons -->
+<div class="shoe-controls">
+  <button class="shoe-btn" id="zoomOutBtn"><i class='bx bx-zoom-out'></i></button>
+  <button class="shoe-btn" id="zoomResetBtn"><i class='bx bx-reset'></i></button>
+  <button class="shoe-btn" id="zoomInBtn"><i class='bx bx-zoom-in'></i></button>
+  <button class="shoe-btn" id="rotateLeftBtn"><i class='bx bx-rotate-left'></i></button>
+  <button class="shoe-btn" id="rotateRightBtn"><i class='bx bx-rotate-right'></i></button>
 </div>
+
     
-    <p class="drag-instruction">Drag the t-shirt to adjust position</p>
+    <p class="drag-instruction">Drag the shoe to adjust position on your feet</p>
   </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/pose-detection"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/posenet"></script>
 <script src="product.js"></script>
 
 <script>
   // Product data with additional filter properties
   const products = [
-  {
-    id: 1,
-    name: "Levi's Casual Shirt",
-    desc: "100% Cotton, Regular Fit, Half Sleeve, Blue",
-    rating: "★★★★★ (4.8)",
-    price: 899,
-    originalPrice: 1299,
-    discount: "31% OFF",
-    image: "/images/shirts/shirt1.png",
-    category: ["Casual"],
-    brand: "Levi's",
-    size: ["S", "M", "L", "XL"],
-    color: "Brown",
-    material: "Cotton",
-    sleeve: "Half",
-    pattern: "Solid"
-  },
-  {
-    id: 2,
-    name: "H&M Polo Shirt",
-    desc: "Slim Fit, White, Easy Iron, Spread Collar",
-    rating: "★★★★☆ (4.5)",
-    price: 1199,
-    originalPrice: 1499,
-    discount: "20% OFF",
-    image: "/images/shirts/shirt2.png",
-    category: ["Polo"],
-    brand: "H&M",
-    size: ["S", "M", "L"],
-    color: "Blue",
-    material: "Cotton",
-    sleeve: "Full",
-    pattern: "Solid"
-  },
-  {
-    id: 3,
-    name: "Zara Printed Shirt",
-    desc: "Floral Print, Relaxed Fit, full Sleeve",
-    rating: "★★★★☆ (4.3)",
-    price: 1590,
-    originalPrice: 1990,
-    discount: "20% OFF",
-    image: "/images/shirts/shirt3.png",
-    category: "Casual",
-    brand: "Zara",
-    size: ["M", "L", "XL"],
-    color: "Blue",
-    material: "Polyester",
-    sleeve: "Full",
-    pattern: "Printed"
-  },
-  {
-    id: 4,
-    name: "Allen Solly Polo",
-    desc: "Pique Polo, Full Sleeve, Slim Fit, Black",
-    rating: "★★★★★ (4.7)",
-    price: 799,
-    originalPrice: 999,
-    discount: "20% OFF",
-    image: "/images/shirts/shirt4.png",
-    category: "Polo",
-    brand: "Allen Solly",
-    size: ["S", "M", "L", "XL"],
-    color: "Green",
-    material: "Cotton",
-    sleeve: "Full",
-    pattern: "Solid"
-  },
-  {
-    id: 5,
-    name: "Van Heusen Linen",
-    desc: "100% Linen, Regular Fit, Full Sleeve, Beige",
-    rating: "★★★★☆ (4.6)",
-    price: 1299,
-    originalPrice: 1799,
-    discount: "28% OFF",
-    image: "/images/shirts/shirt5.png",
-    category: "Linen",
-    brand: "Van Heusen",
-    size: ["M", "L", "XL"],
-    color: "Blue",
-    material: "Linen",
-    sleeve: "Full",
-    pattern: "Printed"
-  },
-  {
-    id: 6,
-    name: "Peter England Checks",
-    desc: "Checked Shirt, Regular Fit, Full Sleeve",
-    rating: "★★★★☆ (4.4)",
-    price: 999,
-    originalPrice: 1299,
-    discount: "23% OFF",
-    image: "/images/shirts/shirt6.png",
-    category: "Formal",
-    brand: "Peter England",
-    size: ["S", "M", "L"],
-    color: "Blue",
-    material: "Cotton",
-    sleeve: "Full",
-    pattern: "Printed"
-  },
-  {
-    id: 7,
-    name: "Arrow Formal Shirt",
-    desc: "Slim Fit, Brown, Non-Iron, Spread Collar",
-    rating: "★★★★★ (4.8)",
-    price: 1499,
-    originalPrice: 1999,
-    discount: "25% OFF",
-    image: "/images/shirts/shirt7.png",
-    category: "Formal",
-    brand: "Arrow",
-    size: ["S", "M", "L"],
-    color: "Brown",
-    material: "Cotton",
-    sleeve: "Full",
-    pattern: "Checked"
-  },
-  {
-    id: 8,
-    name: "UCB Denim Shirt",
-    desc: "Denim Shirt, Regular Fit, Full Sleeve, Blue",
-    rating: "★★★★☆ (4.5)",
-    price: 1299,
-    originalPrice: 1599,
-    discount: "19% OFF",
-    image: "/images/shirts/shirt8.png",
-    category: "Casual",
-    brand: "UCB",
-    size: ["M", "L", "XL"],
-    color: "Brown",
-    material: "Denim",
-    sleeve: "Full",
-    pattern: "Checked"
-  },
-  {
-    id: 9,
-    name: "Raymond Linen Shirt",
-    desc: "Pure Linen, Regular Fit, Half Sleeve, White",
-    rating: "★★★★☆ (4.6)",
-    price: 1599,
-    originalPrice: 1999,
-    discount: "20% OFF",
-    image: "/images/shirts/shirt9.png",
-    category: "Linen",
-    brand: "Raymond",
-    size: ["S", "M", "L"],
-    color: "Yellow",
-    material: "Linen",
-    sleeve: "Half",
-    pattern: "Solid"
-  },
-  {
-    id: 10,
-    name: "Tommy Hilfiger Polo",
-    desc: "Classic Polo, Half Sleeve, Regular Fit, Yellow",
-    rating: "★★★★★ (4.9)",
-    price: 2199,
-    originalPrice: 2799,
-    discount: "21% OFF",
-    image: "/images/shirts/shirt10.png",
-    category: "Polo",
-    brand: "Tommy Hilfiger",
-    size: ["S", "M", "L", "XL"],
-    color: "Yellow",
-    material: "Cotton",
-    sleeve: "Half",
-    pattern: "Solid"
-  },
-  {
-    id: 11,
-    name: "Louis Philippe Formal",
-    desc: "Slim Fit, Black, Easy Iron, Spread Collar",
-    rating: "★★★★☆ (4.7)",
-    price: 1799,
-    originalPrice: 2299,
-    discount: "22% OFF",
-    image: "/images/shirts/shirt11.png",
-    category: "Formal",
-    brand: "Louis Philippe",
-    size: ["S", "M", "L"],
-    color: "Black",
-    material: "Cotton",
-    sleeve: "Full",
-    pattern: "Solid"
-  },
-  {
-    id: 12,
-    name: "Blackberrys Formal",
-    desc: "Slim Fit, White, Non-Iron, Spread Collar",
-    rating: "★★★★☆ (4.6)",
-    price: 1999,
-    originalPrice: 2499,
-    discount: "20% OFF",
-    image: "/images/shirts/shirt12.png",
-    category: "Formal",
-    brand: "Blackberrys",
-    size: ["S", "M", "L"],
-    color: "White",
-    material: "Cotton",
-    sleeve: "Full",
-    pattern: "Solid"
-  },
-  {
-    id: 13,
-    name: "Pepe Jeans Casual",
-    desc: "Casual Shirt, Regular Fit, Full Sleeve, Pink",
-    rating: "★★★★☆ (4.5)",
-    price: 1299,
-    originalPrice: 1599,
-    discount: "19% OFF",
-    image: "/images/shirts/shirt13.png",
-    category: "Casual",
-    brand: "Pepe Jeans",
-    size: ["M", "L", "XL"],
-    color: "Pink",
-    material: "Cotton",
-    sleeve: "Full",
-    pattern: "Solid"
-  },
-  {
-    id: 14,
-    name: "Jack & Jones Printed",
-    desc: "Printed Shirt, Slim Fit, Full Sleeve",
-    rating: "★★★★☆ (4.4)",
-    price: 1099,
-    originalPrice: 1399,
-    discount: "21% OFF",
-    image: "/images/shirts/shirt14.png",
-    category: "Casual",
-    brand: "Jack & Jones",
-    size: ["S", "M", "L"],
-    color: "Green",
-    material: "Cotton",
-    sleeve: "Full",
-    pattern: "Printed"
-  },
-  {
-    id: 15,
-    name: "US Polo Assn Polo",
-    desc: "Classic Polo, Half Sleeve, Regular Fit, Navy",
-    rating: "★★★★★ (4.8)",
-    price: 1299,
-    originalPrice: 1599,
-    discount: "19% OFF",
-    image: "/images/shirts/shirt15.png",
-    category:"Polo",
-    brand: "US Polo Assn",
-    size: ["S", "M", "L", "XL"],
-    color: "Green",
-    material: "Cotton",
-    sleeve: "Half",
-    pattern: "Solid"
-  },
-  {
-    id: 16,
-    name: "Indian Terrain Linen",
-    desc: "Linen Shirt, Regular Fit, Half Sleeve, Beige",
-    rating: "★★★★☆ (4.6)",
-    price: 1499,
-    originalPrice: 1999,
-    discount: "25% OFF",
-    image: "/images/shirts/shirt16.png",
-    category: "Linen",
-    brand: "Indian Terrain",
-    size: ["M", "L", "XL"],
-    color: "Blue",
-    material: "Linen",
-    sleeve: "Half",
-    pattern: "Solid"
-  },
-  {
-    id: 17,
-    name: "John Players Checks",
-    desc: "Checked Shirt, Regular Fit, Half Sleeve",
-    rating: "★★★★☆ (4.3)",
-    price: 899,
-    originalPrice: 1199,
-    discount: "25% OFF",
-    image: "/images/shirts/shirt17.png",
-    category: "Casual",
-    brand: "John Players",
-    size: ["S", "M", "L"],
-    color: "Blue",
-    material: "Cotton",
-    sleeve: "Half",
-    pattern: "Checked"
-  },
-  {
-    id: 18,
-    name: "Wrangler Denim Shirt",
-    desc: "Denim Shirt, Regular Fit, Full Sleeve, Red",
-    rating: "★★★★☆ (4.5)",
-    price: 1199,
-    originalPrice: 1499,
-    discount: "20% OFF",
-    image: "/images/shirts/shirt18.png",
-    category: ["Casual","Formal"],
-    brand: "Wrangler",
-    size: ["M", "L", "XL"],
-    color: "Red",
-    material: "Denim",
-    sleeve: "Full",
-    pattern: "Solid"
-  },
-  {
-    id: 19,
-    name: "Jack & Jones Printed",
-    desc: "Classic Polo, Full Sleeve, Regular Fit, Navy",
-    rating: "★★★★☆ (4.5)",
-    price: 799,
-    originalPrice: 999,
-    discount: "20% OFF",
-    image: "/images/shirts/shirt19.png",
-    category: ["Polo","Linen"],
-    brand: "Jack & Jones",
-    size: ["S", "M", "L"],
-    color: "Blue",
-    material: "Cotton",
-    sleeve: "Full",
-    pattern: "Solid"
-  },
-  {
-    id: 20,
-    name: "Allen Solly Polo",
-    desc: "Pique Polo, Half Sleeve, Slim Fit, White",
-    rating: "★★★★★ (4.7)",
-    price: 799,
-    originalPrice: 999,
-    discount: "20% OFF",
-    image: "/images/shirts/shirt20.png",
-    category: ["Polo","Formal"],
-    brand: "Allen Solly",
-    size: ["S", "M", "L", "XL"],
-    color: "White",
-    material: "Cotton",
-    sleeve: "Half",
-    pattern: "Checked"
-  }
-];
+    {
+      id: 1,
+      name: "Nike Air Max",
+      desc: "Men's Running Shoes, Cushioned, Breathable",
+      rating: "★★★★★ (4.9)",
+      price: 4999,
+      originalPrice: 6999,
+      discount: 29,
+      image: "/images/shoes/shoe1.png",
+      category: "Sneakers",
+      brand: "Nike",
+      size: [7, 8, 9, 10],
+      color: "White",
+      material: "Mesh"
+    },
+
+    {
+      id: 2,
+      name: "Adidas Ultraboost",
+      desc: "Men's Running Shoes, Responsive Cushioning",
+      rating: "★★★★☆ (4.7)",
+      price: 5499,
+      originalPrice: 7999,
+      discount: 31,
+      image: "/images/shoes/shoe2.png",
+      category: "Sports",
+      brand: "Adidas",
+      size: [8, 9, 10],
+      color: "Black",
+      material: "Mesh"
+    },
+    {
+      id: 3,
+      name: "Puma RS-X",
+      desc: "Men's Sneakers, Retro Running Style",
+      rating: "★★★★☆ (4.5)",
+      price: 3299,
+      originalPrice: 4999,
+      discount: 34,
+      image: "/images/shoes/shoe3.png",
+      category: "Sneakers",
+      brand: "Puma",
+      size: [7, 8, 9],
+      color: "Red",
+      material: "Synthetic"
+    },
+    {
+      id: 4,
+      name: "Reebok Classic",
+      desc: "Leather Sneakers, Retro Style, Comfortable",
+      rating: "★★★★★ (4.8)",
+      price: 2999,
+      originalPrice: 4499,
+      discount: 33,
+      image: "/images/shoes/shoe4.png",
+      category: "Casual",
+      brand: "Reebok",
+      size: [8, 9, 10],
+      color: "White",
+      material: "Leather"
+    },
+    {
+      id: 5,
+      name: "Skechers Go Walk",
+      desc: "Men's Walking Shoes, Lightweight, Slip-on",
+      rating: "★★★★☆ (4.6)",
+      price: 3499,
+      originalPrice: 4999,
+      discount: 30,
+      image: "/images/shoes/shoe5.png",
+      category: "Casual",
+      brand: "Skechers",
+      size: [7, 8, 9, 10],
+      color: "Black",
+      material: "Mesh"
+    },
+    {
+      id: 6,
+      name: "Woodland Brown",
+      desc: "Men's Leather Shoes, Outdoor, Durable",
+      rating: "★★★★☆ (4.4)",
+      price: 2799,
+      originalPrice: 3999,
+      discount: 30,
+      image: "/images/shoes/shoe6.png",
+      category: "Formal",
+      brand: "Woodland",
+      size: [8, 9, 10],
+      color: "Brown",
+      material: "Leather"
+    },
+    {
+      id: 7,
+      name: "Bata Formal",
+      desc: "Men's Leather Formal Shoes, Office Wear",
+      rating: "★★★★★ (4.8)",
+      price: 1499,
+      originalPrice: 2499,
+      discount: 40,
+      image: "/images/shoes/shoe7.png",
+      category: "Formal",
+      brand: "Bata",
+      size: [7, 8, 9],
+      color: "Black",
+      material: "Leather"
+    },
+    {
+      id: 8,
+      name: "Red Tape Loafers",
+      desc: "Men's Casual Loafers, Slip-on, Comfortable",
+      rating: "★★★★☆ (4.5)",
+      price: 1299,
+      originalPrice: 1999,
+      discount: 35,
+      image: "/images/shoes/shoe8.png",
+      category: "Loafers",
+      brand: "Red Tape",
+      size: [8, 9, 10],
+      color: "Brown",
+      material: "Leather"
+    },
+    {
+      id: 9,
+      name: "Nike Jordan",
+      desc: "Men's Basketball Shoes, High-Top, Stylish",
+      rating: "★★★★★ (4.9)",
+      price: 6999,
+      originalPrice: 9999,
+      discount: 30,
+      image: "/images/shoes/shoe9.png",
+      category: "Sneakers",
+      brand: "Nike",
+      size: [8, 9, 10, 11],
+      color: "Black",
+      material: "Leather"
+    },
+    {
+      id: 10,
+      name: "Adidas Stan Smith",
+      desc: "Men's Classic Sneakers, Leather, Green",
+      rating: "★★★★★ (4.8)",
+      price: 3999,
+      originalPrice: 5999,
+      discount: 33,
+      image: "/images/shoes/shoe10.png",
+      category: "Sneakers",
+      brand: "Adidas",
+      size: [7, 8, 9],
+      color: "Green",
+      material: "Leather"
+    },
+    {
+      id: 11,
+      name: "Puma Future Rider",
+      desc: "Men's Retro Running Shoes, Comfortable",
+      rating: "★★★★☆ (4.6)",
+      price: 2999,
+      originalPrice: 4499,
+      discount: 33,
+      image: "/images/shoes/shoe11.png",
+      category: "Sneakers",
+      brand: "Puma",
+      size: [8, 9, 10],
+      color: "Blue",
+      material: "Synthetic"
+    },
+    {
+      id: 12,
+      name: "Reebok Nano",
+      desc: "Men's Training Shoes, CrossFit, Durable",
+      rating: "★★★★☆ (4.7)",
+      price: 4499,
+      originalPrice: 6999,
+      discount: 36,
+      image: "/images/shoes/shoe12.png",
+      category: "Sports",
+      brand: "Reebok",
+      size: [9, 10, 11],
+      color: "Black",
+      material: "Synthetic"
+    },
+    {
+      id: 13,
+      name: "Skechers Arch Fit",
+      desc: "Men's Walking Shoes, Arch Support, Comfort",
+      rating: "★★★★☆ (4.5)",
+      price: 3999,
+      originalPrice: 5999,
+      discount: 33,
+      image: "/images/shoes/shoe13.png",
+      category: "Casual",
+      brand: "Skechers",
+      size: [8, 9, 10],
+      color: "Grey",
+      material: "Mesh"
+    },
+    {
+      id: 14,
+      name: "Woodland Sandals",
+      desc: "Men's Outdoor Sandals, Durable, Comfortable",
+      rating: "★★★★☆ (4.4)",
+      price: 1799,
+      originalPrice: 2499,
+      discount: 28,
+      image: "/images/shoes/shoe14.png",
+      category: "Sandals",
+      brand: "Woodland",
+      size: [8, 9, 10],
+      color: "Brown",
+      material: "Rubber"
+    },
+    {
+      id: 15,
+      name: "Bata Comfit",
+      desc: "Men's Casual Shoes, Lightweight, Comfortable",
+      rating: "★★★★★ (4.8)",
+      price: 1299,
+      originalPrice: 1999,
+      discount: 35,
+      image: "/images/shoes/shoe15.png",
+      category: "Casual",
+      brand: "Bata",
+      size: [7, 8, 9],
+      color: "Black",
+      material: "Synthetic"
+    },
+    {
+      id: 16,
+      name: "Red Tape Sports",
+      desc: "Men's Running Shoes, Breathable, Lightweight",
+      rating: "★★★★☆ (4.6)",
+      price: 1999,
+      originalPrice: 2999,
+      discount: 33,
+      image: "/images/shoes/shoe16.png",
+      category: "Sports",
+      brand: "Red Tape",
+      size: [8, 9, 10],
+      color: "Blue",
+      material: "Mesh"
+    },
+    {
+      id: 17,
+      name: "Nike Revolution",
+      desc: "Men's Running Shoes, Cushioned, Breathable",
+      rating: "★★★★☆ (4.3)",
+      price: 2499,
+      originalPrice: 3999,
+      discount: 38,
+      image: "/images/shoes/shoe17.png",
+      category: "Sports",
+      brand: "Nike",
+      size: [7, 8, 9],
+      color: "White",
+      material: "Mesh"
+    },
+    {
+      id: 18,
+      name: "Adidas Superstar",
+      desc: "Men's Classic Sneakers, Leather, White",
+      rating: "★★★★★ (4.9)",
+      price: 4999,
+      originalPrice: 7999,
+      discount: 38,
+      image: "/images/shoes/shoe18.png",
+      category: "Sneakers",
+      brand: "Adidas",
+      size: [8, 9, 10],
+      color: "White",
+      material: "Leather"
+    },
+    {
+      id: 19,
+      name: "Adidas Ultraboost",
+      desc: "Men's Running Shoes, Responsive Cushioning",
+      rating: "★★★★☆ (4.7)",
+      price: 5499,
+      originalPrice: 7999,
+      discount: 31,
+      image: "/images/shoes/shoe19.png",
+      category: "Sports",
+      brand: "Adidas",
+      size: [9, 10, 11],
+      color: "Black",
+      material: "Mesh"
+    },
+    {
+      id: 20,
+      name: "Bata Formal",
+      desc: "Men's Leather Formal Shoes, Office Wear",
+      rating: "★★★★★ (4.8)",
+      price: 1499,
+      originalPrice: 2499,
+      discount: 40,
+      image: "/images/shoes/Bata Formal.png",
+      category: "Formal",
+      brand: "Bata",
+      size: [7, 8, 9],
+      color: "Black",
+      material: "Leather"
+    }
+  
+    // ... (rest of your product data)
+  ];
 </script>
 </body>
 </html>

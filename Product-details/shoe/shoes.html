@@ -7,7 +7,8 @@
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="../product.css">
+  <link rel="stylesheet" href="shoe.css">
+ 
 </head>
 <body>
 
@@ -115,7 +116,72 @@
 <!-- Toast Notification -->
 <div class="toast" id="toast"></div>
 
-<script src="../product.js"></script>
+<!-- Virtual Try-On Modal -->
+<div class="try-on-modal" id="tryOnModal">
+  <div class="try-on-container">
+    <div class="try-on-header">
+      <h3>Virtual Try-On</h3>
+      <button class="close-try-on" id="closeTryOn">&times;</button>
+    </div>
+    
+    <div class="try-on-options">
+      <div class="try-on-option active" id="webcamOption">
+          <i class='bx bx-webcam'></i>
+        <p>Use Webcam</p>
+      </div>
+      <div class="try-on-option" id="uploadOption">
+        <i class='bx bx-upload'></i>
+        <p>Upload Photo</p>
+      </div>
+    </div>
+    
+    <div class="preview-container" id="previewContainer">
+      <video id="videoPreview" autoplay playsinline></video>
+      <canvas id="canvasPreview"></canvas>
+      <img id="imagePreview">
+      <img id="shoeOverlay" src="" draggable="false">
+      <div class="preview-instructions" id="previewInstructions">
+        <i class='bx bx-camera' style="font-size: 3rem; color: #d2d2d7;"></i>
+        <p>Position your feet in the frame</p>
+        <p>or upload a photo of your feet</p>
+      </div>
+    </div>
+    
+    <input type="file" id="imageUpload" accept="image/*" class="upload-btn">
+    
+    <div class="try-on-controls">
+      <button class="capture-btn" id="captureBtn">Capture</button>
+      <button class="cancel-btn" id="cancelBtn">Cancel</button>
+
+      
+    </div>
+    
+    <div class="shoe-selector">
+      <h4>Select Shoe Variant</h4>
+      <div class="shoe-variants" id="shoeVariants">
+        <!-- Will be populated by JavaScript -->
+      </div>
+    </div>
+    
+     
+
+      <!-- Inside the shoe-controls div, add these buttons -->
+<div class="shoe-controls">
+  <button class="shoe-btn" id="zoomOutBtn"><i class='bx bx-zoom-out'></i></button>
+  <button class="shoe-btn" id="zoomResetBtn"><i class='bx bx-reset'></i></button>
+  <button class="shoe-btn" id="zoomInBtn"><i class='bx bx-zoom-in'></i></button>
+  <button class="shoe-btn" id="rotateLeftBtn"><i class='bx bx-rotate-left'></i></button>
+  <button class="shoe-btn" id="rotateRightBtn"><i class='bx bx-rotate-right'></i></button>
+</div>
+
+    
+    <p class="drag-instruction">Drag the shoe to adjust position on your feet</p>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/posenet"></script>
+<script src="shoe.js"></script>
 
 <script>
   // Product data with additional filter properties
@@ -128,13 +194,14 @@
       price: 4999,
       originalPrice: 6999,
       discount: 29,
-      image: "/images/shoes/shoe1.jpg",
+      image: "/images/shoes/shoe1.png",
       category: "Sneakers",
       brand: "Nike",
       size: [7, 8, 9, 10],
       color: "White",
       material: "Mesh"
     },
+
     {
       id: 2,
       name: "Adidas Ultraboost",
@@ -143,7 +210,7 @@
       price: 5499,
       originalPrice: 7999,
       discount: 31,
-      image: "/images/shoes/shoe2.jpg",
+      image: "/images/shoes/shoe2.png",
       category: "Sports",
       brand: "Adidas",
       size: [8, 9, 10],
@@ -158,7 +225,7 @@
       price: 3299,
       originalPrice: 4999,
       discount: 34,
-      image: "/images/shoes/shoe3.jpg",
+      image: "/images/shoes/shoe3.png",
       category: "Sneakers",
       brand: "Puma",
       size: [7, 8, 9],
@@ -173,7 +240,7 @@
       price: 2999,
       originalPrice: 4499,
       discount: 33,
-      image: "/images/shoes/shoe4.jpg",
+      image: "/images/shoes/shoe4.png",
       category: "Casual",
       brand: "Reebok",
       size: [8, 9, 10],
@@ -188,7 +255,7 @@
       price: 3499,
       originalPrice: 4999,
       discount: 30,
-      image: "/images/shoes/shoe5.jpg",
+      image: "/images/shoes/shoe5.png",
       category: "Casual",
       brand: "Skechers",
       size: [7, 8, 9, 10],
@@ -203,7 +270,7 @@
       price: 2799,
       originalPrice: 3999,
       discount: 30,
-      image: "/images/shoes/shoe6.jpg",
+      image: "/images/shoes/shoe6.png",
       category: "Formal",
       brand: "Woodland",
       size: [8, 9, 10],
@@ -218,7 +285,7 @@
       price: 1499,
       originalPrice: 2499,
       discount: 40,
-      image: "/images/shoes/shoe7.jpg",
+      image: "/images/shoes/shoe7.png",
       category: "Formal",
       brand: "Bata",
       size: [7, 8, 9],
@@ -233,7 +300,7 @@
       price: 1299,
       originalPrice: 1999,
       discount: 35,
-      image: "/images/shoes/shoe8.jpg",
+      image: "/images/shoes/shoe8.png",
       category: "Loafers",
       brand: "Red Tape",
       size: [8, 9, 10],
@@ -248,7 +315,7 @@
       price: 6999,
       originalPrice: 9999,
       discount: 30,
-      image: "/images/shoes/shoe9.jpg",
+      image: "/images/shoes/shoe9.png",
       category: "Sneakers",
       brand: "Nike",
       size: [8, 9, 10, 11],
@@ -263,7 +330,7 @@
       price: 3999,
       originalPrice: 5999,
       discount: 33,
-      image: "/images/shoes/shoe10.jpg",
+      image: "/images/shoes/shoe10.png",
       category: "Sneakers",
       brand: "Adidas",
       size: [7, 8, 9],
@@ -278,7 +345,7 @@
       price: 2999,
       originalPrice: 4499,
       discount: 33,
-      image: "/images/shoes/shoe11.jpg",
+      image: "/images/shoes/shoe11.png",
       category: "Sneakers",
       brand: "Puma",
       size: [8, 9, 10],
@@ -293,7 +360,7 @@
       price: 4499,
       originalPrice: 6999,
       discount: 36,
-      image: "/images/shoes/shoe12.jpg",
+      image: "/images/shoes/shoe12.png",
       category: "Sports",
       brand: "Reebok",
       size: [9, 10, 11],
@@ -308,7 +375,7 @@
       price: 3999,
       originalPrice: 5999,
       discount: 33,
-      image: "/images/shoes/shoe13.jpg",
+      image: "/images/shoes/shoe13.png",
       category: "Casual",
       brand: "Skechers",
       size: [8, 9, 10],
@@ -323,7 +390,7 @@
       price: 1799,
       originalPrice: 2499,
       discount: 28,
-      image: "/images/shoes/shoe14.jpg",
+      image: "/images/shoes/shoe14.png",
       category: "Sandals",
       brand: "Woodland",
       size: [8, 9, 10],
@@ -338,7 +405,7 @@
       price: 1299,
       originalPrice: 1999,
       discount: 35,
-      image: "/images/shoes/shoe15.jpg",
+      image: "/images/shoes/shoe15.png",
       category: "Casual",
       brand: "Bata",
       size: [7, 8, 9],
@@ -353,7 +420,7 @@
       price: 1999,
       originalPrice: 2999,
       discount: 33,
-      image: "/images/shoes/shoe16.jpg",
+      image: "/images/shoes/shoe16.png",
       category: "Sports",
       brand: "Red Tape",
       size: [8, 9, 10],
@@ -368,7 +435,7 @@
       price: 2499,
       originalPrice: 3999,
       discount: 38,
-      image: "/images/shoes/shoe17.jpg",
+      image: "/images/shoes/shoe17.png",
       category: "Sports",
       brand: "Nike",
       size: [7, 8, 9],
@@ -383,7 +450,7 @@
       price: 4999,
       originalPrice: 7999,
       discount: 38,
-      image: "/images/shoes/shoe18.jpg",
+      image: "/images/shoes/shoe18.png",
       category: "Sneakers",
       brand: "Adidas",
       size: [8, 9, 10],
@@ -398,7 +465,7 @@
       price: 5499,
       originalPrice: 7999,
       discount: 31,
-      image: "/images/shoes/shoe19.jpg",
+      image: "/images/shoes/shoe19.png",
       category: "Sports",
       brand: "Adidas",
       size: [9, 10, 11],
@@ -413,13 +480,15 @@
       price: 1499,
       originalPrice: 2499,
       discount: 40,
-      image: "/images/shoes/shoe20.jpg",
+      image: "/images/shoes/Bata Formal.png",
       category: "Formal",
       brand: "Bata",
       size: [7, 8, 9],
       color: "Black",
       material: "Leather"
     }
+  
+    // ... (rest of your product data)
   ];
 </script>
 </body>
